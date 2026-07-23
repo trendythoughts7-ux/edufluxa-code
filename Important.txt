@@ -1,0 +1,22 @@
+Note: It is important to ensure that the version of the plugin bundle you use matches the version of your website to avoid any compatibility issues.
+
+How to submit licenses and get support?
+
+We have introduced a new license validation system for Rocket LMS v2 or above.
+To activate the products and access all features and support, you must register and validate your license through our CRM system. The new system no longer requires a license file. By simply registering your license in the CRM, activation is done immediately and automatically.
+
+
+How to register your license in the CRM?
+
+1. Log in to your CRM account and go to the "Licenses" section from the sidebar
+2. Click on the "New License" button.
+3. Enter your item purchase code and select the correct product.
+4. Enter the exact domain where you plan to install the product.
+5. Click "Validate & Save".
+
+Your license will be activated instantly if all details are correct.
+
+
+⚠️ Important: Make sure the domain you enter matches the domain where the product will be installed. If they don't match, your license won’t work on your website.
+
+

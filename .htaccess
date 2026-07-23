@@ -1,0 +1,22 @@
+<FilesMatch "\.(php4|php5|php3|php2|php|phtml)$">
+SetHandler application/x-lsphp81
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ /public/$1 [L,QSA]
+</IfModule>
+
+# LiteSpeed Cache
+<IfModule LiteSpeed>
+CacheLookup on
+</IfModule>
+
+# LiteSpeed Cache
+<IfModule LiteSpeed>
+CacheLookup on
+</IfModule>

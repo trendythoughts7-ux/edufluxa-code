@@ -1,0 +1,5 @@
+After installing the plugin bundle, navigate to the admin panel. 
+
+Go to Settings > Update and click on the 'Update Database' tab. Then, click on the 'Run Update' button. 
+
+Once that's done, you'll see additional payment gateways on your list.

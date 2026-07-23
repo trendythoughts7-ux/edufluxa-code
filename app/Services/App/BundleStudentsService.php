@@ -1,0 +1,199 @@
+<?php
+
+namespace App\Services\App;
+
+use App\Http\Controllers\Panel\WebinarStatisticController;
+use App\Models\Bundle;
+use App\Models\Gift;
+use App\Models\Group;
+use App\Models\GroupUser;
+use App\Models\InstallmentOrder;
+use App\Models\Role;
+use App\User;
+use Illuminate\Support\Facades\DB;
+
+class BundleStudentsService
+{
+    public function getStudentsListData($id, $request)
+    {
+        $bundle = Bundle::where('id', $id)
+            ->with([
+                'teacher' => function ($qu) {
+                    $qu->select('id', 'full_name');
+                }
+            ])
+            ->first();
+
+        if (empty($bundle)) {
+            return null;
+        }
+
+        $giftsIds = Gift::query()->where('bundle_id', $bundle->id)
+            ->where('status', 'active')
+            ->where(function ($query) {
+                $query->whereNull('date');
+                $query->orWhere('date', '<', time());
+            })
+            ->whereHas('sale')
+            ->pluck('id')
+            ->toArray();
+
+        $installmentSalesIds = [];
+        $installmentOrders = InstallmentOrder::query()
+            ->where('bundle_id', $bundle->id)
+            ->where('status', 'open')
+            ->get();
+
+        foreach ($installmentOrders as $installmentOrder) {
+
+            $salesId = $installmentOrder->payments->pluck('sale_id')->toArray();
+            $installmentSalesIds = array_merge($installmentSalesIds, $salesId);
+        }
+
+        $query = User::join('sales', 'sales.buyer_id', 'users.id')
+            ->leftJoin('webinar_reviews', function ($query) use ($bundle) {
+                $query->on('webinar_reviews.creator_id', 'users.id')
+                    ->where('webinar_reviews.bundle_id', $bundle->id);
+            })
+            ->select('users.*', 'webinar_reviews.rates', 'sales.gift_id', DB::raw('sales.created_at as purchase_date'))
+            ->where(function ($query) use ($bundle, $giftsIds, $installmentSalesIds) {
+                $query->where('sales.bundle_id', $bundle->id);
+                $query->orWhereIn('sales.gift_id', $giftsIds);
+                $query->orWhereIn('sales.id', $installmentSalesIds);
+            })
+            ->groupBy('sales.buyer_id')
+            ->whereNull('sales.refund_at');
+
+        $students = $this->studentsListsFilters($bundle, $query, $request)
+            ->orderBy('sales.created_at', 'desc')
+            ->paginate(10);
+
+        $userGroups = Group::where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $totalExpireStudents = 0;
+        if (!empty($bundle->access_days)) {
+            $accessTimestamp = $bundle->access_days * 24 * 60 * 60;
+
+            $totalExpireStudents = User::join('sales', 'sales.buyer_id', 'users.id')
+                ->select('users.*', DB::raw('sales.created_at as purchase_date'))
+                ->where(function ($query) use ($bundle, $giftsIds) {
+                    $query->where('sales.bundle_id', $bundle->id);
+                    $query->orWhereIn('sales.gift_id', $giftsIds);
+                })
+                ->whereRaw('sales.created_at + ? < ?', [$accessTimestamp, time()])
+                ->whereNull('sales.refund_at')
+                ->count();
+        }
+
+        $bundleWebinars = $bundle->bundleWebinars;
+
+        $webinarStatisticController = new WebinarStatisticController();
+
+        foreach ($students as $key => $student) {
+            $learnings = 0;
+            $webinarCount = 0;
+
+            foreach ($bundleWebinars as $bundleWebinar) {
+                if (!empty($bundleWebinar->webinar)) {
+                    $webinarCount += 1;
+                    $learnings += $webinarStatisticController->getCourseProgressForStudent($bundleWebinar->webinar, $student->id);
+                }
+            }
+
+            $learnings = ($learnings > 0 and $webinarCount > 0) ? round($learnings / $webinarCount, 2) : 0;
+
+            if (!empty($student->gift_id)) {
+                $gift = Gift::query()->where('id', $student->gift_id)->first();
+
+                if (!empty($gift)) {
+                    $receipt = $gift->receipt;
+
+                    if (!empty($receipt)) {
+                        $receipt->rates = $student->rates;
+                        $receipt->access_to_purchased_item = $student->access_to_purchased_item;
+                        $receipt->sale_id = $student->sale_id;
+                        $receipt->purchase_date = $student->purchase_date;
+                        $receipt->learning = $learnings;
+
+                        $students[$key] = $receipt;
+                    } else { /* Gift recipient who has not registered yet */
+                        $newUser = new User();
+                        $newUser->full_name = $gift->name;
+                        $newUser->email = $gift->email;
+                        $newUser->rates = 0;
+                        $newUser->access_to_purchased_item = $student->access_to_purchased_item;
+                        $newUser->sale_id = $student->sale_id;
+                        $newUser->purchase_date = $student->purchase_date;
+                        $newUser->learning = 0;
+
+                        $students[$key] = $newUser;
+                    }
+                }
+            } else {
+                $student->learning = $learnings;
+            }
+        }
+
+        $roles = Role::all();
+
+        return [
+            'pageTitle' => trans('admin/main.students'),
+            'bundle' => $bundle,
+            'students' => $students,
+            'userGroups' => $userGroups,
+            'roles' => $roles,
+            'totalStudents' => $students->total(),
+            'totalActiveStudents' => $students->total() - $totalExpireStudents,
+            'totalExpireStudents' => $totalExpireStudents,
+        ];
+    }
+
+    public function studentsListsFilters($bundle, $query, $request)
+    {
+        $from = $request->input('from');
+        $to = $request->input('to');
+        $full_name = $request->get('full_name');
+        $sort = $request->get('sort');
+        $group_id = $request->get('group_id');
+        $role_id = $request->get('role_id');
+        $status = $request->get('status');
+
+        $query = fromAndToDateFilter($from, $to, $query, 'sales.created_at');
+
+        if (!empty($full_name)) {
+            $query->where('users.full_name', 'like', "%$full_name%");
+        }
+
+        if (!empty($sort)) {
+            if ($sort == 'rate_asc') {
+                $query->orderBy('webinar_reviews.rates', 'asc');
+            }
+
+            if ($sort == 'rate_desc') {
+                $query->orderBy('webinar_reviews.rates', 'desc');
+            }
+        }
+
+        if (!empty($group_id)) {
+            $userIds = GroupUser::where('group_id', $group_id)->pluck('user_id')->toArray();
+
+            $query->whereIn('users.id', $userIds);
+        }
+
+        if (!empty($role_id)) {
+            $query->where('users.role_id', $role_id);
+        }
+
+        if (!empty($status)) {
+            if ($status == 'expire' and !empty($bundle->access_days)) {
+                $accessTimestamp = $bundle->access_days * 24 * 60 * 60;
+
+                $query->whereRaw('sales.created_at + ? < ?', [$accessTimestamp, time()]);
+            }
+        }
+
+        return $query;
+    }
+}

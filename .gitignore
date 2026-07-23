@@ -1,0 +1,50 @@
+/node_modules
+/public/hot
+/public/storage
+/public/store/*
+/public/debug_paytabs.log
+!/public/store/.htaccess
+/storage/*.key
+/vendor
+/.idea
+/.vscode
+
+/storage/framework/laravel-excel
+
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+composer.lock
+storage/debugbar/.gitignore
+
+# --- Added Session 014: harden against accidental secret/junk commits ---
+.env
+*.backup
+*.backup-*
+*.bak
+*.bak-*
+round1_*.php
+round2_*.php
+round2_dry_run_output.txt
+describe_tables.php
+describe_more.php
+find_test_ids.php
+scan_constructors.php
+firebase-auth.json
+
+# --- Added Session 014: exclude generated/runtime/oversized content from baseline commit ---
+/storage/backups
+/storage/debugbar
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/views
+/storage/app
+/database/regions/cities.json
+
+# --- Session 014 continued: exclude vendor docs and stray backup files ---
+/How to Install Plugins/
+*.bak*
