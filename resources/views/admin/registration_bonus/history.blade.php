@@ -305,7 +305,7 @@
 
             @can('admin_users_edit')
                 @include('admin.includes.delete_button',[
-                    'url' => getAdminPanelUrl("/users/{$user->id}/disable_registration_bonus"),
+                    'url' => signAdminUrl(getAdminPanelUrl("/users/{$user->id}/disable_registration_bonus")),
                     'btnClass' => 'dropdown-item text-danger mb-0 py-3 px-0 font-12',
                     'btnText' => trans('update.disable_registration_bonus'),
                     'btnIcon' => 'close-square',

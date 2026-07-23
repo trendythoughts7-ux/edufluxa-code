@@ -67,7 +67,7 @@
                                         <div class="dropdown-menu dropdown-menu-right">
                                             @can('admin_users_edit')
                                                 @include('admin.includes.delete_button',[
-                                                    'url' => getAdminPanelUrl().'/users/'.$user->id.'/deleteBadge/'.$customBadge->id,
+                                                    'url' => signAdminUrl(getAdminPanelUrl().'/users/'.$user->id.'/deleteBadge/'.$customBadge->id),
                                                     'btnClass' => 'dropdown-item text-danger mb-0 py-3 px-0 font-14',
                                                     'btnText' => trans('admin/main.delete'),
                                                     'btnIcon' => 'trash',

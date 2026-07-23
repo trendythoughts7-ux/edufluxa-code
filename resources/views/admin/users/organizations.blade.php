@@ -297,7 +297,7 @@
 
         <div class="dropdown-menu dropdown-menu-right">
             @can('admin_users_impersonate')
-                <a href="{{ getAdminPanelUrl() }}/users/{{ $user->id }}/impersonate" 
+                <a href="{{ signAdminUrl(getAdminPanelUrl().'/users/'.$user->id.'/impersonate') }}" 
                    target="_blank"
                    class="dropdown-item d-flex align-items-center mb-3 py-3 px-0 gap-4">
                     <x-iconsax-lin-user-square class="icons text-gray-500 mr-2" width="18px" height="18px"/>
@@ -315,7 +315,7 @@
 
             @can('admin_users_delete')
                 @include('admin.includes.delete_button',[
-                    'url' => getAdminPanelUrl().'/users/'.$user->id.'/delete',
+                    'url' => signAdminUrl(getAdminPanelUrl().'/users/'.$user->id.'/delete'),
                     'btnClass' => 'dropdown-item text-danger mb-0 py-3 px-0 font-14',
                     'btnText' => trans('admin/main.delete'),
                     'btnIcon' => 'trash',

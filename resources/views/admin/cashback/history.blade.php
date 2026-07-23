@@ -239,7 +239,7 @@
 
             @can('admin_cashback_transactions')
                 @include('admin.includes.delete_button',[
-                    'url' => getAdminPanelUrl("/users/{$transaction->user_id}/disable_cashback_toggle"),
+                    'url' => signAdminUrl(getAdminPanelUrl("/users/{$transaction->user_id}/disable_cashback_toggle")),
                     'btnClass' => 'dropdown-item text-' . ($transaction->user->disable_cashback ? 'success' : 'danger') . ' mb-0 py-3 px-0 font-14',
                     'btnText' => $transaction->user->disable_cashback ? trans('update.enable_cashback') : trans('update.disable_cashback'),
                     'btnIcon' => $transaction->user->disable_cashback ? 'tick-square' : 'close-square',

@@ -67,7 +67,7 @@
                                                             @if(!in_array($become->status, ['accept', 'pending_pay_package']))
                                                                 <div class="dropdown-item d-flex align-items-center mb-3 py-3 px-0 gap-4">
                                                                     @include('admin.includes.delete_button',[
-                                                                        'url' => getAdminPanelUrl().'/users/'.$become->user_id.'/acceptRequestToInstructor',
+                                                                        'url' => signAdminUrl(getAdminPanelUrl().'/users/'.$become->user_id.'/acceptRequestToInstructor'),
                                                                         'btnClass' => 'text-success font-14',
                                                                         'btnText' => trans('admin/main.accept_request'),
                                                                         'btnIcon' => 'tick-circle',

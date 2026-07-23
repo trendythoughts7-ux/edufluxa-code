@@ -133,7 +133,7 @@
 
                                                      @can('admin_users_delete')
                                                          @include('admin.includes.delete_button',[
-                                                             'url' => getAdminPanelUrl().'/users/'.$user->id.'/delete',
+                                                             'url' => signAdminUrl(getAdminPanelUrl().'/users/'.$user->id.'/delete'),
                                                              'btnClass' => 'dropdown-item text-danger mb-0 py-3 px-0 font-14',
                                                              'btnText' => trans('admin/main.delete'),
                                                              'btnIcon' => 'trash',

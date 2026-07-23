@@ -658,6 +658,11 @@ class UserController extends Controller
     {
         $this->authorize('admin_users_edit');
 
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$id}/deleteBadge/{$badge_id}"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_badge_delete_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
+
         $user = User::findOrFail($id);
 
         $badge = UserBadge::where('id', $badge_id)
@@ -675,6 +680,11 @@ class UserController extends Controller
     {
         $this->authorize('admin_users_delete');
 
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$id}/delete"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_delete_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
+
         $user = User::find($id);
 
         if ($user) {
@@ -687,6 +697,11 @@ class UserController extends Controller
     public function acceptRequestToInstructor($id)
     {
         $this->authorize('admin_users_edit');
+
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$id}/acceptRequestToInstructor"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_accept_instructor_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
 
         $user = User::findOrFail($id);
 
@@ -763,6 +778,11 @@ class UserController extends Controller
     public function impersonate($user_id)
     {
         $this->authorize('admin_users_impersonate');
+
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$user_id}/impersonate"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_impersonate_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
 
         $user = User::findOrFail($user_id);
 
@@ -995,6 +1015,11 @@ class UserController extends Controller
     {
         $this->authorize('admin_users_edit');
 
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$id}/disable_cashback_toggle"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_disable_cashback_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
+
         $user = User::query()->findOrFail($id);
 
         $user->update([
@@ -1014,6 +1039,11 @@ class UserController extends Controller
     {
         $this->authorize('admin_users_edit');
 
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$id}/disable_registration_bonus"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_disable_registration_bonus_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
+
         $user = User::query()->findOrFail($id);
 
         $user->update([
@@ -1032,6 +1062,11 @@ class UserController extends Controller
     public function disableInstallmentApproval($id)
     {
         $this->authorize('admin_users_edit');
+
+        if (!hasValidAdminUrlSignature(getAdminPanelUrl("/users/{$id}/disable_installment_approval"), request()->query("expires"), request()->query("signature"))) {
+            $toastData = ["title" => trans("public.request_failed"), "msg" => trans("update.user_disable_installment_approval_link_expired_or_invalid"), "status" => "error"];
+            return redirect()->back()->with(["toast" => $toastData]);
+        }
 
         $user = User::query()->findOrFail($id);
 

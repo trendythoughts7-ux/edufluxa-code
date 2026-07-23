@@ -40,7 +40,7 @@
                              ])
 
             @include('admin.includes.delete_button',[
-                             'url' => getAdminPanelUrl("/users/{$user->id}/acceptRequestToInstructor"),
+                             'url' => signAdminUrl(getAdminPanelUrl("/users/{$user->id}/acceptRequestToInstructor")),
                              'btnClass' => 'btn btn-success ml-1 mt-3',
                              'btnText' => trans('admin/main.accept_request'),
                              'hideDefaultClass' => true

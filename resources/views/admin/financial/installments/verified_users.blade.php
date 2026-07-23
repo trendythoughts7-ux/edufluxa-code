@@ -98,7 +98,7 @@
 
         <div class="dropdown-menu dropdown-menu-right">
             @include('admin.includes.delete_button',[
-                'url' => getAdminPanelUrl("/users/{$user->id}/disable_installment_approval"),
+                'url' => signAdminUrl(getAdminPanelUrl("/users/{$user->id}/disable_installment_approval")),
                 'btnClass' => 'dropdown-item text-danger mb-3 py-3 px-0 font-14',
                 'btnText' => trans("update.unverifiable"),
                 'btnIcon' => 'close-square',
