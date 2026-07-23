@@ -565,3 +565,6 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
 Route::get('/purchase-code', [PurchaseCodeController::class, 'show'])->name('purchase.code.show');
 Route::post('/purchase-code', [PurchaseCodeController::class, 'store'])->name('purchase.code.store');
 
+Route::middleware(['web','admin'])->prefix('admin')->group(function () {
+    Route::get('/exports/{export}/download', 'Admin\ExportController@download')->name('admin.exports.download');
+});
