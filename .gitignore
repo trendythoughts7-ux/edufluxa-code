@@ -48,3 +48,4 @@ firebase-auth.json
 # --- Session 014 continued: exclude vendor docs and stray backup files ---
 /How to Install Plugins/
 *.bak*
+*.broken_backup
