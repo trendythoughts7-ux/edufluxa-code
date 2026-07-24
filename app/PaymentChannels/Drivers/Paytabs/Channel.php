@@ -76,7 +76,7 @@ class Channel extends BasePaymentChannel implements IChannel
 
             return $pay;
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            \Log::error('Paytabs payment error: ' . $e->getMessage());
         }
 
     }
