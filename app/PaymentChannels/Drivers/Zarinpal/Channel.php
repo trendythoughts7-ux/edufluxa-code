@@ -35,7 +35,7 @@ class Channel extends BasePaymentChannel implements IChannel
     private function handleConfigs()
     {
         \Config::set('zarinpal.merchant_id', $this->merchant_id);
-        \Config::set('zarinpal.merchant_id', $this->currency);
+        \Config::set('zarinpal.currency', $this->currency);
     }
 
     public function paymentRequest(Order $order)
@@ -61,7 +61,7 @@ class Channel extends BasePaymentChannel implements IChannel
             }
 
         } catch (\Exception $exception) {
-            dd($exception);
+            \Log::error('Zarinpal payment error: ' . $exception->getMessage());
         }
 
         $toastData = [
