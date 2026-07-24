@@ -104,6 +104,7 @@ class Channel extends BasePaymentChannel implements IChannel
 
             return $order;
         } catch (\Exception $e) {
+            \Log::error('Ngenius verify error: ' . $e->getMessage());
             print('Error: ' . $e->getMessage());
         }
     }
