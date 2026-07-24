@@ -79,7 +79,7 @@ class Channel extends BasePaymentChannel implements IChannel
 
             return $response->getTargetUrl();
         } catch (\Exception $exception) {
-            dd($exception);
+            \Log::error('TapPayment payment error: ' . $exception->getMessage());
         }
 
     }
