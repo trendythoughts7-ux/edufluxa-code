@@ -94,7 +94,7 @@ class Channel extends BasePaymentChannel implements IChannel
         try {
             return Payu::initiate($transaction)->redirect($this->makeCallbackUrl());
         } catch (\Exception $exception) {
-            //dd($exception);
+            \Log::error('Payu paymentRequest failed: ' . $exception->getMessage());
         }
 
         $toastData = [
@@ -119,7 +119,12 @@ class Channel extends BasePaymentChannel implements IChannel
     {
         $this->handleConfigs();
 
-        $transaction = Payu::capture();
+        try {
+            $transaction = Payu::capture();
+        } catch (\Exception $e) {
+            \Log::error('Payu verify failed: ' . $e->getMessage());
+            return null;
+        }
 
         $order_id = $transaction->response('udf1');
         $user_id = $transaction->response('udf2');
