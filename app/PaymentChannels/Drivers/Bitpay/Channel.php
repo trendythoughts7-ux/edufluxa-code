@@ -114,7 +114,20 @@ class Channel extends BasePaymentChannel implements IChannel
 
 
         if (!empty($order)) {
-            $order->update(['status' => Order::$fail]);
+            $orderStatus = Order::$fail;
+
+            try {
+                $invoice = LaravelBitpay::getInvoice($order->reference_id);
+                $invoiceStatus = $invoice->getStatus();
+
+                if (in_array($invoiceStatus, ['paid', 'confirmed', 'complete'])) {
+                    $orderStatus = Order::$paying;
+                }
+            } catch (\Exception $exception) {
+                \Log::error('Bitpay verify error: ' . $exception->getMessage());
+            }
+
+            $order->update(['status' => $orderStatus]);
         }
 
         return $order;
