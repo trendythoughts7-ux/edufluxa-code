@@ -175,6 +175,11 @@ class Channel extends BasePaymentChannel implements IChannel
 
         $order = Order::where('reference_id', $payment_id)->where('user_id', $user->id)->first();
 
+        if (empty($order)) {
+            \Log::error('Paypal verify: order not found for payment_id ' . $payment_id);
+            return $order;
+        }
+
         if ($order->status === Order::$paid) {
             return $order;
         }
