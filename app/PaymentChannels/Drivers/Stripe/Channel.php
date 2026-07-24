@@ -43,22 +43,32 @@ class Channel extends BasePaymentChannel implements IChannel
 
         Stripe::setApiKey($this->api_secret);
 
-        $checkout = Session::create([
-            'payment_method_types' => ['card'],
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => $currency,
-                    'unit_amount_decimal' => $price * 100,
-                    'product_data' => [
-                        'name' => $generalSettings['site_name'] . ' payment',
+        try {
+            $checkout = Session::create([
+                'payment_method_types' => ['card'],
+                'line_items' => [[
+                    'price_data' => [
+                        'currency' => $currency,
+                        'unit_amount_decimal' => $price * 100,
+                        'product_data' => [
+                            'name' => $generalSettings['site_name'] . ' payment',
+                        ],
                     ],
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => $this->makeCallbackUrl('success'),
-            'cancel_url' => $this->makeCallbackUrl('cancel'),
-        ]);
+                    'quantity' => 1,
+                ]],
+                'mode' => 'payment',
+                'success_url' => $this->makeCallbackUrl('success'),
+                'cancel_url' => $this->makeCallbackUrl('cancel'),
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Stripe paymentRequest failed: ' . $e->getMessage());
+            $toastData = [
+                'title' => trans('cart.fail_purchase'),
+                'msg' => '',
+                'status' => 'error'
+            ];
+            return redirect()->back()->with(['toast' => $toastData])->withInput();
+        }
 
         /*$order->update([
             'reference_id' => $checkout->id,
@@ -95,7 +105,12 @@ class Channel extends BasePaymentChannel implements IChannel
         if ($status == 'success' and !empty($request->session_id) and !empty($order)) {
             Stripe::setApiKey($this->api_secret);
 
-            $session = Session::retrieve($request->session_id);
+            try {
+                $session = Session::retrieve($request->session_id);
+            } catch (\Exception $e) {
+                \Log::error('Stripe verify failed: ' . $e->getMessage());
+                $session = null;
+            }
 
             if (!empty($session) and $session->payment_status == 'paid') {
                 $order->update([
