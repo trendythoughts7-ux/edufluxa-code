@@ -111,7 +111,8 @@ class Channel extends BasePaymentChannel implements IChannel
             }
 
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            \Log::error('Paymob paymentRequest error: ' . $e->getMessage());
+            $errorMsg = $e->getMessage();
         }
 
         $toastData = [
@@ -164,7 +165,7 @@ class Channel extends BasePaymentChannel implements IChannel
                     return $order;
                 }
             } catch (\Exception $e) {
-                dd($e->getMessage());
+                \Log::error('Paymob verify error: ' . $e->getMessage());
             }
         }
 
