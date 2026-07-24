@@ -9,6 +9,28 @@ use App\PaymentChannels\IChannel;
 use Illuminate\Http\Request;
 use Omnipay\Omnipay;
 
+/**
+ * NOT PRODUCTION-READY / DO NOT ACTIVATE.
+ *
+ * This driver sends Omnipay clientToken() (a Drop-in/SDK initialization
+ * token) as the payment method nonce ('token' field -> paymentMethodNonce
+ * in Omnipay\Braintree\Message\AuthorizeRequest::getData()). A clientToken
+ * is NOT a valid payment nonce -- Braintree requires an actual
+ * payment-method nonce collected client-side via Braintree Drop-in UI or
+ * Hosted Fields after the customer enters real card details.
+ *
+ * No such frontend integration exists in this codebase (no
+ * resources/views/**\/braintree* template was found), so every
+ * paymentRequest()/verify() call will send an invalid nonce and the
+ * transaction will fail at Braintree's API regardless of credentials.
+ *
+ * To make this driver production-ready: build a checkout view that loads
+ * the Braintree Drop-in/Hosted Fields JS SDK using the clientToken from
+ * clientToken(), collects a real payment_method_nonce client-side, and
+ * passes that nonce (not the clientToken) into createPaymentData()'s
+ * 'token' field. This is a dedicated frontend development task, not a
+ * quick fix, and is out of scope for this audit pass.
+ */
 class Channel extends BasePaymentChannel implements IChannel
 {
     protected $currency;
