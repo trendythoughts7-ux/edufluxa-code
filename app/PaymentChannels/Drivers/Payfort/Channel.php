@@ -73,15 +73,29 @@ class Channel extends BasePaymentChannel implements IChannel
 
     }
 
+    /**
+     * NOT PRODUCTION-READY. Do not activate this gateway.
+     *
+     * Known gaps found during Session 018 audit:
+     * - paymentRequest() uses a static 'signature' credential item as-is,
+     *   but PayFort's real flow requires a signature dynamically computed
+     *   per-request (hash of the request params + merchant secret phrase,
+     *   per PayFort's SHA signature spec). As written, PayFort will reject
+     *   real transactions with a signature mismatch.
+     * - paymentRequest() never stores the order id in session (every other
+     *   driver does this via order_session_key), so there is no way to
+     *   look the order back up on callback.
+     * - makeCallbackUrl() is an empty stub.
+     * - verify() below was an unimplemented stub (previously dd(2), which
+     *   halted every request) - the dd() has been removed so it no longer
+     *   crashes, but it still does not read the callback request, verify
+     *   any signature, or look up a real order. It always returns null.
+     *
+     * Do not flip this gateway's status to active until all of the above
+     * are implemented and tested against real PayFort sandbox credentials.
+     */
     public function verify(Request $request)
     {
-        dd(2);
-        $order = null;
-
-        if (!empty($order)) {
-            $order->update(['status' => Order::$fail]);
-        }
-
-        return $order;
+        return null;
     }
 }
