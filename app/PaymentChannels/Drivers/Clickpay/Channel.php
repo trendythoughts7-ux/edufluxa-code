@@ -77,7 +77,7 @@ class Channel extends BasePaymentChannel implements IChannel
             return $pay;
 
         } catch (\Exception $e) {
-            //dd($e->getMessage());
+            \Log::error('Clickpay paymentRequest failed: ' . $e->getMessage());
         }
     }
 
@@ -120,7 +120,7 @@ class Channel extends BasePaymentChannel implements IChannel
                     }
                 }
             } catch (\Exception $e) {
-                // dd($e->getMessage());
+                \Log::error('Clickpay verify failed: ' . $e->getMessage());
             }
         }
 
