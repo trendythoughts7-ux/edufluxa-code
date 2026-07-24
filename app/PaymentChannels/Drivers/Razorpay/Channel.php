@@ -35,12 +35,38 @@ class Channel extends BasePaymentChannel implements IChannel
 
     public function paymentRequest(Order $order)
     {
+        $generalSettings = getGeneralSettings();
 
+        return '<form action="' . $this->makeCallbackUrl($order) . '" method="get">
+            <input type="hidden" name="order_id" value="' . $order->id . '">
+            <script src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key="' . $this->api_key . '"
+                    data-amount="' . (int)($order->total_amount * 100) . '"
+                    data-buttontext="product_price"
+                    data-description="Rozerpay"
+                    data-currency="' . $this->currency . '"
+                    data-image="' . $generalSettings['logo'] . '"
+                    data-prefill.name="' . $order->user->full_name . '"
+                    data-prefill.email="' . $order->user->email . '"
+                    data-theme.color="#43d477">
+            </script>
+            <style>
+                .razorpay-payment-button {
+                    opacity: 0;
+                    visibility: hidden;
+                }
+            </style>
+            <script>
+                $(document).ready(function() {
+                    $(".razorpay-payment-button").trigger("click");
+                })
+            </script>
+        </form>';
     }
 
     private function makeCallbackUrl(Order $order)
     {
-
+        return route('payment_verify_post', ['gateway' => 'Razorpay']);
     }
 
     public function verify(Request $request)

@@ -49,13 +49,6 @@ class AccountingController extends Controller
             ])
             ->get();
 
-        $razorpay = false;
-        foreach ($paymentChannels as $paymentChannel) {
-            if ($paymentChannel->class_name == 'Razorpay') {
-                $razorpay = true;
-            }
-        }
-
         $registrationBonusAmount = null;
 
         if ($userAuth->enable_registration_bonus) {
@@ -84,7 +77,6 @@ class AccountingController extends Controller
             'readyPayout' => $userAuth->getPayout(),
             'totalIncome' => $userAuth->getIncome(),
             'editOfflinePayment' => $editOfflinePayment,
-            'razorpay' => $razorpay,
             'registrationBonusAmount' => $registrationBonusAmount,
             'cashbackRules' => $cashbackRules ?? null,
         ];
@@ -235,19 +227,15 @@ class AccountingController extends Controller
         ]);
 
 
-        if ($paymentChannel->class_name == 'Razorpay') {
-            return $this->echoRozerpayForm($order);
-        } else {
-            $paymentController = new PaymentController();
+        $paymentController = new PaymentController();
 
-            $paymentRequest = new Request();
-            $paymentRequest->merge([
-                'gateway' => $paymentChannel->id,
-                'order_id' => $order->id
-            ]);
+        $paymentRequest = new Request();
+        $paymentRequest->merge([
+            'gateway' => $paymentChannel->id,
+            'order_id' => $order->id
+        ]);
 
-            return $paymentController->paymentRequest($paymentRequest);
-        }
+        return $paymentController->paymentRequest($paymentRequest);
     }
 
     private function handleUploadAttachment($user, $file)
@@ -255,42 +243,6 @@ class AccountingController extends Controller
         $path = 'financial/offlinePayments';
         $path = $this->uploadFile($file, $path, null, $user->id);
         return $path;
-    }
-
-    private function echoRozerpayForm($order)
-    {
-        $generalSettings = getGeneralSettings();
-
-        echo '<form action="/payments/verify/Razorpay" method="get">
-            <input type="hidden" name="order_id" value="' . $order->id . '">
-
-            <script src="/assets/default/js/app.js"></script>
-            <script src="https://checkout.razorpay.com/v1/checkout.js"
-                    data-key="' . getRazorpayApiKey()['api_key'] . '"
-                    data-amount="' . (int)($order->total_amount * 100) . '"
-                    data-buttontext="product_price"
-                    data-description="Rozerpay"
-                    data-currency="' . currency() . '"
-                    data-image="' . $generalSettings['logo'] . '"
-                    data-prefill.name="' . $order->user->full_name . '"
-                    data-prefill.email="' . $order->user->email . '"
-                    data-theme.color="#43d477">
-            </script>
-
-            <style>
-                .razorpay-payment-button {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-            </style>
-
-            <script>
-                $(document).ready(function() {
-                    $(".razorpay-payment-button").trigger("click");
-                })
-            </script>
-        </form>';
-        return '';
     }
 
     public function updateOfflinePayment(Request $request, $id)

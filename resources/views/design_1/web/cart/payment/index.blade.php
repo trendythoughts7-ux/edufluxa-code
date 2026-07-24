@@ -221,23 +221,6 @@
 
     </section>
 
-    @if(!empty($razorpay) and $razorpay)
-        <form action="/payments/verify/Razorpay" method="get">
-            <input type="hidden" name="order_id" value="{{ $order->id }}">
-
-            <script src="https://checkout.razorpay.com/v1/checkout.js"
-                    data-key="{{ getRazorpayApiKey()['api_key'] }}"
-                    data-amount="{{ (int)($order->total_amount * 100) }}"
-                    data-buttontext=""
-                    data-description="Rozerpay"
-                    data-currency="{{ currency() }}"
-                    data-image="{{ $generalSettings['logo'] }}"
-                    data-prefill.name="{{ $order->user->full_name }}"
-                    data-prefill.email="{{ $order->user->email }}"
-                    data-theme.color="#43d477">
-            </script>
-        </form>
-    @endif
 
 @endsection
 

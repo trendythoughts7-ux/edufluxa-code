@@ -41,13 +41,6 @@ class CartCheckoutService
             $order = $this->createOrderAndOrderItems($carts, $calculate, $user, $discountCoupon);
 
             if (!empty($order) and $order->total_amount > 0) {
-                $razorpay = false;
-                foreach ($paymentChannels as $paymentChannel) {
-                    if ($paymentChannel->class_name == 'Razorpay') {
-                        $razorpay = true;
-                    }
-                }
-
                 $data = [
                     'paymentChannels' => $paymentChannels,
                     'carts' => $carts->map(function ($cart) {
@@ -57,7 +50,6 @@ class CartCheckoutService
                     'order' => $order,
                     'count' => $carts->count(),
                     'userCharge' => $user->getAccountingCharge(),
-                    'razorpay' => $razorpay,
                     'amounts' => $calculate,
                 ];
 

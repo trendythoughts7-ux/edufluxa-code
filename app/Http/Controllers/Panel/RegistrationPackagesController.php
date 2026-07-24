@@ -161,13 +161,6 @@ class RegistrationPackagesController extends Controller
             return $this->handleFreePackage($package, $orderItem);
         }
 
-        $razorpay = false;
-        foreach ($paymentChannels as $paymentChannel) {
-            if ($paymentChannel->class_name == 'Razorpay') {
-                $razorpay = true;
-            }
-        }
-
         $calculatePrices = [
             'total' => $order->total_amount,
             'sub_total' => $order->amount,
@@ -184,7 +177,6 @@ class RegistrationPackagesController extends Controller
             'calculatePrices' => $calculatePrices,
             'count' => 1,
             'userCharge' => $user->getAccountingCharge(),
-            'razorpay' => $razorpay,
             'offlineBanks' => OfflineBank::query()->orderBy('created_at', 'desc')->with(['specifications'])->get(),
         ];
 

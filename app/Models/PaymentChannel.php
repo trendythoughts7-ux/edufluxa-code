@@ -76,7 +76,8 @@ class PaymentChannel extends Model
         'IPay88',
         'Paytabs',
         'Cintepay',
-        'Clickpay'
+        'Clickpay',
+        'Razorpay'
     ];
 
     static $paypal = 'Paypal';

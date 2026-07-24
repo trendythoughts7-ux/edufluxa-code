@@ -318,55 +318,15 @@ class PaymentsController extends Controller
         ]);
 
 
-        if ($paymentChannel->class_name == 'Razorpay') {
-            return $this->echoRozerpayForm($order);
-        } else {
-            $paymentController = new PaymentsController();
+        $paymentController = new PaymentsController();
 
-            $paymentRequest = new Request();
-            $paymentRequest->merge([
-                'gateway_id' => $paymentChannel->id,
-                'order_id' => $order->id
-            ]);
+        $paymentRequest = new Request();
+        $paymentRequest->merge([
+            'gateway_id' => $paymentChannel->id,
+            'order_id' => $order->id
+        ]);
 
-            return $paymentController->paymentRequest($paymentRequest);
-        }
-    }
-
-    private function echoRozerpayForm($order)
-    {
-        $generalSettings = getGeneralSettings();
-
-        echo '<form action="/payments/verify/Razorpay" method="get">
-            <input type="hidden" name="order_id" value="' . $order->id . '">
-
-            <script src="/assets/default/js/app.js"></script>
-            <script src="https://checkout.razorpay.com/v1/checkout.js"
-                    data-key="' . env('RAZORPAY_API_KEY') . '"
-                    data-amount="' . (int)($order->total_amount * 100) . '"
-                    data-buttontext="product_price"
-                    data-description="Rozerpay"
-                    data-currency="' . currency() . '"
-                    data-image="' . $generalSettings['logo'] . '"
-                    data-prefill.name="' . $order->user->full_name . '"
-                    data-prefill.email="' . $order->user->email . '"
-                    data-theme.color="#43d477">
-            </script>
-
-            <style>
-                .razorpay-payment-button {
-                    opacity: 0;
-                    visibility: hidden;
-                }
-            </style>
-
-            <script>
-                $(document).ready(function() {
-                    $(".razorpay-payment-button").trigger("click");
-                })
-            </script>
-        </form>';
-        return '';
+        return $paymentController->paymentRequest($paymentRequest);
     }
 
 }
