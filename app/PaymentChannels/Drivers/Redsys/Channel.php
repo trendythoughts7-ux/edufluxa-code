@@ -71,7 +71,6 @@ class Channel extends BasePaymentChannel implements IChannel
 
             return $form;
         } catch (\Exception $exception) {
-            dd($exception);
             throw new \Exception($exception->getMessage(), $exception->getCode());
         }
     }
