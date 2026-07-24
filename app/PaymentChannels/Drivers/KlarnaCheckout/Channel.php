@@ -93,7 +93,7 @@ class Channel extends BasePaymentChannel implements IChannel
             $response = $gateway->authorize($data)->send()->getData();
 
         } catch (\Exception $exception) {
-            dd($exception);
+            \Log::error('KlarnaCheckout payment error: ' . $exception->getMessage());
         }
 
         if (!empty($response)) {
