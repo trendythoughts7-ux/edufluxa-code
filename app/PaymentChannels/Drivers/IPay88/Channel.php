@@ -65,7 +65,7 @@ class Channel extends BasePaymentChannel implements IChannel
     private function makeCallbackUrl()
     {
         $callbackUrl = route('payment_verify', [
-            'gateway' => 'Ipay88'
+            'gateway' => 'IPay88'
         ]);
 
         return $callbackUrl;
