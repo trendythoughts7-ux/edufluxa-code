@@ -7,7 +7,6 @@ use App\Models\PaymentChannel;
 use App\PaymentChannels\BasePaymentChannel;
 use App\PaymentChannels\IChannel;
 use Illuminate\Http\Request;
-use Instamojo\Instamojo;
 use SebaCarrasco93\LaravelPayku\Facades\LaravelPayku;
 use SebaCarrasco93\LaravelPayku\Models\PaykuTransaction;
 
@@ -102,7 +101,8 @@ class Channel extends BasePaymentChannel implements IChannel
 
             return $order;
         } catch (\Exception $e) {
-            print('Error: ' . $e->getMessage());
+            \Log::error('Payku verify() failed: ' . $e->getMessage());
+            throw new \Exception($e->getMessage(), $e->getCode());
         }
     }
 }
