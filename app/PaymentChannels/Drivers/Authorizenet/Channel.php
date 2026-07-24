@@ -151,7 +151,7 @@ class Channel extends BasePaymentChannel implements IChannel
                             'refId' => $response->getRefId(),
                         ];
 
-                        $orderStatus = Order::$fail;
+                        $orderStatus = Order::$paying;
                     } else {
                         $message_text = 'There were some issue with the payment. Please try again later.';
 
