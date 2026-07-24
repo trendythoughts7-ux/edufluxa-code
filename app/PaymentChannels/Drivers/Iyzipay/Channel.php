@@ -120,7 +120,12 @@ class Channel extends BasePaymentChannel implements IChannel
 
         session()->put($this->order_session_key, $order->id);
 
-        $payWithIyzicoInitialize = PayWithIyzicoInitialize::create($IForm, $this->IOptions);
+        try {
+            $payWithIyzicoInitialize = PayWithIyzicoInitialize::create($IForm, $this->IOptions);
+        } catch (\Exception $e) {
+            \Log::error('Iyzipay paymentRequest failed: ' . $e->getMessage());
+            return $this->getErrorToast();
+        }
 
         if ($payWithIyzicoInitialize->getStatus() == 'success') {
             return Redirect::away($payWithIyzicoInitialize->getPayWithIyzicoPageUrl()); // return for redirection
@@ -164,7 +169,12 @@ class Channel extends BasePaymentChannel implements IChannel
             $request2->setConversationId($orderId);
             $request2->setToken($token);
 
-            $checkoutForm = \Iyzipay\Model\PayWithIyzico::retrieve($request2, $this->IOptions);
+            try {
+                $checkoutForm = \Iyzipay\Model\PayWithIyzico::retrieve($request2, $this->IOptions);
+            } catch (\Exception $e) {
+                \Log::error('Iyzipay verify failed: ' . $e->getMessage());
+                return $order;
+            }
 
             $buyerId = $checkoutForm->getBasketId();
 
