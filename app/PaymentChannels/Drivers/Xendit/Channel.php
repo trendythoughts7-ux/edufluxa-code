@@ -77,7 +77,7 @@ class Channel extends BasePaymentChannel implements IChannel
 
             return $result['invoice_url'];
         } catch (\Throwable $e) {
-            dd($e->getMessage());
+            \Log::error('Xendit payment error: ' . $e->getMessage());
         }
 
         $toastData = [
