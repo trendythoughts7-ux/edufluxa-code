@@ -2,7 +2,6 @@
 
 namespace App\PaymentChannels\Drivers\Paystack;
 
-use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
 use App\Models\Order;
 use App\Models\PaymentChannel;
 use App\PaymentChannels\BasePaymentChannel;
@@ -39,7 +38,7 @@ class Channel extends BasePaymentChannel implements IChannel
 
     private function handleConfigs()
     {
-        \Config::set('paystack.paymentUrl', $this->paymentUrl);
+        \Config::set('paystack.publicKey', $this->publicKey);
         \Config::set('paystack.secretKey', $this->secretKey);
         \Config::set('paystack.paymentUrl', $this->paymentUrl);
         \Config::set('paystack.merchantEmail', $this->merchantEmail);
