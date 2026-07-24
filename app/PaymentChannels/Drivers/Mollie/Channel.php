@@ -52,16 +52,15 @@ class Channel extends BasePaymentChannel implements IChannel
 
             $gateway = $this->makeGateway();
             $response = $gateway->purchase($this->createPaymentData($order))->send();
-            dd($response);
+
             if ($response->isRedirect()) {
                 return $response->redirect();
             }
 
         } catch (\Exception $exception) {
-            dd($exception);
             throw new \Exception($exception->getMessage(), $exception->getCode());
         }
-        dd(1);
+
         $toastData = [
             'title' => trans('cart.fail_purchase'),
             'msg' => '',
