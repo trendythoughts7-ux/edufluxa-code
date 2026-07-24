@@ -55,20 +55,30 @@ class Channel extends BasePaymentChannel implements IChannel
         ];
 
         // Send purchase request
-        $response = $gateway->purchase(
-            [
-                'language' => 'ENG',
-                'transactionId' => $order->id,
-                'paymentMethod' => 'hanzaee',
-                'amount' => $this->makeAmountByCurrency($order->total_amount, $this->currency),
-                'currency' => $this->currency,
-                'testMode' => $this->test_mode,
-                'returnUrl' => $this->makeCallbackUrl($order, 'success'),
-                'cancelUrl' => $this->makeCallbackUrl($order, 'cancel'),
-                'notifyUrl' => $this->makeCallbackUrl($order, 'notify'),
-                'card' => $card,
-            ]
-        )->send();
+        try {
+            $response = $gateway->purchase(
+                [
+                    'language' => 'ENG',
+                    'transactionId' => $order->id,
+                    'paymentMethod' => 'hanzaee',
+                    'amount' => $this->makeAmountByCurrency($order->total_amount, $this->currency),
+                    'currency' => $this->currency,
+                    'testMode' => $this->test_mode,
+                    'returnUrl' => $this->makeCallbackUrl($order, 'success'),
+                    'cancelUrl' => $this->makeCallbackUrl($order, 'cancel'),
+                    'notifyUrl' => $this->makeCallbackUrl($order, 'notify'),
+                    'card' => $card,
+                ]
+            )->send();
+        } catch (\Exception $e) {
+            \Log::error('Paysera paymentRequest failed: ' . $e->getMessage());
+            $toastData = [
+                'title' => trans('cart.fail_purchase'),
+                'msg' => '',
+                'status' => 'error'
+            ];
+            return redirect()->back()->with(['toast' => $toastData])->withInput();
+        }
 
         if ($response->isRedirect()) {
             return $response->redirect();
@@ -104,7 +114,15 @@ class Channel extends BasePaymentChannel implements IChannel
         $gateway->setPassword($this->api_secret);
 
         // Accept the notification
-        $response = $gateway->acceptNotification()->send();
+        try {
+            $response = $gateway->acceptNotification()->send();
+        } catch (\Exception $e) {
+            \Log::error('Paysera verify failed: ' . $e->getMessage());
+            if (!empty($order)) {
+                $order->update(['status' => Order::$fail]);
+            }
+            return $order;
+        }
 
         if ($response->isSuccessful() and !empty($order)) {
             // Mark the order as paid
