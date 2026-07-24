@@ -80,7 +80,7 @@ class Channel extends BasePaymentChannel implements IChannel
                 return $payment['data']['checkout_url'];
             }
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            \Log::error('Chapa payment error: ' . $e->getMessage());
         }
     }
 
