@@ -56,7 +56,7 @@ class Channel extends BasePaymentChannel implements IChannel
         ];
 
         // Send purchase request
-        /*try {*/
+        try {
 
         $response = $gateway->purchase(
             [
@@ -73,12 +73,12 @@ class Channel extends BasePaymentChannel implements IChannel
                 'card' => $card,
             ]
         )->send();
+        } catch (\Exception $exception) {
+            \Log::error('Robokassa payment error: ' . $exception->getMessage());
+            $response = null;
+        }
 
-        /*} catch (\Exception $exception) {
-            dd($exception);
-        }*/
-
-        if ($response->isRedirect()) {
+        if (!empty($response) and $response->isRedirect()) {
             return $response->redirect();
         }
 
