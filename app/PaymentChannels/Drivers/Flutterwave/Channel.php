@@ -69,7 +69,7 @@ class Channel extends BasePaymentChannel implements IChannel
                 return $payment['data']['link'];
             }
         } catch (\Exception $e) {
-            //dd($e->getMessage());
+            \Log::error('Flutterwave paymentRequest failed: ' . $e->getMessage());
         }
 
         $toastData = [
@@ -107,11 +107,16 @@ class Channel extends BasePaymentChannel implements IChannel
 
             // https://developer.flutterwave.com/docs/transaction-verification-1
 
-            $payment = Http::withToken($this->secretKey)
-                ->get("https://api.flutterwave.com/v3/transactions/?id=" . $transactionId)
-                ->json();
+            try {
+                $payment = Http::withToken($this->secretKey)
+                    ->get("https://api.flutterwave.com/v3/transactions/?id=" . $transactionId)
+                    ->json();
+            } catch (\Exception $e) {
+                \Log::error('Flutterwave verify failed: ' . $e->getMessage());
+                $payment = null;
+            }
 
-            if ($payment['status'] == 'success' and isset($payment['data'][0]) and $payment['data'][0]['status'] == 'successful') {
+            if (!empty($payment) and $payment['status'] == 'success' and isset($payment['data'][0]) and $payment['data'][0]['status'] == 'successful') {
                 $order->update([
                     'status' => Order::$paying,
                     'payment_data' => json_encode($payment),
