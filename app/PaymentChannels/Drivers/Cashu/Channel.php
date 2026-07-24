@@ -41,6 +41,7 @@ class Channel extends BasePaymentChannel implements IChannel
     public function paymentRequest(Order $order)
     {
         $this->handleConfigs();
+        \Config::set('cashu._session_id', 'order_' . $order->id);
 
         $generalSettings = getGeneralSettings();
         $user = $order->user;
@@ -61,21 +62,31 @@ class Channel extends BasePaymentChannel implements IChannel
         return CashU::Go($data);
     }
 
-    private function makeCallbackUrl()
-    {
-
-    }
-
     public function verify(Request $request)
     {
         $this->handleConfigs();
 
+        $data = $request->all();
+        $sessionId = $data['session_id'] ?? null;
+        $orderId = null;
+
+        if (!empty($sessionId) && str_starts_with($sessionId, 'order_')) {
+            $orderId = substr($sessionId, strlen('order_'));
+        }
+
+        $order = !empty($orderId) ? Order::find($orderId) : null;
+
         if (!empty($order)) {
+            // NOTE: CashU's callback payload does not clearly document a
+            // reliable success/fail indicator (see vendor package README).
+            // Orders are marked failed by default until this is verified
+            // against real CashU documentation. Do not activate this
+            // gateway until success-detection logic is properly confirmed.
             $order->update([
-                'status' => Order::$fail
+                'status' => Order::$fail,
             ]);
         }
 
-        return null;
+        return $order;
     }
 }
