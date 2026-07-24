@@ -62,8 +62,14 @@ class Channel extends BasePaymentChannel implements IChannel
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->initiate($postData, false);
         if (!is_array($payment_options)) {
-            print_r($payment_options);
-            $payment_options = array();
+            \Log::error('Sslcommerz paymentRequest failed: ' . (is_string($payment_options) ? $payment_options : json_encode($payment_options)));
+
+            $toastData = [
+                'title' => trans('cart.fail_purchase'),
+                'msg' => '',
+                'status' => 'error'
+            ];
+            return redirect()->back()->with(['toast' => $toastData])->withInput();
         }
     }
 
