@@ -90,7 +90,9 @@ class PayoutController extends Controller
         }
 
         if (!empty($account_type)) {
-            $query->where('account_bank_name', $account_type);
+            $query->whereHas('userSelectedBank', function ($q) use ($account_type) {
+                $q->where('user_bank_id', $account_type);
+            });
         }
 
         if (!empty($sort)) {
@@ -148,7 +150,7 @@ class PayoutController extends Controller
 
         $notifyOptions = [
             '[payout.amount]' => $payout->amount,
-            '[payout.account]' => $payout->account_bank_name
+            '[payout.account]' => optional(optional($payout->userSelectedBank)->bank)->title
         ];
         sendNotification('payout_proceed', $notifyOptions, $payout->user_id);
 
