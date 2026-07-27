@@ -1,0 +1,10 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+parameters:
+    level: 2
+    paths:
+        - app
+    excludePaths:
+        - app/Http/Controllers/Api/Instructor/*
+    bootstrapFiles:
+        - vendor/autoload.php

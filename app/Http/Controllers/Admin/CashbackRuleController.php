@@ -157,19 +157,15 @@ class CashbackRuleController extends Controller
             'created_at' => time(),
         ]);
 
-        if (!empty($rule)) {
-            $this->storeExtraData($rule, $data);
+        $this->storeExtraData($rule, $data);
 
-            $toastData = [
-                'title' => trans('public.request_success'),
-                'msg' => trans('update.new_cashback_rule_were_successfully_created'),
-                'status' => 'success'
-            ];
+        $toastData = [
+            'title' => trans('public.request_success'),
+            'msg' => trans('update.new_cashback_rule_were_successfully_created'),
+            'status' => 'success'
+        ];
 
-            return redirect(getAdminPanelUrl("/cashback/rules/{$rule->id}/edit"))->with(['toast' => $toastData]);
-        }
-
-        abort(500);
+        return redirect(getAdminPanelUrl("/cashback/rules/{$rule->id}/edit"))->with(['toast' => $toastData]);
     }
 
     private function storeExtraData($rule, $data)
@@ -341,19 +337,15 @@ class CashbackRuleController extends Controller
             'enable' => (!empty($data['enable']) and $data['enable'] == 'on'),
         ]);
 
-        if (!empty($rule)) {
-            $this->storeExtraData($rule, $data);
+        $this->storeExtraData($rule, $data);
 
-            $toastData = [
-                'title' => trans('public.request_success'),
-                'msg' => trans('update.cashback_rule_were_successfully_updated'),
-                'status' => 'success'
-            ];
+        $toastData = [
+            'title' => trans('public.request_success'),
+            'msg' => trans('update.cashback_rule_were_successfully_updated'),
+            'status' => 'success'
+        ];
 
-            return redirect(getAdminPanelUrl("/cashback/rules/{$rule->id}/edit"))->with(['toast' => $toastData]);
-        }
-
-        abort(500);
+        return redirect(getAdminPanelUrl("/cashback/rules/{$rule->id}/edit"))->with(['toast' => $toastData]);
     }
 
     public function delete($id)
