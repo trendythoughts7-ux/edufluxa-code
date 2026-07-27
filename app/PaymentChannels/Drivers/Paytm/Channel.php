@@ -53,16 +53,26 @@ class Channel extends BasePaymentChannel implements IChannel
 
         $payment = PaytmWallet::with('receive');
 
-        $payment->prepare([
-            'order' => $order->id,
-            'user' => $order->user_id,
-            'email' => $order->user->email,
-            'mobile_number' => $order->user->mobile,
-            'amount' => $this->makeAmountByCurrency($order->total_amount, $this->currency),
-            'callback_url' => $this->makeCallbackUrl($order)
-        ]);
+        try {
+            $payment->prepare([
+                'order' => $order->id,
+                'user' => $order->user_id,
+                'email' => $order->user->email,
+                'mobile_number' => $order->user->mobile,
+                'amount' => $this->makeAmountByCurrency($order->total_amount, $this->currency),
+                'callback_url' => $this->makeCallbackUrl($order)
+            ]);
 
-        return $payment->receive();
+            return $payment->receive();
+        } catch (\Throwable $e) {
+            \Log::error('Paytm paymentRequest failed: ' . $e->getMessage());
+            $toastData = [
+                'title' => trans('cart.fail_purchase'),
+                'msg' => trans('cart.gateway_error'),
+                'status' => 'error'
+            ];
+            return redirect()->back()->with(['toast' => $toastData])->withInput();
+        }
     }
 
     private function makeCallbackUrl(Order $order)
@@ -78,14 +88,22 @@ class Channel extends BasePaymentChannel implements IChannel
     {
         $this->handleConfigs();
 
-        $paytmWallet = PaytmWallet::with('receive');
+        $order = null;
 
-        $order = Order::find($paytmWallet->getOrderId());
+        try {
+            $paytmWallet = PaytmWallet::with('receive');
 
-        if ($paytmWallet->isSuccessful()) {
-            $order->update(['status' => Order::$paying]);
-        } else if ($paytmWallet->isFailed()) {
-            $order->update(['status' => Order::$fail]);
+            $order = Order::find($paytmWallet->getOrderId());
+
+            if (empty($order)) {
+                \Log::error('Paytm verify: order not found', ['order_id' => $paytmWallet->getOrderId()]);
+            } elseif ($paytmWallet->isSuccessful()) {
+                $order->update(['status' => Order::$paying]);
+            } elseif ($paytmWallet->isFailed()) {
+                $order->update(['status' => Order::$fail]);
+            }
+        } catch (\Throwable $e) {
+            \Log::error('Paytm verify failed: ' . $e->getMessage());
         }
 
         return $order;
