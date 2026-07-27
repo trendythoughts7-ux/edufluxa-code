@@ -8,15 +8,31 @@ require 'assets_helpers.php';
 require 'settings.php';
 require 'theme_helpers.php';
 
+/**
+ * Returns the Blade view-namespace prefix used across the site's front-end.
+ *
+ * Historically this supported switching between multiple installable "themes"
+ * via a view_templates DB table / App\Models\ViewTemplate model. That table and
+ * model no longer exist in this codebase, and this function's caching logic had
+ * been commented out -- meaning it had been unconditionally and silently
+ * returning the hardcoded string 'web.default' (a view-folder that has never
+ * existed) regardless of caller intent. Most call-sites were unreachable dead
+ * code, but at least one (RewardProductsController::index(), a live guest-facing
+ * route) was genuinely broken by this.
+ *
+ * 'design_1' is the sole theme present and in active use sitewide
+ * (resources/views/design_1/{web,panel}). Confirmed via full audit on
+ * 2026-07-27: no view_templates table, no ViewTemplate model, and no other
+ * reference to a multi-theme switching mechanism exists anywhere in the
+ * codebase. This function now reflects that reality directly.
+ *
+ * If multi-theme support is ever reintroduced, this function (and its
+ * call-sites) is the correct place to wire it back in -- that would be a new
+ * feature, not a bug fix, and should be scoped separately.
+ */
 function getTemplate()
 {
-    /*$template = cache()->remember('view.template', 7 * 24 * 60 * 60, function () {
-        return \App\Models\ViewTemplate::where('status', true)->first();
-    });*/
-    if (!empty($template) and $template->count() > 0) {
-        return 'web.' . $template->folder;
-    }
-    return 'web.default';
+    return 'design_1.web';
 }
 
 
