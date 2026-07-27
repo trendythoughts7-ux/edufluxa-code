@@ -2527,29 +2527,6 @@ function canDeleteContentDirectly()
     return $result;
 }
 
-function getRazorpayApiKey(): array
-{
-    $api_key = "";
-    $api_secret = "";
-
-    $paymentChannel = \App\Models\PaymentChannel::query()->where('class_name', 'Razorpay')->first();
-
-    if (!empty($paymentChannel) and !empty($paymentChannel->credentials)) {
-        if (!empty($paymentChannel->credentials['api_key'])) {
-            $api_key = $paymentChannel->credentials['api_key'];
-        }
-
-        if (!empty($paymentChannel->credentials['api_secret'])) {
-            $api_secret = $paymentChannel->credentials['api_secret'];
-        }
-    }
-
-    return [
-        'api_key' => $api_key,
-        'api_secret' => $api_secret,
-    ];
-}
-
 function checkTimestampInToday($timestamp)
 {
     $now = now();
