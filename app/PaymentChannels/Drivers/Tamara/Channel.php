@@ -304,18 +304,25 @@ class Channel extends BasePaymentChannel implements IChannel
                 ->first();
 
             if (!empty($order)) {
-                $authOrder = new AuthoriseOrderRequest($tamaraPaymentOrderId);
+                try {
+                    $authOrder = new AuthoriseOrderRequest($tamaraPaymentOrderId);
 
-                $tamaraClient = $this->getTamaraClient();
-                $authedResponse = $tamaraClient->authoriseOrder($authOrder);
+                    $tamaraClient = $this->getTamaraClient();
+                    $authedResponse = $tamaraClient->authoriseOrder($authOrder);
 
-                $tamaraOrderStatus = $authedResponse->getOrderStatus(); // authorised, approved, captured, fully_captured, declined, refunded, failed, expired
+                    $tamaraOrderStatus = $authedResponse->getOrderStatus(); // authorised, approved, captured, fully_captured, declined, refunded, failed, expired
 
-                if ($tamaraOrderStatus == "authorised") {
-                    $order->update([
-                        'status' => Order::$paying,
-                    ]);
-                } else {
+                    if ($tamaraOrderStatus == "authorised") {
+                        $order->update([
+                            'status' => Order::$paying,
+                        ]);
+                    } else {
+                        $order->update([
+                            'status' => Order::$fail,
+                        ]);
+                    }
+                } catch (\Throwable $e) {
+                    \Log::error('Tamara verify authoriseOrder failed: ' . $e->getMessage());
                     $order->update([
                         'status' => Order::$fail,
                     ]);
