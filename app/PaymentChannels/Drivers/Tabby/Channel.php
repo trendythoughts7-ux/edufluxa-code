@@ -235,30 +235,36 @@ class Channel extends BasePaymentChannel implements IChannel
         $order = null;
 
         if (!empty($paymentId)) {
-            $tabbyService = new TabbyService(
-                merchantCode: $this->merchantCode,
-                publicKey: $this->publicKey,
-                secretKey: $this->secretKey,
-                currency: $this->currency,
-            );
+            try {
+                $tabbyService = new TabbyService(
+                    merchantCode: $this->merchantCode,
+                    publicKey: $this->publicKey,
+                    secretKey: $this->secretKey,
+                    currency: $this->currency,
+                );
 
-            $payment = $tabbyService->retrievePayment($paymentId);
-            $paymentOrder = $payment->getOrder();
+                $payment = $tabbyService->retrievePayment($paymentId);
+                $paymentOrder = $payment->getOrder();
 
-            $paymentOrderId = str_replace('order-', '', $paymentOrder->getReferenceId());
+                $paymentOrderId = str_replace('order-', '', $paymentOrder->getReferenceId());
 
-            $order = Order::where('id', $paymentOrderId)
-                ->where('user_id', $user->id)
-                ->first();
+                $order = Order::where('id', $paymentOrderId)
+                    ->where('user_id', $user->id)
+                    ->first();
 
-            if (!empty($order) and in_array($payment->getStatus(), ["AUTHORIZED", "CLOSED"])) {
-                $order->update([
-                    'status' => Order::$paying,
-                ]);
-            } else {
-                $order->update([
-                    'status' => Order::$fail,
-                ]);
+                if (empty($order)) {
+                    \Log::error('Tabby verify: order not found', ['payment_id' => $paymentId]);
+                } elseif (in_array($payment->getStatus(), ["AUTHORIZED", "CLOSED"])) {
+                    $order->update([
+                        'status' => Order::$paying,
+                    ]);
+                } else {
+                    $order->update([
+                        'status' => Order::$fail,
+                    ]);
+                }
+            } catch (\Exception $e) {
+                \Log::error('Tabby verify failed: ' . $e->getMessage());
             }
         }
 
