@@ -327,7 +327,6 @@ class QuizzesController extends Controller
             ];
             return apiResponse2(1, 'retrieved', trans('public.retrieved'),$data);
 
-            return view(getTemplate() . '.panel.quizzes.results', $data);
         }
 
         abort(404);
