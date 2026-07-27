@@ -102,7 +102,6 @@ class SaleController extends Controller
             $sale->item_id = $item ? $item->id : '';
             $sale->item_seller = ($item and $item->creator) ? $item->creator->full_name : trans('update.deleted_user');
             $sale->seller_id = ($item and $item->creator) ? $item->creator->id : '';
-            $sale->sale_type = ($item and $item->creator) ? $item->creator->id : '';
         } else if (!empty($sale->event_ticket_id)) {
             $item = $sale->eventTicket;
             $event = $item->event;

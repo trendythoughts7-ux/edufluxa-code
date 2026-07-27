@@ -83,7 +83,6 @@ class EnrollmentController extends Controller
         $sale->item_id = $item ? $item->id : '';
         $sale->item_seller = ($item and $item->creator) ? $item->creator->full_name : trans('update.deleted_item');
         $sale->seller_id = ($item and $item->creator) ? $item->creator->id : '';
-        $sale->sale_type = ($item and $item->creator) ? $item->creator->id : '';
 
         return $sale;
     }
