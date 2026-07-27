@@ -50,29 +50,6 @@ class CommentsController extends Controller
         return apiResponse2(1, 'retrieved', trans('public.retrieved'),$data);
      }
 
-    public function myComments(Request $request)
-    {
-        $user = auth()->user();
-        $user = User::find(922);
-        $query = Comment::where('user_id', $user->id)
-            ->whereNotNull('webinar_id')
-            ->with(['webinar' => function ($query) {
-                $query->select('id', 'title', 'slug');
-            }]);
-
-        $query = $this->filterComments($query, $request);
-
-        $comments = $query->orderBy('created_at', 'desc')
-            ->paginate(10);
-
-        $data = [
-            'pageTitle' => trans('panel.my_comments'),
-            'comments' => $comments,
-        ];
-
-        return view(getTemplate() . '.panel.webinar.my_comments', $data);
-    }
-
     private function filterComments($query, $request)
     {
         $from = $request->get('from', null);

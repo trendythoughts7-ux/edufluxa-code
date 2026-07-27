@@ -47,34 +47,6 @@ class WebinarsController extends Controller
         $this->instructorWebinarMiscService = $instructorWebinarMiscService;
     }
 
-    public function index(Request $request)
-    {
-        $data = $this->instructorWebinarListingService->index($request);
-
-        return view(getTemplate() . '.panel.webinar.index', $data);
-    }
-
-    public function invitations(Request $request)
-    {
-        $data = $this->instructorWebinarListingService->invitations($request);
-
-        return view(getTemplate() . '.panel.webinar.index', $data);
-    }
-
-    public function organizationClasses(Request $request)
-    {
-        $data = $this->instructorWebinarListingService->organizationClasses($request);
-
-        return view(getTemplate() . '.panel.webinar.organization_classes', $data);
-    }
-
-    public function create(Request $request)
-    {
-        $data = $this->instructorWebinarCreationService->create($request);
-
-        return view(getTemplate() . '.panel.webinar.create', $data);
-    }
-
     public function store(Request $request)
     {
         return $this->instructorWebinarCreationService->store($request);
@@ -94,13 +66,6 @@ class WebinarsController extends Controller
         }
 
         return redirect($result['redirect']);
-    }
-
-    public function edit($id, $step = 1)
-    {
-        $data = $this->instructorWebinarUpdateService->edit($id, $step);
-
-        return view(getTemplate() . '.panel.webinar.create', $data);
     }
 
     public function updateAll(Request $request, $id)
