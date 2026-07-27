@@ -49,7 +49,6 @@ class PaymentChannel extends Model
         'Cintepay',
         'TapPayment',
         'Paytr',
-        'Telebirr',
         'Chapa',
         'Clickpay',
         'Tabby',
