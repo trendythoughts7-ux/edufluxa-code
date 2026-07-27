@@ -92,7 +92,6 @@ class ProductController extends Controller
             ]);
 
 
-        return view(getTemplate() . '.products.show', $data);
     }
 
 
