@@ -92,10 +92,6 @@ Route::group(['namespace' => 'Auth', 'middleware' => ['check_mobile_app', 'share
 });
 
 Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impersonate', 'share', 'check_maintenance', 'check_restriction']], function () {
-    Route::get('/stripe', function () {
-        return view('design_1.web.cart.payment.channels.stripe');
-    });
-
     // set Locale
     Route::post('/locale', 'LocaleController@setLocale')->name('appLocaleRoute');
 
