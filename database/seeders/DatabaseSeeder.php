@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ThemeHeaderFooterSeeder::class);
 
         $this->call(DefaultThemeSeeder::class);
+        $this->call(NotificationTemplatesTableSeeder::class);
     }
 }
