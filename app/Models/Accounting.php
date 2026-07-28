@@ -374,21 +374,19 @@ class Accounting extends Model
 
                 if (!empty($affiliateUser) and $affiliateUser->affiliate) {
 
-                    if (!empty($affiliate)) {
-                        if (!empty($orderItem->product_id) and !empty($referralSettings['store_affiliate_user_commission']) and $referralSettings['store_affiliate_user_commission'] > 0) {
-                            $affiliateCommission = $referralSettings['store_affiliate_user_commission'];
+                    if (!empty($orderItem->product_id) and !empty($referralSettings['store_affiliate_user_commission']) and $referralSettings['store_affiliate_user_commission'] > 0) {
+                        $affiliateCommission = $referralSettings['store_affiliate_user_commission'];
 
-                            if ($commission > 0) {
-                                $affiliateCommissionPrice = ($affiliateCommission * $commissionPrice) / $commission;
-                                $commissionPrice = $commissionPrice - $affiliateCommissionPrice;
-                            }
-                        } elseif (empty($orderItem->product_id) and !empty($referralSettings['affiliate_user_commission']) and $referralSettings['affiliate_user_commission'] > 0) {
-                            $affiliateCommission = $referralSettings['affiliate_user_commission'];
+                        if ($commission > 0) {
+                            $affiliateCommissionPrice = ($affiliateCommission * $commissionPrice) / $commission;
+                            $commissionPrice = $commissionPrice - $affiliateCommissionPrice;
+                        }
+                    } elseif (empty($orderItem->product_id) and !empty($referralSettings['affiliate_user_commission']) and $referralSettings['affiliate_user_commission'] > 0) {
+                        $affiliateCommission = $referralSettings['affiliate_user_commission'];
 
-                            if ($commission > 0) {
-                                $affiliateCommissionPrice = ($affiliateCommission * $commissionPrice) / $commission;
-                                $commissionPrice = $commissionPrice - $affiliateCommissionPrice;
-                            }
+                        if ($commission > 0) {
+                            $affiliateCommissionPrice = ($affiliateCommission * $commissionPrice) / $commission;
+                            $commissionPrice = $commissionPrice - $affiliateCommissionPrice;
                         }
                     }
                 }
