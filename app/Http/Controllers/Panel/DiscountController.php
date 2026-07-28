@@ -119,7 +119,7 @@ class DiscountController extends Controller
         $html = "";
 
         foreach($discounts as $discountRow) {
-            $html .= (string)view()->make('design_1.panel.marketing.discounts.lists.table_items', ['discount' => $discountRow]);
+            $html .= view()->make('design_1.panel.marketing.discounts.lists.table_items', ['discount' => $discountRow])->render();
         }
 
         return response()->json([

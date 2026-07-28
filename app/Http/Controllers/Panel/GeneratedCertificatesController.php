@@ -159,7 +159,7 @@ class GeneratedCertificatesController extends Controller
         $html = "";
 
         foreach ($certificates as $certificate) {
-            $html .= (string)view()->make('design_1.panel.certificates.students.item_table', ['certificate' => $certificate]);
+            $html .= view()->make('design_1.panel.certificates.students.item_table', ['certificate' => $certificate])->render();
         }
 
         return response()->json([

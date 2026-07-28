@@ -67,7 +67,7 @@ class AiContentController extends Controller
         $html = "";
 
         foreach ($contents as $contentRow) {
-            $html .= (string)view()->make('design_1.panel.ai_contents.lists.table_items', ['content' => $contentRow]);
+            $html .= view()->make('design_1.panel.ai_contents.lists.table_items', ['content' => $contentRow])->render();
         }
 
         return response()->json([

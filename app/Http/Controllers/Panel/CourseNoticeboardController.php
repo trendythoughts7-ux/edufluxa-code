@@ -144,10 +144,10 @@ class CourseNoticeboardController extends Controller
         $html = "";
 
         foreach ($noticeboards as $noticeboardRow) {
-            $html .= (string)view()->make('design_1.panel.noticeboard.lists.table_items', [
+            $html .= view()->make('design_1.panel.noticeboard.lists.table_items', [
                 'noticeboard' => $noticeboardRow,
                 'isCourseNotice' => true,
-            ]);
+            ])->render();
         }
 
         return response()->json([

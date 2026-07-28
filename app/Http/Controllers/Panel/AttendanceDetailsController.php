@@ -180,11 +180,11 @@ class AttendanceDetailsController extends Controller
         $html = "";
 
         foreach ($students as $studentRow) {
-            $html .= (string)view()->make('design_1.panel.webinars.attendances.details.table_items', [
+            $html .= view()->make('design_1.panel.webinars.attendances.details.table_items', [
                 'student' => $studentRow,
                 'changeAttendanceStatus' => $changeAttendanceStatus,
                 'session' => $session,
-            ]);
+            ])->render();
         }
 
         return response()->json([

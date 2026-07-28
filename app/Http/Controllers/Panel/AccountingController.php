@@ -114,7 +114,7 @@ class AccountingController extends Controller
         $html = "";
 
         foreach ($offlinePayments as $offlinePaymentRow) {
-            $html .= (string)view()->make("design_1.panel.financial.account.offline_transactions.table_items", ['offlinePayment' => $offlinePaymentRow]);
+            $html .= view()->make("design_1.panel.financial.account.offline_transactions.table_items", ['offlinePayment' => $offlinePaymentRow])->render();
         }
 
         return response()->json([

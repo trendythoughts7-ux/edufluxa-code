@@ -21,7 +21,7 @@ class ChapterController extends Controller
 
     public function getForm(Request $request)
     {
-        $html = (string)view()->make("design_1.panel.webinars.create.modals.chapter");
+        $html = view()->make("design_1.panel.webinars.create.modals.chapter")->render();
 
         return response()->json([
             'code' => 200,
@@ -162,7 +162,7 @@ class ChapterController extends Controller
                 'chapter' => $chapter,
             ];
 
-            $html = (string)view()->make("design_1.panel.webinars.create.modals.chapter", $data);
+            $html = view()->make("design_1.panel.webinars.create.modals.chapter", $data)->render();
 
             return response()->json([
                 'code' => 200,

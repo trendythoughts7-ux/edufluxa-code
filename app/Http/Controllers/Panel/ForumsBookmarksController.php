@@ -77,7 +77,7 @@ class ForumsBookmarksController extends Controller
         $html = "";
 
         foreach ($topics as $topicRow) {
-            $html .= (string)view()->make('design_1.panel.forum.bookmarks.table_items', ['topic' => $topicRow]);
+            $html .= view()->make('design_1.panel.forum.bookmarks.table_items', ['topic' => $topicRow])->render();
         }
 
         return response()->json([

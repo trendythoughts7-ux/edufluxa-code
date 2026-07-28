@@ -92,7 +92,7 @@ class AffiliateController extends Controller
         $html = "";
 
         foreach ($affiliates as $affiliateRow) {
-            $html .= (string)view()->make('design_1.panel.marketing.affiliates.table_items', ['affiliate' => $affiliateRow]);
+            $html .= view()->make('design_1.panel.marketing.affiliates.table_items', ['affiliate' => $affiliateRow])->render();
         }
 
         return response()->json([

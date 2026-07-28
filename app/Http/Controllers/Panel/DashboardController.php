@@ -206,7 +206,7 @@ class DashboardController extends Controller
                 'gift' => $gift
             ];
 
-            $result = (string)view()->make('design_1.web.gift.modal.show_to_receipt', $data);
+            $result = view()->make('design_1.web.gift.modal.show_to_receipt', $data)->render();
             $result = str_replace(array("\r\n", "\n", "  "), '', $result);
 
             return $result;

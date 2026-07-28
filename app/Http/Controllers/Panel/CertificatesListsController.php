@@ -151,9 +151,9 @@ class CertificatesListsController extends Controller
 
         foreach ($certificatesItems as $certificateItem) {
             if ($source == 'quiz') {
-                $html .= (string)view()->make('design_1.panel.certificates.lists.quiz_item_table', ['quizItem' => $certificateItem]);
+                $html .= view()->make('design_1.panel.certificates.lists.quiz_item_table', ['quizItem' => $certificateItem])->render();
             } else {
-                $html .= (string)view()->make('design_1.panel.certificates.lists.course_item_table', ['course' => $certificateItem]);
+                $html .= view()->make('design_1.panel.certificates.lists.course_item_table', ['course' => $certificateItem])->render();
             }
         }
 
