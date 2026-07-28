@@ -188,8 +188,7 @@ function toGmtOffset($timezone): string
     $sign = $offset > 0 ? '+' : '-';
     $hours = floor($seconds / 3600);
     $mins = floor($seconds / 60 % 60);
-    $secs = floor($seconds % 60);
-    return sprintf("GMT $sign%02d:%02d", $hours, $mins, $secs);
+    return sprintf("GMT $sign%02d:%02d", $hours, $mins);
 }
 
 //this function convert string to UTC time zone
