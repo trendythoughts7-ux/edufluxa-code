@@ -24,7 +24,7 @@ class RelatedProductsController extends Controller
             'relatedProduct' => $relatedProduct,
         ];
 
-        $html = (string)view()->make("admin.store.products.create.relatedProducts.related_product_modal", $data);
+        $html = view()->make("admin.store.products.create.relatedProducts.related_product_modal", $data)->render();
 
         return response()->json([
             'code' => 200,

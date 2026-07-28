@@ -18,10 +18,10 @@ class EventSpeakersController extends Controller
 
         $locale = mb_strtolower($request->get('locale', getDefaultLocale()));
 
-        $html = (string)view()->make('admin.events.create.contents.speakers.form', [
+        $html = view()->make('admin.events.create.contents.speakers.form', [
             'event' => $event,
             'locale' => $locale,
-        ]);
+        ])->render();
 
         return response()->json([
             'code' => 200,
@@ -63,11 +63,11 @@ class EventSpeakersController extends Controller
         if (!empty($speaker)) {
             $locale = mb_strtolower($request->get('locale', getDefaultLocale()));
 
-            $html = (string)view()->make('admin.events.create.contents.speakers.form', [
+            $html = view()->make('admin.events.create.contents.speakers.form', [
                 'event' => $event,
                 'speaker' => $speaker,
                 'locale' => $locale,
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

@@ -152,9 +152,9 @@ class QuizQuestionController extends Controller
                 ];
 
                 if ($question->type == 'multiple') {
-                    $html = (string)\View::make('admin.quizzes.modals.multiple_question', $data);
+                    $html = \View::make('admin.quizzes.modals.multiple_question', $data)->render();
                 } else {
-                    $html = (string)\View::make('admin.quizzes.modals.descriptive_question', $data);
+                    $html = \View::make('admin.quizzes.modals.descriptive_question', $data)->render();
                 }
 
                 return response()->json([

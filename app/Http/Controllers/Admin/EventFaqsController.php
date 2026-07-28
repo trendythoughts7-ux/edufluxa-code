@@ -18,10 +18,10 @@ class EventFaqsController extends Controller
 
         $locale = mb_strtolower($request->get('locale', getDefaultLocale()));
 
-        $html = (string)view()->make('admin.events.create.contents.faqs.form', [
+        $html = view()->make('admin.events.create.contents.faqs.form', [
             'event' => $event,
             'locale' => $locale,
-        ]);
+        ])->render();
 
         return response()->json([
             'code' => 200,
@@ -64,11 +64,11 @@ class EventFaqsController extends Controller
         if (!empty($faq)) {
             $locale = mb_strtolower($request->get('locale', getDefaultLocale()));
 
-            $html = (string)view()->make('admin.events.create.contents.faqs.form', [
+            $html = view()->make('admin.events.create.contents.faqs.form', [
                 'event' => $event,
                 'faq' => $faq,
                 'locale' => $locale,
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

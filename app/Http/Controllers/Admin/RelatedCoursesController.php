@@ -24,7 +24,7 @@ class RelatedCoursesController extends Controller
             'relatedCourse' => $relatedCourse,
         ];
 
-        $html = (string)view()->make("admin.webinars.relatedCourse.related_course_modal", $data);
+        $html = view()->make("admin.webinars.relatedCourse.related_course_modal", $data)->render();
 
         return response()->json([
             'code' => 200,

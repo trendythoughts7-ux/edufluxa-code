@@ -145,7 +145,7 @@ class CommentController extends Controller
         $html = "";
 
         foreach ($comments as $commentRow) {
-            $html .= (string)view()->make('design_1.panel.store.comments.table_items', ['comment' => $commentRow]);
+            $html .= view()->make('design_1.panel.store.comments.table_items', ['comment' => $commentRow])->render();
         }
 
         return response()->json([

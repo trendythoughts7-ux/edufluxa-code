@@ -191,7 +191,7 @@ trait AssignmentTrait
         $html = "";
 
         foreach ($assignments as $assignment) {
-            $html .= (string)view()->make('design_1.panel.assignments.my_assignments.table_items', ['assignment' => $assignment]);
+            $html .= view()->make('design_1.panel.assignments.my_assignments.table_items', ['assignment' => $assignment])->render();
         }
 
         return response()->json([
@@ -302,7 +302,7 @@ trait AssignmentTrait
         $html = "";
 
         foreach ($assignments as $assignment) {
-            $html .= (string)view()->make('design_1.panel.assignments.my-courses-assignments.item_table', ['assignment' => $assignment]);
+            $html .= view()->make('design_1.panel.assignments.my-courses-assignments.item_table', ['assignment' => $assignment])->render();
         }
 
         return response()->json([
@@ -371,7 +371,7 @@ trait AssignmentTrait
         $html = "";
 
         foreach ($assignmentHistories as $assignmentHistory) {
-            $html .= (string)view()->make('design_1.panel.assignments.histories.item_table', ['assignmentHistory' => $assignmentHistory]);
+            $html .= view()->make('design_1.panel.assignments.histories.item_table', ['assignmentHistory' => $assignmentHistory])->render();
         }
 
         return response()->json([
@@ -457,7 +457,7 @@ trait AssignmentTrait
         $html = "";
 
         foreach ($assignmentHistories as $assignmentHistory) {
-            $html .= (string)view()->make('design_1.panel.assignments.students.item_table', ['assignmentHistory' => $assignmentHistory]);
+            $html .= view()->make('design_1.panel.assignments.students.item_table', ['assignmentHistory' => $assignmentHistory])->render();
         }
 
         return response()->json([

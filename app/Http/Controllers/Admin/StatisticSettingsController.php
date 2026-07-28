@@ -97,7 +97,7 @@ class StatisticSettingsController extends Controller
             'locale' => mb_strtolower(app()->getLocale())
         ];
 
-        $html = (string)view()->make('admin.settings.personalization.statistic_modal', $data);
+        $html = view()->make('admin.settings.personalization.statistic_modal', $data)->render();
 
         return response()->json([
             'code' => 200,
@@ -163,7 +163,7 @@ class StatisticSettingsController extends Controller
             'editStatistic' => $statistic
         ];
 
-        $html = (string)view()->make('admin.settings.personalization.statistic_modal', $data);
+        $html = view()->make('admin.settings.personalization.statistic_modal', $data)->render();
 
         return response()->json([
             'code' => 200,

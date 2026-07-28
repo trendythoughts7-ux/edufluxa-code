@@ -164,7 +164,7 @@ class SaleController extends Controller
         $html = "";
 
         foreach ($orders as $orderRow) {
-            $html .= (string)view()->make('design_1.panel.store.sales.table_items', ['order' => $orderRow]);
+            $html .= view()->make('design_1.panel.store.sales.table_items', ['order' => $orderRow])->render();
         }
 
         return response()->json([
@@ -215,10 +215,10 @@ class SaleController extends Controller
             $buyer = $order->buyer;
             $order->address = $buyer->getAddress(true);
 
-            $html = (string)view()->make("design_1.panel.store.modals.enter_tracking_code", [
+            $html = view()->make("design_1.panel.store.modals.enter_tracking_code", [
                 'order' => $order,
                 'saleId' => $saleId,
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

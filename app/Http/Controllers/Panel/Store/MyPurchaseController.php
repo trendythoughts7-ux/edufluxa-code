@@ -183,7 +183,7 @@ class MyPurchaseController extends Controller
         $html = "";
 
         foreach ($orders as $orderRow) {
-            $html .= (string)view()->make('design_1.panel.store.my_purchases.table_items', ['order' => $orderRow]);
+            $html .= view()->make('design_1.panel.store.my_purchases.table_items', ['order' => $orderRow])->render();
         }
 
         return response()->json([
