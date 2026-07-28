@@ -82,7 +82,7 @@ class UpcomingCourseFollowingsController extends Controller
 
         foreach ($upcomingCourses as $upcomingCourseRow) {
             $html .= '<div class="col-12 col-md-6 col-lg-3 mt-20">';
-            $html .= (string)view()->make("design_1.panel.upcoming_courses.followings.grid_card", ['upcomingCourse' => $upcomingCourseRow]);
+            $html .= view()->make("design_1.panel.upcoming_courses.followings.grid_card", ['upcomingCourse' => $upcomingCourseRow])->render();
             $html .= '</div>';
         }
 

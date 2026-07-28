@@ -165,7 +165,7 @@ class SaleController extends Controller
         $html = "";
 
         foreach ($sales as $saleRow) {
-            $html .= (string)view()->make('design_1.panel.financial.sales.table_items', ['sale' => $saleRow]);
+            $html .= view()->make('design_1.panel.financial.sales.table_items', ['sale' => $saleRow])->render();
         }
 
         return response()->json([

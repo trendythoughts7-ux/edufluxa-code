@@ -101,7 +101,7 @@ class UpcomingCoursesController extends Controller
 
         foreach ($upcomingCourses as $upcomingCourseRow) {
             $html .= '<div class="col-12 col-md-6 col-lg-3 mt-20">';
-            $html .= (string)view()->make("design_1.panel.upcoming_courses.my_courses.grid_card", ['upcomingCourse' => $upcomingCourseRow]);
+            $html .= view()->make("design_1.panel.upcoming_courses.my_courses.grid_card", ['upcomingCourse' => $upcomingCourseRow])->render();
             $html .= '</div>';
         }
 
@@ -604,7 +604,7 @@ class UpcomingCoursesController extends Controller
                 'webinars' => $webinars,
             ];
 
-            $html = (string)view()->make('design_1.panel.upcoming_courses.my_courses.modals.assign_course_modal', $data);
+            $html = view()->make('design_1.panel.upcoming_courses.my_courses.modals.assign_course_modal', $data)->render();
 
             return response()->json([
                 'code' => 200,

@@ -77,7 +77,7 @@ class SpecialOfferController extends Controller
         $html = "";
 
         foreach($specialOffers as $specialOfferRow) {
-            $html .= (string)view()->make('design_1.panel.marketing.special_offers.table_items', ['specialOffer' => $specialOfferRow]);
+            $html .= view()->make('design_1.panel.marketing.special_offers.table_items', ['specialOffer' => $specialOfferRow])->render();
         }
 
         return response()->json([

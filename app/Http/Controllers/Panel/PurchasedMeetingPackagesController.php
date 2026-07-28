@@ -212,7 +212,7 @@ class PurchasedMeetingPackagesController extends Controller
         $html = "";
 
         foreach ($meetingPackagesSold as $meetingPackageRow) {
-            $html .= (string)view()->make('design_1.panel.meeting.purchased_packages.lists.table_items', ['meetingPackageSold' => $meetingPackageRow]);
+            $html .= view()->make('design_1.panel.meeting.purchased_packages.lists.table_items', ['meetingPackageSold' => $meetingPackageRow])->render();
         }
 
         return response()->json([
@@ -230,10 +230,10 @@ class PurchasedMeetingPackagesController extends Controller
 
         if (!empty($meetingPackageSold)) {
 
-            $html = (string)view()->make("design_1.panel.meeting.modals.contact_info", [
+            $html = view()->make("design_1.panel.meeting.modals.contact_info", [
                 'userInfo' => $meetingPackageSold->meetingPackage->creator,
                 'meetingPackageSold' => $meetingPackageSold,
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

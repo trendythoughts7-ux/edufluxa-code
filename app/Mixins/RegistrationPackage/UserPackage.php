@@ -241,7 +241,7 @@ class UserPackage
                     'currentCount' => $package->{$type}
                 ];
 
-                $result = (string)view()->make('design_1.panel.financial.registration_packages.package_limitation_modal', $resultData);
+                $result = view()->make('design_1.panel.financial.registration_packages.package_limitation_modal', $resultData)->render();
                 $result = str_replace(array("\r\n", "\n", "  "), '', $result);
             }
         }

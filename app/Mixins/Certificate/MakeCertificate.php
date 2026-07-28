@@ -57,7 +57,7 @@ class MakeCertificate
                 'body' => $body
             ];
 
-            $html = (string)view()->make('admin.certificates.create_template.show_certificate', $data);
+            $html = view()->make('admin.certificates.create_template.show_certificate', $data)->render();
             return $this->sendToApi($userCertificate, $html);
         }
 
@@ -201,7 +201,7 @@ class MakeCertificate
                 'body' => $body
             ];
 
-            $html = (string)view()->make('admin.certificates.create_template.show_certificate', $data);
+            $html = view()->make('admin.certificates.create_template.show_certificate', $data)->render();
             return $this->sendToApi($userCertificate, $html);
         }
 
@@ -245,7 +245,7 @@ class MakeCertificate
                 'body' => $body
             ];
 
-            $html = (string)view()->make('admin.certificates.create_template.show_certificate', $data);
+            $html = view()->make('admin.certificates.create_template.show_certificate', $data)->render();
             return $this->sendToApi($userCertificate, $html);
         }
 

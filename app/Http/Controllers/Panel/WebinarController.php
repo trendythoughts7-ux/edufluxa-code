@@ -414,7 +414,7 @@ class WebinarController extends Controller
                 'course' => $webinar
             ];
 
-            $html = (string)view()->make("design_1.panel.webinars.modals.join_next_session_modal", $data);
+            $html = view()->make("design_1.panel.webinars.modals.join_next_session_modal", $data)->render();
 
             return response()->json([
                 'code' => 200,

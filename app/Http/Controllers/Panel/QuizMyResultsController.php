@@ -221,7 +221,7 @@ class QuizMyResultsController extends Controller
         $html = "";
 
         foreach ($quizzesResults as $quizResult) {
-            $html .= (string)view()->make('design_1.panel.quizzes.my_results.table_items', ['quizResult' => $quizResult]);
+            $html .= view()->make('design_1.panel.quizzes.my_results.table_items', ['quizResult' => $quizResult])->render();
         }
 
         return response()->json([

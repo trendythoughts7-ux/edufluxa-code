@@ -74,7 +74,7 @@ class PromotionsController extends Controller
         $html = "";
 
         foreach ($promotionSales as $promotionSaleRow) {
-            $html .= (string)view()->make('design_1.panel.marketing.promotions.table_items', ['promotionSale' => $promotionSaleRow]);
+            $html .= view()->make('design_1.panel.marketing.promotions.table_items', ['promotionSale' => $promotionSaleRow])->render();
         }
 
         return response()->json([
@@ -99,10 +99,10 @@ class PromotionsController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-            $html = (string)view()->make("design_1.panel.marketing.promotions.pay_modal", [
+            $html = view()->make("design_1.panel.marketing.promotions.pay_modal", [
                 'promotion' => $promotion,
                 'webinars' => $webinars
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

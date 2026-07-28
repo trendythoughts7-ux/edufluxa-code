@@ -92,10 +92,10 @@ class SoldMeetingPackageSessionsController extends Controller
         $html = "";
 
         foreach ($sessions as $sessionRow) {
-            $html .= (string)view()->make('design_1.panel.meeting.sold_packages.sessions.table_items', [
+            $html .= view()->make('design_1.panel.meeting.sold_packages.sessions.table_items', [
                 'session' => $sessionRow,
                 'meetingPackageSold' => $meetingPackageSold,
-            ]);
+            ])->render();
         }
 
         return response()->json([
@@ -319,7 +319,7 @@ class SoldMeetingPackageSessionsController extends Controller
 
             if (!empty($session)) {
 
-                $html = (string)view()->make("design_1.panel.meeting.sold_packages.sessions.modals.join_session", []);
+                $html = view()->make("design_1.panel.meeting.sold_packages.sessions.modals.join_session", [])->render();
 
                 return response()->json([
                     'code' => 200,
@@ -371,7 +371,7 @@ class SoldMeetingPackageSessionsController extends Controller
 
             if (!empty($session)) {
 
-                $html = (string)view()->make("design_1.panel.meeting.sold_packages.sessions.modals.finish_session", []);
+                $html = view()->make("design_1.panel.meeting.sold_packages.sessions.modals.finish_session", [])->render();
 
                 return response()->json([
                     'code' => 200,

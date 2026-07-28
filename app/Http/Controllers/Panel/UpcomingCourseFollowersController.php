@@ -96,7 +96,7 @@ class UpcomingCourseFollowersController extends Controller
         $html = "";
 
         foreach ($followers as $followerRow) {
-            $html .= (string)view()->make('design_1.panel.upcoming_courses.followers.item_card', ['follower' => $followerRow]);
+            $html .= view()->make('design_1.panel.upcoming_courses.followers.item_card', ['follower' => $followerRow])->render();
         }
 
         return response()->json([

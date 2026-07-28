@@ -68,7 +68,7 @@ class PayoutController extends Controller
         $html = "";
 
         foreach($payouts as $payoutRow) {
-            $html .= (string)view()->make('design_1.panel.financial.payout.table_items', ['payout' => $payoutRow]);
+            $html .= view()->make('design_1.panel.financial.payout.table_items', ['payout' => $payoutRow])->render();
         }
 
         return response()->json([
@@ -150,9 +150,9 @@ class PayoutController extends Controller
 
         if (!empty($payout)) {
 
-            $html = (string)view()->make('design_1.panel.financial.payout.modals.details', [
+            $html = view()->make('design_1.panel.financial.payout.modals.details', [
                 'payout' => $payout,
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

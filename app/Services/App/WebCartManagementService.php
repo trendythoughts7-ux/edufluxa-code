@@ -134,7 +134,7 @@ class WebCartManagementService
                         'calculatePrices' => $calculate,
                     ];
 
-                    $html = (string) view()->make('design_1.web.cart.overview.includes.summary', $data);
+                    $html = view()->make('design_1.web.cart.overview.includes.summary', $data)->render();
 
                     return [
                         'success' => true,
