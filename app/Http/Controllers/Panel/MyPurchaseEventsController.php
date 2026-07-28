@@ -134,7 +134,7 @@ class MyPurchaseEventsController extends Controller
         $html = "";
 
         foreach ($events as $eventRow) {
-            $html .= (string)view()->make("design_1.panel.events.my_purchases.events.event_card.index", ['event' => $eventRow]);
+            $html .= view()->make("design_1.panel.events.my_purchases.events.event_card.index", ['event' => $eventRow])->render();
         }
 
         return response()->json([
@@ -154,9 +154,9 @@ class MyPurchaseEventsController extends Controller
             ->first();
 
         if (!empty($event) and $event->checkUserHasBought($user) and $event->type == "online" and !empty($event->session)) {
-            $html = (string)view()->make("design_1.panel.events.modals.join_modal", [
+            $html = view()->make("design_1.panel.events.modals.join_modal", [
                 'event' => $event,
-            ]);
+            ])->render();
 
             return response()->json([
                 'code' => 200,

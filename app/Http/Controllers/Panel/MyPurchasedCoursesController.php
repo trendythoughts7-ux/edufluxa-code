@@ -227,7 +227,7 @@ class MyPurchasedCoursesController extends Controller
 
         foreach ($sales as $saleItem) {
             $html .= '<div class="col-12 col-lg-6 mb-32">';
-            $html .= (string)view()->make("design_1.panel.webinars.my_purchases.item_card.index", ['sale' => $saleItem]);
+            $html .= view()->make("design_1.panel.webinars.my_purchases.item_card.index", ['sale' => $saleItem])->render();
             $html .= '</div>';
         }
 

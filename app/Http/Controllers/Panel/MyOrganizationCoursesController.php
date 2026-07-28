@@ -150,7 +150,7 @@ class MyOrganizationCoursesController extends Controller
 
         foreach ($courses as $courseItem) {
             $html .= '<div class="col-12 col-md-4 col-lg-3 col-xl-2 mt-20">';
-            $html .= (string)view()->make("design_1.panel.webinars.organization_classes.grid_card", ['course' => $courseItem, 'pageSource' => $source]);
+            $html .= view()->make("design_1.panel.webinars.organization_classes.grid_card", ['course' => $courseItem, 'pageSource' => $source])->render();
             $html .= '</div>';
         }
 

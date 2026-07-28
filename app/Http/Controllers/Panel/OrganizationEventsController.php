@@ -119,7 +119,7 @@ class OrganizationEventsController extends Controller
         $html = "";
 
         foreach ($events as $eventRow) {
-            $html .= (string)view()->make("design_1.panel.events.organization.event_card", ['event' => $eventRow]);
+            $html .= view()->make("design_1.panel.events.organization.event_card", ['event' => $eventRow])->render();
         }
 
         return response()->json([

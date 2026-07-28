@@ -118,7 +118,7 @@ class InstallmentsController extends Controller
 
         foreach($orders as $orderRow) {
             $html .= '<div class="col-12 col-lg-3 mt-16">';
-            $html .= (string)view()->make("design_1.panel.financial.installments.lists.grid_card", ['order' => $orderRow]);
+            $html .= view()->make("design_1.panel.financial.installments.lists.grid_card", ['order' => $orderRow])->render();
             $html .= '</div>';
         }
 

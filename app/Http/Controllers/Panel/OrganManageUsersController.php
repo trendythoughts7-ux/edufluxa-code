@@ -156,7 +156,7 @@ class OrganManageUsersController extends Controller
         $html = "";
 
         foreach ($users as $userRow) {
-            $html .= (string)view()->make("design_1.panel.manage.{$userType}.table_items", ['user' => $userRow]);
+            $html .= view()->make("design_1.panel.manage.{$userType}.table_items", ['user' => $userRow])->render();
         }
 
         return response()->json([

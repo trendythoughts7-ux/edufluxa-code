@@ -201,7 +201,7 @@ class MyAttendancesController extends Controller
         $html = "";
 
         foreach ($sessions as $sessionRow) {
-            $html .= (string)view()->make('design_1.panel.webinars.attendances.my_attendance.table_items', ['session' => $sessionRow]);
+            $html .= view()->make('design_1.panel.webinars.attendances.my_attendance.table_items', ['session' => $sessionRow])->render();
         }
 
         return response()->json([
