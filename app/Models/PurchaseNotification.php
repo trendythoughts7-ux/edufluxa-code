@@ -49,32 +49,32 @@ class PurchaseNotification extends Model implements TranslatableContract
      * Relations
      * ******/
 
-    public function allRelatives()
+    public function allRelatives(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(PurchaseNotificationRoleGroupContent::class, 'purchase_notification_id', 'id');
     }
 
-    public function userGroups()
+    public function userGroups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'purchase_notification_roles_groups_contents', 'purchase_notification_id', 'group_id');
     }
 
-    public function roles()
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'purchase_notification_roles_groups_contents', 'purchase_notification_id', 'role_id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Webinar::class, 'purchase_notification_roles_groups_contents', 'purchase_notification_id', 'webinar_id');
     }
 
-    public function bundles()
+    public function bundles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Bundle::class, 'purchase_notification_roles_groups_contents', 'purchase_notification_id', 'bundle_id');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'purchase_notification_roles_groups_contents', 'purchase_notification_id', 'product_id');
     }

@@ -10,7 +10,7 @@ class CourseForumAnswer extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }

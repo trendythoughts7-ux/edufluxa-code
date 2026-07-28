@@ -28,7 +28,7 @@ class ForumRecommendedTopic extends Model implements TranslatableContract
     }
 
 
-    public function topics()
+    public function topics(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany('App\Models\ForumTopic', 'forum_recommended_topic_items',
             'recommended_topic_id', 'topic_id');

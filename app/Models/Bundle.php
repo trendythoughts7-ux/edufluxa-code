@@ -65,62 +65,62 @@ class Bundle extends Model implements TranslatableContract
         return $this->getBundleDuration();
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'teacher_id', 'id');
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 
-    public function filterOptions()
+    public function filterOptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\BundleFilterOption', 'bundle_id', 'id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Tag', 'bundle_id', 'id');
     }
 
-    public function tickets()
+    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Ticket', 'bundle_id', 'id');
     }
 
-    public function bundleWebinars()
+    public function bundleWebinars(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\BundleWebinar', 'bundle_id', 'id');
     }
 
-    public function faqs()
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Faq', 'bundle_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Comment', 'bundle_id', 'id');
     }
 
-    public function reviews()
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarReview', 'bundle_id', 'id');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Sale', 'bundle_id', 'id')
             ->whereNull('refund_at')
@@ -128,17 +128,17 @@ class Bundle extends Model implements TranslatableContract
     }
 
 
-    public function productBadgeContent()
+    public function productBadgeContent(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ProductBadgeContent::class, 'targetable');
     }
 
-    public function relatedCourses()
+    public function relatedCourses(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany('App\Models\RelatedCourse', 'targetable');
     }
 
-    public function deleteRequest()
+    public function deleteRequest(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(ContentDeleteRequest::class, 'targetable');
     }

@@ -18,17 +18,17 @@ class OfflinePayment extends Model
 
     protected $guarded = ['id'];
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function offlineBank()
+    public function offlineBank(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\OfflineBank', 'offline_bank_id', 'id');
     }
 
-    public function order()
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Order', 'order_id', 'id');
     }

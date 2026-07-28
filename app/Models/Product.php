@@ -99,82 +99,82 @@ class Product extends Model implements TranslatableContract
     /*
      * Relations
      * */
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductFile', 'product_id', 'id');
     }
 
-    public function media()
+    public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductMedia', 'product_id', 'id');
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductCategory', 'category_id', 'id');
     }
 
-    public function selectedFilterOptions()
+    public function selectedFilterOptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductSelectedFilterOption', 'product_id', 'id');
     }
 
-    public function selectedSpecifications()
+    public function selectedSpecifications(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductSelectedSpecification', 'product_id', 'id');
     }
 
-    public function faqs()
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductFaq', 'product_id', 'id');
     }
 
-    public function discounts()
+    public function discounts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductDiscount', 'product_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Comment', 'product_id', 'id');
     }
 
-    public function reviews()
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductReview', 'product_id', 'id');
     }
 
-    public function productOrders()
+    public function productOrders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductOrder', 'product_id', 'id');
     }
 
-    public function productBadgeContents()
+    public function productBadgeContents(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ProductBadgeContent::class, 'targetable');
     }
 
-    public function relatedCourses()
+    public function relatedCourses(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany('App\Models\RelatedCourse', 'targetable');
     }
 
-    public function relatedProducts()
+    public function relatedProducts(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(RelatedProduct::class, 'targetable');
     }
 
-    public function deleteRequest()
+    public function deleteRequest(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(ContentDeleteRequest::class, 'targetable');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }

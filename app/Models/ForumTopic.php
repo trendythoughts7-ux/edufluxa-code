@@ -31,32 +31,32 @@ class ForumTopic extends Model
         return SlugService::createSlug(self::class, 'slug', $title);
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function forum()
+    public function forum(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Forum', 'forum_id', 'id');
     }
 
-    public function attachments()
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ForumTopicAttachment', 'topic_id', 'id');
     }
 
-    public function likes()
+    public function likes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ForumTopicLike', 'topic_id', 'id');
     }
 
-    public function posts()
+    public function posts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ForumTopicPost', 'topic_id', 'id');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }

@@ -23,7 +23,7 @@ class MeetingTime extends Model
 
     protected $guarded = ['id'];
 
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Meeting', 'meeting_id', 'id');
     }

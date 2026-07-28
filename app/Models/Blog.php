@@ -43,37 +43,37 @@ class Blog extends Model implements TranslatableContract
         return SlugService::createSlug(self::class, 'slug', $title);
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\BlogCategory', 'category_id', 'id');
     }
 
-    public function author()
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'author_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Comment', 'blog_id', 'id');
     }
 
-    public function deleteRequest()
+    public function deleteRequest(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(ContentDeleteRequest::class, 'targetable');
     }
 
-    public function productBadgeContents()
+    public function productBadgeContents(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ProductBadgeContent::class, 'targetable');
     }
 
-    public function relatedPosts()
+    public function relatedPosts(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(RelatedPost::class, 'targetable');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }

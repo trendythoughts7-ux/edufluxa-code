@@ -14,7 +14,7 @@ class UserSelectedBankSpecification extends Model
     protected $guarded = ['id'];
 
 
-    public function bankSpecification()
+    public function bankSpecification(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\UserBankSpecification', 'user_bank_specification_id', 'id');
     }

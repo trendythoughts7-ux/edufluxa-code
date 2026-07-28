@@ -26,42 +26,42 @@ class Discount extends Model
     static $discountTypePercentage = 'percentage';
     static $discountTypeFixedAmount = 'fixed_amount';
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function discountUsers()
+    public function discountUsers(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\DiscountUser', 'discount_id', 'id');
     }
 
-    public function discountCourses()
+    public function discountCourses(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\DiscountCourse', 'discount_id', 'id');
     }
 
-    public function discountBundles()
+    public function discountBundles(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\DiscountBundle', 'discount_id', 'id');
     }
 
-    public function discountEvents()
+    public function discountEvents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\DiscountEvent', 'discount_id', 'id');
     }
 
-    public function discountMeetingPackages()
+    public function discountMeetingPackages(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\DiscountMeetingPackage', 'discount_id', 'id');
     }
 
-    public function discountCategories()
+    public function discountCategories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\DiscountCategory', 'discount_id', 'id');
     }
 
-    public function discountGroups()
+    public function discountGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\DiscountGroup', 'discount_id', 'id');
     }

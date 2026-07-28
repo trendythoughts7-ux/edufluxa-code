@@ -15,13 +15,13 @@ class RelatedPost extends Model
      | Relations
      * ==========*/
 
-    public function targetable()
+    public function targetable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
 
 
-    public function post()
+    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Blog::class, 'post_id', 'id');
     }

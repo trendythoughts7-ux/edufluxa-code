@@ -11,12 +11,12 @@ class ProductSelectedSpecificationMultiValue extends Model
     protected $guarded = ['id'];
 
 
-    public function selectedSpecification()
+    public function selectedSpecification(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductSelectedSpecification','selected_specification_id','id');
     }
 
-    public function multiValue()
+    public function multiValue(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductSpecificationMultiValue','specification_multi_value_id','id');
     }

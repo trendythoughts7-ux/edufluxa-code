@@ -27,7 +27,7 @@ class LandingComponent extends Model implements TranslatableContract
     // #############
     // Relations
     // ############
-    public function landingBuilderComponent()
+    public function landingBuilderComponent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(LandingBuilderComponent::class, 'component_id', 'id');
     }

@@ -33,42 +33,42 @@ class Quiz extends Model implements TranslatableContract
     }
 
 
-    public function quizQuestions()
+    public function quizQuestions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\QuizzesQuestion', 'quiz_id', 'id');
     }
 
-    public function quizResults()
+    public function quizResults(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\QuizzesResult', 'quiz_id', 'id');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function certificates()
+    public function certificates(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Certificate', 'quiz_id', 'id');
     }
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarChapter', 'chapter_id', 'id');
     }
 
-    public function personalNote()
+    public function personalNote(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne('App\Models\CoursePersonalNote', 'targetable');
     }

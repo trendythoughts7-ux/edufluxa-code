@@ -15,17 +15,17 @@ class CoursePersonalNote extends Model
      | Relations
      * ==========*/
 
-    public function targetable()
+    public function targetable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
 
-    public function course()
+    public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Webinar::class, 'course_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }

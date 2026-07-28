@@ -62,27 +62,27 @@ class Category extends Model implements TranslatableContract
     }
 
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
     }
 
-    public function subCategories()
+    public function subCategories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'parent_id', 'id')->orderBy('order', 'asc');
     }
 
-    public function filters()
+    public function filters(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Filter', 'category_id', 'id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Webinar', 'category_id', 'id');
     }
 
-    public function userOccupations()
+    public function userOccupations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\UserOccupation', 'category_id', 'id');
     }

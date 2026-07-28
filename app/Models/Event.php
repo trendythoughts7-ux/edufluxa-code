@@ -78,87 +78,87 @@ class Event extends Model implements TranslatableContract
     /* ==========
      | Relations
      * ==========*/
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function filterOptions()
+    public function filterOptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(EventFilterOption::class, 'event_id', 'id');
     }
 
-    public function tickets()
+    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(EventTicket::class, 'event_id', 'id');
     }
 
-    public function speakers()
+    public function speakers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(EventSpeaker::class, 'event_id', 'id');
     }
 
-    public function productBadgeContents()
+    public function productBadgeContents(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ProductBadgeContent::class, 'targetable');
     }
 
-    public function relatedCourses()
+    public function relatedCourses(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany('App\Models\RelatedCourse', 'targetable');
     }
 
-    public function prerequisites()
+    public function prerequisites(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Prerequisite::class, 'event_id', 'id');
     }
 
-    public function faqs()
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Faq::class, 'event_id', 'id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Tag::class, 'event_id', 'id');
     }
 
-    public function extraDescriptions()
+    public function extraDescriptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(WebinarExtraDescription::class, 'event_id', 'id');
     }
 
-    public function specificLocation()
+    public function specificLocation(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(SpecificLocation::class, 'targetable')->select(DB::raw('*, ST_AsText(geo_center) as geo_center'));
     }
 
-    public function deleteRequest()
+    public function deleteRequest(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(ContentDeleteRequest::class, 'targetable');
     }
 
-    public function reviews()
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(WebinarReview::class, 'event_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Comment::class, 'event_id', 'id');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }
 
-    public function session()
+    public function session(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Session::class, 'event_id', 'id');
     }

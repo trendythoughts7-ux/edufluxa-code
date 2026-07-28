@@ -40,7 +40,7 @@ class EventSpeaker extends Model implements TranslatableContract
     /* ==========
      | Relations
      * ==========*/
-    public function event()
+    public function event(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }

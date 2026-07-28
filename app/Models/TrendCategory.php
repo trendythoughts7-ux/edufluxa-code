@@ -11,7 +11,7 @@ class TrendCategory extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }

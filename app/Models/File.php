@@ -50,17 +50,17 @@ class File extends Model implements TranslatableContract
     }
 
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarChapter', 'chapter_id', 'id');
     }
 
-    public function learningStatus()
+    public function learningStatus(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\CourseLearning', 'file_id', 'id');
     }
 
-    public function personalNote()
+    public function personalNote(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne('App\Models\CoursePersonalNote', 'targetable');
     }

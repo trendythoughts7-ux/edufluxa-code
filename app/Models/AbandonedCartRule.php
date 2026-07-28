@@ -35,22 +35,22 @@ class AbandonedCartRule extends Model implements TranslatableContract
     // Relations
     // ############
 
-    public function discount()
+    public function discount(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Discount::class, 'discount_id', 'id');
     }
 
-    public function usersAndGroups()
+    public function usersAndGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AbandonedCartRuleUserGroup::class, 'abandoned_cart_rule_id', 'id');
     }
 
-    public function userGroups()
+    public function userGroups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'abandoned_cart_rule_users_groups', 'abandoned_cart_rule_id', 'group_id');
     }
 
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'abandoned_cart_rule_users_groups', 'abandoned_cart_rule_id', 'user_id');
     }
@@ -60,32 +60,32 @@ class AbandonedCartRule extends Model implements TranslatableContract
         return $this->hasMany(AbandonedCartRuleSpecificationItem::class, 'abandoned_cart_rule_id', 'id');
     }
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'abandoned_cart_rule_specification_items', 'abandoned_cart_rule_id', 'category_id');
     }
 
-    public function instructors()
+    public function instructors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'abandoned_cart_rule_specification_items', 'abandoned_cart_rule_id', 'instructor_id');
     }
 
-    public function sellers()
+    public function sellers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'abandoned_cart_rule_specification_items', 'abandoned_cart_rule_id', 'seller_id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Webinar::class, 'abandoned_cart_rule_specification_items', 'abandoned_cart_rule_id', 'webinar_id');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'abandoned_cart_rule_specification_items', 'abandoned_cart_rule_id', 'product_id');
     }
 
-    public function bundles()
+    public function bundles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Bundle::class, 'abandoned_cart_rule_specification_items', 'abandoned_cart_rule_id', 'bundle_id');
     }

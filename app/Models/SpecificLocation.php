@@ -12,7 +12,7 @@ class SpecificLocation extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
 
-    public function targetable()
+    public function targetable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
@@ -29,22 +29,22 @@ class SpecificLocation extends Model
     /********
      * Relations
      * ******/
-    public function country()
+    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Region::class, 'country_id', 'id');
     }
 
-    public function province()
+    public function province(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Region::class, 'province_id', 'id');
     }
 
-    public function city()
+    public function city(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Region::class, 'city_id', 'id');
     }
 
-    public function district()
+    public function district(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Region::class, 'district_id', 'id');
     }

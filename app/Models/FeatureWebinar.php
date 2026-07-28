@@ -24,7 +24,7 @@ class FeatureWebinar extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'description');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }

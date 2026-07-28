@@ -30,32 +30,32 @@ class WebinarAssignment extends Model implements TranslatableContract
     }
 
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarChapter', 'chapter_id', 'id');
     }
 
-    public function attachments()
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarAssignmentAttachment', 'assignment_id', 'id');
     }
 
-    public function assignmentHistory()
+    public function assignmentHistory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\WebinarAssignmentHistory', 'assignment_id', 'id');
     }
 
-    public function personalNote()
+    public function personalNote(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne('App\Models\CoursePersonalNote', 'targetable');
     }
 
-    public function instructorAssignmentHistories()
+    public function instructorAssignmentHistories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarAssignmentHistory', 'assignment_id', 'id');
     }

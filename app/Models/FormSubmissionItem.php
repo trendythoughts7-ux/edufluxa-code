@@ -15,7 +15,7 @@ class FormSubmissionItem extends Model
     protected $guarded = ['id'];
 
 
-    public function field()
+    public function field(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(FormField::class, 'form_field_id', 'id');
     }

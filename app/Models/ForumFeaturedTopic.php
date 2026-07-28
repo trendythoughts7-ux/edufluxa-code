@@ -12,7 +12,7 @@ class ForumFeaturedTopic extends Model
     protected $guarded = ['id'];
 
 
-    public function topic()
+    public function topic(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ForumTopic', 'topic_id', 'id');
     }

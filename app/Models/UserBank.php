@@ -23,7 +23,7 @@ class UserBank extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'title');
     }
 
-    public function specifications()
+    public function specifications(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\UserBankSpecification', 'user_bank_id', 'id');
     }

@@ -10,22 +10,22 @@ class Group extends Model
 
     protected $guarded = ['id'];
 
-    public function groupUsers()
+    public function groupUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\GroupUser', 'group_id', 'id');
     }
 
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\GroupUser', 'id', 'group_id');
     }
 
-    public function groupRegistrationPackage()
+    public function groupRegistrationPackage(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\GroupRegistrationPackage', 'group_id', 'id');
     }
 
-    public function commissions()
+    public function commissions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(UserCommission::class, 'user_group_id', 'id');
     }

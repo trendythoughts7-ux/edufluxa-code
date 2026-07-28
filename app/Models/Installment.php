@@ -77,7 +77,7 @@ class Installment extends Model implements TranslatableContract
     // Relations
     // ############
 
-    public function userGroups()
+    public function userGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InstallmentUserGroup::class, 'installment_id', 'id');
     }
@@ -87,52 +87,52 @@ class Installment extends Model implements TranslatableContract
         return $this->hasMany(InstallmentSpecificationItem::class, 'installment_id', 'id');
     }
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'installment_specification_items', 'installment_id', 'category_id');
     }
 
-    public function instructors()
+    public function instructors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'installment_specification_items', 'installment_id', 'instructor_id');
     }
 
-    public function sellers()
+    public function sellers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'installment_specification_items', 'installment_id', 'seller_id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Webinar::class, 'installment_specification_items', 'installment_id', 'webinar_id');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'installment_specification_items', 'installment_id', 'product_id');
     }
 
-    public function bundles()
+    public function bundles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Bundle::class, 'installment_specification_items', 'installment_id', 'bundle_id');
     }
 
-    public function subscribes()
+    public function subscribes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Subscribe::class, 'installment_specification_items', 'installment_id', 'subscribe_id');
     }
 
-    public function registrationPackages()
+    public function registrationPackages(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(RegistrationPackage::class, 'installment_specification_items', 'installment_id', 'registration_package_id');
     }
 
-    public function steps()
+    public function steps(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InstallmentStep::class, 'installment_id', 'id');
     }
 
-    public function orders()
+    public function orders(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InstallmentOrder::class, 'installment_id', 'id');
     }

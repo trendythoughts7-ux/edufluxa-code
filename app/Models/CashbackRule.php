@@ -37,17 +37,17 @@ class CashbackRule extends Model implements TranslatableContract
     // Relations
     // ############
 
-    public function usersAndGroups()
+    public function usersAndGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(CashbackRuleUserGroup::class, 'cashback_rule_id', 'id');
     }
 
-    public function userGroups()
+    public function userGroups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'cashback_rule_users_groups', 'cashback_rule_id', 'group_id');
     }
 
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'cashback_rule_users_groups', 'cashback_rule_id', 'user_id');
     }
@@ -57,42 +57,42 @@ class CashbackRule extends Model implements TranslatableContract
         return $this->hasMany(CashbackRuleSpecificationItem::class, 'cashback_rule_id', 'id');
     }
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'category_id');
     }
 
-    public function instructors()
+    public function instructors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'instructor_id');
     }
 
-    public function sellers()
+    public function sellers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'seller_id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Webinar::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'webinar_id');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Product::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'product_id');
     }
 
-    public function bundles()
+    public function bundles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Bundle::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'bundle_id');
     }
 
-    public function subscribes()
+    public function subscribes(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Subscribe::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'subscribe_id');
     }
 
-    public function registrationPackages()
+    public function registrationPackages(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(RegistrationPackage::class, 'cashback_rule_specification_items', 'cashback_rule_id', 'registration_package_id');
     }

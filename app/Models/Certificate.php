@@ -10,27 +10,27 @@ class Certificate extends Model
     public $timestamps = false;
     protected $guarded = ['id'];
 
-    public function quiz()
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Quiz', 'id', 'quiz_id');
     }
 
-    public function student()
+    public function student(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\User', 'id', 'student_id');
     }
 
-    public function quizzesResult()
+    public function quizzesResult(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\QuizzesResult', 'id', 'quiz_result_id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Bundle', 'bundle_id', 'id');
     }

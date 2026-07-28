@@ -53,32 +53,32 @@ class WebinarChapterItem extends Model
         }
     }
 
-    public function session()
+    public function session(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Session', 'item_id', 'id');
     }
 
-    public function file()
+    public function file(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\File', 'item_id', 'id');
     }
 
-    public function textLesson()
+    public function textLesson(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\TextLesson', 'item_id', 'id');
     }
 
-    public function assignment()
+    public function assignment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarAssignment', 'item_id', 'id');
     }
 
-    public function quiz()
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Quiz', 'item_id', 'id');
     }
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarChapter', 'chapter_id', 'id');
     }

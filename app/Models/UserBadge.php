@@ -13,7 +13,7 @@ class UserBadge extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function badge()
+    public function badge(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Badge', 'badge_id', 'id');
     }

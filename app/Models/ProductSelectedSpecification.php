@@ -27,12 +27,12 @@ class ProductSelectedSpecification extends Model implements TranslatableContract
     }
 
 
-    public function specification()
+    public function specification(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductSpecification', 'product_specification_id', 'id');
     }
 
-    public function selectedMultiValues()
+    public function selectedMultiValues(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductSelectedSpecificationMultiValue', 'selected_specification_id', 'id');
     }

@@ -31,12 +31,12 @@ class MeetingPackage extends Model implements TranslatableContract
     /* ==========
      | Relations
      * ==========*/
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(MeetingPackageSold::class, 'meeting_package_id', 'id');
     }

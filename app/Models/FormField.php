@@ -30,7 +30,7 @@ class FormField extends Model implements TranslatableContract
      * Relations
      * ******/
 
-    public function options()
+    public function options(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(FormFieldOption::class, 'form_field_id', 'id');
     }

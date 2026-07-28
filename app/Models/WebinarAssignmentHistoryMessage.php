@@ -11,7 +11,7 @@ class WebinarAssignmentHistoryMessage extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function sender()
+    public function sender(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'sender_id', 'id');
     }

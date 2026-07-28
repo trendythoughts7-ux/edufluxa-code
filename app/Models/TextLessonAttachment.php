@@ -11,7 +11,7 @@ class TextLessonAttachment extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function file()
+    public function file(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\File', 'file_id', 'id');
     }

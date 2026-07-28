@@ -54,72 +54,72 @@ class UpcomingCourse extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'seo_description');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'teacher_id', 'id');
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function filterOptions()
+    public function filterOptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\UpcomingCourseFilterOption', 'upcoming_course_id', 'id');
     }
 
-    public function followers()
+    public function followers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\UpcomingCourseFollower', 'upcoming_course_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Comment', 'upcoming_course_id', 'id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Tag', 'upcoming_course_id', 'id');
     }
 
-    public function faqs()
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Faq', 'upcoming_course_id', 'id');
     }
 
-    public function favorite()
+    public function favorite(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Favorite', 'upcoming_course_id', 'id');
     }
 
-    public function extraDescriptions()
+    public function extraDescriptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarExtraDescription', 'upcoming_course_id', 'id');
     }
 
-    public function relatedCourses()
+    public function relatedCourses(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany('App\Models\RelatedCourse', 'targetable');
     }
 
-    public function productBadgeContent()
+    public function productBadgeContent(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ProductBadgeContent::class, 'targetable');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }

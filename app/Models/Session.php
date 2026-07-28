@@ -39,62 +39,62 @@ class Session extends Model implements TranslatableContract
     }
 
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function sessionReminds()
+    public function sessionReminds(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\SessionRemind', 'session_id', 'id');
     }
 
-    public function attendances()
+    public function attendances(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(SessionAttendance::class, 'session_id', 'id');
     }
 
-    public function attendanceNotification()
+    public function attendanceNotification(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(SessionAttendanceNotification::class, 'session_id', 'id');
     }
 
-    public function learningStatus()
+    public function learningStatus(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\CourseLearning', 'session_id', 'id');
     }
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarChapter', 'chapter_id', 'id');
     }
 
-    public function agoraHistory()
+    public function agoraHistory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\AgoraHistory', 'session_id', 'id');
     }
 
-    public function personalNote()
+    public function personalNote(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne('App\Models\CoursePersonalNote', 'targetable');
     }
 
-    public function reserveMeeting()
+    public function reserveMeeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ReserveMeeting::class, 'reserve_meeting_id', 'id');
     }
 
-    public function event()
+    public function event(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
-    public function meetingPackageSold()
+    public function meetingPackageSold(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(MeetingPackageSold::class, 'meeting_package_sold_id', 'id');
     }

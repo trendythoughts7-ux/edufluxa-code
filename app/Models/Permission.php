@@ -13,7 +13,7 @@ class Permission extends Model
     /**
      * Get the sections for the permission.
      */
-    public function sections()
+    public function sections(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Section', 'section_id');
     }

@@ -29,12 +29,12 @@ class Landing extends Model implements TranslatableContract
     // Relations
     // ############
 
-    public function components()
+    public function components(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(LandingComponent::class, 'landing_id', 'id');
     }
 
-    public function color()
+    public function color(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ThemeColorFont::class, 'color_id', 'id');
     }

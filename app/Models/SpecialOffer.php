@@ -14,27 +14,27 @@ class SpecialOffer extends Model
     public static $active = 'active';
     public static $inactive = 'inactive';
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Bundle', 'bundle_id', 'id');
     }
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Product', 'product_id', 'id');
     }
 
-    public function subscribe()
+    public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Subscribe', 'subscribe_id', 'id');
     }
 
-    public function registrationPackage()
+    public function registrationPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\RegistrationPackage', 'registration_package_id', 'id');
     }

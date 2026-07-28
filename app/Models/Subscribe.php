@@ -44,12 +44,12 @@ class Subscribe extends Model implements TranslatableContract
      | Relations
      * ==========*/
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Sale', 'subscribe_id', 'id');
     }
 
-    public function uses()
+    public function uses(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\SubscribeUse', 'subscribe_id', 'id');
     }
@@ -59,22 +59,22 @@ class Subscribe extends Model implements TranslatableContract
         return $this->hasMany(SubscribeSpecificationItem::class, 'subscribe_id', 'id');
     }
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'subscribe_specification_items', 'subscribe_id', 'category_id');
     }
 
-    public function instructors()
+    public function instructors(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'subscribe_specification_items', 'subscribe_id', 'instructor_id');
     }
 
-    public function courses()
+    public function courses(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Webinar::class, 'subscribe_specification_items', 'subscribe_id', 'course_id');
     }
 
-    public function bundles()
+    public function bundles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Bundle::class, 'subscribe_specification_items', 'subscribe_id', 'bundle_id');
     }

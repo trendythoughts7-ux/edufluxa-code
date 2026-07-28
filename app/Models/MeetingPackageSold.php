@@ -17,22 +17,22 @@ class MeetingPackageSold extends Model
     /* ==========
      | Relations
      * ==========*/
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function meetingPackage()
+    public function meetingPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(MeetingPackage::class, 'meeting_package_id', 'id');
     }
 
-    public function sale()
+    public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Sale::class, 'sale_id', 'id');
     }
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Session::class, 'meeting_package_sold_id', 'id');
     }

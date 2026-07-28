@@ -17,27 +17,27 @@ class Theme extends Model
      * Relations
      * ========*/
 
-    public function color()
+    public function color(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ThemeColorFont::class, 'color_id', 'id');
     }
 
-    public function font()
+    public function font(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ThemeColorFont::class, 'font_id', 'id');
     }
 
-    public function header()
+    public function header(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ThemeHeaderFooter::class, 'header_id', 'id');
     }
 
-    public function footer()
+    public function footer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ThemeHeaderFooter::class, 'footer_id', 'id');
     }
 
-    public function homeLanding()
+    public function homeLanding(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Landing::class, 'home_landing_id', 'id');
     }

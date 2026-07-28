@@ -36,37 +36,37 @@ class WebinarChapter extends Model implements TranslatableContract
     }
 
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Session', 'chapter_id', 'id');
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\File', 'chapter_id', 'id');
     }
 
-    public function textLessons()
+    public function textLessons(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\TextLesson', 'chapter_id', 'id');
     }
 
-    public function assignments()
+    public function assignments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarAssignment', 'chapter_id', 'id');
     }
 
-    public function quizzes()
+    public function quizzes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Quiz', 'chapter_id', 'id');
     }
 
-    public function chapterItems()
+    public function chapterItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarChapterItem', 'chapter_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }

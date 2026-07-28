@@ -11,12 +11,12 @@ class DiscountGroup extends Model
 
     protected $guarded = ['id'];
 
-    public function discount()
+    public function discount(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Discount', 'discount_id', 'id');
     }
 
-    public function group()
+    public function group(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Group', 'group_id', 'id');
     }

@@ -11,12 +11,12 @@ class BundleWebinar extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Bundle', 'bundle_id', 'id');
     }

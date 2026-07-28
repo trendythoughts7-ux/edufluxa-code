@@ -11,12 +11,12 @@ class DiscountMeetingPackage extends Model
 
     protected $guarded = ['id'];
 
-    public function discount()
+    public function discount(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Discount', 'discount_id', 'id');
     }
 
-    public function meetingPackage()
+    public function meetingPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\MeetingPackage', 'meeting_package_id', 'id');
     }

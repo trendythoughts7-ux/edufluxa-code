@@ -12,7 +12,7 @@ class UpcomingCourseFollower extends Model
     protected $guarded = ['id'];
 
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }

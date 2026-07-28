@@ -23,12 +23,12 @@ class ProductFilter extends Model implements TranslatableContract
     }
 
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductCategory', 'category_id', 'id');
     }
 
-    public function options()
+    public function options(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductFilterOption', 'filter_id', 'id')->orderBy('order', 'asc');
     }

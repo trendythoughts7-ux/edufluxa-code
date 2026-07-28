@@ -31,7 +31,7 @@ class ProductFile extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'description');
     }
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Product', 'product_id', 'id');
     }

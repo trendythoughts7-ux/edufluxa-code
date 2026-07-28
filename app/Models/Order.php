@@ -51,12 +51,12 @@ class Order extends Model
     }
 
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function orderItems()
+    public function orderItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\OrderItem', 'order_id', 'id');
     }

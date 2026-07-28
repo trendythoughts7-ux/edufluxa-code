@@ -15,17 +15,17 @@ class FormSubmission extends Model
     protected $guarded = ['id'];
 
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function form()
+    public function form(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Form::class, 'form_id', 'id');
     }
 
-    public function items()
+    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(FormSubmissionItem::class, 'submission_id', 'id');
     }

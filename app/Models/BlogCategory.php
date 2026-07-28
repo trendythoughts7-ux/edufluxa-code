@@ -50,7 +50,7 @@ class BlogCategory extends Model implements TranslatableContract
 
 
 
-    public function blog()
+    public function blog(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Blog', 'category_id', 'id');
     }

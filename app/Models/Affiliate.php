@@ -13,12 +13,12 @@ class Affiliate extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function affiliateUser()
+    public function affiliateUser(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'affiliate_user_id', 'id');
     }
 
-    public function referredUser()
+    public function referredUser(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'referred_user_id', 'id');
     }

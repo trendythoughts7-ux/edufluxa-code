@@ -15,17 +15,17 @@ class Noticeboard extends Model
     static $adminTypes = ['organizations', 'students', 'instructors', 'students_and_instructors'];
     static $migrateTypes = ['all', 'organizations', 'students', 'instructors', 'students_and_instructors'];
 
-    public function noticeboardStatus()
+    public function noticeboardStatus(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\NoticeboardStatus', 'noticeboard_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function senderUser()
+    public function senderUser(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\User', 'sender_id', 'id');
     }

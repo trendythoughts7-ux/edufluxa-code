@@ -12,12 +12,12 @@ class Prerequisite extends Model
 
 
 
-    public function course()
+    public function course(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'prerequisite_id', 'id');
     }
 
-    public function event()
+    public function event(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }

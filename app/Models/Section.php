@@ -10,7 +10,7 @@ class Section extends Model
 
     protected $guarded = ['id'];
 
-    public function children() {
+    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany {
         return $this->hasMany($this, 'section_group_id', 'id');
     }
 }

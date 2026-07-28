@@ -12,22 +12,22 @@ class SelectedInstallment extends Model
     protected $guarded = ['id'];
 
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function installment()
+    public function installment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Installment::class, 'installment_id', 'id');
     }
 
-    public function steps()
+    public function steps(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(SelectedInstallmentStep::class, 'selected_installment_id', 'id');
     }
 
-    public function order()
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(InstallmentOrder::class, 'installment_order_id', 'id');
     }

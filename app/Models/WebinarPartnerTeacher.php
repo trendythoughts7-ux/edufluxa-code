@@ -12,12 +12,12 @@ class WebinarPartnerTeacher extends Model
 
     protected $guarded = ['id'];
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'teacher_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'webinar_id', 'id');
     }

@@ -28,7 +28,7 @@ class CartDiscount extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'subtitle');
     }
 
-    public function discount()
+    public function discount(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Discount::class, 'discount_id', 'id');
     }

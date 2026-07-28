@@ -30,7 +30,7 @@ class QuizzesQuestion extends Model implements TranslatableContract
     }
 
 
-    public function quizzesQuestionsAnswers()
+    public function quizzesQuestionsAnswers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\QuizzesQuestionsAnswer', 'question_id', 'id');
     }

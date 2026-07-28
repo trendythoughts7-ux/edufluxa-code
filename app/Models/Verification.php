@@ -18,7 +18,7 @@ class Verification extends Model
 
     const EXPIRE_TIME = 3600; // second => 1 hour
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User');
     }

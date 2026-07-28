@@ -16,12 +16,12 @@ class SessionAttendance extends Model
     /* ==========
      | Relations
      * ==========*/
-    public function student()
+    public function student(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'student_id', 'id');
     }
 
-    public function session()
+    public function session(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Session::class, 'session_id', 'id');
     }

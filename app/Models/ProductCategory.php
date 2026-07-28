@@ -38,22 +38,22 @@ class ProductCategory extends Model implements TranslatableContract
     }
 
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductCategory', 'parent_id', 'id');
     }
 
-    public function subCategories()
+    public function subCategories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'parent_id', 'id')->orderBy('order', 'asc');
     }
 
-    public function filters()
+    public function filters(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductFilter', 'category_id', 'id');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Product', 'category_id', 'id');
     }

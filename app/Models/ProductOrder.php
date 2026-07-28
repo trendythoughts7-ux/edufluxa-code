@@ -17,27 +17,27 @@ class ProductOrder extends Model
     static $canceled = 'canceled';
     static $pending = 'pending';
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Product', 'product_id', 'id');
     }
 
-    public function seller()
+    public function seller(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'seller_id', 'id');
     }
 
-    public function buyer()
+    public function buyer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'buyer_id', 'id');
     }
 
-    public function sale()
+    public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Sale', 'sale_id', 'id');
     }
 
-    public function gift()
+    public function gift(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Gift', 'gift_id', 'id');
     }

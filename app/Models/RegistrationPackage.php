@@ -28,7 +28,7 @@ class RegistrationPackage extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'description');
     }
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Sale','registration_package_id','id');
     }

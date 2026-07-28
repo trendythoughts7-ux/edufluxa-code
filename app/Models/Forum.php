@@ -44,32 +44,32 @@ class Forum extends Model implements TranslatableContract
         return SlugService::createSlug(self::class, 'slug', $title);
     }
 
-    public function parent()
+    public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Forum', 'parent_id', 'id');
     }
 
-    public function subForums()
+    public function subForums(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'parent_id', 'id')->orderBy('order', 'asc');
     }
 
-    public function topics()
+    public function topics(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ForumTopic', 'forum_id', 'id');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }
 
-    public function userGroup()
+    public function userGroup(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Group', 'group_id', 'id');
     }
 
-    public function userRole()
+    public function userRole(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Role', 'role_id', 'id');
     }

@@ -13,17 +13,17 @@ class CourseNoticeboard extends Model
 
     static $colors = ['warning', 'danger', 'neutral', 'info', 'success'];
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function noticeboardStatus()
+    public function noticeboardStatus(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\CourseNoticeboardStatus', 'noticeboard_id', 'id');
     }

@@ -12,7 +12,7 @@ class ProductFeaturedCategory extends Model
     protected $guarded = ['id'];
 
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
     }

@@ -27,17 +27,17 @@ class SelectedInstallmentStep extends Model
      * Relations
      * */
 
-    public function selectedInstallment()
+    public function selectedInstallment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(SelectedInstallment::class, 'selected_installment_id', 'id');
     }
 
-    public function installmentStep()
+    public function installmentStep(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(InstallmentStep::class, 'installment_step_id', 'id');
     }
 
-    public function orderPayment()
+    public function orderPayment(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(InstallmentOrderPayment::class, 'selected_installment_step_id', 'id');
     }

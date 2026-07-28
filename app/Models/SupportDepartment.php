@@ -23,7 +23,7 @@ class SupportDepartment extends Model implements TranslatableContract
     }
 
 
-    public function supports()
+    public function supports(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Support', 'department_id', 'id');
     }

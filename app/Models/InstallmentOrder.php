@@ -12,52 +12,52 @@ class InstallmentOrder extends Model
     protected $guarded = ['id'];
 
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function installment()
+    public function installment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Installment::class, 'installment_id', 'id');
     }
 
-    public function selectedInstallment()
+    public function selectedInstallment(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(SelectedInstallment::class, 'installment_order_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Webinar::class, 'webinar_id', 'id');
     }
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Bundle::class, 'bundle_id', 'id');
     }
 
-    public function subscribe()
+    public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Subscribe::class, 'subscribe_id', 'id');
     }
 
-    public function registrationPackage()
+    public function registrationPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(RegistrationPackage::class, 'registration_package_id', 'id');
     }
 
-    public function payments()
+    public function payments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InstallmentOrderPayment::class, 'installment_order_id', 'id');
     }
 
-    public function attachments()
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(InstallmentOrderAttachment::class, 'installment_order_id', 'id');
     }

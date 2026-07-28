@@ -18,48 +18,48 @@ class VisitLog extends Model
      | Relations
      * ==========*/
 
-    public function targetable()
+    public function targetable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Webinar::class, 'targetable_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Bundle::class, 'targetable_id', 'id');
     }
 
-    public function upcomingCourse()
+    public function upcomingCourse(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(UpcomingCourse::class, 'targetable_id', 'id');
     }
 
-    public function blog()
+    public function blog(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Blog::class, 'targetable_id', 'id');
     }
 
-    public function forum()
+    public function forum(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Forum::class, 'targetable_id', 'id');
     }
 
-    public function forumTopic()
+    public function forumTopic(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ForumTopic::class, 'targetable_id', 'id');
     }
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class, 'targetable_id', 'id');
     }
 
     // Use This On Models
-    /*public function visits()
+    /*public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }*/

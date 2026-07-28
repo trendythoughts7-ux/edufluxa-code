@@ -63,32 +63,32 @@ class Form extends Model implements TranslatableContract
     /********
      * Relations
      * ******/
-    public function rolesAndUersAndGroups()
+    public function rolesAndUersAndGroups(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(FormRoleUserGroup::class, 'form_id', 'id');
     }
 
-    public function userGroups()
+    public function userGroups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Group::class, 'form_roles_users_groups', 'form_id', 'group_id');
     }
 
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, 'form_roles_users_groups', 'form_id', 'user_id');
     }
 
-    public function roles()
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Role::class, 'form_roles_users_groups', 'form_id', 'role_id');
     }
 
-    public function fields()
+    public function fields(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(FormField::class, 'form_id', 'id');
     }
 
-    public function submissions()
+    public function submissions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(FormSubmission::class, 'form_id', 'id');
     }

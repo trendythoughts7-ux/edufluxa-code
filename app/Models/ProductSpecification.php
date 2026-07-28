@@ -25,12 +25,12 @@ class ProductSpecification extends Model implements TranslatableContract
     }
 
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductSpecificationCategory', 'specification_id', 'id');
     }
 
-    public function multiValues()
+    public function multiValues(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductSpecificationMultiValue', 'specification_id', 'id');
     }

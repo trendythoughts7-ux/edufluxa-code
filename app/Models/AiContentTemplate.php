@@ -34,7 +34,7 @@ class AiContentTemplate extends Model implements TranslatableContract
      * Relations
      * ******/
 
-    public function contents()
+    public function contents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(AiContent::class, 'service_id', 'id');
     }

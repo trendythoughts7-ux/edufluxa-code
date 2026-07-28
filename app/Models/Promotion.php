@@ -27,7 +27,7 @@ class Promotion extends Model implements TranslatableContract
         return getTranslateAttributeValue($this, 'description');
     }
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Sale', 'promotion_id', 'id')->whereNull('refund_at');
     }

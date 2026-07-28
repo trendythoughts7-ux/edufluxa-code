@@ -11,7 +11,7 @@ class ProductSpecificationCategory extends Model
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductCategory', 'category_id', 'id');
     }

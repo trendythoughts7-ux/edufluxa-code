@@ -33,7 +33,7 @@ class Role extends Model implements TranslatableContract
         return !in_array($this->name, [self::$admin, self::$user, self::$organization, self::$teacher]);
     }
 
-    public function users()
+    public function users(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\User', 'role_id', 'id');
     }

@@ -16,7 +16,7 @@ class UserLoginHistory extends Model
      | Relations
      * ==========*/
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }

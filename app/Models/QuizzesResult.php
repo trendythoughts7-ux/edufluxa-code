@@ -14,12 +14,12 @@ class QuizzesResult extends Model
 
     protected $guarded = ['id'];
 
-    public function quiz()
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Quiz', 'quiz_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }

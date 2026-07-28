@@ -17,12 +17,12 @@ class AiContent extends Model
      * Relations
      * ******/
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function template()
+    public function template(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(AiContentTemplate::class, 'service_id', 'id');
     }

@@ -11,7 +11,7 @@ class AgoraHistory extends Model
     protected $dateFormat = "U";
     protected $guarded = ['id'];
 
-    public function session()
+    public function session(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Session', 'session_id', 'id');
     }

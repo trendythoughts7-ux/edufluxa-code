@@ -14,22 +14,22 @@ class UserSelectedBank extends Model
     protected $guarded = ['id'];
 
 
-    public function bank()
+    public function bank(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\UserBank', 'user_bank_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function specifications()
+    public function specifications(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\UserSelectedBankSpecification', 'user_selected_bank_id', 'id');
     }
 
-    public function payouts()
+    public function payouts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Payout::class, 'user_selected_bank_id', 'id');
     }

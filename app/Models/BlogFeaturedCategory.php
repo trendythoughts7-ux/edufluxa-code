@@ -12,7 +12,7 @@ class BlogFeaturedCategory extends Model
     protected $guarded = ['id'];
 
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(BlogCategory::class, 'category_id', 'id');
     }

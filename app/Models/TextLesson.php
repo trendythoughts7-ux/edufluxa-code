@@ -39,22 +39,22 @@ class TextLesson extends Model implements TranslatableContract
     }
 
 
-    public function attachments()
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\TextLessonAttachment', 'text_lesson_id', 'id');
     }
 
-    public function learningStatus()
+    public function learningStatus(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\CourseLearning', 'text_lesson_id', 'id');
     }
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\WebinarChapter', 'chapter_id', 'id');
     }
 
-    public function personalNote()
+    public function personalNote(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne('App\Models\CoursePersonalNote', 'targetable');
     }

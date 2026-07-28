@@ -30,7 +30,7 @@ class InstallmentStep extends Model implements TranslatableContract
     /*********
      * Relations
      * */
-    public function installment()
+    public function installment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Installment::class, 'installment_id', 'id');
     }

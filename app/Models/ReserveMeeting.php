@@ -17,27 +17,27 @@ class ReserveMeeting extends Model
 
     protected $guarded = ['id'];
 
-    public function meetingTime()
+    public function meetingTime(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\MeetingTime', 'meeting_time_id', 'id');
     }
 
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Meeting', 'meeting_id', 'id');
     }
 
-    public function sale()
+    public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Sale', 'sale_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
-    public function session()
+    public function session(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Session', 'reserve_meeting_id', 'id');
     }

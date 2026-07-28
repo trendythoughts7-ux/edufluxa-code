@@ -33,82 +33,82 @@ class Sale extends Model
         Sale::observe(SaleNumberObserver::class);
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Bundle', 'bundle_id', 'id');
     }
 
-    public function buyer()
+    public function buyer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'buyer_id', 'id');
     }
 
-    public function seller()
+    public function seller(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'seller_id', 'id');
     }
 
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Meeting', 'meeting_id', 'id');
     }
 
-    public function subscribe()
+    public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Subscribe', 'subscribe_id', 'id');
     }
 
-    public function promotion()
+    public function promotion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Promotion', 'promotion_id', 'id');
     }
 
-    public function registrationPackage()
+    public function registrationPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\RegistrationPackage', 'registration_package_id', 'id');
     }
 
-    public function order()
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Order', 'order_id', 'id');
     }
 
-    public function ticket()
+    public function ticket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
     }
 
-    public function saleLog()
+    public function saleLog(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\SaleLog', 'sale_id', 'id');
     }
 
-    public function productOrder()
+    public function productOrder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\ProductOrder', 'product_order_id', 'id');
     }
 
-    public function gift()
+    public function gift(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Gift', 'gift_id', 'id');
     }
 
-    public function installmentOrderPayment()
+    public function installmentOrderPayment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\InstallmentOrderPayment', 'installment_payment_id', 'id');
     }
 
-    public function eventTicket()
+    public function eventTicket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(EventTicket::class, 'event_ticket_id', 'id');
     }
 
-    public function meetingPackage()
+    public function meetingPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(MeetingPackage::class, 'meeting_package_id', 'id');
     }

@@ -17,17 +17,17 @@ class EventTicketSold extends Model
     /* ==========
      | Relations
      * ==========*/
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function eventTicket()
+    public function eventTicket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(EventTicket::class, 'event_ticket_id', 'id');
     }
 
-    public function sale()
+    public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Sale::class, 'sale_id', 'id');
     }

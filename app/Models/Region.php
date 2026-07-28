@@ -30,57 +30,57 @@ class Region extends Model
         return Geo::get_geo_array($this->attributes['geo_center']);
     }
 
-    public function country()
+    public function country(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo($this, 'country_id', 'id')->where('type', self::$country);
     }
 
-    public function countryProvinces()
+    public function countryProvinces(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'country_id', 'id')->where('type', self::$province);
     }
 
-    public function countryCities()
+    public function countryCities(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'country_id', 'id')->where('type', self::$city);
     }
 
-    public function provinceCities()
+    public function provinceCities(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'province_id', 'id')->where('type', self::$city);
     }
 
-    public function cityDistricts()
+    public function cityDistricts(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'city_id', 'id')->where('type', self::$district);
     }
 
-    public function province()
+    public function province(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo($this, 'province_id', 'id')->where('type', self::$province);
     }
 
-    public function city()
+    public function city(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo($this, 'city_id', 'id')->where('type', self::$city);
     }
 
-    public function countryUsers()
+    public function countryUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\User', 'country_id', 'id');
     }
 
-    public function provinceUsers()
+    public function provinceUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\User', 'province_id', 'id');
     }
 
-    public function cityUsers()
+    public function cityUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\User', 'city_id', 'id');
     }
 
-    public function districtUsers()
+    public function districtUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\User', 'district_id', 'id');
     }

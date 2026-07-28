@@ -16,7 +16,7 @@ class ProductMedia extends Model
     static $image = 'image';
     static $video = 'video';
 
-    public function product()
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Product', 'product_id', 'id');
     }

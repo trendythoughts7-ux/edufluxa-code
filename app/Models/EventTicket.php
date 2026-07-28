@@ -40,18 +40,18 @@ class EventTicket extends Model implements TranslatableContract
     /* ==========
      | Relations
      * ==========*/
-    public function event()
+    public function event(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Sale::class, 'event_ticket_id', 'id')
             ->whereNull('refund_at');
     }
 
-    public function eventTicketsSolds()
+    public function eventTicketsSolds(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(EventTicketSold::class, 'event_ticket_id', 'id');
     }

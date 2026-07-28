@@ -13,7 +13,7 @@ class RewardAccounting extends Model
     const ADDICTION = 'addiction';
     const DEDUCTION = 'deduction';
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }

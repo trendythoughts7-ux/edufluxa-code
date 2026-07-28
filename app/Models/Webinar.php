@@ -85,156 +85,156 @@ class Webinar extends Model implements TranslatableContract
         return false;
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\User', 'teacher_id', 'id');
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 
-    public function filterOptions()
+    public function filterOptions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarFilterOption', 'webinar_id', 'id');
     }
 
-    public function tickets()
+    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Ticket', 'webinar_id', 'id');
     }
 
 
-    public function chapters()
+    public function chapters(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarChapter', 'webinar_id', 'id');
     }
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Session', 'webinar_id', 'id');
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\File', 'webinar_id', 'id');
     }
 
-    public function assignments()
+    public function assignments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarAssignment', 'webinar_id', 'id');
     }
 
-    public function textLessons()
+    public function textLessons(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\TextLesson', 'webinar_id', 'id');
     }
 
-    public function faqs()
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Faq', 'webinar_id', 'id');
     }
 
-    public function webinarExtraDescription()
+    public function webinarExtraDescription(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarExtraDescription', 'webinar_id', 'id');
     }
 
-    public function prerequisites()
+    public function prerequisites(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Prerequisite', 'webinar_id', 'id');
     }
 
-    public function certificates()
+    public function certificates(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Certificate', 'webinar_id', 'id');
     }
 
-    public function quizzes()
+    public function quizzes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Quiz', 'webinar_id', 'id');
     }
 
-    public function webinarPartnerTeacher()
+    public function webinarPartnerTeacher(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarPartnerTeacher', 'webinar_id', 'id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Tag', 'webinar_id', 'id');
     }
 
-    public function purchases()
+    public function purchases(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Purchase', 'webinar_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Comment', 'webinar_id', 'id');
     }
 
-    public function reviews()
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\WebinarReview', 'webinar_id', 'id');
     }
 
-    public function visits()
+    public function visits(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(VisitLog::class, 'targetable');
     }
 
-    public function timeSpents()
+    public function timeSpents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(TimeSpentOnCourse::class, 'course_id', 'id');
     }
 
 
-    public function sales()
+    public function sales(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Sale', 'webinar_id', 'id')
             ->whereNull('refund_at')
             ->where('type', 'webinar');
     }
 
-    public function feature()
+    public function feature(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\FeatureWebinar', 'webinar_id', 'id');
     }
 
-    public function noticeboards()
+    public function noticeboards(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\CourseNoticeboard', 'webinar_id', 'id');
     }
 
-    public function forums()
+    public function forums(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\CourseForum', 'webinar_id', 'id');
     }
 
-    public function productBadgeContents()
+    public function productBadgeContents(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany(ProductBadgeContent::class, 'targetable');
     }
 
-    public function relatedCourses()
+    public function relatedCourses(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
         return $this->morphMany('App\Models\RelatedCourse', 'targetable');
     }
 
-    public function deleteRequest()
+    public function deleteRequest(): \Illuminate\Database\Eloquent\Relations\MorphOne
     {
         return $this->morphOne(ContentDeleteRequest::class, 'targetable');
     }
 
-    public function waitlists()
+    public function waitlists(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Waitlist::class, 'webinar_id', 'id');
     }

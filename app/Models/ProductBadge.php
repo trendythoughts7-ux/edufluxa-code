@@ -28,7 +28,7 @@ class ProductBadge extends Model implements TranslatableContract
      * Relations
      * ******/
 
-    public function contents()
+    public function contents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\ProductBadgeContent', 'product_badge_id', 'id');
     }
