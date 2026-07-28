@@ -4,7 +4,7 @@ use App\Models\TextLessonAttachment as PrimaryModel;
 
 class TextLessonAttachment extends PrimaryModel {
     
-    public function file()
+    public function file(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\File', 'file_id', 'id');
     }

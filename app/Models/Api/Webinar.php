@@ -869,82 +869,82 @@ class Webinar extends Model
     }
 
 
-    public function tickets()
+    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Ticket', 'webinar_id', 'id');
     }
 
-    public function badges()
+    public function badges(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\ProductBadgeContent', 'targetable_id', 'id');
     }
 
-    public function chapters()
+    public function chapters(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\WebinarChapter', 'webinar_id', 'id');
     }
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Session', 'webinar_id', 'id');
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\File', 'webinar_id', 'id');
     }
 
-    public function textLessons()
+    public function textLessons(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\TextLesson', 'webinar_id', 'id');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'creator_id', 'id');
     }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'teacher_id', 'id');
     }
 
-    public function category()
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
 
-    public function tags()
+    public function tags(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Tag', 'webinar_id', 'id');
     }
 
-    public function purchases()
+    public function purchases(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Purchase', 'webinar_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Comment', 'webinar_id', 'id');
     }
 
-    public function reviews()
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\WebinarReview', 'webinar_id', 'id');
     }
 
-    public function prerequisites()
+    public function prerequisites(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Prerequisite', 'webinar_id', 'id');
     }
 
-    public function faqs()
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Faq', 'webinar_id', 'id');
     }
 
-    public function quizzes()
+    public function quizzes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Quiz', 'webinar_id', 'id');
     }

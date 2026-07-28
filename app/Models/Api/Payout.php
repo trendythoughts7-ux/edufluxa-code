@@ -6,11 +6,11 @@ use App\Models\Payout as Model;
 
 class Payout extends Model
 {
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'user_id', 'id');
     }
-    public function userSelectedBank()
+    public function userSelectedBank(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\UserSelectedBank', 'user_selected_bank_id', 'id');
     }

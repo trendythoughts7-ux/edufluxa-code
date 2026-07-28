@@ -20,25 +20,25 @@ class Bundle extends Model
             ->first();
     }
 
-    public function badges()
+    public function badges(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\ProductBadgeContent', 'targetable_id', 'id');
     }
-    public function bundleWebinars()
+    public function bundleWebinars(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\BundleWebinar', 'bundle_id', 'id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
     {
         //  return $this->hasManyThrough('App\Models\Webinar', 'App\Models\BundleWebinar', 'bundle_id', 'id');
     }
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'teacher_id', 'id');
     }
 
-    public function tickets()
+    public function tickets(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Ticket', 'bundle_id', 'id');
     }

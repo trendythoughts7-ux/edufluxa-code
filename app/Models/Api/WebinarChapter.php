@@ -8,27 +8,27 @@ class WebinarChapter extends Model
 {
 
 
-    public function sessions()
+    public function sessions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Session', 'chapter_id', 'id');
     }
 
-    public function files()
+    public function files(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\File', 'chapter_id', 'id');
     }
 
-    public function textLessons()
+    public function textLessons(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\TextLesson', 'chapter_id', 'id');
     }
 
-    public function quizzes()
+    public function quizzes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Quiz', 'chapter_id', 'id');
     }
 
-    public function chapterItems()
+    public function chapterItems(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\WebinarChapterItem', 'chapter_id', 'id');
     }

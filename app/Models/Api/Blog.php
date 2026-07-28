@@ -64,16 +64,16 @@ class Blog extends Model implements TranslatableContract
             'category'=>$this->category->title ,
         ];
     }
-    public function badges()
+    public function badges(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\ProductBadgeContent', 'targetable_id', 'id');
     }
-    public function author()
+    public function author(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'author_id', 'id');
     }
 
-    public function comments()
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Comment', 'blog_id', 'id');
     }

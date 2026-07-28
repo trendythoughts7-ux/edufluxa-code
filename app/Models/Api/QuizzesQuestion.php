@@ -4,7 +4,7 @@ use App\Models\QuizzesQuestion as WebQuizzesQuestion;
 
 class QuizzesQuestion extends WebQuizzesQuestion{
 
-    public function quizzesQuestionsAnswers()
+    public function quizzesQuestionsAnswers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\QuizzesQuestionsAnswer', 'question_id', 'id');
     }

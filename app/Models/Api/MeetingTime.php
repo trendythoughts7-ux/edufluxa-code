@@ -7,7 +7,7 @@ use App\Models\MeetingTime as Model;
 class MeetingTime extends Model
 {
     //
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Meeting', 'meeting_id', 'id');
     }

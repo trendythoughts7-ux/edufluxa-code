@@ -35,22 +35,22 @@ class Cart extends Model
         return $this->reserveMeeting->paid_amount ;
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'creator_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }
 
-    public function reserveMeeting()
+    public function reserveMeeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\ReserveMeeting', 'reserve_meeting_id', 'id');
     }
 
-    public function ticket()
+    public function ticket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
     }

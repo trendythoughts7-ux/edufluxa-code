@@ -77,7 +77,7 @@ class WebinarAssignment extends Model
         }
         return null;
     }
-    public function attachments()
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\WebinarAssignmentAttachment', 'assignment_id', 'id');
     }
@@ -157,7 +157,7 @@ class WebinarAssignment extends Model
         // return $this->instructorAssignmentHistories()->messages()->where('sender_id', '!=', $this->creator_id)->count();
     }
 
-    public function assignmentHistory()
+    public function assignmentHistory(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         $user = apiAuth();
         $id = 0;

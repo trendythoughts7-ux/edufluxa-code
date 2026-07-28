@@ -155,17 +155,17 @@ class QuizzesResult extends WebQuizzesResult
 
     }
 
-    public function quiz()
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Quiz', 'quiz_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'user_id', 'id');
     }
 
-    public function certificate()
+    public function certificate(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Api\Certificate', 'quiz_result_id', 'id');
     }

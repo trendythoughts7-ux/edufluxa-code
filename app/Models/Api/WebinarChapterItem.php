@@ -95,27 +95,27 @@ class WebinarChapterItem extends Model
     }
 
 
-    public function session()
+    public function session(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Session', 'item_id', 'id');
     }
 
-    public function file()
+    public function file(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\File', 'item_id', 'id');
     }
 
-    public function textLesson()
+    public function textLesson(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\TextLesson', 'item_id', 'id');
     }
 
-    public function assignment()
+    public function assignment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\WebinarAssignment', 'item_id', 'id');
     }
 
-    public function quiz()
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Quiz', 'item_id', 'id');
     }

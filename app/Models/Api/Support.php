@@ -5,22 +5,22 @@ use App\Models\Support as Model ;
 
 class Support extends Model{
 
-    public function department()
+    public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\SupportDepartment', 'department_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'user_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }
 
-    public function conversations()
+    public function conversations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\SupportConversation', 'support_id', 'id');
     }

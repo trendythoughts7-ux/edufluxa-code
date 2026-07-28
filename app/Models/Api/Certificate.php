@@ -48,17 +48,17 @@ class Certificate extends WebCertificate
     }
 
 
-    public function quiz()
+    public function quiz(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Api\Quiz', 'id', 'quiz_id');
     }
 
-    public function student()
+    public function student(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Api\User', 'id', 'student_id');
     }
 
-    public function quizzesResult()
+    public function quizzesResult(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Api\QuizzesResult', 'id', 'quiz_result_id');
     }

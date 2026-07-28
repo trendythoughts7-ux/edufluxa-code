@@ -19,12 +19,12 @@ class WebinarReport extends Model
         ] ;
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'user_id', 'id');
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }

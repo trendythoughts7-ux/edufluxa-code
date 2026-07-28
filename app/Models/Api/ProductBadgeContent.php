@@ -15,28 +15,28 @@ class ProductBadgeContent extends Model
      * Relations
      * ******/
 
-    public function targetable()
+    public function targetable(): \Illuminate\Database\Eloquent\Relations\MorphTo
     {
         return $this->morphTo();
     }
 
-    public function badge()
+    public function badge(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(ProductBadge::class, 'product_badge_id', 'id');
     }
 
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Webinar::class, 'targetable_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Bundle::class, 'targetable_id', 'id');
     }
 
-    public function blog()
+    public function blog(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Blog::class, 'targetable_id', 'id');
     }

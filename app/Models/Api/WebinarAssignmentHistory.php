@@ -108,7 +108,7 @@ class WebinarAssignmentHistory extends Model
 
     }
 
-    public function assignment()
+    public function assignment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\WebinarAssignment', 'assignment_id', 'id');
     }

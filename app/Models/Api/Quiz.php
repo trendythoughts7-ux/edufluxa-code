@@ -302,27 +302,27 @@ class Quiz extends Model
     }
 
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }
 
-    public function chapter()
+    public function chapter(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\WebinarChapter', 'webinar_id', 'id');
     }
 
-    public function quizResults()
+    public function quizResults(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\QuizzesResult', 'quiz_id', 'id');
     }
 
-    public function quizQuestions()
+    public function quizQuestions(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\QuizzesQuestion', 'quiz_id', 'id');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'creator_id', 'id');
     }

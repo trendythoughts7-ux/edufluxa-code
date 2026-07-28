@@ -38,22 +38,22 @@ class ReserveMeeting extends Model
 
     }
 
-    public function meetingTime()
+    public function meetingTime(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\MeetingTime', 'meeting_time_id', 'id');
     }
 
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Meeting', 'meeting_id', 'id');
     }
 
-    public function sale()
+    public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Sale', 'sale_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'user_id', 'id');
     }

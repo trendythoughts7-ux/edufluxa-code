@@ -321,31 +321,31 @@ class User extends Model implements JWTSubject
     }
 
 
-    public function quizResults()
+    public function quizResults(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\QuizzesResult', 'user_id');
 
     }
 
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\Api\Meeting', 'creator_id', 'id');
     }
 
-    public function webinars()
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Webinar', 'creator_id', 'id')
             ->orWhere('teacher_id', $this->id);
     }
 
-    public function userCreatedQuizzes()
+    public function userCreatedQuizzes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\Quiz', 'creator_id');
 
 
     }
 
-    public function userGroup()
+    public function userGroup(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\GroupUser', 'id', 'user_id');
     }
@@ -360,12 +360,12 @@ class User extends Model implements JWTSubject
         return Follow::where('follower', $this->id)->where('status', Follow::$accepted)->get();
     }
 
-    public function getOrganizationTeachers()
+    public function getOrganizationTeachers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany($this, 'organ_id', 'id')->where('role_name', Role::$teacher);
     }
 
-    public function purchases()
+    public function purchases(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Sale::class, 'buyer_id');
     }

@@ -66,32 +66,32 @@ class Accounting extends Model
         return $type ;
     }
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'user_id', 'id');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'creator_id', 'id');
     }
 
-    public function promotion()
+    public function promotion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Promotion', 'promotion_id', 'id');
     }
 
-    public function subscribe()
+    public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Subscribe', 'subscribe_id', 'id');
     }
 
-    public function meetingTime()
+    public function meetingTime(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\MeetingTime', 'meeting_time_id', 'id');
     }

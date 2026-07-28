@@ -83,57 +83,57 @@ class Sale extends WebSale
     }
 
 
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }
 
-    public function bundle()
+    public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Bundle', 'bundle_id', 'id');
     }
 
-    public function buyer()
+    public function buyer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'buyer_id', 'id');
     }
 
-    public function seller()
+    public function seller(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Model\Api\User', 'seller_id', 'id');
     }
 
-    public function meeting()
+    public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Meeting', 'meeting_id', 'id');
     }
 
-    public function subscribe()
+    public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Subscribe', 'subscribe_id', 'id');
     }
 
-    public function promotion()
+    public function promotion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Promotion', 'promotion_id', 'id');
     }
 
-    public function order()
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Order', 'order_id', 'id');
     }
 
-    public function ticket()
+    public function ticket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
     }
 
-    public function saleLog()
+    public function saleLog(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne('App\Models\SaleLog', 'sale_id', 'id');
     }
 
-    public function gift()
+    public function gift(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Gift', 'gift_id', 'id');
     }

@@ -81,11 +81,11 @@ class TextLesson extends WebTextLesson
 
     }
 
-    public function attachments()
+    public function attachments(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\TextLessonAttachment', 'text_lesson_id', 'id');
     }
-    public function webinar()
+    public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\Webinar', 'webinar_id', 'id');
     }

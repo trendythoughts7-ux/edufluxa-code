@@ -56,17 +56,17 @@ class Meeting extends Model
 
     }
 
-    public function teacher()
+    public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'teacher_id', 'id');
     }
 
-    public function creator()
+    public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo('App\Models\Api\User', 'creator_id', 'id');
     }
 
-    public function meetingTimes()
+    public function meetingTimes(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany('App\Models\Api\MeetingTime', 'meeting_id', 'id');
     }

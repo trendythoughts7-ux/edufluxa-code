@@ -8,7 +8,7 @@ use App\Models\CourseForumAnswer as Model;
 class CourseForumAnswer extends Model
 {
     //
-    public function course_forum()
+    public function course_forum(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
        return $this->belongsTo(CourseForum::class, 'forum_id');
     }
