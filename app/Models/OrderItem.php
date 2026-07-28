@@ -125,17 +125,17 @@ class OrderItem extends Model
     {
         $typeName = "course";
 
-        if (!empty($orderItem->reserve_meeting_id)) {
+        if (!empty($this->reserve_meeting_id)) {
             $typeName = "meeting";
-        } elseif (!empty($orderItem->product_id)) {
+        } elseif (!empty($this->product_id)) {
             $typeName = "product";
-        } elseif (!empty($orderItem->bundle_id)) {
+        } elseif (!empty($this->bundle_id)) {
             $typeName = "bundle";
-        } elseif (!empty($orderItem->promotion_id)) {
+        } elseif (!empty($this->promotion_id)) {
             $typeName = "promotion";
-        } elseif (!empty($orderItem->event_ticket_id)) {
+        } elseif (!empty($this->event_ticket_id)) {
             $typeName = "event_ticket";
-        } elseif (!empty($orderItem->meeting_package_id)) {
+        } elseif (!empty($this->meeting_package_id)) {
             $typeName = "meeting_package";
         }
 
