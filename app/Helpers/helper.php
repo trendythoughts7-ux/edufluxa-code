@@ -770,82 +770,38 @@ function currency($user = null)
                     $countryToCurrency = [
                         // MIDDLE EAST
                         'AE' => 'AED', 'SA' => 'SAR', 'QA' => 'QAR', 'KW' => 'KWD', 'OM' => 'OMR', 'BH' => 'BHD', 'IQ' => 'IQD', 'IR' => 'IRR', 'JO' => 'JOD', 'LB' => 'LBP', 'YE' => 'YER',
-
                         // EUROZONE (EUR)
                         'AT' => 'EUR', 'BE' => 'EUR', 'CY' => 'EUR', 'EE' => 'EUR', 'FI' => 'EUR', 'FR' => 'EUR', 'DE' => 'EUR', 'GR' => 'EUR', 'IE' => 'EUR', 'IT' => 'EUR', 'LV' => 'EUR', 'LT' => 'EUR', 'LU' => 'EUR', 'MT' => 'EUR', 'NL' => 'EUR', 'PT' => 'EUR', 'SK' => 'EUR', 'SI' => 'EUR', 'ES' => 'EUR',
                         // EUROPE (non-euro)
                         'GB' => 'GBP', 'PL' => 'PLN', 'CZ' => 'CZK', 'RO' => 'RON', 'HU' => 'HUF', 'SE' => 'SEK', 'NO' => 'NOK', 'DK' => 'DKK', 'CH' => 'CHF', 'RU' => 'RUB', 'UA' => 'UAH', 'TR' => 'TRY', 'BG' => 'BGN', 'HR' => 'HRK', 'IS' => 'ISK',
-
                         // AMERICAS
                         'US' => 'USD', 'CA' => 'CAD', 'MX' => 'MXN', 'AR' => 'ARS', 'BR' => 'BRL', 'CL' => 'CLP', 'CO' => 'COP', 'PE' => 'PEN', 'BS' => 'BSD', 'BB' => 'BBD', 'BZ' => 'BZD', 'BM' => 'BMD', 'BO' => 'BOB', 'CR' => 'CRC', 'CU' => 'CUP', 'DO' => 'DOP', 'GT' => 'GTQ',
                         'PR' => 'USD', 'GU' => 'USD', 'AS' => 'USD', 'VI' => 'USD',
-
                         // AFRICA
                         'EG' => 'EGP', 'MA' => 'MAD', 'DZ' => 'DZD', 'ZA' => 'ZAR', 'NG' => 'NGN', 'KE' => 'KES', 'TZ' => 'TZS', 'UG' => 'UGX', 'GH' => 'GHS', 'ET' => 'ETB', 'TN' => 'TND', 'LY' => 'LYD', 'SD' => 'SDG', 'BI' => 'BIF', 'CD' => 'CDF', 'NA' => 'NAD',
                         // WEST AFRICAN CFA (XOF)
                         'BJ' => 'XOF', 'BF' => 'XOF', 'CI' => 'XOF', 'GW' => 'XOF', 'ML' => 'XOF', 'NE' => 'XOF', 'SN' => 'XOF', 'TG' => 'XOF',
                         // CENTRAL AFRICAN CFA (XAF)
                         'CM' => 'XAF', 'CF' => 'XAF', 'TD' => 'XAF', 'CG' => 'XAF', 'GA' => 'XAF', 'GQ' => 'XAF',
-
                         // ASIA
-                        'IN' => 'INR', 'PK' => 'PKR', 'BD' => 'BDT', 'LK' => 'LKR', 'NP' => 'NPR', 'AF' => 'AFN', 'IR' => 'IRR', 'IQ' => 'IQD', 'IL' => 'ILS', 'LB' => 'LBP', 'TR' => 'TRY', 'JO' => 'JOD', 'QA' => 'QAR', 'KW' => 'KWD', 'OM' => 'OMR',
+                        'IN' => 'INR', 'PK' => 'PKR', 'BD' => 'BDT', 'LK' => 'LKR', 'NP' => 'NPR', 'AF' => 'AFN', 'IL' => 'ILS', 
                         'CN' => 'CNY', 'JP' => 'JPY', 'KR' => 'KRW', 'MY' => 'MYR', 'SG' => 'SGD', 'TH' => 'THB', 'VN' => 'VND', 'ID' => 'IDR', 'PH' => 'PHP', 'HK' => 'HKD', 'TW' => 'TWD',
                         'AZ' => 'AZN', 'AM' => 'AMD', 'GE' => 'GEL', 'KZ' => 'KZT', 'KG' => 'KGS', 'UZ' => 'UZS', 'TJ' => 'TJS', 'TM' => 'TMT',
-
                         // OCEANIA
                         'AU' => 'AUD', 'NZ' => 'NZD', 'FJ' => 'FJD',
-
                         // MENA & NORTH AFRICA edge
-                        'PS' => 'ILS', 'SY' => 'SYP', 'YE' => 'YER', 'AE' => 'AED', 'SA' => 'SAR', 'BH' => 'BHD', 'OM' => 'OMR', 'QA' => 'QAR', 'KW' => 'KWD',
-
+                        'PS' => 'ILS', 'SY' => 'SYP', 
                         // SPECIAL/LEGACY OR PROJECT-SPECIFIC CODES FROM LISTS
                         'AL' => 'Lek', // Albania (project uses "Lek" key)
                         'AW' => 'AWG',
-                        'AZ' => 'AZN',
-                        'BB' => 'BBD',
-                        'BD' => 'BDT',
                         'BY' => 'BYN',
                         'BA' => 'BAM',
                         'BW' => 'BWP',
                         'KH' => 'KHR',
                         'KY' => 'KYD',
-                        'HR' => 'HRK', // legacy per project list
-                        'CZ' => 'CZK',
-                        'DK' => 'DKK',
-                        'DO' => 'DOP',
+                        // legacy per project list
                         'DM' => 'XCD', 'GD' => 'XCD', 'AG' => 'XCD', 'KN' => 'XCD', 'LC' => 'XCD', 'VC' => 'XCD', 'AI' => 'XCD', 'MS' => 'XCD',
-                        'HK' => 'HKD',
-                        'HU' => 'HUF',
-                        'ID' => 'IDR',
-                        'IL' => 'ILS',
-                        'LB' => 'LBP',
-                        'MY' => 'MYR',
                         'MV' => 'MVR',
-                        'NG' => 'NGN',
-                        'NO' => 'NOK',
-                        'OM' => 'OMR',
-                        'PK' => 'PKR',
-                        'PH' => 'PHP',
-                        'PL' => 'PLN',
-                        'RO' => 'RON',
-                        'SG' => 'SGD',
-                        'CH' => 'CHF',
-                        'TH' => 'THB',
-                        'UA' => 'UAH',
-                        'GB' => 'GBP',
-                        'TW' => 'TWD',
-                        'VN' => 'VND',
-                        'UZ' => 'UZS',
-                        'TZ' => 'TZS',
-                        'ET' => 'ETB',
-                        'KW' => 'KWD',
-                        'BI' => 'BIF',
-                        'CD' => 'CDF',
-                        'NA' => 'NAD',
-                        'UG' => 'UGX',
-                        'KE' => 'KES',
-                        'GE' => 'GEL',
-                        'QA' => 'QAR',
                         'MZ' => 'MZM', // project list uses MZM
                     ];
 
