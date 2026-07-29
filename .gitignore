@@ -49,3 +49,4 @@ firebase-auth.json
 /How to Install Plugins/
 *.bak*
 *.broken_backup
+error_log
