@@ -6,6 +6,12 @@ use App\Mixins\Cart\CartItemInfo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * @property int|string|null $uid
+ * @property array|null $itemInfo
+ * @property \App\Models\Ticket|null $ticket
+ * @property int|null $quantity
+ */
 class Cart extends Model
 {
     protected $table = "cart";
@@ -97,7 +103,7 @@ class Cart extends Model
         return $totalPrice;
     }
 
-    public static function getItemPrice($cart)
+    public static function getItemPrice(Cart $cart)
     {
         $price = 0;
 
