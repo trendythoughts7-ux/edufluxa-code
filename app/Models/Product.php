@@ -335,7 +335,7 @@ class Product extends Model implements TranslatableContract
             ->where('status', 'active')
             ->get();
 
-        if (!empty($reviews) and $reviews->count() > 0) {
+        if ($reviews->count() > 0) {
             $rate = number_format($reviews->avg('rates'), 2);
         }
 

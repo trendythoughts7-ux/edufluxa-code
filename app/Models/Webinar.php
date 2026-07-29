@@ -251,7 +251,7 @@ class Webinar extends Model implements TranslatableContract
                 ->where('status', 'active')
                 ->get();
 
-            if (!empty($reviews) and $reviews->count() > 0) {
+            if ($reviews->count() > 0) {
                 $rate = number_format($reviews->avg('rates'), 2);
             }
         }
@@ -354,7 +354,7 @@ class Webinar extends Model implements TranslatableContract
         $tickets = Ticket::where('webinar_id', $this->id)->get();
 
         foreach ($tickets as $ticket) {
-            if (!empty($ticket) and $ticket->isValid()) {
+            if ($ticket->isValid()) {
                 $percent += $ticket->discount;
             }
         }
