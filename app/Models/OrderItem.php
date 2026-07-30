@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Observers\OrderItemNumberObserver;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,12 +25,12 @@ class OrderItem extends Model
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Order', 'order_id', 'id');
+        return $this->belongsTo(Order::class, 'order_id', 'id');
     }
 
     public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -44,12 +45,12 @@ class OrderItem extends Model
 
     public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Subscribe', 'subscribe_id', 'id');
+        return $this->belongsTo(Subscribe::class, 'subscribe_id', 'id');
     }
 
     public function promotion(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Promotion', 'promotion_id', 'id');
+        return $this->belongsTo(Promotion::class, 'promotion_id', 'id');
     }
 
     public function reserveMeeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -59,7 +60,7 @@ class OrderItem extends Model
 
     public function registrationPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\RegistrationPackage', 'registration_package_id', 'id');
+        return $this->belongsTo(RegistrationPackage::class, 'registration_package_id', 'id');
     }
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -69,7 +70,7 @@ class OrderItem extends Model
 
     public function productOrder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\ProductOrder', 'product_order_id', 'id');
+        return $this->belongsTo(ProductOrder::class, 'product_order_id', 'id');
     }
 
     public function installmentPayment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -79,7 +80,7 @@ class OrderItem extends Model
 
     public function ticket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
     public function gift(): \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -111,7 +111,7 @@ class Sale extends Model
 
     public function installmentOrderPayment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\InstallmentOrderPayment', 'installment_payment_id', 'id');
+        return $this->belongsTo(InstallmentOrderPayment::class, 'installment_payment_id', 'id');
     }
 
     public function eventTicket(): \Illuminate\Database\Eloquent\Relations\BelongsTo

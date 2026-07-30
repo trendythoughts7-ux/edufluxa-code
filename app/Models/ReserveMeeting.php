@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\CalendarLinks\Link;
 
@@ -22,22 +23,22 @@ class ReserveMeeting extends Model
 
     public function meetingTime(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\MeetingTime', 'meeting_time_id', 'id');
+        return $this->belongsTo(MeetingTime::class, 'meeting_time_id', 'id');
     }
 
     public function meeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Meeting', 'meeting_id', 'id');
+        return $this->belongsTo(Meeting::class, 'meeting_id', 'id');
     }
 
     public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Sale', 'sale_id', 'id');
+        return $this->belongsTo(Sale::class, 'sale_id', 'id');
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\User', 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function session(): \Illuminate\Database\Eloquent\Relations\HasOne
