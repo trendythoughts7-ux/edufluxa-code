@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Mixins\Cart\CartItemInfo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use App\Models\Webinar;
+use App\Models\Bundle;
+use App\Models\Product;
 
 class Gift extends Model
 {
@@ -31,17 +34,17 @@ class Gift extends Model
 
     public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
+        return $this->belongsTo(Webinar::class, 'webinar_id', 'id');
     }
 
     public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Bundle', 'bundle_id', 'id');
+        return $this->belongsTo(Bundle::class, 'bundle_id', 'id');
     }
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Product', 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
 

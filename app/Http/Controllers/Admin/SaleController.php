@@ -93,7 +93,7 @@ class SaleController extends Controller
         return view('admin.financial.sales.lists', $data);
     }
 
-    private function makeTitle($sale)
+    private function makeTitle(Sale $sale)
     {
         if (!empty($sale->webinar_id) or !empty($sale->bundle_id)) {
             $item = !empty($sale->webinar_id) ? $sale->webinar : $sale->bundle;

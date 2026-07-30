@@ -4,8 +4,19 @@ namespace App\Models;
 
 use App\Mixins\RegistrationBonus\RegistrationBonusAccounting;
 use App\Models\Observers\SaleNumberObserver;
+use App\Models\Gift;
+use App\Models\OrderItem;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $buyer_id
+ * @property string|null $item_title
+ * @property int|string|null $item_id
+ * @property string|null $item_seller
+ * @property int|string|null $seller_id
+ * @property string|null $gift_recipient
+ * @property-read \App\Models\Gift $gift
+ */
 class Sale extends Model
 {
     public static $webinar = 'webinar';
@@ -95,7 +106,7 @@ class Sale extends Model
 
     public function gift(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Gift', 'gift_id', 'id');
+        return $this->belongsTo(Gift::class, 'gift_id', 'id');
     }
 
     public function installmentOrderPayment(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -118,7 +129,7 @@ class Sale extends Model
      | Helpers
      * ========*/
 
-    public static function createSales($orderItem, $payment_method)
+    public static function createSales(OrderItem $orderItem, $payment_method)
     {
         $orderType = Order::$webinar;
         if (!empty($orderItem->reserve_meeting_id)) {
@@ -191,7 +202,7 @@ class Sale extends Model
         return $sale;
     }
 
-    public static function handleSaleNotifications($orderItem, $seller_id)
+    public static function handleSaleNotifications(OrderItem $orderItem, $seller_id)
     {
         $title = '';
         if (!empty($orderItem->webinar_id)) {
@@ -308,7 +319,8 @@ class Sale extends Model
             $subscribe = Subscribe::where('id', $use->subscribe_id)->first();
 
             if (!empty($subscribe)) {
-                $subscribe->installment_order_id = $use->installment_order_id;
+                // Dynamic runtime-only property (not a 'subscribes' table column) - copied from SubscribeUse for downstream use
+                $subscribe->installment_order_id = $use->installment_order_id; // @phpstan-ignore-line
             }
         }
 

@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 use Jorenvh\Share\ShareFacade;
 use Spatie\CalendarLinks\Link;
 
+/**
+ * @property-read int $creator_id
+ */
 class Webinar extends Model implements TranslatableContract
 {
     use Translatable;

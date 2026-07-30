@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\CalendarLinks\Link;
 
+/**
+ * @property-read int $meeting_id
+ */
 class ReserveMeeting extends Model
 {
     protected $table = "reserve_meetings";

@@ -5,6 +5,9 @@ namespace App\Models;
 use App\Models\Observers\OrderItemNumberObserver;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property-read int|null $reserve_meeting_id
+ */
 class OrderItem extends Model
 {
     public $timestamps = false;
@@ -31,12 +34,12 @@ class OrderItem extends Model
 
     public function webinar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Webinar', 'webinar_id', 'id');
+        return $this->belongsTo(Webinar::class, 'webinar_id', 'id');
     }
 
     public function bundle(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Bundle', 'bundle_id', 'id');
+        return $this->belongsTo(Bundle::class, 'bundle_id', 'id');
     }
 
     public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -51,7 +54,7 @@ class OrderItem extends Model
 
     public function reserveMeeting(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\ReserveMeeting', 'reserve_meeting_id', 'id');
+        return $this->belongsTo(ReserveMeeting::class, 'reserve_meeting_id', 'id');
     }
 
     public function registrationPackage(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -61,7 +64,7 @@ class OrderItem extends Model
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Product', 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function productOrder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -100,7 +103,7 @@ class OrderItem extends Model
      * ========*/
 
 
-    public static function getSeller($orderItem)
+    public static function getSeller(OrderItem $orderItem)
     {
         $seller = null;
 
