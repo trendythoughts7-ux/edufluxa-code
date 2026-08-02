@@ -4,6 +4,20 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $status
+ * @property string $comment_user_type
+ * @property int $created_at
+ * @property string $comment
+ * @property int $user_id
+ * @property int|null $blog_id
+ * @property-read \App\Models\Blog|null $blog
+ * @property-read \App\Models\Product|null $product
+ * @property-read \App\Models\Webinar|null $webinar
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $replies
+ * @property-read \App\User|null $user
+ */
 class CommentResource extends JsonResource
 {
     /**

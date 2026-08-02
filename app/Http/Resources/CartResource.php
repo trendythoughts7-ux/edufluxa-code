@@ -4,6 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property int|null $webinar_id
+ * @property int|null $bundle_id
+ * @property int|null $reserve_meeting_id
+ * @property-read \App\Models\ReserveMeeting|null $reserveMeeting
+ */
 class CartResource extends JsonResource
 {
     /**

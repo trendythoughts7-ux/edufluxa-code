@@ -4,6 +4,14 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property int|null $pass_mark
+ * @property float|null $average_grade
+ * @property int $created_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Certificate[] $certificates
+ */
 class CertificateResource extends JsonResource
 {
     /**

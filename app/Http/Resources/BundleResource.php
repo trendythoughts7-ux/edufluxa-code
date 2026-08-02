@@ -6,6 +6,28 @@ use App\Mixins\Cashback\CashbackRules;
 use App\Models\Api\Bundle;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property float $price
+ * @property bool $subscribe
+ * @property int|null $access_days
+ * @property string $status
+ * @property string $title
+ * @property string|null $description
+ * @property int $created_at
+ * @property bool|null $is_favorite
+ * @property string|null $video_demo
+ * @property int|null $points
+ * @property-read \App\Models\Category|null $category
+ * @property-read \App\Models\Api\User|null $teacher
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\WebinarReview[] $reviews
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Api\BundleWebinar[] $bundleWebinars
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Sale[] $sales
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Api\Ticket[] $tickets
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Faq[] $faqs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ */
 class BundleResource extends JsonResource
 {
     /**
