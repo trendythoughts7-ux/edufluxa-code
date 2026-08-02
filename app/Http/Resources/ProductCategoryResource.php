@@ -4,6 +4,12 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string|null $icon
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ProductCategory[] $subCategories
+ */
 class ProductCategoryResource extends JsonResource
 {
     /**

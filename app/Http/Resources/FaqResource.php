@@ -4,6 +4,14 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $answer
+ * @property int|null $order
+ * @property int $created_at
+ * @property int $updated_at
+ */
 class FaqResource extends JsonResource
 {
     /**

@@ -5,6 +5,21 @@ namespace App\Http\Resources;
 use App\Models\File;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $storage
+ * @property string $title
+ * @property string|null $description
+ * @property bool|null $read
+ * @property bool|null $auth_has_access
+ * @property bool|null $user_has_access
+ * @property string|null $file_type
+ * @property int $created_at
+ * @property bool|null $check_previous_parts
+ * @property int|null $access_after_day
+ * @property string $accessibility
+ * @property-read \App\Models\Api\Webinar|null $webinar
+ */
 class FileResource extends JsonResource
 {
     /**

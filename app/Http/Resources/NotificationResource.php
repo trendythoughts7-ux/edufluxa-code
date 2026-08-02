@@ -4,6 +4,18 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property int|null $user_id
+ * @property int|null $sender_id
+ * @property int|null $group_id
+ * @property int|null $webinar_id
+ * @property string $title
+ * @property string $message
+ * @property string $sender
+ * @property string $type
+ * @property int $created_at
+ */
 class NotificationResource extends JsonResource
 {
     /**
