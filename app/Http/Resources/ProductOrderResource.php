@@ -1,9 +1,18 @@
 <?php
-
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read int $quantity
+ * @property-read string $status
+ * @property-read int $created_at
+ * @property-read \App\User $buyer
+ * @property-read \App\User $seller
+ * @property-read \App\Models\Sale $sale
+ * @property-read \App\Models\Product $product
+ */
 class ProductOrderResource extends JsonResource
 {
     /**
@@ -22,14 +31,12 @@ class ProductOrderResource extends JsonResource
                 'full_name' => $this->buyer->full_name,
                 'email' => $this->buyer->email,
                 'avator' => $this->buyer->getAvatar(),
-
             ] : null,
             'seller' => $this->seller ? [
                 'id' => $this->seller->id,
                 'full_name' => $this->seller->full_name,
                 'email' => $this->seller->email,
                 'avator' => $this->seller->getAvatar(),
-
             ] : null,
             'price' => (float)convertPriceToUserCurrency($this->sale->amount),
             'discount' => (float)convertPriceToUserCurrency($this->sale->discount),

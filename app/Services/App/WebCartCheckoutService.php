@@ -60,7 +60,10 @@ class WebCartCheckoutService
         ]);
     }
 
-    private function createOrderAndOrderItems($carts, $calculate, $user, $discountCoupon = null)
+    /**
+     * @param \Illuminate\Database\Eloquent\Collection<int, \App\Models\Cart> $carts
+     */
+    private function createOrderAndOrderItems(\Illuminate\Database\Eloquent\Collection $carts, $calculate, $user, $discountCoupon = null)
     {
         $totalAmount = $calculate["total"];
 

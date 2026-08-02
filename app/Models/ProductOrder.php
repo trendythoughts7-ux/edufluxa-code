@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductOrder extends Model
@@ -19,26 +20,26 @@ class ProductOrder extends Model
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Product', 'product_id', 'id');
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
     public function seller(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\User', 'seller_id', 'id');
+        return $this->belongsTo(User::class, 'seller_id', 'id');
     }
 
     public function buyer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\User', 'buyer_id', 'id');
+        return $this->belongsTo(User::class, 'buyer_id', 'id');
     }
 
     public function sale(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Sale', 'sale_id', 'id');
+        return $this->belongsTo(Sale::class, 'sale_id', 'id');
     }
 
     public function gift(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Gift', 'gift_id', 'id');
+        return $this->belongsTo(Gift::class, 'gift_id', 'id');
     }
 }

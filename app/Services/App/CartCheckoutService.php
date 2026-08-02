@@ -62,7 +62,10 @@ class CartCheckoutService
         return ['status' => 'empty_cart'];
     }
 
-    public function createOrderAndOrderItems($carts, $calculate, $user, $discountCoupon = null)
+    /**
+     * @param \Illuminate\Database\Eloquent\Collection<int, \App\Models\Api\Cart> $carts
+     */
+    public function createOrderAndOrderItems(\Illuminate\Database\Eloquent\Collection $carts, $calculate, $user, $discountCoupon = null)
     {
         $order = Order::create([
             'user_id' => $user->id,

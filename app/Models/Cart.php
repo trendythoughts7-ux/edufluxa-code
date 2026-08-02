@@ -52,12 +52,12 @@ class Cart extends Model
 
     public function ticket(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\Ticket', 'ticket_id', 'id');
+        return $this->belongsTo(Ticket::class, 'ticket_id', 'id');
     }
 
     public function productOrder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo('App\Models\ProductOrder', 'product_order_id', 'id');
+        return $this->belongsTo(ProductOrder::class, 'product_order_id', 'id');
     }
 
     public function subscribe(): \Illuminate\Database\Eloquent\Relations\BelongsTo
