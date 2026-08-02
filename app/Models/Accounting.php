@@ -112,7 +112,7 @@ class Accounting extends Model
      | Helpers
      * ========*/
 
-    public static function createAccounting($orderItem, $type = null)
+    public static function createAccounting(OrderItem $orderItem, $type = null)
     {
         self::createAccountingBuyer($orderItem, $type);
 
@@ -129,7 +129,7 @@ class Accounting extends Model
         }
     }
 
-    public static function createAccountingBuyer($orderItem, $type = null)
+    public static function createAccountingBuyer(OrderItem $orderItem, $type = null)
     {
         if ($type !== 'credit' and $orderItem->total_amount > 0) {
             Accounting::create([
@@ -224,7 +224,7 @@ class Accounting extends Model
         sendNotification('new_financial_document', $notifyOptions, $orderItem->user_id);
     }
 
-    public static function createAccountingTax($orderItem)
+    public static function createAccountingTax(OrderItem $orderItem)
     {
         Accounting::create([
             'user_id' => $orderItem->user_id,
@@ -251,7 +251,7 @@ class Accounting extends Model
         return true;
     }
 
-    public static function createAccountingSeller($orderItem)
+    public static function createAccountingSeller(OrderItem $orderItem)
     {
         if (!empty($orderItem->bundle_id)) {
             self::createAccountingForBundle($orderItem);
@@ -333,7 +333,7 @@ class Accounting extends Model
         }
     }
 
-    public static function createAccountingSystemForSubscribe($orderItem)
+    public static function createAccountingSystemForSubscribe(OrderItem $orderItem)
     {
         $sellerId = OrderItem::getSeller($orderItem);
 
@@ -352,7 +352,7 @@ class Accounting extends Model
         return true;
     }
 
-    public static function createAccountingCommission($orderItem)
+    public static function createAccountingCommission(OrderItem $orderItem)
     {
         $authId = $orderItem->user_id;
         $sellerId = OrderItem::getSeller($orderItem);
@@ -478,7 +478,7 @@ class Accounting extends Model
     }
 
 
-    public static function refundAccounting($sale, $productOrderId = null)
+    public static function refundAccounting(Sale $sale, $productOrderId = null)
     {
         self::refundAccountingBuyer($sale);
 
@@ -493,7 +493,7 @@ class Accounting extends Model
         }
     }
 
-    public static function refundAccountingBuyer($sale)
+    public static function refundAccountingBuyer(Sale $sale)
     {
         Accounting::create([
             'user_id' => $sale->buyer_id,
@@ -515,7 +515,7 @@ class Accounting extends Model
         return true;
     }
 
-    public static function refundAccountingTax($sale)
+    public static function refundAccountingTax(Sale $sale)
     {
         if (!empty($sale->tax) and $sale->tax > 0) {
             Accounting::create([
@@ -539,7 +539,7 @@ class Accounting extends Model
         return true;
     }
 
-    public static function refundAccountingCommission($sale)
+    public static function refundAccountingCommission(Sale $sale)
     {
         if (!empty($sale->commission) and $sale->commission > 0) {
             Accounting::create([
@@ -564,7 +564,7 @@ class Accounting extends Model
         return true;
     }
 
-    public static function refundAccountingSeller($sale)
+    public static function refundAccountingSeller(Sale $sale)
     {
         $amount = $sale->total_amount;
 
@@ -623,7 +623,7 @@ class Accounting extends Model
     }
 
 
-    public static function createAccountingForSubscribe($orderItem, $type = null)
+    public static function createAccountingForSubscribe(OrderItem $orderItem, $type = null)
     {
         self::createAccountingBuyer($orderItem, $type);
         if ($orderItem->tax_price and $orderItem->tax_price > 0) {
@@ -640,7 +640,7 @@ class Accounting extends Model
         sendNotification('new_subscribe_plan', $notifyOptions, $orderItem->user_id);
     }
 
-    public static function createAccountingForPromotion($orderItem, $type = null)
+    public static function createAccountingForPromotion(OrderItem $orderItem, $type = null)
     {
         self::createAccountingBuyer($orderItem, $type);
 
@@ -659,7 +659,7 @@ class Accounting extends Model
     }
 
 
-    public static function createAccountingSystemForPromotion($orderItem)
+    public static function createAccountingSystemForPromotion(OrderItem $orderItem)
     {
         Accounting::create([
             'user_id' => $orderItem->webinar_id ? $orderItem->webinar->creator_id : (!empty($orderItem->reserve_meeting_id) ? $orderItem->reserveMeeting->meeting->creator_id : 1),
@@ -674,7 +674,7 @@ class Accounting extends Model
         ]);
     }
 
-    public static function createAccountingForRegistrationPackage($orderItem, $type = null)
+    public static function createAccountingForRegistrationPackage(OrderItem $orderItem, $type = null)
     {
         self::createAccountingBuyer($orderItem, $type);
 
@@ -697,7 +697,7 @@ class Accounting extends Model
         sendNotification("registration_package_activated_for_admin", $notifyOptions, 1);
     }
 
-    public static function createAccountingSystemForRegistrationPackage($orderItem)
+    public static function createAccountingSystemForRegistrationPackage(OrderItem $orderItem)
     {
         Accounting::create([
             'user_id' => 1,
@@ -780,7 +780,7 @@ class Accounting extends Model
     }
 
 
-    public static function createAccountingForInstallmentPayment($orderItem, $type = null)
+    public static function createAccountingForInstallmentPayment(OrderItem $orderItem, $type = null)
     {
         self::createAccountingBuyer($orderItem, $type);
 
@@ -791,7 +791,7 @@ class Accounting extends Model
         self::createAccountingSystemForInstallmentPayment($orderItem);
     }
 
-    public static function createAccountingSystemForInstallmentPayment($orderItem)
+    public static function createAccountingSystemForInstallmentPayment(OrderItem $orderItem)
     {
         Accounting::create([
             'user_id' => 1,
