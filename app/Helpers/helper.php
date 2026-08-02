@@ -1733,6 +1733,11 @@ function getUserLocale()
     return mb_strtolower($locale);
 }
 
+/**
+ * @template T
+ * @param T $object
+ * @return T
+ */
 function deepClone($object)
 {
     $cloned = clone($object);

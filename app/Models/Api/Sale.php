@@ -4,6 +4,12 @@ namespace App\Models\Api;
 
 use App\Models\Sale as WebSale;
 
+/**
+ * @property string|null $gift_sender
+ * @property string|null $gift_date
+ * @property bool|null $expired
+ * @property int|null $expired_at
+ */
 class Sale extends WebSale
 {
 
