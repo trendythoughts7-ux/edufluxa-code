@@ -4,6 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $full_name
+ * @property-read string $email
+ * @property-read string|null $created_at
+ * @property-read string|null $updated_at
+ */
 class UserProfile extends JsonResource
 {
     /**

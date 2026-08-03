@@ -4,6 +4,24 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $title
+ * @property-read string $description
+ * @property-read \App\Models\Webinar $webinar
+ * @property-read string $status
+ * @property-read float|null $min_grade
+ * @property-read float|null $avg_grade
+ * @property-read int|float|null $grade
+ * @property-read int $pending_count
+ * @property-read int $passed_count
+ * @property-read int $failed_count
+ * @property-read int $submissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection $attachments
+ * @property-read int|null $access_after_day
+ * @property-read bool|int|null $check_previous_parts
+ * @property-read string $assignmentStatus
+ */
 class WebinarAssignmentResource extends JsonResource
 {
     /**

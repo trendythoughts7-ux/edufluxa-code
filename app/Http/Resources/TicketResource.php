@@ -4,6 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read \App\Models\Api\Webinar|null $webinar
+ * @property-read \App\Models\Api\Bundle|null $bundle
+ * @property-read int $id
+ * @property-read string $title
+ * @property-read int|float|null $discount
+ */
 class TicketResource extends JsonResource
 {
     /**

@@ -4,6 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read \App\Models\Api\WebinarAssignment $assignment
+ * @property-read \App\User $student
+ * @property-read int $id
+ * @property-read int $student_id
+ * @property-read string $status
+ */
 class WebinarAssignmentHistoryResource extends JsonResource
 {
     /**
