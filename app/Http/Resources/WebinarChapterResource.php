@@ -4,6 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $title
+ * @property-read int|string $created_at
+ * @property-read bool|int $check_all_contents_pass
+ * @property-read \Illuminate\Database\Eloquent\Collection $chapterItems
+ */
 class WebinarChapterResource extends JsonResource
 {
     /**
