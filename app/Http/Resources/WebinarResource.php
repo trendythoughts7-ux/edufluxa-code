@@ -5,6 +5,47 @@ namespace App\Http\Resources;
 use App\Mixins\Cashback\CashbackRules;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read \App\Models\Category $category
+ * @property-read \App\Models\Api\User $teacher
+ * @property-read string $type
+ * @property-read string|null $image_cover
+ * @property-read string $status
+ * @property-read string $title
+ * @property-read \Illuminate\Database\Eloquent\Collection $reviews
+ * @property-read string|null $label
+ * @property-read int|float|null $price
+ * @property-read int|null $access_days
+ * @property-read float|int $sales_amount
+ * @property-read \Illuminate\Database\Eloquent\Collection $sales
+ * @property-read int|string $created_at
+ * @property-read int|null $start_date
+ * @property-read int|null $duration
+ * @property-read array $specification
+ * @property-read int|null $capacity
+ * @property-read int $students_count
+ * @property-read int $comments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection $chapters
+ * @property-read \Illuminate\Database\Eloquent\Collection $sessions
+ * @property-read \Illuminate\Database\Eloquent\Collection $pendingQuizzes
+ * @property-read \Illuminate\Database\Eloquent\Collection $pendingAssignments
+ * @property-read \Illuminate\Database\Eloquent\Collection $quizzes
+ * @property-read float|null $quizzes_average_grade
+ * @property-read \Illuminate\Database\Eloquent\Collection $assignments
+ * @property-read float|int $assignments_average_grade
+ * @property-read int $forums_messages_count
+ * @property-read int $forums_students_count
+ * @property-read array $students_roles
+ * @property-read array $quiz_status
+ * @property-read array $assignments_status
+ * @property-read array $monthly_sales
+ * @property-read array $course_progress_line
+ * @property-read array $course_progress
+ * @property-read string|null $video_demo
+ * @property-read string $description
+ * @property-read int|null $sales_count_number
+ */
 class WebinarResource extends JsonResource
 {
     /**
