@@ -4,6 +4,28 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $title
+ * @property-read string|null $auth_status
+ * @property-read int|null $time
+ * @property-read \Illuminate\Database\Eloquent\Collection $quizQuestions
+ * @property-read int|null $pass_mark
+ * @property-read float|null $average_grade
+ * @property-read \Illuminate\Database\Eloquent\Collection $quizResults
+ * @property-read \Illuminate\Database\Eloquent\Collection $certificates
+ * @property-read int $success_rate
+ * @property-read string $status
+ * @property-read int|null $attempt
+ * @property-read string|null $created_at
+ * @property-read bool|int $certificate
+ * @property-read \App\Models\Api\User $creator
+ * @property-read int|null $auth_attempt_count
+ * @property-read string $attempt_state
+ * @property-read bool $auth_can_take_quiz
+ * @property-read \App\Models\Api\Webinar $webinar
+ * @property-read bool|null $AuthPassedQuiz
+ */
 class QuizResource extends JsonResource
 {
     /**

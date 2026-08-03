@@ -4,6 +4,10 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $title
+ */
 class TagResource extends JsonResource
 {
     /**

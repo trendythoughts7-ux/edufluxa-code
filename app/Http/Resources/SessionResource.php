@@ -4,6 +4,23 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $title
+ * @property-read bool|null $read
+ * @property-read int $date
+ * @property-read int $duration
+ * @property-read string $description
+ * @property-read int|string $created_at
+ * @property-read string|null $moderator_secret
+ * @property-read string|null $link
+ * @property-read string|null $session_api
+ * @property-read string|null $zoom_start_link
+ * @property-read string|null $api_secret
+ * @property-read bool|int|null $check_previous_parts
+ * @property-read int|null $access_after_day
+ * @property-read string|null $agora_settings
+ */
 class SessionResource extends JsonResource
 {
     /**

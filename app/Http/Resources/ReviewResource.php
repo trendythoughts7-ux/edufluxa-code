@@ -4,6 +4,19 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property-read int $id
+ * @property-read string $description
+ * @property-read \App\User $creator
+ * @property-read int $creator_id
+ * @property-read float|int $rates
+ * @property-read int|null $content_quality
+ * @property-read int|null $instructor_skills
+ * @property-read int|null $purchase_worth
+ * @property-read int|null $support_quality
+ * @property-read string|null $created_at
+ * @property-read \Illuminate\Database\Eloquent\Collection $comments
+ */
 class ReviewResource extends JsonResource
 {
     /**
