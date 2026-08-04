@@ -20,6 +20,7 @@ use Spatie\CalendarLinks\Link;
  * @property int $members
  * @property int $registered_members
  * @property \Illuminate\Support\Carbon|null $last_submission
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Sale[] $sales
  */
 class Webinar extends Model implements TranslatableContract
 {

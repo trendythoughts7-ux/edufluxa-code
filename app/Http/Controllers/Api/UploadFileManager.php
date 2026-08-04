@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 
+/**
+ * @property string $storage_path
+ */
 class UploadFileManager extends Controller
 {
     /**

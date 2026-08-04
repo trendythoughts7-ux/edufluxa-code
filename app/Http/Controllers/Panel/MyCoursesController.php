@@ -49,6 +49,9 @@ class MyCoursesController extends Controller
         return $this->getViewDataByQuery($request, $query, $user, true);
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\Models\Webinar> $query
+     */
     private function getViewDataByQuery(Request $request, Builder $query, $user, $isInvitedCoursesPage = false)
     {
         $pageListData = $this->getMyCoursesListPageData($request, $query);
@@ -126,6 +129,9 @@ class MyCoursesController extends Controller
         return $query;
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\Models\Webinar> $query
+     */
     public function getMyCoursesListPageData(Request $request, Builder $query)
     {
         $page = $request->get('page') ?? 1;

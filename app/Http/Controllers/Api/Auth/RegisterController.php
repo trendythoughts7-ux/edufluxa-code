@@ -21,6 +21,7 @@ use Illuminate\Validation\ValidationException;
 class RegisterController extends Controller
 {
     use UserFormFieldsTrait;
+    private $username;
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -203,7 +204,9 @@ class RegisterController extends Controller
             Affiliate::storeReferral($user, $referralCode);
         }
         event(new Registered($user));
-        $token = auth('api')->tokenById($user->id);
+        /** @var \Tymon\JWTAuth\JWTGuard $apiGuard */
+        $apiGuard = auth('api');
+        $token = $apiGuard->tokenById($user->id);
         $data['token'] = $token;
         $data['user_id'] = $user->id;
         return apiResponse2(1, 'login', trans('api.auth.login'), $data);

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    private $username;
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -145,12 +146,13 @@ class LoginController extends Controller
     public function logout()
     {
         $user = auth('api')->user();
+        $currentToken = (string) \Tymon\JWTAuth\Facades\JWTAuth::getToken();
         auth('api')->logout();
         if (!apiAuth()) {
             $user->update([
                 'logged_count' => $user->logged_count - 1
             ]);
-            $session = UserFirebaseSessions::where('token', $user->token)->first();
+            $session = UserFirebaseSessions::where('token', $currentToken)->first();
             if ($session) {
                 $session->delete();
             }

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
+    private $username;
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller

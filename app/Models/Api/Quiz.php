@@ -10,6 +10,9 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Failed;
 
+/**
+ * @property-read int $creator_id
+ */
 class Quiz extends Model
 {
     use CheckWebinarItemAccessTrait ;
