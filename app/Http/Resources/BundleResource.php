@@ -50,7 +50,7 @@ class BundleResource extends JsonResource
 
         $hasBought = $this->checkUserHasBought($user);
         $canSale = ($this->canSale() and !$hasBought);
-        $can_buy_with_points = ($canSale and $this->price > 0 and !empty($bundle->points));
+        $can_buy_with_points = ($canSale and $this->price > 0 and !empty($this->points));
         $can_buy_with_subscribe = ($canSale and $this->price > 0 and $this->subscribe);
 
         $isExpired = (!empty($purchase) and $this->access_days and !$this->checkHasExpiredAccessDays($purchase->created_at));

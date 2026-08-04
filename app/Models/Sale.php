@@ -238,7 +238,7 @@ class Sale extends Model
             $notifyOptions = [
                 '[amount]' => handlePrice($orderItem->amount),
                 '[u.name]' => $orderItem->user->full_name,
-                '[time.date]' => $reserveMeeting->day . ' ' . $reserveMeeting->time,
+                '[time.date]' => $reserveMeeting->day . ' ' . $reserveMeeting->meetingTime->time,
             ];
             sendNotification('new_appointment', $notifyOptions, $orderItem->user_id);
             sendNotification('new_appointment', $notifyOptions, $reserveMeeting->meeting->creator_id);
