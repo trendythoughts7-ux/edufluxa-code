@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+/**
+ * @property int $creator_id
+ *
+ * Dynamic/computed properties (assigned at runtime, confirmed via trace, not schema columns):
+ * @property string $locale
+ * @property string $type
+ * @property int|null $expiry_timestamp
+ * @property int $count
+ */
 class Quiz extends Model implements TranslatableContract
 {
     use Translatable;
