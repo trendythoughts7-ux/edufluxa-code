@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $creator_id
+ */
 class WebinarReview extends Model
 {
     protected $table = 'webinar_reviews';

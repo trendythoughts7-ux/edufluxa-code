@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|string|null $seller_id
  * @property string|null $gift_recipient
  * @property-read \App\Models\Gift $gift
+ * @property int|float $totalAmount
  */
 class Sale extends Model
 {

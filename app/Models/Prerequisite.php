@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $webinar_title
+ */
 class Prerequisite extends Model
 {
     protected $table = 'prerequisites';

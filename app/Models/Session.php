@@ -9,6 +9,9 @@ use Spatie\CalendarLinks\Link;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+/**
+ * @property int $number_row
+ */
 class Session extends Model implements TranslatableContract
 {
     use Translatable;
