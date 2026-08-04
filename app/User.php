@@ -40,6 +40,26 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\UserMeta[] $userMetas
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\UserOccupation[] $occupations
  * @property \App\Models\UserRegistrationPackage|null $userRegistrationPackage
+ *
+ * Dynamic/computed properties (assigned at runtime or via raw SQL select aliases;
+ * confirmed via trace, not schema columns) - see Section 0.2 discipline in project docs:
+ * @property int|float $course_progress
+ * @property int $passed_quizzes
+ * @property int $unsent_assignments
+ * @property int $pending_assignments
+ * @property int|string $classes_durations
+ * @property int $totalPurchase
+ * @property \Illuminate\Database\Eloquent\Collection|null $someRandomPosts
+ * @property \Illuminate\Database\Eloquent\Collection|null $someRandomProducts
+ * @property int $total_meetings
+ * @property int|string $weekly_hours
+ * @property string|null $earliestAvailableTime
+ * @property float|int $rates
+ * @property bool|null $access_to_purchased_item
+ * @property int|null $sale_id
+ * @property string|null $purchase_date
+ * @property float|int $learning
+ * @property int $count
  */
 class User extends Authenticatable
 {
@@ -161,6 +181,9 @@ class User extends Authenticatable
         return in_array($section_name, $this->permissions);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function role()
     {
         return $this->belongsTo('App\Models\Role', 'role_id', 'id');
@@ -312,6 +335,9 @@ class User extends Authenticatable
         return $this->hasMany(Accounting::class, 'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function meeting()
     {
         return $this->hasOne('App\Models\Meeting', 'creator_id', 'id');
@@ -331,6 +357,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\ReserveMeeting', 'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function affiliateCode()
     {
         return $this->hasOne('App\Models\AffiliateCode', 'user_id', 'id');
@@ -351,12 +380,18 @@ class User extends Authenticatable
         return Follow::where('follower', $this->id)->where('status', Follow::$accepted)->get();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function webinars()
     {
         return $this->hasMany('App\Models\Webinar', 'creator_id', 'id')
             ->orWhere('teacher_id', $this->id);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function products()
     {
         return $this->hasMany('App\Models\Product', 'creator_id', 'id');
@@ -377,6 +412,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\ProductOrder', 'seller_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function forumTopics()
     {
         return $this->hasMany('App\Models\ForumTopic', 'creator_id', 'id');
@@ -387,11 +425,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\ForumTopicPost', 'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function blog()
     {
         return $this->hasMany('App\Models\Blog', 'author_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function selectedBank()
     {
         return $this->hasOne('App\Models\UserSelectedBank', 'user_id', 'id');
@@ -463,6 +507,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Certificate', 'student_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function customBadges()
     {
         return $this->hasMany('App\Models\UserBadge', 'user_id', 'id');
@@ -473,6 +520,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Support', 'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function occupations()
     {
         return $this->hasMany('App\Models\UserOccupation', 'user_id', 'id');
@@ -483,11 +533,17 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\UserProfileAttachment', 'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function userRegistrationPackage()
     {
         return $this->hasOne('App\Models\UserRegistrationPackage', 'user_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function organization()
     {
         return $this->hasOne($this, 'id', 'organ_id');

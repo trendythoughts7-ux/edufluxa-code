@@ -55,7 +55,7 @@ class BundleStudentsService
                 $query->on('webinar_reviews.creator_id', 'users.id')
                     ->where('webinar_reviews.bundle_id', $bundle->id);
             })
-            ->select('users.*', 'webinar_reviews.rates', 'sales.gift_id', DB::raw('sales.created_at as purchase_date'))
+            ->select('users.*', 'webinar_reviews.rates', 'sales.access_to_purchased_item', 'sales.id as sale_id', 'sales.gift_id', DB::raw('sales.created_at as purchase_date'))
             ->where(function ($query) use ($bundle, $giftsIds, $installmentSalesIds) {
                 $query->where('sales.bundle_id', $bundle->id);
                 $query->orWhereIn('sales.gift_id', $giftsIds);
@@ -108,7 +108,7 @@ class BundleStudentsService
                 $gift = Gift::query()->where('id', $student->gift_id)->first();
 
                 if (!empty($gift)) {
-                    $receipt = $gift->receipt;
+                    $receipt = $this->resolveGiftReceipt($gift);
 
                     if (!empty($receipt)) {
                         $receipt->rates = $student->rates;
@@ -150,6 +150,10 @@ class BundleStudentsService
         ];
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\User> $query
+     * @return \Illuminate\Database\Eloquent\Builder<\App\User>
+     */
     public function studentsListsFilters($bundle, $query, $request)
     {
         $from = $request->input('from');
@@ -195,5 +199,14 @@ class BundleStudentsService
         }
 
         return $query;
+    }
+
+    /**
+     * @param \App\Models\Gift $gift
+     * @return \App\User|null
+     */
+    private function resolveGiftReceipt($gift)
+    {
+        return $gift->receipt;
     }
 }
