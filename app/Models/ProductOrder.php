@@ -5,6 +5,9 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $address
+ */
 class ProductOrder extends Model
 {
     protected $table = 'product_orders';

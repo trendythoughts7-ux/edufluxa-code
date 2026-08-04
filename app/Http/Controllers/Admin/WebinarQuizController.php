@@ -101,7 +101,7 @@ class WebinarQuizController extends Controller
         return redirect()->back();
     }
 
-    private function handleChapterItem($quiz)
+    private function handleChapterItem(Quiz $quiz)
     {
         $user = $quiz->creator;
 

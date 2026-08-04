@@ -17,6 +17,9 @@ use Spatie\CalendarLinks\Link;
 
 /**
  * @property-read int $creator_id
+ * @property int $members
+ * @property int $registered_members
+ * @property \Illuminate\Support\Carbon|null $last_submission
  */
 class Webinar extends Model implements TranslatableContract
 {

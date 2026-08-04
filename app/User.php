@@ -36,6 +36,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
+/**
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\UserMeta[] $userMetas
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\UserOccupation[] $occupations
+ * @property \App\Models\UserRegistrationPackage|null $userRegistrationPackage
+ */
 class User extends Authenticatable
 {
     use Notifiable;
