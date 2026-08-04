@@ -110,7 +110,7 @@ class SettingsController extends Controller
             if (!empty($settings->value)) {
                 $values = json_decode($settings->value, true);
 
-                $values['locale'] = mb_strtoupper($settings->locale);
+                $values['locale'] = mb_strtoupper($locale);
             }
         }
 

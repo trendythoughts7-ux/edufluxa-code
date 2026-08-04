@@ -141,6 +141,7 @@ class NavbarLinksSettingsController extends Controller
 
         if (!empty($settings) and !empty($settings->translations)) {
             foreach ($settings->translations as $translation) {
+                /** @var \App\Models\Translation\SettingTranslation $translation */
                 $values = json_decode($translation->value);
 
                 foreach ($values as $key => $value) {
