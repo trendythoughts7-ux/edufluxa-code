@@ -95,6 +95,7 @@ class SubscribeController extends Controller
 
             $subscribeMixins = (new SubscribeMixins());
             $item = $subscribeMixins->handleTargetProductLimitationOnCourseQuery($subscribe, $itemQuery, $targetType)->first();
+            /** @var \App\Models\Webinar|\App\Models\Bundle|null $item */
 
             if (empty($item)) {
                 $toastData = [
