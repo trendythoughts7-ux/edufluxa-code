@@ -460,7 +460,8 @@ class CartManagerController extends Controller
             $isDB = true;
         } else {
             $carts = $this->getCarts();
-            $cartItem = $carts->where('uid', $itemId);
+            $cartItem = $carts->where('uid', $itemId)->first();
+            /** @var \App\Models\Cart|null $cartItem */
         }
 
         if (!empty($cartItem)) {

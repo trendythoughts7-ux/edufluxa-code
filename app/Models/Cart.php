@@ -11,6 +11,11 @@ use Illuminate\Support\Collection;
  * @property array|null $itemInfo
  * @property \App\Models\Ticket|null $ticket
  * @property int|null $quantity
+ * @property \App\Models\Webinar|null $webinar
+ * @property \App\Models\Bundle|null $bundle
+ * @property \App\Models\EventTicket|null $eventTicket
+ * @property \App\Models\MeetingPackage|null $meetingPackage
+ * @property \App\Models\ProductOrder|object{quantity: int, product: mixed}|null $productOrder
  * @property-read null $product
  */
 class Cart extends Model
