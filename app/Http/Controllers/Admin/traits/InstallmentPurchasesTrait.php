@@ -128,6 +128,9 @@ trait InstallmentPurchasesTrait
      * are silently dropped when the model is re-hydrated from the queue, so
      * they must be captured as plain scalar properties on a stdClass instead.
      */
+    /**
+     * @param \App\Models\InstallmentOrder $order
+     */
     private function buildPurchasesExportRow($order)
     {
         $product = '';

@@ -5,6 +5,12 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $overdue_count
+ * @property float $overdue_amount
+ * @property string $upcoming_date
+ * @property int $days_left
+ */
 class InstallmentOrder extends Model
 {
     protected $table = 'installment_orders';
