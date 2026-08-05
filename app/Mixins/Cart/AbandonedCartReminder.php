@@ -115,6 +115,9 @@ class AbandonedCartReminder
         sendNotification($template, $notifyOptions, $this->user->id, null, 'system', 'single', $template);
     }
 
+    /**
+     * @param \App\Models\Cart $item
+     */
     private function getRulesByCartItem($item) // item => Cart
     {
         $targetType = null;

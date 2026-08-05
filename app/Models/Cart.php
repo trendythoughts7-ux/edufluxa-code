@@ -11,6 +11,7 @@ use Illuminate\Support\Collection;
  * @property array|null $itemInfo
  * @property \App\Models\Ticket|null $ticket
  * @property int|null $quantity
+ * @property-read null $product
  */
 class Cart extends Model
 {
