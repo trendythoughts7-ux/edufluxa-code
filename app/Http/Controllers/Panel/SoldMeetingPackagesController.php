@@ -56,6 +56,9 @@ class SoldMeetingPackagesController extends Controller
         return view('design_1.panel.meeting.sold_packages.lists.index', $data);
     }
 
+    /**
+     * @param Builder<\App\Models\MeetingPackageSold> $query
+     */
     private function handleTopStats(Builder $query): array
     {
         $totalSoldPackages = deepClone($query)->count();
@@ -115,7 +118,7 @@ class SoldMeetingPackagesController extends Controller
 
         if (!empty($status)) {
             if ($status == 'open') {
-                $query->where(function ($query) use ($status) {
+                $query->where(function ($query) {
                     $query->whereHas('sessions', function (Builder $query) {
                         $query->where('status', '!=', 'finished');
                     });
@@ -124,7 +127,7 @@ class SoldMeetingPackagesController extends Controller
                 });
 
             } elseif ($status == 'finished') {
-                $query->where(function ($query) use ($status) {
+                $query->where(function ($query) {
                     $query->whereDoesntHave('sessions', function (Builder $query) {
                         $query->where('status', '!=', 'finished');
                     });
@@ -163,6 +166,9 @@ class SoldMeetingPackagesController extends Controller
     }
 
 
+    /**
+     * @param Builder<\App\Models\MeetingPackageSold> $query
+     */
     private function getListsData(Request $request, Builder $query)
     {
         $page = $request->get('page') ?? 1;
