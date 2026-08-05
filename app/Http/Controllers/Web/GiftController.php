@@ -17,6 +17,7 @@ class GiftController extends Controller
     public function index(Request $request, $itemType, $itemSlug)
     {
         $item = $this->getItem($itemType, $itemSlug);
+        /** @var \App\Models\Webinar|\App\Models\Bundle|\App\Models\Product|null $item */
 
         $giftSettings = getGiftsGeneralSettings();
 
@@ -74,6 +75,7 @@ class GiftController extends Controller
         $data = $request->all();
 
         $item = $this->getItem($itemType, $itemSlug);
+        /** @var \App\Models\Webinar|\App\Models\Bundle|\App\Models\Product|null $item */
 
         $giftSettings = getGiftsGeneralSettings();
 
@@ -136,6 +138,9 @@ class GiftController extends Controller
         abort(404);
     }
 
+    /**
+     * @param \App\Models\Webinar|\App\Models\Bundle|\App\Models\Product $item
+     */
     private function handleFreeItem($item, $itemType, $data)
     {
         $gift = $this->createGift($item, $itemType, $data);
@@ -180,6 +185,9 @@ class GiftController extends Controller
         return back()->with(['toast' => $toastData]);
     }
 
+    /**
+     * @param \App\Models\Webinar|\App\Models\Bundle|\App\Models\Product $item
+     */
     private function createGift($item, $itemType, $data)
     {
         $columnName = $this->getColumnName($itemType);
