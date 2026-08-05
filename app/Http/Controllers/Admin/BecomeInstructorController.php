@@ -73,6 +73,9 @@ class BecomeInstructorController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * @param \App\Models\BecomeInstructor $becomeInstructors
+     */
     private function handleRefundPackage($becomeInstructors)
     {
         if (!empty($becomeInstructors->package_id)) {
