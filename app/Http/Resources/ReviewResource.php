@@ -49,6 +49,7 @@ class ReviewResource extends JsonResource
             'created_at' => $this->created_at,
             'comments' => CommentResource::collection($this->comments) ,
             'replies' => $this->comments->where('status', 'active')->map(function ($reply) {
+                /** @var \App\Models\Api\Comment $reply */
                 return [
                     'id' => $this->id,
                     'user' => [

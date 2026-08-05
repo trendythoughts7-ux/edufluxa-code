@@ -9,6 +9,9 @@ use App\Models\ReserveMeeting;
 use App\Models\Role;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @property bool $verified
+ */
 class User extends Model implements JWTSubject
 {
     public function getJWTIdentifier()
@@ -111,6 +114,7 @@ class User extends Model implements JWTSubject
             'meeting' => ($this->meeting && $this->meeting->meetingTimes->count()) ? $this->meeting->details : null,
 
             'organization_teachers' => $this->getOrganizationTeachers->map(function ($teacher) {
+                /** @var \App\Models\Api\User $teacher */
                 return $teacher->brief;
             }),
             'country_id' => $this->country_id,
@@ -179,14 +183,35 @@ class User extends Model implements JWTSubject
 
     public function getFinancialAttribute()
     {
+        $bank = null;
+        $bankSpecifications = [];
+
+        if (!empty($this->selectedBank) and !empty($this->selectedBank->bank)) {
+            $bank = [
+                'id' => $this->selectedBank->bank->id,
+                'name' => $this->selectedBank->bank->title,
+            ];
+
+            foreach ($this->selectedBank->bank->specifications as $specification) {
+                $selectedBankSpecification = $this->selectedBank->specifications
+                    ->where('user_selected_bank_id', $this->selectedBank->id)
+                    ->where('user_bank_specification_id', $specification->id)
+                    ->first();
+
+                $bankSpecifications[] = [
+                    'id' => $specification->id,
+                    'name' => $specification->name,
+                    'value' => (!empty($selectedBankSpecification)) ? $selectedBankSpecification->value : null,
+                ];
+            }
+        }
+
         return [
-            'account_type' => $this->type,
-            'iban' => $this->iban,
-            'account_id' => $this->account_id,
+            'bank' => $bank,
+            'bank_specifications' => $bankSpecifications,
             'identity_scan' => ($this->identity_scan) ? url($this->identity_scan) : null,
             'certificate' => ($this->certificate) ? url($this->certificate) : null,
             'address' => $this->address,
-
         ];
     }
 
@@ -258,6 +283,7 @@ class User extends Model implements JWTSubject
     {
 
         return collect($this->getBadges())->map(function ($badges) {
+            /** @var \App\Models\Badge|\App\Models\UserBadge $badges */
             return [
                 'id' => $badges->id,
                 'title' => !empty($badges->badge_id) ? $badges->badge->title : $badges->title,

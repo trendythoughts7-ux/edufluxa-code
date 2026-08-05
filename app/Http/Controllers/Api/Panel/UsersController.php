@@ -13,6 +13,8 @@ use App\Models\Newsletter;
 use App\Models\Reward;
 use App\Models\RewardAccounting;
 use App\Models\UserMeta;
+use App\Models\UserSelectedBank;
+use App\Models\UserSelectedBankSpecification;
 use App\Models\Follow;
 
 use App\Models\UserZoomApi;
@@ -85,7 +87,7 @@ class UsersController extends Controller
         $available_inputs = [
             'full_name', 'language', 'email', 'mobile', 'newsletter', 'public_message', 'timezone', 'password',
             'about', 'bio',
-            'account_type', 'iban', 'account_id',
+            
             'level_of_training', 'meeting_type',
             'country_id', 'province_id', 'city_id', 'district_id',
             'location'
@@ -104,10 +106,8 @@ class UsersController extends Controller
             'newsletter' => 'boolean',
             // 'password' => 'required|string|min:6',
 
-            'account_type' => Rule::in(getOfflineBanksTitle()),
-            'iban' => 'required_with:account_type',
-            'account_id' => 'required_with:account_type',
             // 'identity_scan' => 'required_with:account_type',
+            'bank_id' => 'nullable|exists:user_banks,id',
 
             'bio' => 'nullable|string|min:3|max:48',
             'level_of_training' => 'array|in:beginner,middle,expert',
@@ -146,6 +146,29 @@ class UsersController extends Controller
         }
 
 
+
+        if ($request->has("bank_id") and !empty($request->input("bank_id"))) {
+            UserSelectedBank::query()->where("user_id", $user->id)->delete();
+            $userSelectedBank = UserSelectedBank::query()->create([
+                "user_id" => $user->id,
+                "user_bank_id" => $request->input("bank_id")
+            ]);
+            if (!empty($request->input("bank_specifications"))) {
+                $specificationInsert = [];
+                foreach ($request->input("bank_specifications") as $specificationId => $specificationValue) {
+                    if (!empty($specificationValue)) {
+                        $specificationInsert[] = [
+                            "user_selected_bank_id" => $userSelectedBank->id,
+                            "user_bank_specification_id" => $specificationId,
+                            "value" => $specificationValue
+                        ];
+                    }
+                }
+                if (!empty($specificationInsert)) {
+                    UserSelectedBankSpecification::query()->insert($specificationInsert);
+                }
+            }
+        }
         if (!$user->isUser()) {
             if ($request->has('zoom_jwt_token') and !empty($request->input('zoom_jwt_token'))) {
 
