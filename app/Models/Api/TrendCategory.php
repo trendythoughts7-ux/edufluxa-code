@@ -16,6 +16,7 @@ class TrendCategory extends Model
             'color' =>$this->color,
             'icon' =>($this->icon)? url($this->icon):null,
             'sub_categories' => $this->category->subCategories->map(function ($sub_category) use (&$all_webinar_count) {
+                /** @var \App\Models\Category $sub_category */
                 $all_webinar_count += $sub_category->webinars->count();
                 return [
                     'id' => $sub_category->id,

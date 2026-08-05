@@ -21,6 +21,7 @@ class Comment extends Model
             'webinar' => $this->webinar->brief ?? null,
             'product' => $this->product ? new ProductResource($this->product) : null,
             'replies' => $this->replies->where('status', 'active')->map(function ($reply) {
+                    /** @var \App\Models\Api\Comment $reply */
                 return [
                     'id' => $reply->id,
                     'comment_user_type' => $reply->comment_user_type,
