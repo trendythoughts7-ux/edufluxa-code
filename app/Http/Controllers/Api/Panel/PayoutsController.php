@@ -13,6 +13,7 @@ class PayoutsController extends Controller
     public function index(Request $request)
     {
         $user = apiAuth();
+        /** @var \App\Models\Api\User $user */
         $payouts = Payout::where('user_id', $user->id)
             //->where('status',Payout::$done)
             ->orderBy('status', 'asc')
@@ -35,6 +36,9 @@ class PayoutsController extends Controller
 
     }
 
+    /**
+     * @param \App\Models\Api\User $user
+     */
     private function getCurrentPayout(Request $request, $user)
     {
         $accountCharge = $user->getAccountingCharge();
@@ -77,6 +81,7 @@ class PayoutsController extends Controller
     public function requestPayout()
     {
         $user = apiAuth();
+        /** @var \App\Models\Api\User $user */
         $getUserPayout = $user->getPayout();
         $getFinancialSettings = getFinancialSettings();
 
