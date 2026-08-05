@@ -53,6 +53,9 @@ class InstallmentsController extends Controller
         return view('design_1.panel.financial.installments.lists.index', $data);
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\Models\InstallmentOrder> $query
+     */
     private function getListsData(Request $request, Builder $query, $user)
     {
         $page = $request->get('page') ?? 1;

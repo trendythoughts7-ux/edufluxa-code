@@ -10,6 +10,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property float $overdue_amount
  * @property string $upcoming_date
  * @property int $days_left
+ * @property int $overdue_timestamp
+ * @property int $remained_installments_count
+ * @property float $remained_installments_amount
+ * @property \App\Models\SelectedInstallmentStep|null $upcoming_installment
+ * @property bool $has_overdue
  */
 class InstallmentOrder extends Model
 {
