@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $replies_count
+ */
 class ForumTopicPost extends Model
 {
     protected $table = 'forum_topic_posts';

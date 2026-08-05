@@ -81,6 +81,9 @@ class ForumPostsController extends Controller
         return $query;
     }
 
+    /**
+     * @param Builder<\App\Models\ForumTopicPost> $query
+     */
     private function getListsData(Request $request, Builder $query, $user)
     {
         $page = $request->get('page') ?? 1;
