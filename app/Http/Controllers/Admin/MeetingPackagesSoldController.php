@@ -92,6 +92,10 @@ class MeetingPackagesSoldController extends Controller
         ];
     }
 
+    /**
+     * @param Builder<\App\Models\MeetingPackageSold> $query
+     * @return Builder<\App\Models\MeetingPackageSold>
+     */
     private function handleListsFilters(Request $request, Builder $query): Builder
     {
         $from = $request->get('from');
@@ -122,7 +126,7 @@ class MeetingPackagesSoldController extends Controller
 
         if (!empty($status)) {
             if ($status == 'open') {
-                $query->where(function ($query) use ($status) {
+                $query->where(function ($query) {
                     $query->whereHas('sessions', function (Builder $query) {
                         $query->where('status', '!=', 'finished');
                     });
@@ -131,7 +135,7 @@ class MeetingPackagesSoldController extends Controller
                 });
 
             } elseif ($status == 'finished') {
-                $query->where(function ($query) use ($status) {
+                $query->where(function ($query) {
                     $query->whereDoesntHave('sessions', function (Builder $query) {
                         $query->where('status', '!=', 'finished');
                     });
