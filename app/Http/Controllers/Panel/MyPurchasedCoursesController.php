@@ -109,6 +109,7 @@ class MyPurchasedCoursesController extends Controller
 
         foreach ($sales as $sale) {
             if (!empty($sale->gift_id)) {
+                $gift = $sale->gift;
                 if (!empty($gift->webinar)) {
                     $totalCoursesHours += $gift->webinar->duration;
 
@@ -237,6 +238,10 @@ class MyPurchasedCoursesController extends Controller
         ]);
     }
 
+    /**
+     * @param \App\Models\Sale $sale
+     * @return \App\Models\Sale
+     */
     private function handleSaleExtraData($sale)
     {
         if (!empty($sale->gift_id)) {
