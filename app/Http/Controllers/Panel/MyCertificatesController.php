@@ -215,6 +215,7 @@ class MyCertificatesController extends Controller
                 ->get();
 
             foreach ($certificatesItems as $quiz) {
+                /** @var \App\Models\Quiz $quiz */
                 $userLastQuizResult = $quiz->quizResults->first();
                 $canDownloadCertificate = (!empty($userLastQuizResult) and $userLastQuizResult->status == QuizzesResult::$passed);
 
@@ -234,6 +235,7 @@ class MyCertificatesController extends Controller
                 ->get();
 
             foreach ($certificatesItems as $course) {
+                /** @var \App\Models\Webinar $course */
                 $course->lastCertificate = $course->makeCertificateForUser($user);
             }
         }
