@@ -4,6 +4,9 @@ namespace App\Mixins\Cart;
 
 class CartItemInfo
 {
+    /**
+     * @param \App\Models\Cart $cart
+     */
     public function getItemInfo($cart)
     {
         if (!empty($cart->webinar_id)) {
@@ -190,6 +193,10 @@ class CartItemInfo
         return $info;
     }
 
+    /**
+     * @param \App\Models\Cart $cart
+     * @param \App\Models\InstallmentOrderPayment $installmentPayment
+     */
     private function getInstallmentOrderInfo($cart, $installmentPayment)
     {
         $info = [];
