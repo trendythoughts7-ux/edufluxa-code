@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\CalendarLinks\Link;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-
 /**
  * @property int $number_row
+ * @property int $present_count
+ * @property int $late_count
+ * @property int $total_students
+ * @property int $absent_count
+ * @property \App\Models\SessionAttendance|null $myAttendance
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\SessionAttendance[] $attendances
  */
 class Session extends Model implements TranslatableContract
 {

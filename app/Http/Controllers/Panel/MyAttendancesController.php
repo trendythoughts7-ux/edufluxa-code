@@ -68,6 +68,9 @@ class MyAttendancesController extends Controller
         return view('design_1.panel.webinars.attendances.my_attendance.index', $data);
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\Models\Session> $query
+     */
     private function getTopStats(Builder $query, $user): array
     {
         $sessions = $query
@@ -162,6 +165,9 @@ class MyAttendancesController extends Controller
         return $query;
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\Models\Session> $query
+     */
     private function getListsData(Request $request, Builder $query, $user)
     {
         $page = $request->get('page') ?? 1;
