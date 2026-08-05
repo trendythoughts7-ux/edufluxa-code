@@ -14,6 +14,9 @@ use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\DB;
 use Jorenvh\Share\ShareFacade;
 
+/**
+ * @property-read null $type No "type" DB column exists on bundles table; always null. Read at 3 call sites (CashbackRules.php, AbandonedCartReminder.php, BundleController.php) as a copy-paste leftover from the Webinar pattern. Traced safe: value flows downstream but is never consumed there. Documented, not fixed at call sites, to avoid behavior change.
+ */
 class Bundle extends Model implements TranslatableContract
 {
     use Translatable;

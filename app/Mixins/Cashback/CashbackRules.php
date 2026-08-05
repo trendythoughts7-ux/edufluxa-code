@@ -20,6 +20,9 @@ class CashbackRules
         $this->user = $user;
     }
 
+    /**
+     * @param \App\Models\Cart|\App\Models\OrderItem $item
+     */
     public function getRulesByItem($item) // item => Cart or OrderItem
     {
         $targetType = null;
