@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CourseForum;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\CourseForumAnswer;
 use App\Models\Webinar;
 use Illuminate\Http\Request;
@@ -87,6 +88,10 @@ class CourseForumsControllers extends Controller
         return view('admin.webinars.forum.question_lists', $data);
     }
 
+    /**
+     * @param Builder<\App\Models\CourseForum> $query
+     * @return Builder<\App\Models\CourseForum>
+     */
     private function handleForumFilters($request, $query)
     {
         $title = $request->get('title');

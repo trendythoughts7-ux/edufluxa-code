@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property \App\Models\CourseForumAnswer|null $last_answer
+ * @property \App\Models\CourseForumAnswer|null $resolved
+ */
 class CourseForum extends Model
 {
     protected $table = 'course_forums';
