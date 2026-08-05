@@ -114,7 +114,7 @@ class Badge extends Model implements TranslatableContract
                         if (!empty($courses) and !$courses->isEmpty()) {
                             $webinarIds = $courses->pluck('id')->toArray();
 
-                            $supportsRate = webinarReview::whereIn('webinar_id', $webinarIds)
+                            $supportsRate = WebinarReview::whereIn('webinar_id', $webinarIds)
                                 ->where('status', 'active')
                                 ->avg('support_quality');
 
@@ -189,6 +189,7 @@ class Badge extends Model implements TranslatableContract
             }
         }
 
+        /** @var \App\Models\Badge|\App\Models\UserBadge $earnedBadge */
         foreach ($earnedBadges as $earnedBadge) {
             if (!empty($earnedBadge->badge_id)) {
                 self::handleBadgeReward($earnedBadge->badge, $user->id);
@@ -259,6 +260,10 @@ class Badge extends Model implements TranslatableContract
         ];
     }
 
+    /**
+     * @param \App\Models\Badge $badge
+     * @param int $userId
+     */
     static function handleBadgeReward($badge, $userId)
     {
         if (!empty($badge->score)) {
