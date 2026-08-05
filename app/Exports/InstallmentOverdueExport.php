@@ -45,6 +45,9 @@ class InstallmentOverdueExport implements FromCollection, WithHeadings, WithMapp
     /**
      * @inheritDoc
      */
+    /**
+     * @param \App\Models\InstallmentOrder $order
+     */
     public function map($order): array
     {
         $product = '';

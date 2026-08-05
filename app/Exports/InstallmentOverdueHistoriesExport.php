@@ -48,6 +48,9 @@ class InstallmentOverdueHistoriesExport implements FromCollection, WithHeadings,
     /**
      * @inheritDoc
      */
+    /**
+     * @param \App\Models\InstallmentOrder $order
+     */
     public function map($order): array
     {
         $product = '';
