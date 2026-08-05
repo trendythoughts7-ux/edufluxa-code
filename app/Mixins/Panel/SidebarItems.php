@@ -88,6 +88,9 @@ class SidebarItems
         return $items;
     }
 
+    /**
+     * @param \App\User $user
+     */
     static public function getEducationSectionItems($user)
     {
         $items = [];
