@@ -60,6 +60,8 @@ use Illuminate\Support\Str;
  * @property string|null $purchase_date
  * @property float|int $learning
  * @property int $count
+ * @property \App\Models\SessionAttendance|null $attendance
+ * @property string|null $joined_at
  */
 class User extends Authenticatable
 {

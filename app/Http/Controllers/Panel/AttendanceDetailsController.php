@@ -145,6 +145,9 @@ class AttendanceDetailsController extends Controller
         return $query;
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\User> $query
+     */
     private function getListsData(Request $request, Builder $query, $session)
     {
         $page = $request->get('page') ?? 1;
