@@ -46,6 +46,7 @@ class SummaryController extends Controller
 
         $data['balance'] = $user->getAccountingBalance();
         $drawable = $user->getPayout();
+        $getFinancialSettings = getFinancialSettings();
         $can_drawable = ($drawable > ((!empty($getFinancialSettings) and !empty($getFinancialSettings['minimum_payout'])) ? (int)$getFinancialSettings['minimum_payout'] : 0));
         $data['can_drawable'] = $can_drawable;
 
