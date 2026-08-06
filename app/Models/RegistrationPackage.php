@@ -7,6 +7,9 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property bool $has_installment Dynamically set at runtime in RegistrationPackagesController; not a database column.
+ */
 class RegistrationPackage extends Model implements TranslatableContract
 {
     use Translatable;

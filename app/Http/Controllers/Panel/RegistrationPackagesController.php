@@ -183,6 +183,9 @@ class RegistrationPackagesController extends Controller
         return view('design_1.web.cart.payment.index', $data);
     }
 
+    /**
+     * @param \App\Models\OrderItem $orderItem
+     */
     private function handleFreePackage($package, $orderItem)
     {
         $sale = Sale::createSales($orderItem, 'credit');
