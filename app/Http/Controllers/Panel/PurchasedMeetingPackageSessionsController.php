@@ -56,6 +56,9 @@ class PurchasedMeetingPackageSessionsController extends Controller
         abort(404);
     }
 
+    /**
+     * @param \Illuminate\Database\Eloquent\Builder<\App\Models\Session> $query
+     */
     private function getListsData(Request $request, Builder $query, $meetingPackageSold)
     {
         $page = $request->get('page') ?? 1;
