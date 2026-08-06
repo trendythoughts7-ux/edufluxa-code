@@ -9,6 +9,9 @@ use App\Http\Resources\WebinarAssignmentResource;
 use App\Models\File;
 use App\Models\WebinarChapterItem as Model;
 
+/**
+ * @property-read string|null $auth_status Never assigned anywhere in the codebase as of this fix; always resolves to null at runtime. Possibly an incomplete feature.
+ */
 class WebinarChapterItem extends Model
 {
     public function getItemResource()
@@ -19,12 +22,14 @@ class WebinarChapterItem extends Model
 
         $type = $this->type;
         if ($type == self::$chapterFile) {
+            $item = $this->item;
+            /** @var \App\Models\File $item */
             return [
                 'id' => $this->item->id,
                 'title' => $this->item->title,
                 'file_type' => $this->item->file_type,
-                'storage' => $this->item->storage,
-                'volume' => (empty($this->item->volume) or $this->item->volume === "0 bytes" or in_array($this->item->storage, File::$ignoreVolumeFileSources)) ? null : $this->item->volume,
+                'storage' => $item->storage,
+                'volume' => (empty($this->item->volume) or $this->item->volume === "0 bytes" or in_array($item->storage, File::$ignoreVolumeFileSources)) ? null : $this->item->volume,
                 'downloadable' => $this->item->downloadable,
                 'access_after_day' => $this->item->access_after_day,
                 'check_previous_parts' => $this->item->check_previous_parts,

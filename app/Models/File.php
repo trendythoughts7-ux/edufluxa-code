@@ -7,6 +7,9 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use App\Models\Traits\SequenceContent;
 
+/**
+ * @property string $storage
+ */
 class File extends Model implements TranslatableContract
 {
     use Translatable;
