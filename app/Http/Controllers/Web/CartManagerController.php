@@ -581,8 +581,6 @@ class CartManagerController extends Controller
         $extraData = [];
 
         if ($notIsEmpty) {
-            $cartController = new CartController();
-            //$calculate = $cartController->calculatePrice($cartItems, $user);
 
             $subtotal = Cart::getCartsTotalPrice($cartItems);
 
