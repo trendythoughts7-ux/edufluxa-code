@@ -246,10 +246,6 @@ class CartPricingEngineService
             $subTotal += $price;
         }
 
-        if (!empty($discountCoupon)) {
-            $totalDiscount += $this->getCouponDiscountByCartItem($discountCoupon, $cart, $user);
-        }
-
         if ($totalDiscount > $subTotal) {
             $totalDiscount = $subTotal;
         }
