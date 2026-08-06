@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+/**
+ * Dynamic/computed property (assigned at runtime, confirmed via trace, not a schema column):
+ * @property bool $not_purchased
+ */
 class TextLesson extends Model implements TranslatableContract
 {
     use Translatable;
