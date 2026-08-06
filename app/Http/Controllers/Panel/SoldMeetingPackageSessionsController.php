@@ -59,6 +59,9 @@ class SoldMeetingPackageSessionsController extends Controller
         abort(404);
     }
 
+    /**
+     * @param Builder<\App\Models\Session> $query
+     */
     private function getListsData(Request $request, Builder $query, $meetingPackageSold)
     {
         $page = $request->get('page') ?? 1;
