@@ -201,6 +201,10 @@ class WebinarController extends Controller
         return $recentReviews;
     }
 
+    /**
+     * @param \Illuminate\Support\Collection<int, \App\Models\Quiz> $quizzes
+     * @return \Illuminate\Support\Collection<int, \App\Models\Quiz>
+     */
     private function checkQuizzesResults($user, $quizzes)
     {
         $canDownloadCertificate = false;
@@ -212,6 +216,10 @@ class WebinarController extends Controller
         return $quizzes;
     }
 
+    /**
+     * @param \App\Models\Quiz $quiz
+     * @return \App\Models\Quiz
+     */
     private function checkQuizResults($user, $quiz)
     {
         $canDownloadCertificate = false;

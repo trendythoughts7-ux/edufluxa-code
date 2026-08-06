@@ -19,6 +19,11 @@ use Astrotomic\Translatable\Translatable;
  * @property \App\Models\QuizzesResult|null $userLastResult
  * @property mixed $lastCertificate
  * @property bool $can_download_certificate
+ * @property string $result_status
+ * @property mixed $user_grade
+ * @property int $result_count
+ * @property \App\Models\QuizzesResult|null $result
+ * @property bool $can_try
  */
 class Quiz extends Model implements TranslatableContract
 {
