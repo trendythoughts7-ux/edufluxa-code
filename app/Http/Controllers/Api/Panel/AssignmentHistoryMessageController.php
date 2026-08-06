@@ -27,6 +27,7 @@ class AssignmentHistoryMessageController extends Controller
 
             abort_unless($assignmentHistory, 404);
 
+            // @phpstan-ignore-next-line empty.variable (guaranteed truthy after abort_unless above; redundant defensive check retained intentionally, confirmed non-bug)
             if (!empty($assignmentHistory)) {
 
                 if ($user->id != $assignment->creator_id) {
@@ -115,6 +116,9 @@ class AssignmentHistoryMessageController extends Controller
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), $resource);
     }
 
+    /**
+     * @param \App\Models\WebinarAssignment $assignment
+     */
     private function getAssignmentDeadline($assignment, $user)
     {
         $deadline = true; // default can access
