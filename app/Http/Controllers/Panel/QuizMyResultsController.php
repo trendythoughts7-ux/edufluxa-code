@@ -131,10 +131,6 @@ class QuizMyResultsController extends Controller
             });
         }
 
-        if (!empty($user_id) and $user_id != 'all') {
-            $query->where('user_id', $user_id);
-        }
-
         if ($instructor_id) {
             $query->where('creator_id', $instructor_id);
         }
