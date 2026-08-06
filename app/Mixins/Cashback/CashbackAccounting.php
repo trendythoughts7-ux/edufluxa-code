@@ -55,6 +55,9 @@ class CashbackAccounting
         }
     }
 
+    /**
+     * @param \Illuminate\Support\Collection<int, \App\Models\OrderItem> $orderItems
+     */
     public function setAccountingForOrderItems($orderItems)
     {
         if (getFeaturesSettings('cashback_active')) {
