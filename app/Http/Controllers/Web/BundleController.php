@@ -444,7 +444,7 @@ class BundleController extends Controller
 
                 $fakeCarts->add($fakeCart);
 
-                $cartController = new CartController();
+                $cartController = app(CartController::class);
 
                 return $cartController->checkout(new Request(), $fakeCarts);
             }
