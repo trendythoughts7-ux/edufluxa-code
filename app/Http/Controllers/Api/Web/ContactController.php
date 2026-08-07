@@ -32,7 +32,7 @@ class ContactController extends Controller
         ];
         sendNotification('new_contact_message', $notifyOptions, 1);
 
-        return apiResponse(1, 'user sent message successfully.');
+        return apiResponse2(1, 'sent', 'user sent message successfully.');
         //return back()->with(['msg' => trans('site.contact_store_success')]);
     }
 }
