@@ -8,6 +8,9 @@ use App\Models\FormFieldOption;
 use App\Models\UserFormField;
 use Illuminate\Http\Request;
 
+/**
+ * @method string|null uploadFile($file, $destination, $fileName = null, $userId = null, $storage = "public")
+ */
 trait UserFormFieldsTrait
 {
     public function getFormFieldsByUserType(Request $request, $type = null, $justHtml = false, $user = null, $becomeInstructor = null)
