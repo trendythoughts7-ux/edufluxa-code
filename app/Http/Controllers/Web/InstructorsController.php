@@ -167,6 +167,19 @@ class InstructorsController extends Controller
         return $bestRateUsers;
     }
 
+    private function getTopSalesUsers($query, $role)
+    {
+        $query->leftJoin('sales', function ($join) {
+            $join->on('users.id', '=', 'sales.seller_id')
+                ->whereNull('refund_at');
+        })
+            ->whereNotNull('sales.seller_id')
+            ->select('users.*', 'sales.seller_id', DB::raw('count(sales.seller_id) as counts'))
+            ->groupBy('sales.seller_id')
+            ->orderBy('counts', 'desc');
+        return $query;
+    }
+
     private function filterInstructors($request, $query, $role)
     {
         $categories = $request->get('categories', null);
