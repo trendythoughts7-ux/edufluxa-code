@@ -56,6 +56,9 @@ class PurchasedMeetingPackagesController extends Controller
         return view('design_1.panel.meeting.purchased_packages.lists.index', $data);
     }
 
+    /**
+     * @param Builder<\App\Models\MeetingPackageSold> $query
+     */
     private function handleTopStats(Builder $query): array
     {
         $totalPurchasedPackages = deepClone($query)->count();
@@ -164,6 +167,9 @@ class PurchasedMeetingPackagesController extends Controller
     }
 
 
+    /**
+     * @param Builder<\App\Models\MeetingPackageSold> $query
+     */
     private function getListsData(Request $request, Builder $query)
     {
         $page = $request->get('page') ?? 1;
