@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\ProductFile
  * @property int $id
  * @property string $title
  * @property string|null $description
