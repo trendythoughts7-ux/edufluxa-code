@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Web\traits\CheckContentLimitationTrait;
 use App\Http\Controllers\Web\traits\InstallmentsTrait;
 use App\Mixins\Installment\InstallmentPlans;
 use App\Mixins\RegistrationPackage\UserPackage;
@@ -22,6 +23,7 @@ use Illuminate\Http\Request;
 
 class RegistrationPackagesController extends Controller
 {
+    use CheckContentLimitationTrait;
     use InstallmentsTrait;
 
     private function checkAccess($user = null)
