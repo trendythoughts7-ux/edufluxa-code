@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\Ticket
  * @property-read \App\Models\Api\Webinar|null $webinar
  * @property-read \App\Models\Api\Bundle|null $bundle
  * @property-read int $id
