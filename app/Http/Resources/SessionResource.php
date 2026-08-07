@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\Session
  * @property-read int $id
  * @property-read string $title
  * @property-read bool|null $read
