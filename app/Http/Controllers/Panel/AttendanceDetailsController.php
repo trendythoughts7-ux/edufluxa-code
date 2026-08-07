@@ -153,7 +153,7 @@ class AttendanceDetailsController extends Controller
         $page = $request->get('page') ?? 1;
         $count = $this->perPage;
 
-        $total = $query->get()->count();
+        $total = $query->count();
 
         $query->limit($count);
         $query->offset(($page - 1) * $count);

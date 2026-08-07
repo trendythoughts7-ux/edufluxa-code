@@ -54,11 +54,11 @@ class MyCertificatesController extends Controller
     private function checkUserHaveCertificatesItems($user)
     {
         $query = $this->getQueryBySource($user, 'quiz');
-        $certificatesItems = $query->get()->count();
+        $certificatesItems = $query->count();
 
         if ($certificatesItems < 1) {
             $query2 = $this->getQueryBySource($user, 'completion');
-            $certificatesItems = $query2->get()->count();
+            $certificatesItems = $query2->count();
         }
 
         return ($certificatesItems > 0);
