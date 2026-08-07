@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Web\traits\CheckContentLimitationTrait;
 use App\Http\Controllers\Web\traits\InstallmentsTrait;
 use App\Http\Controllers\Web\traits\UserFormFieldsTrait;
 use App\Mixins\Installment\InstallmentPlans;
@@ -21,6 +22,7 @@ use Illuminate\Validation\ValidationException;
 
 class BecomeInstructorController extends Controller
 {
+    use CheckContentLimitationTrait;
     use InstallmentsTrait;
     use UserFormFieldsTrait;
 
