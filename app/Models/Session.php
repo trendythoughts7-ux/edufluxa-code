@@ -120,8 +120,11 @@ class Session extends Model implements TranslatableContract
         }
     }
 
-    public function getJoinLink()
+    public function getJoinLink($zoom_start_link = false)
     {
+        if ($zoom_start_link and auth()->check() and auth()->id() == $this->creator_id and $this->session_api == 'zoom') {
+            return $this->zoom_start_link;
+        }
         return "/panel/sessions/{$this->id}/join";
     }
 
