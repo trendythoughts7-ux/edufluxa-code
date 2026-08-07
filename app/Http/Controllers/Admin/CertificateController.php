@@ -45,9 +45,6 @@ class CertificateController extends Controller
         $data = [
             'pageTitle' => trans('admin/main.certificate_list_page_title'),
             'certificates' => $certificates,
-            'student' => $filters['student'] ?? null,
-            'instructor' => $filters['instructor'] ?? null,
-            'quiz_title' => $filters['quiz_title'] ?? null,
         ];
 
         $teacher_ids = $request->get('teacher_ids');
