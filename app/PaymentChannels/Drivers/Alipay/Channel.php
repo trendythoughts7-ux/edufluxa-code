@@ -36,6 +36,7 @@ class Channel extends BasePaymentChannel implements IChannel
     protected function makeGateway($order)
     {
         $gateway = Omnipay::create('GlobalAlipay_Web');
+        /** @var \Omnipay\GlobalAlipay\WebGateway $gateway */
 
         $gateway->setPartner($this->partner);
         $gateway->setKey($this->key); //for sign_type=MD5
