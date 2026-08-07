@@ -140,11 +140,7 @@ class EventSpeakersController extends Controller
 
             $itemIds = explode(',', $data['items']);
 
-            if (!is_array($itemIds) and !empty($itemIds)) {
-                $itemIds = [$itemIds];
-            }
-
-            if (!empty($itemIds) and is_array($itemIds) and count($itemIds)) {
+            if (count($itemIds)) {
                 foreach ($itemIds as $order => $id) {
                     EventSpeaker::query()->where('id', $id)
                         ->where('event_id', $eventId)

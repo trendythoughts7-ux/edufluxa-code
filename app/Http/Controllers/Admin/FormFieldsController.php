@@ -182,12 +182,7 @@ class FormFieldsController extends Controller
         if (!empty($items)) {
             $itemIds = explode(',', $items);
 
-            if (!is_array($itemIds) and !empty($itemIds)) {
-                $itemIds = [$itemIds];
-            }
-
-            if (!empty($itemIds) and is_array($itemIds) and count($itemIds)) {
-
+            if (count($itemIds)) {
                 foreach ($itemIds as $order => $id) {
                     FormField::query()->where('form_id', $form->id)
                         ->where('id', $id)
@@ -213,12 +208,7 @@ class FormFieldsController extends Controller
         if (!empty($items)) {
             $itemIds = explode(',', $items);
 
-            if (!is_array($itemIds) and !empty($itemIds)) {
-                $itemIds = [$itemIds];
-            }
-
-            if (!empty($itemIds) and is_array($itemIds) and count($itemIds)) {
-
+            if (count($itemIds)) {
                 foreach ($itemIds as $order => $id) {
                     FormFieldOption::query()->where('form_field_id', $fieldId)
                         ->where('id', $id)

@@ -213,11 +213,7 @@ class ProductSpecificationController extends Controller
 
         $itemIds = explode(',', $data['items']);
 
-        if (!is_array($itemIds) and !empty($itemIds)) {
-            $itemIds = [$itemIds];
-        }
-
-        if (!empty($itemIds) and is_array($itemIds) and count($itemIds)) {
+        if (count($itemIds)) {
             foreach ($itemIds as $order => $id) {
                 ProductSelectedSpecification::where('id', $id)
                     ->where('creator_id', $user->id)

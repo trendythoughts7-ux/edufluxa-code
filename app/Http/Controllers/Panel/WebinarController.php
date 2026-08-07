@@ -446,11 +446,7 @@ class WebinarController extends Controller
         $tableName = $data['table'];
         $itemIds = explode(',', $data['items']);
 
-        if (!is_array($itemIds) and !empty($itemIds)) {
-            $itemIds = [$itemIds];
-        }
-
-        if (!empty($itemIds) and is_array($itemIds) and count($itemIds)) {
+        if (count($itemIds)) {
             switch ($tableName) {
                 case 'tickets':
                     foreach ($itemIds as $order => $id) {
