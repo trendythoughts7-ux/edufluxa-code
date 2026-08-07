@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Web;
+use App\Http\Controllers\Web\traits\LearningPageItemInfoTrait;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\traits\LearningPageAssignmentTrait;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AssignmentHistoryController extends Controller
 {
-    use LearningPageAssignmentTrait;
+    use LearningPageAssignmentTrait, LearningPageItemInfoTrait;
 
     public function storeMessage(Request $request, $assignmentId, $historyId)
     {
