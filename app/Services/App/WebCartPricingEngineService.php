@@ -118,7 +118,7 @@ class WebCartPricingEngineService
         return $amount;
     }
 
-    public function handleOrderPrices($cart, $user, $taxIsDifferent = false, $discountCoupon = null)
+    public function handleOrderPrices(\App\Models\Cart $cart, $user, $taxIsDifferent = false, $discountCoupon = null)
     {
         $seller = $this->getSeller($cart);
         $financialSettings = getFinancialSettings();
@@ -458,7 +458,7 @@ class WebCartPricingEngineService
         return (count($cartHasWebinar) or count($cartHasBundle) or count($cartHasMeeting) or count($cartHasInstallmentPayment));
     }
 
-    private function getSeller($cart)
+    private function getSeller(\App\Models\Cart $cart)
     {
         $user = null;
 
