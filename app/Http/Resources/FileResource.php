@@ -6,6 +6,7 @@ use App\Models\File;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\File
  * @property int $id
  * @property string $storage
  * @property string $title
