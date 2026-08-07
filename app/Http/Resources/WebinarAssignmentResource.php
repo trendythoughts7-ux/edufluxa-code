@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\WebinarAssignment
  * @property-read int $id
  * @property-read string $title
  * @property-read string $description
@@ -50,7 +51,7 @@ class WebinarAssignmentResource extends JsonResource
             'passed_count' => $this->passed_count,
             'failed_count' => $this->failed_count,
             'submissions_count' => $this->submissions_count,
-            'attachments' => $this->attachments->map(function ($item) {
+            'attachments' => $this->attachments->map(function (\App\Models\Api\WebinarAssignmentAttachment $item) {
                 return [
                     'url' => $item->attach ? url($item->attach) : null,
                     'title' => $item->title,
