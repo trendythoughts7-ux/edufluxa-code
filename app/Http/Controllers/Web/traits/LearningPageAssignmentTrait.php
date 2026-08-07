@@ -179,6 +179,9 @@ trait LearningPageAssignmentTrait
         return $assignmentHistory;
     }
 
+    /**
+     * @param \App\Models\WebinarAssignment $assignment
+     */
     private function getAssignmentDeadline($assignment, $user)
     {
         $deadline = true; // default can access
