@@ -7,6 +7,7 @@ use App\Models\Api\Bundle;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\Bundle
  * @property int $id
  * @property float $price
  * @property bool $subscribe
