@@ -67,7 +67,7 @@ class CartPricingEngineService
         ];
     }
 
-    public function getSeller($cart)
+    public function getSeller(\App\Models\Cart $cart)
     {
         $user = null;
 
@@ -132,7 +132,7 @@ class CartPricingEngineService
         return $commissionPrice;
     }
 
-    public function handleOrderPrices($cart, $user, $taxIsDifferent = false)
+    public function handleOrderPrices(\App\Models\Cart $cart, $user, $taxIsDifferent = false)
     {
         $seller = $this->getSeller($cart);
         $financialSettings = getFinancialSettings();
