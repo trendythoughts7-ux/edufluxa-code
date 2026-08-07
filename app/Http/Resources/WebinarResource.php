@@ -6,6 +6,7 @@ use App\Mixins\Cashback\CashbackRules;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\Webinar
  * @property-read int $id
  * @property-read \App\Models\Category $category
  * @property-read \App\Models\Api\User $teacher
