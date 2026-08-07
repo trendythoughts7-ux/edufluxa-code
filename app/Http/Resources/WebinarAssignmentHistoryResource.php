@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
+ * @mixin \App\Models\Api\WebinarAssignmentHistory
  * @property-read \App\Models\Api\WebinarAssignment $assignment
  * @property-read \App\User $student
  * @property-read int $id
