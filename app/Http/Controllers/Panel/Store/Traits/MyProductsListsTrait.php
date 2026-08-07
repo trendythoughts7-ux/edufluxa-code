@@ -54,6 +54,9 @@ trait MyProductsListsTrait
         return $query;
     }
 
+    /**
+     * @param Builder<\App\Models\Product> $query
+     */
     private function getPageListData(Request $request, Builder $query)
     {
         $page = $request->get('page') ?? 1;
