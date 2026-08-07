@@ -46,9 +46,9 @@ class ResetPasswordController extends Controller
                 ->update(['password' => Hash::make($data['password'])]);
             DB::table('password_resets')->where(['email' => $data['email']])->delete();
 
-           return apiResponse(1, 'password reset.');
+           return apiResponse2(1, 'reset', 'password reset.');
         }
-        return apiResponse(1, 'there is not such request to reset password');
+        return apiResponse2(0, 'not_found', 'there is not such request to reset password');
 
     }
 }
