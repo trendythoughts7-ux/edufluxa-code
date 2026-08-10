@@ -992,20 +992,18 @@ class User extends Authenticatable
             ->get();
 
         foreach ($installmentOrders as $installmentOrder) {
-            if (!empty($installmentOrder)) {
-                $hasBought = true;
+            $hasBought = true;
 
-                if ($installmentOrder->checkOrderHasOverdue()) {
-                    $overdueIntervalDays = getInstallmentsSettings('overdue_interval_days');
+            if ($installmentOrder->checkOrderHasOverdue()) {
+                $overdueIntervalDays = getInstallmentsSettings('overdue_interval_days');
 
-                    if (empty($overdueIntervalDays) or $installmentOrder->overdueDaysPast() > $overdueIntervalDays) {
-                        $hasBought = false;
-                    }
+                if (empty($overdueIntervalDays) or $installmentOrder->overdueDaysPast() > $overdueIntervalDays) {
+                    $hasBought = false;
                 }
+            }
 
-                if ($hasBought) {
-                    $webinarIds[] = $installmentOrder->webinar_id;
-                }
+            if ($hasBought) {
+                $webinarIds[] = $installmentOrder->webinar_id;
             }
         }
 
