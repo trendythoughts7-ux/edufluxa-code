@@ -192,14 +192,12 @@ class ChapterController extends Controller
                     'status' => $status,
                 ]);
 
-                if (!empty($chapter)) {
-                    WebinarChapterTranslation::updateOrCreate([
-                        'webinar_chapter_id' => $chapter->id,
-                        'locale' => mb_strtolower($data['locale']),
-                    ], [
-                        'title' => $data['title'],
-                    ]);
-                }
+                WebinarChapterTranslation::updateOrCreate([
+                    'webinar_chapter_id' => $chapter->id,
+                    'locale' => mb_strtolower($data['locale']),
+                ], [
+                    'title' => $data['title'],
+                ]);
 
                 removeContentLocale();
 
