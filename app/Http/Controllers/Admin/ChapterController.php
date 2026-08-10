@@ -60,7 +60,7 @@ class ChapterController extends Controller
                 'chapters' => [],
             ];
 
-            if (!empty($chapters) and count($chapters)) {
+            if (count($chapters)) {
                 // for translate send on array of data
 
                 foreach ($chapters as $chapter) {
