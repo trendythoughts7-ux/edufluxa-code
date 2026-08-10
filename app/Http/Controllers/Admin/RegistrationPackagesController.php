@@ -235,9 +235,9 @@ class RegistrationPackagesController extends Controller
             }
         }
 
-        $pageGeneralSettings = (!empty($settings) and !empty($settings[Setting::$registrationPackagesGeneralName])) ? $settings[Setting::$registrationPackagesGeneralName]->value : null;
-        $instructorsSettings = (!empty($settings) and !empty($settings[Setting::$registrationPackagesInstructorsName])) ? $settings[Setting::$registrationPackagesInstructorsName]->value : null;
-        $organizationsSettings = (!empty($settings) and !empty($settings[Setting::$registrationPackagesOrganizationsName])) ? $settings[Setting::$registrationPackagesOrganizationsName]->value : null;
+        $pageGeneralSettings = !empty($settings[Setting::$registrationPackagesGeneralName]) ? $settings[Setting::$registrationPackagesGeneralName]->value : null;
+        $instructorsSettings = !empty($settings[Setting::$registrationPackagesInstructorsName]) ? $settings[Setting::$registrationPackagesInstructorsName]->value : null;
+        $organizationsSettings = !empty($settings[Setting::$registrationPackagesOrganizationsName]) ? $settings[Setting::$registrationPackagesOrganizationsName]->value : null;
 
         $data = [
             'pageTitle' => trans('admin/main.settings'),
