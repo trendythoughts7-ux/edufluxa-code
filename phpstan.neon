@@ -18,6 +18,9 @@ parameters:
             message: '#^Access to an undefined property WebToPay_PaymentMethod::\$(minAmount|maxAmount|currency)\.$#'
             path: app/PaymentChannels/Drivers/Paysera/WebToPay.php
         -
+            message: '#^Access to an undefined property Laravel\\Socialite\\Contracts\\User::\$(id|email|name)\.$#'
+            path: app/Http/Controllers/Auth/SocialiteController.php
+        -
             message: '#^Call to an undefined method object\{quantity: int, product: mixed\}::update\(\)\.$#'
             path: app/Http/Controllers/Web/CartManagerController.php
     paths:
