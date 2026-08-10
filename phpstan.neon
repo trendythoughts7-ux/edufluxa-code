@@ -10,7 +10,6 @@ parameters:
             paths:
                 - app/PaymentChannels/Drivers/Braintree/Channel.php
                 - app/PaymentChannels/Drivers/Mollie/Channel.php
-                - app/PaymentChannels/Drivers/Paysera/Channel.php
                 - app/PaymentChannels/Drivers/Robokassa/Channel.php
         -
             message: '#^Call to an undefined method net\\authorize\\api\\contract\\v1\\ANetApiResponseType::getTransactionResponse\(\)\.$#'
