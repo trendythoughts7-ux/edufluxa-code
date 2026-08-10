@@ -3,6 +3,10 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+/**
+ * @mixin \App\Models\Blog
+ * @property string|null $locale
+ */
 
 class BlogResource extends JsonResource
 {
