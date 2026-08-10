@@ -2,7 +2,7 @@
 
 namespace App\Mixins\Installment;
 
-use App\Http\Controllers\Web\CartController;
+use App\Services\App\WebCartPricingEngineService;
 use App\Models\Accounting;
 use App\Models\Cart;
 use App\Models\InstallmentOrderPayment;
@@ -146,9 +146,8 @@ class InstallmentAccounting
         $cart->product_order_id = $order->product_order_id;
         $cart->subscribe_id = $order->subscribe_id;
 
-        $cartController = new CartController();
 
-        return $cartController->handleOrderPrices($cart, $order->user);
+        return app(WebCartPricingEngineService::class)->handleOrderPrices($cart, $order->user);
     }
 
 }
