@@ -55,7 +55,7 @@ class ImportsController extends Controller
         $errorsItems = [];
         $errors = [];
 
-        $duplicateRowsLogs = [];
+        $duplicateRowsLogs = ['errors' => []];
 
         $importChannel = ImportManager::makeChannel($type);
 
