@@ -592,7 +592,7 @@ class User extends Authenticatable
         $rate = 0;
         $count = 0;
 
-        if (!empty($webinars)) {
+        if ($webinars->isNotEmpty()) {
             $rates = 0;
 
             foreach ($webinars as $webinar) {
@@ -628,7 +628,7 @@ class User extends Authenticatable
         $webinars = $this->webinars;
         $count = 0;
 
-        if (!empty($webinars)) {
+        if ($webinars->isNotEmpty()) {
             foreach ($webinars as $webinar) {
                 $count += $webinar->reviews->count();
             }
@@ -797,7 +797,7 @@ class User extends Authenticatable
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-            if (!empty($groupNotifications) and !$groupNotifications->isEmpty()) {
+            if (!$groupNotifications->isEmpty()) {
                 $notifications = $notifications->merge($groupNotifications);
             }
         }
@@ -809,7 +809,7 @@ class User extends Authenticatable
                 ->doesntHave('notificationStatus')
                 ->orderBy('created_at', 'desc')
                 ->get();
-            if (!empty($studentsNotifications) and !$studentsNotifications->isEmpty()) {
+            if (!$studentsNotifications->isEmpty()) {
                 $notifications = $notifications->merge($studentsNotifications);
             }
         }
@@ -821,7 +821,7 @@ class User extends Authenticatable
                 ->doesntHave('notificationStatus')
                 ->orderBy('created_at', 'desc')
                 ->get();
-            if (!empty($instructorNotifications) and !$instructorNotifications->isEmpty()) {
+            if (!$instructorNotifications->isEmpty()) {
                 $notifications = $notifications->merge($instructorNotifications);
             }
         }
@@ -833,7 +833,7 @@ class User extends Authenticatable
                 ->doesntHave('notificationStatus')
                 ->orderBy('created_at', 'desc')
                 ->get();
-            if (!empty($organNotifications) and !$organNotifications->isEmpty()) {
+            if (!$organNotifications->isEmpty()) {
                 $notifications = $notifications->merge($organNotifications);
             }
         }
@@ -850,7 +850,7 @@ class User extends Authenticatable
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-            if (!empty($courseStudentsNotifications) and !$courseStudentsNotifications->isEmpty()) {
+            if (!$courseStudentsNotifications->isEmpty()) {
                 $notifications = $notifications->merge($courseStudentsNotifications);
             }
         }
@@ -1108,7 +1108,7 @@ class User extends Authenticatable
                 ->where('status', 'finished')
                 ->get();
 
-            if (!empty($reserves)) {
+            if ($reserves->isNotEmpty()) {
 
                 foreach ($reserves as $reserve) {
                     $meetingTime = $reserve->meetingTime;
