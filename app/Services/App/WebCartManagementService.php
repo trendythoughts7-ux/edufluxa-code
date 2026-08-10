@@ -40,14 +40,14 @@ class WebCartManagementService
             ])
             ->get();
 
-        if (!empty($carts) and !$carts->isEmpty()) {
+        if (!$carts->isEmpty()) {
             $calculate = $this->webCartPricingEngineService->calculatePrice($carts, $user);
 
             $hasPhysicalProduct = $carts->where('productOrder.product.type', Product::$physical);
 
             $deliveryEstimateTime = 0;
 
-            if (!empty($hasPhysicalProduct) and count($hasPhysicalProduct)) {
+            if (count($hasPhysicalProduct)) {
                 foreach ($hasPhysicalProduct as $physicalProductCart) {
                     if (!empty($physicalProductCart->productOrder) and
                         !empty($physicalProductCart->productOrder->product) and
@@ -124,7 +124,7 @@ class WebCartManagementService
 
             $carts = Cart::where('creator_id', $user->id)->get();
 
-            if (!empty($carts) and !$carts->isEmpty()) {
+            if (!$carts->isEmpty()) {
                 $calculate = $this->webCartPricingEngineService->calculatePrice($carts, $user, $discountCoupon);
 
                 if (!empty($calculate)) {
