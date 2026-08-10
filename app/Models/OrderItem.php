@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int|null $installment_order_id
  * @property-read int|null $reserve_meeting_id
  */
 class OrderItem extends Model
