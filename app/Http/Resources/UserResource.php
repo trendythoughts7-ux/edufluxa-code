@@ -3,6 +3,10 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+/**
+ * @mixin \App\User
+ * @mixin \App\Models\Api\User
+ */
 
 class UserResource extends JsonResource
 {
