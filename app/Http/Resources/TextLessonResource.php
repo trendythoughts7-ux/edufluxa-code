@@ -3,6 +3,11 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+/**
+ * @mixin \App\Models\Api\TextLesson
+ * @property int $index
+ * @property string|null $locale
+ */
 
 class TextLessonResource extends JsonResource
 {
@@ -35,7 +40,7 @@ class TextLessonResource extends JsonResource
             'content' => $this->content,
             'locale' => $this->locale,
             // 'read'=>$this->read ,
-            'attachments' => $this->attachments()->get()->map(function ($attachment) {
+            'attachments' => $this->attachments()->get()->map(function (\App\Models\Api\TextLessonAttachment $attachment) {
                 return $attachment->details;
             }),
             'attachments_count' => $this->attachments()->count(),
