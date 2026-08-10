@@ -87,7 +87,7 @@ class CartPricingEngineService
      * @param $itemPrice
      * @param null $seller
      * */
-    public function getCommissionPrice($source, $itemPrice, $seller = null)
+    public function getCommissionPrice($source, $itemPrice, ?\App\User $seller = null)
     {
         $hasSellerSpecificCommission = false;
         $commissionPrice = 0;
