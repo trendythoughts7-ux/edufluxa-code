@@ -282,9 +282,6 @@ function getThemeCustomCssAndJs($key = null)
         'js' => $js,
     ];
 
-    if (!empty($key) and !empty($result[$key])) {
-        return $result[$key];
-    }
 
     return $result;
 }
@@ -296,7 +293,7 @@ function getThemeCustomCssAndJs($key = null)
  * ,dashboard, panel_sidebar, user_avatar, user_cover, instructor_finder_wizard, products_lists
  * @return string|array => [all pages]
  */
-function getThemePageBackgroundSettings($page = null)
+function getThemePageBackgroundSettings(?string $page = null)
 {
     $allImages = [];
     $theme = getActiveTheme();
