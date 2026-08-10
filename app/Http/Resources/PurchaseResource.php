@@ -3,6 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+/**
+ * @mixin \App\Models\Api\Sale
+ */
 
 class PurchaseResource extends JsonResource
 {
