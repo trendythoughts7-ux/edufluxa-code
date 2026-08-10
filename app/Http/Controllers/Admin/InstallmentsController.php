@@ -342,17 +342,15 @@ class InstallmentsController extends Controller
             'enable' => (!empty($data['enable']) and $data['enable'] == 'on'),
         ]);
 
-        if (!empty($installment)) {
-            $this->storeExtraData($installment, $data);
+        $this->storeExtraData($installment, $data);
 
-            $toastData = [
-                'title' => trans('public.request_success'),
-                'msg' => trans('update.installment_were_successfully_updated'),
-                'status' => 'success'
-            ];
+        $toastData = [
+            'title' => trans('public.request_success'),
+            'msg' => trans('update.installment_were_successfully_updated'),
+            'status' => 'success'
+        ];
 
-            return redirect(getAdminPanelUrl("/financial/installments/{$installment->id}/edit"))->with(['toast' => $toastData]);
-        }
+        return redirect(getAdminPanelUrl("/financial/installments/{$installment->id}/edit"))->with(['toast' => $toastData]);
 
         abort(500);
     }
