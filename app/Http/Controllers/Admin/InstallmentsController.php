@@ -108,17 +108,15 @@ class InstallmentsController extends Controller
             'created_at' => time(),
         ]);
 
-        if (!empty($installment)) {
-            $this->storeExtraData($installment, $data);
+        $this->storeExtraData($installment, $data);
 
-            $toastData = [
-                'title' => trans('public.request_success'),
-                'msg' => trans('update.new_installments_were_successfully_created'),
-                'status' => 'success'
-            ];
+        $toastData = [
+            'title' => trans('public.request_success'),
+            'msg' => trans('update.new_installments_were_successfully_created'),
+            'status' => 'success'
+        ];
 
-            return redirect(getAdminPanelUrl("/financial/installments/{$installment->id}/edit"))->with(['toast' => $toastData]);
-        }
+        return redirect(getAdminPanelUrl("/financial/installments/{$installment->id}/edit"))->with(['toast' => $toastData]);
 
         abort(500);
     }
@@ -198,18 +196,16 @@ class InstallmentsController extends Controller
                         ]);
                     }
 
-                    if (!empty($step)) {
-                        $ignoreStepIds[] = $step->id;
+                    $ignoreStepIds[] = $step->id;
 
-                        InstallmentStepTranslation::query()->updateOrCreate([
-                            'installment_step_id' => $step->id,
-                            'locale' => mb_strtolower($data['locale']),
-                        ], [
-                            'title' => $stepData['title'],
-                        ]);
+                    InstallmentStepTranslation::query()->updateOrCreate([
+                        'installment_step_id' => $step->id,
+                        'locale' => mb_strtolower($data['locale']),
+                    ], [
+                        'title' => $stepData['title'],
+                    ]);
 
-                        $order = $order + 1;
-                    }
+                    $order = $order + 1;
                 }
             }
         }
