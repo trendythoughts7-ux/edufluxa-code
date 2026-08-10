@@ -5,6 +5,12 @@ namespace App\Http\Resources;
 use App\Mixins\Cashback\CashbackRules;
 use Illuminate\Http\Resources\Json\JsonResource;
 use \App\Models\Product;
+/**
+ * @mixin \App\Models\Api\Product
+ * @property mixed $label
+ * @property mixed $waiting_orders
+ * @property mixed $cashbackRules
+ */
 
 class ProductResource extends JsonResource
 {
