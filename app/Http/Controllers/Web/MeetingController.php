@@ -117,32 +117,30 @@ class MeetingController extends Controller
         if (!empty($date)) {
             $dayLabel = Carbon::createFromTimestamp($date, getTimezone())->format('l');
 
-            if (!empty($dayLabel)) {
-                $dayLabel = mb_strtolower($dayLabel);
-                $selectedDate = $date;
+            $dayLabel = mb_strtolower($dayLabel);
+            $selectedDate = $date;
 
-                $selectedDateTimes = $meeting->meetingTimes()
-                    ->where('day_label', $dayLabel)
-                    ->get();
+            $selectedDateTimes = $meeting->meetingTimes()
+                ->where('day_label', $dayLabel)
+                ->get();
 
-                foreach ($selectedDateTimes as $selectedDateTime) {
-                    $can_reserve = true;
+            foreach ($selectedDateTimes as $selectedDateTime) {
+                $can_reserve = true;
 
-                    $reserveMeeting = ReserveMeeting::where('meeting_time_id', $selectedDateTime->id)
-                        ->where('day', $date)
-                        ->whereIn('status', ['pending', 'open'])
-                        ->first();
+                $reserveMeeting = ReserveMeeting::where('meeting_time_id', $selectedDateTime->id)
+                    ->where('day', $date)
+                    ->whereIn('status', ['pending', 'open'])
+                    ->first();
 
-                    if ($reserveMeeting && ($reserveMeeting->locked_at || $reserveMeeting->reserved_at)) {
-                        $can_reserve = false;
-                    }
-
-                    /*if ($timestamp + $secondTime < time()) {
-                        $can_reserve = false;
-                    }*/
-
-                    $selectedDateTime->can_reserve = $can_reserve;
+                if ($reserveMeeting && ($reserveMeeting->locked_at || $reserveMeeting->reserved_at)) {
+                    $can_reserve = false;
                 }
+
+                /*if ($timestamp + $secondTime < time()) {
+                    $can_reserve = false;
+                }*/
+
+                $selectedDateTime->can_reserve = $can_reserve;
             }
         }
 
@@ -453,25 +451,21 @@ class MeetingController extends Controller
             'created_at' => time(),
         ]);
 
-        if (!empty($reserve)) {
-            $sale = Sale::create([
-                'buyer_id' => $user->id,
-                'seller_id' => $meeting->creator_id,
-                'meeting_id' => $meeting->id,
-                'type' => Sale::$meeting,
-                'payment_method' => Sale::$credit,
-                'amount' => 0,
-                'total_amount' => 0,
-                'created_at' => time(),
-            ]);
+        $sale = Sale::create([
+            'buyer_id' => $user->id,
+            'seller_id' => $meeting->creator_id,
+            'meeting_id' => $meeting->id,
+            'type' => Sale::$meeting,
+            'payment_method' => Sale::$credit,
+            'amount' => 0,
+            'total_amount' => 0,
+            'created_at' => time(),
+        ]);
 
-            if (!empty($sale)) {
-                $reserve->update([
-                    'sale_id' => $sale->id,
-                    'reserved_at' => time()
-                ]);
-            }
-        }
+        $reserve->update([
+            'sale_id' => $sale->id,
+            'reserved_at' => time()
+        ]);
 
 
         return response()->json([
