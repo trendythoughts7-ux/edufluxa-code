@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+/**
+ * @property string|null $locale Transient locale code set at runtime for API responses (not a DB column).
+ * @property string|null $title Transient translated title set at runtime via getTitleAttribute() (not a DB column).
+ */
+
 class WebinarChapter extends Model implements TranslatableContract
 {
     use Translatable;
