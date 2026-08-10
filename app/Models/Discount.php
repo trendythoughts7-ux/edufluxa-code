@@ -75,7 +75,7 @@ class Discount extends Model
             ->get();
 
         foreach ($orderItems as $orderItem) {
-            if (!empty($orderItem) and !empty($orderItem->order) and $orderItem->order->status == 'paid') {
+            if (!empty($orderItem->order) and $orderItem->order->status == 'paid') {
                 $count = $count - 1;
             }
         }
@@ -93,7 +93,7 @@ class Discount extends Model
             ->get();
 
         foreach ($orderItems as $orderItem) {
-            if (!empty($orderItem) and !empty($orderItem->order) and $orderItem->order->status == 'paid') {
+            if (!empty($orderItem->order) and $orderItem->order->status == 'paid') {
                 $count = $count + 1;
                 $amount = $amount + $orderItem->total_amount;
             }
@@ -299,7 +299,7 @@ class Discount extends Model
             ->get();
 
         foreach ($orderItems as $orderItem) {
-            if (!empty($orderItem) and !empty($orderItem->order) and $orderItem->order->status == 'paid') {
+            if (!empty($orderItem->order) and $orderItem->order->status == 'paid') {
                 $usedCount += 1;
             }
         }
