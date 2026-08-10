@@ -3,6 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+/**
+ * @mixin \App\Models\WebinarAssignmentHistoryMessage
+ */
 
 class WebinarAssignmentHistoryMessageResource extends JsonResource
 {
