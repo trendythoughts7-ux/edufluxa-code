@@ -95,23 +95,21 @@ class UserLoginHistoryController extends Controller
         $user = User::findOrFail($session->user_id);
 
 
-        if (!empty($session)) {
-            $session->update([
-                'session_end_at' => time(),
-                'end_session_type' => 'by_admin'
+        $session->update([
+            'session_end_at' => time(),
+            'end_session_type' => 'by_admin'
+        ]);
+
+        $sessionManager = app('session');
+        $sessionManager->getHandler()->destroy($session->session_id);
+
+
+        if ($user->logged_count > 0) {
+            $user->update([
+                'logged_count' => $user->logged_count - 1
             ]);
-
-            $sessionManager = app('session');
-            $sessionManager->getHandler()->destroy($session->session_id);
-
-
-            if ($user->logged_count > 0) {
-                $user->update([
-                    'logged_count' => $user->logged_count - 1
-                ]);
-            }
-
         }
+
 
         $toastData = [
             'title' => trans('public.request_success'),
@@ -128,9 +126,7 @@ class UserLoginHistoryController extends Controller
 
         $session = UserLoginHistory::findOrFail($id);
 
-        if (!empty($session)) {
-            $session->delete();
-        }
+        $session->delete();
 
         $toastData = [
             'title' => trans('public.request_success'),
