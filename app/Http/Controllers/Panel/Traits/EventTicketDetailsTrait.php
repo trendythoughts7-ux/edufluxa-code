@@ -28,7 +28,7 @@ trait EventTicketDetailsTrait
         $size = 64;
 
         $url = url("/events/validation?code={$code}");
-        return QrCode::size($size)->generate($url)->toHtml();
+        return QrCode::size($size)->generate($url);
     }
 
 }
