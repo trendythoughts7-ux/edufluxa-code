@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $count
+ */
 class CourseForumAnswer extends Model
 {
     protected $table = 'course_forum_answers';

@@ -5,6 +5,9 @@ namespace App\Models\Api;
 use App\Models\Api\Traits\CheckWebinarItemAccessTrait;
 use App\Models\TextLesson as WebTextLesson;
 
+/**
+ * @property string $locale
+ */
 class TextLesson extends WebTextLesson
 {
 

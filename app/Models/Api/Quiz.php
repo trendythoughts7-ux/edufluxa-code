@@ -11,7 +11,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Failed;
 
 /**
+ * @property mixed $result_status
  * @property-read int $creator_id
+ * @property int $remaining_try_again
+ * @property bool $not_participated
+ * @property int $participated_students
+ * @property int $passed_students
+ * @property int $failed_students
+ * @property int $waiting_students
+ * @property bool $show_waiting
+ * @property mixed $questions_grade
  */
 class Quiz extends Model
 {
@@ -332,8 +341,3 @@ class Quiz extends Model
 
 
 }
-
-
-
-
-

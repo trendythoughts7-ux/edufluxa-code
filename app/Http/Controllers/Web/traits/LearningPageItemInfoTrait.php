@@ -185,6 +185,7 @@ trait LearningPageItemInfoTrait
 
     private function checkQuizResult($quiz)
     {
+        /** @var \App\Models\Api\Quiz $quiz */
         $user = auth()->user();
 
         $userQuizDone = QuizzesResult::where('quiz_id', $quiz->id)
