@@ -43,7 +43,7 @@ class AbandonedUsersCartController extends Controller
             ])
             ->paginate(10);
 
-        $cartController = new CartController();
+        $cartController = app(CartController::class);
 
         foreach ($carts as $cart) {
             $userCarts = $cart->user->carts;
@@ -273,7 +273,7 @@ class AbandonedUsersCartController extends Controller
             ])
             ->get();
 
-        $cartController = new CartController();
+        $cartController = app(CartController::class);
         $exportData = [];
 
         foreach ($carts as $cart) {
