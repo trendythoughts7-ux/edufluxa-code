@@ -201,6 +201,7 @@ trait LearningPageAssignmentTrait
 
     private function checkHasAttempts($assignment, $assignmentHistory, $user)
     {
+        /** @var \App\Models\WebinarAssignment $assignment */
         $result = true;
 
         if (!empty($assignment->attempts) and $user->id != $assignment->creator_id) {

@@ -234,6 +234,7 @@ class PaymentController extends Controller
 
     public function setPaymentAccounting($order, $type = null)
     {
+        /** @var \App\Models\Order $order */
         $cashbackAccounting = new CashbackAccounting();
 
         if ($order->is_charge_account) {

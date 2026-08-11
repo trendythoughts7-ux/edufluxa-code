@@ -122,6 +122,7 @@ trait PaymentsTrait
 
     private function updateInstallmentOrder($orderItem, $sale)
     {
+        /** @var \App\Models\OrderItem $orderItem */
         $installmentPayment = $orderItem->installmentPayment;
 
         if (!empty($installmentPayment)) {
