@@ -12,6 +12,11 @@ use Astrotomic\Translatable\Translatable;
 use Illuminate\Support\Facades\DB;
 use Jorenvh\Share\ShareFacade;
 
+/**
+ * @property int $creator_id
+ * @property string|null $commission_type
+ * @property int|null $delivery_fee
+ */
 class Product extends Model implements TranslatableContract
 {
     use Translatable;

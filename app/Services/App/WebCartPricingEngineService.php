@@ -529,6 +529,7 @@ class WebCartPricingEngineService
         foreach ($carts as $cart) {
             if (!empty($cart->productOrder) and !empty($cart->productOrder->product)) {
                 $product = $cart->productOrder->product;
+                /** @var \App\Models\Product $product */
 
                 if (!empty($product->delivery_fee)) {
                     if (!empty($productFee[$product->creator_id]) and $productFee[$product->creator_id] < $product->delivery_fee) {
@@ -551,7 +552,7 @@ class WebCartPricingEngineService
             if (!empty($cart->productOrder) and !empty($cart->productOrder->product)) {
                 $product = $cart->productOrder->product;
 
-                if (!empty($product) and $product->isPhysical()) {
+                if ($product->isPhysical()) {
                     if (!empty($productCount[$product->creator_id])) {
                         $productCount[$product->creator_id] += 1;
                     } else {

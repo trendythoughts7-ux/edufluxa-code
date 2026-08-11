@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
  * @property \App\Models\Bundle|null $bundle
  * @property \App\Models\EventTicket|null $eventTicket
  * @property \App\Models\MeetingPackage|null $meetingPackage
- * @property \App\Models\ProductOrder|object{quantity: int, product: mixed}|null $productOrder
+ * @property \App\Models\ProductOrder|object{quantity: int, product: \App\Models\Product|null, seller: \App\User|null}|null $productOrder
  * @property-read null $product
  * @property float|int $webinars_price
  * @property float|int $bundles_price
