@@ -9,6 +9,9 @@ use App\Models\WebinarAssignmentHistory;
 use App\Models\WebinarAssignmentHistoryMessage;
 use Illuminate\Http\Request;
 
+/**
+ * @property \App\Models\Api\WebinarAssignmentHistory|null $userAssignmentHistory
+ */
 class WebinarAssignment extends Model
 {
     use CheckWebinarItemAccessTrait;
