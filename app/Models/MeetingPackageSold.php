@@ -6,6 +6,13 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Dynamic/computed properties (assigned at runtime via handleExtraData(), not schema columns):
+ * @property string $status
+ * @property int $ended
+ * @property int $scheduled
+ * @property int $notScheduled
+ */
 class MeetingPackageSold extends Model
 {
     protected $table = 'meeting_packages_sold';
