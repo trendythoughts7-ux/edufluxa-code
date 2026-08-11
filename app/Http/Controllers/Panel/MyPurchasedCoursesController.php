@@ -108,6 +108,7 @@ class MyPurchasedCoursesController extends Controller
         $sales = deepClone($query)->get();
 
         foreach ($sales as $sale) {
+            /** @var \App\Models\Sale $sale */
             if (!empty($sale->gift_id)) {
                 $gift = $sale->gift;
                 if (!empty($gift->webinar)) {
