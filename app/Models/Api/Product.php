@@ -185,6 +185,7 @@ class Product extends Model
     {
         return $this->selectedSpecifications->where('allow_selection', false)
             ->map(function ($selected) {
+                    $value = null;
                 if ($selected->type == 'textarea') {
                     $value = $selected->value;
                 } elseif (!empty($selected->selectedMultiValues)) {

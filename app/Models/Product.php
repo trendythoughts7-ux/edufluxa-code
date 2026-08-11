@@ -435,7 +435,7 @@ class Product extends Model implements TranslatableContract
                     $query->where('buyer_id', $user->id);
                     $query->orWhereIn('gift_id', $giftsIds);
                 })
-                ->whereHas('sale', function ($query) use ($user) {
+                ->whereHas('sale', function ($query) {
                     $query->whereIn('type', ['product', 'gift'])
                         ->where('access_to_purchased_item', true)
                         ->whereNull('refund_at');
