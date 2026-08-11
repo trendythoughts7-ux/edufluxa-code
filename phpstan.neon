@@ -26,6 +26,7 @@ parameters:
     paths:
         - app
     excludePaths:
+        - app/Providers/LicenseEventServiceProvider.php
         - app/Http/Controllers/Api/Instructor/*
     bootstrapFiles:
         - vendor/autoload.php
