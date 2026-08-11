@@ -41,6 +41,16 @@ class ProductBadgeContent extends Model
         return $this->belongsTo(Blog::class, 'targetable_id', 'id');
     }
 
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'targetable_id', 'id');
+    }
+
+    public function upcomingCourse(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\UpcomingCourse::class, 'targetable_id', 'id');
+    }
+
 
 
     /* ==========
@@ -61,7 +71,7 @@ class ProductBadgeContent extends Model
                 $item = $this->product;
                 break;
             case "App\Models\Blog":
-                $item = $this->post;
+                $item = $this->blog;
                 break;
             case "App\Models\UpcomingCourse":
                 $item = $this->upcomingCourse;
