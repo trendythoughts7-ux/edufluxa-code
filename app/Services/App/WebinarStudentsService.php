@@ -118,6 +118,7 @@ class WebinarStudentsService
         }
 
         foreach ($students as $key => $student) {
+            /** @var \App\User $student */
             if (!empty($student->gift_id)) {
                 $gift = Gift::query()->where('id', $student->gift_id)->first();
 
