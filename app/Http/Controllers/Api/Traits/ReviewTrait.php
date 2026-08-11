@@ -25,6 +25,7 @@ trait ReviewTrait
         $user = apiAuth();
         $item = $request->input('item');
         $id = $request->input('id');
+        $itemObj = null;
         if ($item == 'webinar') {
             $itemObj = Webinar::where('id', $id)
                 ->where('status', 'active')
