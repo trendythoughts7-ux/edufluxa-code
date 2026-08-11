@@ -323,7 +323,7 @@ class Sale extends Model
 
             if (!empty($subscribe)) {
                 // Dynamic runtime-only property (not a 'subscribes' table column) - copied from SubscribeUse for downstream use
-                $subscribe->installment_order_id = $use->installment_order_id; // @phpstan-ignore-line
+                $subscribe->installment_order_id = $use->installment_order_id;
             }
         }
 
