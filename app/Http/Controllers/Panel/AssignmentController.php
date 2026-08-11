@@ -283,7 +283,7 @@ class AssignmentController extends Controller
         if (!empty($request->get("ajax")[$reqKey]) and !empty($request->get("ajax")[$reqKey]['attachments'])) {
             $attachments = $request->get("ajax")[$reqKey]['attachments'];
 
-            if (!empty($attachments) and count($attachments)) {
+            if (count($attachments)) {
                 foreach ($attachments as $key => $attachment) {
 
                     if (!empty($attachment['title'])) {
