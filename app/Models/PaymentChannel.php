@@ -76,7 +76,17 @@ class PaymentChannel extends Model
         'Paytabs',
         'Cintepay',
         'Clickpay',
-        'Razorpay'
+        'Razorpay',,
+        'Chapa',
+        'Instamojo',
+        'Payfort',
+        'Sslcommerz',
+        'TapPayment'
+        'Chapa',
+        'Instamojo',
+        'Payfort',
+        'Sslcommerz',
+        'TapPayment'
     ];
 
     static $paypal = 'Paypal';
