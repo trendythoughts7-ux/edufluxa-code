@@ -17,6 +17,12 @@ use Illuminate\Support\Collection;
  * @property \App\Models\MeetingPackage|null $meetingPackage
  * @property \App\Models\ProductOrder|object{quantity: int, product: mixed}|null $productOrder
  * @property-read null $product
+ * @property float|int $webinars_price
+ * @property float|int $bundles_price
+ * @property float|int $subscribes_price
+ * @property float|int $promotions_price
+ * @property float|int $reserve_meetings_price
+ * @property float|int $product_orders_price
  */
 class Cart extends Model
 {
