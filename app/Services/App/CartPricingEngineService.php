@@ -270,6 +270,7 @@ class CartPricingEngineService
         foreach ($carts as $cart) {
             if (!empty($cart->productOrder) and !empty($cart->productOrder->product)) {
                 $product = $cart->productOrder->product;
+                /** @var \App\Models\Product $product */
 
                 if (!empty($product->delivery_fee)) {
                     if (!empty($productFee[$product->creator_id]) and $productFee[$product->creator_id] < $product->delivery_fee) {
