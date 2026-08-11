@@ -14,6 +14,7 @@ class Channel extends BasePaymentChannel implements IChannel
     protected $currency;
     protected $test_mode;
     protected $voguepay_merchant_id;
+    protected $order_session_key;
 
     protected array $credentialItems = [
         'voguepay_merchant_id',
@@ -95,7 +96,7 @@ class Channel extends BasePaymentChannel implements IChannel
                     if (!empty($obj) && isset($obj->response_message) && $obj->response_message == 'Approved') {
                         $orderStatus = Order::$paying;
                     } elseif (empty($obj) || !isset($obj->response_message)) {
-                        \Log::error('Voguepay verify: invalid or empty JSON response', ['body' => isset($response) ? (string) $response->getBody() : null]);
+                        \Log::error('Voguepay verify: invalid or empty JSON response', ['body' => (string) $response->getBody()]);
                     }
                 } catch (\Throwable $e) {
                     \Log::error('Voguepay verify request failed: ' . $e->getMessage());
