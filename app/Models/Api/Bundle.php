@@ -29,9 +29,9 @@ class Bundle extends Model
         return $this->hasMany('App\Models\Api\BundleWebinar', 'bundle_id', 'id');
     }
 
-    public function webinars(): \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    public function webinars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        //  return $this->hasManyThrough('App\Models\Webinar', 'App\Models\BundleWebinar', 'bundle_id', 'id');
+        return $this->belongsToMany('App\Models\Api\Webinar', 'bundle_webinars', 'bundle_id', 'webinar_id');
     }
     public function teacher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
