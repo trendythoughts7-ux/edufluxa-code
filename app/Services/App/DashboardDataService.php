@@ -602,7 +602,7 @@ class DashboardDataService
     public function getInstructorStudentAssignmentsData($user, $userWebinarsIds)
     {
         $pendingAssignmentQuery = WebinarAssignmentHistory::query()->where('status', WebinarAssignmentHistory::$pending)
-            ->whereHas('assignment', function (Builder $query) use ($user, $userWebinarsIds) {
+            ->whereHas('assignment', function (Builder $query) use ($userWebinarsIds) {
                 $query->whereIn('webinar_id', $userWebinarsIds);
             })
             ->groupBy('assignment_id')
@@ -747,7 +747,7 @@ class DashboardDataService
     public function getInstructorReviewStudentQuizzes($user, $userWebinarsIds)
     {
         $query = QuizzesResult::query()->where('status', 'waiting')
-            ->whereHas('quiz', function ($query) use ($user, $userWebinarsIds) {
+            ->whereHas('quiz', function ($query) use ($user) {
                 $query->where('creator_id', $user->id);
             })
             ->with([
@@ -855,7 +855,9 @@ class DashboardDataService
         $total = deepClone($query)->count();
         $students = $query->limit(5)->get();
 
-        $totalActive = deepClone($query)
+        /** @var \Illuminate\Database\Eloquent\Builder $clonedQuery */
+        $clonedQuery = deepClone($query);
+        $totalActive = $clonedQuery
             ->whereHas('timesSpentOnCourse', function ($query) {
                 $query->where('page', 'learning_page');
             })

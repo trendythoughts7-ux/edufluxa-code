@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property float|int $total_spent
+ */
 class TimeSpentOnCourse extends Model
 {
     protected $table = "time_spent_on_courses";

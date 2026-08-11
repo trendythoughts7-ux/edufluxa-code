@@ -16,6 +16,7 @@ use Astrotomic\Translatable\Translatable;
  * @property int $absent_count
  * @property \App\Models\SessionAttendance|null $myAttendance
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\SessionAttendance[] $attendances
+ * @property \Illuminate\Database\Eloquent\Collection|\App\User[] $participatesUsers
  */
 class Session extends Model implements TranslatableContract
 {

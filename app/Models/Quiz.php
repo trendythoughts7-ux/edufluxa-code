@@ -18,6 +18,7 @@ use Astrotomic\Translatable\Translatable;
  * @property int $count
  * @property \App\Models\QuizzesResult|null $userLastResult
  * @property mixed $lastCertificate
+ * @property \Illuminate\Support\Carbon|string $submited_at
  * @property bool $can_download_certificate
  * @property string $result_status
  * @property mixed $user_grade
