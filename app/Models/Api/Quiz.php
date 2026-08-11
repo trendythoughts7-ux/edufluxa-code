@@ -114,6 +114,13 @@ class Quiz extends Model
         return false;
     }
 
+    public function getUserHasAccessAttribute()
+    {
+        $user = apiAuth();
+        $hasBought = $this->webinar->checkUserHasBought($user);
+        return ($user and $hasBought) ? true : false;
+    }
+
     public function getAuthPassedQuizAttribute()
     {
         $user = apiAuth();

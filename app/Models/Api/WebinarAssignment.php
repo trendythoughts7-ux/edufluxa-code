@@ -42,6 +42,13 @@ class WebinarAssignment extends Model
         return $query;
     }
 
+    public function getUserHasAccessAttribute()
+    {
+        $user = apiAuth();
+        $hasBought = $this->webinar->checkUserHasBought($user);
+        return ($user and $hasBought) ? true : false;
+    }
+
     public function getDeadlineTimeAttribute()
     {
         $user = apiAuth();
