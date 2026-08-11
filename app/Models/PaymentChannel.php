@@ -76,12 +76,7 @@ class PaymentChannel extends Model
         'Paytabs',
         'Cintepay',
         'Clickpay',
-        'Razorpay',,
-        'Chapa',
-        'Instamojo',
-        'Payfort',
-        'Sslcommerz',
-        'TapPayment'
+        'Razorpay',
         'Chapa',
         'Instamojo',
         'Payfort',
