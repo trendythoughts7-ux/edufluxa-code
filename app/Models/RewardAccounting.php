@@ -1,8 +1,14 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int|float $total_points
+ * @property int|float $spent_points
+ * @property int|float $available_points
+ */
+
 
 class RewardAccounting extends Model
 {
