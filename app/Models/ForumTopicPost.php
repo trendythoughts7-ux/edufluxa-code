@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $replies_count
+ * @property int $count
  */
 class ForumTopicPost extends Model
 {

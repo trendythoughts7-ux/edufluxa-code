@@ -8,6 +8,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @property bool $liked
+ * @property bool $bookmarked
+ * @property int $members_count
+ */
 class ForumTopic extends Model
 {
     use Sluggable;

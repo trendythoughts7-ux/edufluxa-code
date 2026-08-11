@@ -699,7 +699,7 @@ class ForumController extends Controller
 
                     if (file_exists($filePath)) {
                         $fileInfo = pathinfo($filePath);
-                        $type = (!empty($fileInfo) and !empty($fileInfo['extension'])) ? $fileInfo['extension'] : '';
+                        $type = !empty($fileInfo['extension']) ? $fileInfo['extension'] : '';
 
                         $fileName = str_replace(' ', '-', "attachment-{$attachment->id}");
                         $fileName = str_replace('.', '-', $fileName);

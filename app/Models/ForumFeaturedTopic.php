@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed $usersAvatars
+ */
 class ForumFeaturedTopic extends Model
 {
     protected $table = 'forum_featured_topics';
