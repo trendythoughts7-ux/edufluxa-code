@@ -10,6 +10,8 @@ use Astrotomic\Translatable\Translatable;
 
 /**
  * @property int $creator_id
+ * @property bool $check_previous_parts
+ * @property int|null $access_after_day
  *
  * Dynamic/computed properties (assigned at runtime, confirmed via trace, not schema columns):
  * @property string $locale

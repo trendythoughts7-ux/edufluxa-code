@@ -10,6 +10,14 @@ use Astrotomic\Translatable\Translatable;
 /**
  * @property string|null $locale Transient locale code set at runtime for API responses (not a DB column).
  * @property string|null $title Transient translated title set at runtime via getTitleAttribute() (not a DB column).
+ *
+ * SequenceContent trait stub properties (this classs table==webinar_chapters guard means
+ * these trait branches are never actually reached at runtime, but phpstan needs static declarations):
+ * @property mixed $chapter
+ * @property mixed $check_previous_parts
+ * @property mixed $creator_id
+ * @property mixed $chapter_id
+ * @property mixed $access_after_day
  */
 
 class WebinarChapter extends Model implements TranslatableContract
