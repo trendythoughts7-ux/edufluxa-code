@@ -124,6 +124,7 @@ class Category extends Model implements TranslatableContract
         $subCategories = $this->subCategories;
 
         foreach ($subCategories as $category) {
+            /** @var \App\Models\Category $category */
             $webinars = $webinars->merge($category->webinars);
         }
 
@@ -136,6 +137,7 @@ class Category extends Model implements TranslatableContract
         $subCategories = $this->subCategories;
 
         foreach ($subCategories as $category) {
+            /** @var \App\Models\Category $category */
             if (count($category->userOccupations)) {
                 foreach ($category->userOccupations as $occupation) {
                     if (!empty($occupation->user) and !$occupation->user->isUser() and !$occupation->user->isAdmin()) {
