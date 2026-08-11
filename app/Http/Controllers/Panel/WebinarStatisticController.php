@@ -139,7 +139,7 @@ class WebinarStatisticController extends Controller
         ];
     }
 
-    private function getPieChartsData($course, $studentsIds)
+    private function getPieChartsData(Webinar $course, $studentsIds)
     {
         $studentsUserRolesChart = $this->handleStudentsUserRolesChart($studentsIds);
         $courseProgressChart = $this->handleCourseProgressChart($course, $studentsIds);
@@ -341,7 +341,7 @@ class WebinarStatisticController extends Controller
         ];
     }
 
-    private function handleQuizStatusChart($webinar)
+    private function handleQuizStatusChart(Webinar $webinar)
     {
         $labels = [
             trans('quiz.passed'),
@@ -378,7 +378,7 @@ class WebinarStatisticController extends Controller
         ];
     }
 
-    private function handleAssignmentsStatusChart($webinar)
+    private function handleAssignmentsStatusChart(Webinar $webinar)
     {
         $labels = [
             trans('quiz.passed'),
@@ -480,8 +480,8 @@ class WebinarStatisticController extends Controller
         $assignmentsStat = $webinar->getAssignmentsLearningProgressStat($userId);
         $quizzesStat = $webinar->getQuizzesLearningProgressStat($userId);
 
-        $passed = $filesStat['passed'] + $sessionsStat['passed'] + $textLessonsStat['passed'] + $assignmentsStat['passed'] + $quizzesStat['passed'];
-        $count = $filesStat['count'] + $sessionsStat['count'] + $textLessonsStat['count'] + $assignmentsStat['count'] + $quizzesStat['count'];
+        $passed = (int)$filesStat['passed'] + (int)$sessionsStat['passed'] + (int)$textLessonsStat['passed'] + (int)$assignmentsStat['passed'] + (int)$quizzesStat['passed'];
+        $count = (int)$filesStat['count'] + (int)$sessionsStat['count'] + (int)$textLessonsStat['count'] + (int)$assignmentsStat['count'] + (int)$quizzesStat['count'];
 
         if ($passed > 0 and $count > 0) {
             $progress = ($passed * 100) / $count;
