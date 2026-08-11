@@ -54,7 +54,7 @@ class Subscribe extends Model implements TranslatableContract
         return $this->hasMany('App\Models\SubscribeUse', 'subscribe_id', 'id');
     }
 
-    public function specificationItems() // used just in query
+    public function specificationItems(): \Illuminate\Database\Eloquent\Relations\HasMany // used just in query
     {
         return $this->hasMany(SubscribeSpecificationItem::class, 'subscribe_id', 'id');
     }
