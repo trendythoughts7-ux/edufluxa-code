@@ -150,6 +150,9 @@ class WebinarShowService
         ];
     }
 
+    /**
+     * @param \App\Models\Webinar $course
+     */
     public function resolveCourseCommercePricingContext($course, $user, $canSale, $showInstallments)
     {
         $installments = null;
