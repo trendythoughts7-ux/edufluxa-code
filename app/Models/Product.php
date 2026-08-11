@@ -15,6 +15,8 @@ use Jorenvh\Share\ShareFacade;
 /**
  * @property int $creator_id
  * @property string|null $commission_type
+ * @property int|null $salesCountCache
+ * @property int|null $availabilityCount
  * @property int|null $delivery_fee
  */
 class Product extends Model implements TranslatableContract
