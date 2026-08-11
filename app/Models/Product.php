@@ -18,6 +18,8 @@ use Jorenvh\Share\ShareFacade;
  * @property int|null $salesCountCache
  * @property int|null $availabilityCount
  * @property int|null $delivery_fee
+ * @property int|float|null $total_sales
+ * @property \Carbon\Carbon|null $last_purchase_date
  */
 class Product extends Model implements TranslatableContract
 {
