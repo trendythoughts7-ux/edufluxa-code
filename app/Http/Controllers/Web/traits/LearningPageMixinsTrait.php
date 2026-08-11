@@ -36,7 +36,7 @@ trait LearningPageMixinsTrait
         }
 
         $query->with([
-            'chapters' => function ($query) use ($user) {
+            'chapters' => function ($query) {
                 $query->where('status', WebinarChapter::$chapterActive);
                 $query->orderBy('order', 'asc');
 
