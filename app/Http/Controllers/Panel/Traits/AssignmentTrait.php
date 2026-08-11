@@ -18,6 +18,7 @@ trait AssignmentTrait
 
     private function getAssignmentDeadline(&$assignment, $user)
     {
+        /** @var \App\Models\WebinarAssignment $assignment */
         $assignment->deadlineTime = null;
 
         if (!empty($assignment->deadline)) {
@@ -160,6 +161,7 @@ trait AssignmentTrait
             ->get();
 
         foreach ($assignments as &$assignment) {
+            /** @var \App\Models\WebinarAssignment $assignment */
 
             $assignment->deadlineTime = $assignment->getDeadlineTimestamp($user);
 

@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use App\Models\Traits\SequenceContent;
+/**
+ * @property int|bool|null $deadlineTime
+ * @property int $usedAttemptsCount
+ * @property \Carbon\Carbon|null $last_submission
+ * @property \Carbon\Carbon|null $first_submission
+ * @property \Illuminate\Support\Collection $someStudents
+ */
 
 class WebinarAssignment extends Model implements TranslatableContract
 {
