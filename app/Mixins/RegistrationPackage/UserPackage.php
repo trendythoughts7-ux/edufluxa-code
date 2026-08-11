@@ -24,6 +24,10 @@ class UserPackage
     public $activation_date;
     public $days_remained;
     public $expire_at;
+    public $ai_content_access;
+    public $icon;
+    public $remained_days_percent;
+    public $days;
 
     private $user;
 
@@ -196,7 +200,7 @@ class UserPackage
         $result = false; // no limit
         $usedCount = 0;
 
-        if (!empty($package) and !is_null($package->{$type})) {
+        if (!is_null($package->{$type})) {
             switch ($type) {
                 case 'instructors_count':
                     $usedCount = $user->getOrganizationTeachers()->count();
