@@ -8,6 +8,8 @@ use Spatie\CalendarLinks\Link;
 
 /**
  * @property-read int $meeting_id
+ * @property bool $isAgora
+ * @property string|null $agoraLink
  */
 class ReserveMeeting extends Model
 {
