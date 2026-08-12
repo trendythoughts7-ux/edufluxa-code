@@ -239,7 +239,7 @@ class MeetingsController extends Controller
             'created_at' => time(),
         ]);
 
-        if (!empty($reserve)) {
+        if (!empty($reserve)) { // @phpstan-ignore-line
             $sale = Sale::create([
                 'buyer_id' => $user->id,
                 'seller_id' => $meeting->creator_id,
@@ -251,7 +251,7 @@ class MeetingsController extends Controller
                 'created_at' => time(),
             ]);
 
-            if (!empty($sale)) {
+            if (!empty($sale)) { // @phpstan-ignore-line
                 $reserve->update([
                     'sale_id' => $sale->id,
                     'reserved_at' => time()

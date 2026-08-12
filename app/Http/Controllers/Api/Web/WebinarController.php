@@ -99,7 +99,7 @@ class WebinarController extends Controller
         $user = apiAuth();
         $webinar = Webinar::where('id', $id)
             ->with([
-                'chapters' => function ($query) use ($user) {
+                'chapters' => function ($query) {
                     $query->where('status', WebinarChapter::$chapterActive);
                     $query->orderBy('order', 'asc');
 
@@ -452,7 +452,7 @@ class WebinarController extends Controller
                 'isDownloadable' => $webinar->isDownloadable(),
                 'support' => $webinar->support ? true : false,
                 'certificate' => ($webinar->quizzes->where('certificate', 1)->count() > 0) ? true : false,
-                'quizzes_count' => $webinar->quizzes->where('status', \App\models\Quiz::ACTIVE)->count(),
+                'quizzes_count' => $webinar->quizzes->where('status', \App\Models\Quiz::ACTIVE)->count(),
                 'is_favorite' => $is_favorite,
                 'students_count' => $webinar->sales->count(),
                 'tags' => $webinar->tags,

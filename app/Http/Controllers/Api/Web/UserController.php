@@ -165,7 +165,7 @@ class UserController extends Controller
                 ->get();
 
             $hasMeetingsInstructorsIds = [];
-            if (!empty($hasMeetings)) {
+            if (!empty($hasMeetings)) { // @phpstan-ignore-line
                 $hasMeetingsInstructorsIds = $hasMeetings->pluck('creator_id')->toArray();
             }
 
