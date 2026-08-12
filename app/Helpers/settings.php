@@ -63,7 +63,7 @@ function getGeneralSettings($key = null)
  * "new_interactive_file" | "timezone_in_register" | "timezone_in_create_webinar"
  * "sequence_content_status" | "webinar_assignment_status" | "webinar_private_content_status" | "disable_view_content_after_user_register"
  * "direct_classes_payment_button_status" | "mobile_app_status" | "cookie_settings_status" | "show_other_register_method" | "show_certificate_additional_in_register"
- * @return
+ * @return mixed
  * */
 function getFeaturesSettings($key = null)
 {
@@ -106,7 +106,7 @@ function getSMSChannelsSettings($key = null)
 /**
  * @param null $key
  * $key => cookie_settings_modal_message | cookie_settings_modal_items
- * @return
+ * @return mixed
  * */
 function getCookieSettings($key = null)
 {
@@ -116,7 +116,7 @@ function getCookieSettings($key = null)
 
 /**
  * @param $key
- * @return array|[commission, tax, minimum_payout, currency, currency_position, price_display]
+ * @return array
  */
 function getFinancialSettings($key = null)
 {
