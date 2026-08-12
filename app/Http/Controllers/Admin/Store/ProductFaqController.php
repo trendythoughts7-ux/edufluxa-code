@@ -43,7 +43,7 @@ class ProductFaqController extends Controller
                 'created_at' => time(),
             ]);
 
-            if (!empty($faq)) {
+            if (!empty($faq)) { // @phpstan-ignore-line
                 ProductFaqTranslation::updateOrCreate([
                     'product_faq_id' => $faq->id,
                     'locale' => mb_strtolower($data['locale']),

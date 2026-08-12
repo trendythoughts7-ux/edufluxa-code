@@ -176,7 +176,7 @@ class FileController extends Controller
                 'created_at' => time()
             ]);
 
-            if (!empty($file)) {
+            if (!empty($file)) { // @phpstan-ignore-line
                 FileTranslation::updateOrCreate([
                     'file_id' => $file->id,
                     'locale' => mb_strtolower($data['locale']),

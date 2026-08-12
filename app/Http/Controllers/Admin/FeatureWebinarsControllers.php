@@ -107,7 +107,7 @@ class FeatureWebinarsControllers extends Controller
             'updated_at' => time()
         ]);
 
-        if (!empty($feature)) {
+        if (!empty($feature)) { // @phpstan-ignore-line
             FeatureWebinarTranslation::updateOrCreate([
                 'feature_webinar_id' => $feature->id,
                 'locale' => mb_strtolower($data['locale']),

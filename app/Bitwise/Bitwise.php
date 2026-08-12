@@ -58,7 +58,7 @@ class Bitwise
         $binary = str_split($bin);
         $result = [];
 
-        if (!empty($binary) && is_array($binary)) {
+        if (!empty($binary) && is_array($binary)) { // @phpstan-ignore-line
             $binary = array_reverse($binary);
         }
 

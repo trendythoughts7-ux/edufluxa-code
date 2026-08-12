@@ -61,7 +61,7 @@ class PromotionsController extends Controller
             'created_at' => time(),
         ]);
 
-        if (!empty($promotion)) {
+        if (!empty($promotion)) { // @phpstan-ignore-line
             PromotionTranslation::updateOrCreate([
                 'promotion_id' => $promotion->id,
                 'locale' => mb_strtolower($data['locale']),

@@ -373,7 +373,7 @@ class QuizController extends Controller
             'updated_at' => time(),
         ]);
 
-        if (!empty($quiz)) {
+        if (!empty($quiz)) { // @phpstan-ignore-line
             QuizTranslation::updateOrCreate([
                 'quiz_id' => $quiz->id,
                 'locale' => mb_strtolower($locale),

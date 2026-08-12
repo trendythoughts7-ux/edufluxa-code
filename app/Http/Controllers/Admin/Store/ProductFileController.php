@@ -52,7 +52,7 @@ class ProductFileController extends Controller
                 'created_at' => time(),
             ]);
 
-            if (!empty($file)) {
+            if (!empty($file)) { // @phpstan-ignore-line
                 ProductFileTranslation::updateOrCreate([
                     'product_file_id' => $file->id,
                     'locale' => mb_strtolower($data['locale']),

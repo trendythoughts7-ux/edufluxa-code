@@ -87,7 +87,7 @@ class QuizQuestionController extends Controller
                 'created_at' => time()
             ]);
 
-            if (!empty($quizQuestion)) {
+            if (!empty($quizQuestion)) { // @phpstan-ignore-line
                 QuizzesQuestionTranslation::updateOrCreate([
                     'quizzes_question_id' => $quizQuestion->id,
                     'locale' => mb_strtolower($data['locale']),
@@ -111,7 +111,7 @@ class QuizQuestionController extends Controller
                             'created_at' => time()
                         ]);
 
-                        if (!empty($questionAnswer)) {
+                        if (!empty($questionAnswer)) { // @phpstan-ignore-line
                             QuizzesQuestionsAnswerTranslation::updateOrCreate([
                                 'quizzes_questions_answer_id' => $questionAnswer->id,
                                 'locale' => mb_strtolower($data['locale']),

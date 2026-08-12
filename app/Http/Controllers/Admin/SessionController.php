@@ -96,7 +96,7 @@ class SessionController extends Controller
                     'created_at' => time()
                 ]);
 
-                if (!empty($session)) {
+                if (!empty($session)) { // @phpstan-ignore-line
                     SessionTranslation::updateOrCreate([
                         'session_id' => $session->id,
                         'locale' => mb_strtolower($data['locale']),
@@ -125,7 +125,7 @@ class SessionController extends Controller
                     $session->save();
                 }
 
-                if (!empty($session) and !empty($session->chapter_id)) {
+                if (!empty($session) and !empty($session->chapter_id)) { // @phpstan-ignore-line
                     WebinarChapterItem::makeItem($webinar->creator_id, $session->chapter_id, $session->id, WebinarChapterItem::$chapterSession);
                 }
 

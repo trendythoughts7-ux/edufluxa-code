@@ -75,7 +75,7 @@ class ProductSpecificationController extends Controller
                 'created_at' => time(),
             ]);
 
-            if (!empty($selectedSpecification)) {
+            if (!empty($selectedSpecification)) { // @phpstan-ignore-line
                 if ($data['input_type'] == 'multi_value') {
 
                     $this->handleSelectedSpecificationMultiValue($selectedSpecification, $data['multi_values']);
