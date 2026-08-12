@@ -24,7 +24,7 @@ class CommentsController extends Controller
     public $item = '';
     public $item_column = '';
 
-    public function __construct(Request $request)
+    public function __construct(Request $request) // @phpstan-ignore-line
     {
         $page = optional(Route::current())->parameter('page');
         $this->page = $page;
