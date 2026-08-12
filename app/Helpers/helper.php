@@ -2023,7 +2023,7 @@ function checkEventTicketForSale(\App\Models\EventTicket $eventTicket, $user, $q
     }
 
     if (!is_null($event->purchase_limit_count)) {
-        $salesCount = $event->getAllSales($user, true);
+        $salesCount = (int)$event->getAllSales($user, true);
 
         if (($salesCount + $quantity) > $event->purchase_limit_count) {
             return [
