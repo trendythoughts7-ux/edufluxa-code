@@ -7,6 +7,9 @@ use App\Models\Observers\AccountingNumberObserver;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int|null $meeting_time_id
+ */
 class Accounting extends Model
 {
     protected $table = "accounting";

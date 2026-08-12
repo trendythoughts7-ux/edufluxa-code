@@ -12,6 +12,7 @@ use App\Models\Traits\SequenceContent;
  * @property \Carbon\Carbon|null $last_submission
  * @property \Carbon\Carbon|null $first_submission
  * @property \Illuminate\Support\Collection $someStudents
+ * @property string $locale
  */
 
 class WebinarAssignment extends Model implements TranslatableContract
