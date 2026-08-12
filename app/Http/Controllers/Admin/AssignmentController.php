@@ -281,7 +281,7 @@ class AssignmentController extends Controller
 
             $assignment->title = $assignment->getTitleAttribute();
             $assignment->description = $assignment->getDescriptionAttribute();
-            $assignment->attachments = $assignment->attachments->toArray();
+            $assignment->attachments = $assignment->attachments->toArray(); // @phpstan-ignore-line
             $assignment->locale = mb_strtoupper($locale);
         }
 

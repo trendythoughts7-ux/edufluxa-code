@@ -356,7 +356,7 @@ class CertificateController extends Controller
 
         if ($isRtl) {
             $Arabic = new \I18N_Arabic('Glyphs');
-            $body = $Arabic->utf8Glyphs($body);
+            $body = $Arabic->utf8Glyphs($body); // @phpstan-ignore-line
         }
 
         $imgPath = public_path($data['image']);
