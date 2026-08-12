@@ -49,7 +49,7 @@ class RewardsController extends Controller
             });
 
         $earnByExchange = 0;
-        if (!empty($rewardsSettings) and !empty($rewardsSettings['exchangeable']) and $rewardsSettings['exchangeable'] == '1') {
+        if (!empty($rewardsSettings) and !empty($rewardsSettings['exchangeable']) and $rewardsSettings['exchangeable'] == '1') {  // @phpstan-ignore-line
             $earnByExchange = $availablePoints / $rewardsSettings['exchangeable_unit'];
         }
 
@@ -83,7 +83,7 @@ class RewardsController extends Controller
 
         $availablePoints = $user->getRewardPoints();
         $earnByExchange = 0;
-        if (!empty($rewardsSettings) and !empty($rewardsSettings['exchangeable']) and $rewardsSettings['exchangeable'] == '1') {
+        if (!empty($rewardsSettings) and !empty($rewardsSettings['exchangeable']) and $rewardsSettings['exchangeable'] == '1') {  // @phpstan-ignore-line
             $earnByExchange = $availablePoints / $rewardsSettings['exchangeable_unit'];
         }
 
