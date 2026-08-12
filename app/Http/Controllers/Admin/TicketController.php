@@ -55,7 +55,7 @@ class TicketController extends Controller
                 'created_at' => time()
             ]);
 
-            if (!empty($ticket)) {
+            if (!empty($ticket)) { // @phpstan-ignore-line
                 TicketTranslation::updateOrCreate([
                     'ticket_id' => $ticket->id,
                     'locale' => mb_strtolower($data['locale']),

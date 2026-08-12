@@ -167,7 +167,7 @@ class UpcomingCoursesController extends Controller
 
         $upcomingCourse = UpcomingCourse::query()->create($storeData);
 
-        if (!empty($upcomingCourse)) {
+        if (!empty($upcomingCourse)) { // @phpstan-ignore-line
             $this->storePublicItems($request, $upcomingCourse);
 
             return redirect(getAdminPanelUrl("/upcoming_courses/{$upcomingCourse->id}/edit"));

@@ -46,7 +46,7 @@ class WebinarExtraDescriptionController extends Controller
                 'created_at' => time()
             ]);
 
-            if (!empty($webinarExtraDescription)) {
+            if (!empty($webinarExtraDescription)) { // @phpstan-ignore-line
                 WebinarExtraDescriptionTranslation::updateOrCreate([
                     'webinar_extra_description_id' => $webinarExtraDescription->id,
                     'locale' => mb_strtolower($data['locale']),

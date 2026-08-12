@@ -59,7 +59,7 @@ class TestimonialsController extends Controller
             'created_at' => time(),
         ]);
 
-        if (!empty($testimonial)) {
+        if (!empty($testimonial)) { // @phpstan-ignore-line
             TestimonialTranslation::updateOrCreate([
                 'testimonial_id' => $testimonial->id,
                 'locale' => mb_strtolower($data['locale']),

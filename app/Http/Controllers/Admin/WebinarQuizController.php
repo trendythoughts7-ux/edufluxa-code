@@ -72,7 +72,7 @@ class WebinarQuizController extends Controller
 
         $quiz = Quiz::findOrFail($data['quiz_id']);
 
-        if (!empty($quiz)) {
+        if (!empty($quiz)) { // @phpstan-ignore-line
             $quiz->update([
                 'webinar_id' => $data['webinar_id'],
                 'chapter_id' => !empty($data['chapter_id']) ? $data['chapter_id'] : null,

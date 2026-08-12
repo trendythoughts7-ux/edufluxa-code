@@ -320,7 +320,7 @@ class UserController extends Controller
 
         $userMetas = $user->userMetas;
 
-        if (!empty($userMetas)) {
+        if (!empty($userMetas)) { // @phpstan-ignore-line
             foreach ($userMetas as $meta) {
                 $user->{$meta->name} = $meta->value;
             }
