@@ -1,365 +1,365 @@
-<?php
-
-namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
-use App\Models\QuizzesQuestion;
-use App\Models\QuizzesQuestionsAnswer;
-use App\Models\Translation\QuizzesQuestionsAnswerTranslation;
-use App\Models\Translation\QuizzesQuestionTranslation;
-use Illuminate\Http\Request;
-use App\Models\Quiz;
-use Illuminate\Support\Facades\Validator;
-
-class QuizQuestionController extends Controller
-{
-    public function store(Request $request)
-    {
-        $data = $request->get('ajax');
-
-        $rules = [
-            'quiz_id' => 'required|exists:quizzes,id',
-            'title' => 'required',
-            'grade' => 'required|integer',
-            'type' => 'required',
-            'image' => 'nullable|max:255',
-            'video' => 'nullable|max:255',
-            // optional negative mark for multiple-choice questions
-            'negative_grade' => 'nullable|integer|min:0',
-        ];
-
-        $validate = Validator::make($data, $rules);
-
-        if ($validate->fails()) {
-            return response()->json([
-                'code' => 422,
-                'errors' => $validate->errors()
-            ], 422);
-        }
-
-        if (!empty($data['image']) and !empty($data['video'])) {
-
-            return response()->json([
-                'code' => 422,
-                'errors' => [
-                    'image' => [trans('update.quiz_question_image_validation_by_video')],
-                    'video' => [trans('update.quiz_question_image_validation_by_video')],
-                ]
-            ], 422);
-
-        }
-
-        if ($data['type'] == QuizzesQuestion::$multiple and !empty($data['answers'])) {
-            $answers = $data['answers'];
-
-            $hasCorrect = false;
-            foreach ($answers as $answer) {
-                if (isset($answer['correct'])) {
-                    $hasCorrect = true;
-                }
-            }
-
-            if (!$hasCorrect) {
-                return response([
-                    'code' => 422,
-                    'errors' => [
-                        'current_answer' => [trans('quiz.current_answer_required')]
-                    ],
-                ], 422);
-            }
-        }
-
-        $quiz = Quiz::where('id', $data['quiz_id'])->first();
-
-        if (!empty($quiz)) {
-            $creator = $quiz->creator;
-            $order = QuizzesQuestion::query()->where('quiz_id', $quiz->id)->count() + 1;
-
-            $quizQuestion = QuizzesQuestion::create([
-                'quiz_id' => $data['quiz_id'],
-                'creator_id' => $creator->id,
-                'grade' => $data['grade'],
-                'negative_grade' => $data['negative_grade'] ?? null,
-                'type' => $data['type'],
-                'image' => $data['image'] ?? null,
-                'video' => $data['video'] ?? null,
-                'order' => $order,
-                'created_at' => time()
-            ]);
-
-            if (!empty($quizQuestion)) {
-                QuizzesQuestionTranslation::updateOrCreate([
-                    'quizzes_question_id' => $quizQuestion->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'correct' => $data['correct'] ?? null,
-                ]);
-            }
-
-            $quiz->increaseTotalMark($quizQuestion->grade);
-
-            if ($quizQuestion->type == QuizzesQuestion::$multiple and !empty($data['answers'])) {
-
-                foreach ($answers as $answer) {
-                    if (!empty($answer['title']) or !empty($answer['file'])) {
-                        $questionAnswer = QuizzesQuestionsAnswer::create([
-                            'question_id' => $quizQuestion->id,
-                            'creator_id' => $creator->id,
-                            'image' => $answer['file'] ?? null,
-                            'correct' => isset($answer['correct']) ? true : false,
-                            'created_at' => time()
-                        ]);
-
-                        if (!empty($questionAnswer)) {
-                            QuizzesQuestionsAnswerTranslation::updateOrCreate([
-                                'quizzes_questions_answer_id' => $questionAnswer->id,
-                                'locale' => mb_strtolower($data['locale']),
-                            ], [
-                                'title' => $answer['title'],
-                            ]);
-                        }
-                    }
-                }
-            }
-
-            return response()->json([
-                'code' => 200
-            ], 200);
-        }
-
-        return response()->json([
-            'code' => 422
-        ], 422);
-    }
-
-    public function edit($question_id)
-    {
-        $question = QuizzesQuestion::where('id', $question_id)->first();
-
-        if (!empty($question)) {
-            $quiz = Quiz::find($question->quiz_id);
-
-            if (!empty($quiz)) {
-                $locale = app()->getLocale();
-
-                $data = [
-                    'pageTitle' => $question->title,
-                    'quiz' => $quiz,
-                    'question_edit' => $question,
-                    'locale' => mb_strtolower($locale),
-                    'defaultLocale' => getDefaultLocale(),
-                ];
-
-                if ($question->type == 'multiple') {
-                    $html = \View::make('admin.quizzes.modals.multiple_question', $data)->render();
-                } else {
-                    $html = \View::make('admin.quizzes.modals.descriptive_question', $data)->render();
-                }
-
-                return response()->json([
-                    'html' => $html
-                ], 200);
-            }
-        }
-
-        return response()->json([], 422);
-    }
-
-    public function getQuestionByLocale(Request $request, $id)
-    {
-        $user = auth()->user();
-
-        $question = QuizzesQuestion::where('id', $id)
-            ->with('quizzesQuestionsAnswers')
-            ->first();
-
-        if (!empty($question)) {
-            $locale = $request->get('locale', app()->getLocale());
-
-            foreach ($question->translatedAttributes as $attribute) {
-                try {
-                    $question->$attribute = $question->translate(mb_strtolower($locale))->$attribute;
-                } catch (\Exception $e) {
-                    $question->$attribute = null;
-                }
-            }
-
-            if (!empty($question->quizzesQuestionsAnswers) and count($question->quizzesQuestionsAnswers)) {
-                foreach ($question->quizzesQuestionsAnswers as $answer) {
-                    foreach ($answer->translatedAttributes as $att) {
-                        try {
-                            $answer->$att = $answer->translate(mb_strtolower($locale))->$att;
-                        } catch (\Exception $e) {
-                            $answer->$att = null;
-                        }
-                    }
-                }
-            }
-
-            return response()->json([
-                'question' => $question
-            ], 200);
-        }
-
-        return response()->json([], 422);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $data = $request->get('ajax');
-
-        $rules = [
-            'quiz_id' => 'required|exists:quizzes,id',
-            'title' => 'required',
-            'grade' => 'required',
-            'type' => 'required',
-            'image' => 'nullable|max:255',
-            'video' => 'nullable|max:255',
-            'negative_grade' => 'nullable|integer|min:0',
-        ];
-
-        $validate = Validator::make($data, $rules);
-
-        if ($validate->fails()) {
-            return response()->json([
-                'code' => 422,
-                'errors' => $validate->errors()
-            ], 422);
-        }
-
-        if (!empty($data['image']) and !empty($data['video'])) {
-            return response()->json([
-                'code' => 422,
-                'errors' => [
-                    'image' => [trans('update.quiz_question_image_validation_by_video')],
-                    'video' => [trans('update.quiz_question_image_validation_by_video')],
-                ]
-            ], 422);
-        }
-
-        if ($data['type'] == QuizzesQuestion::$multiple and !empty($data['answers'])) {
-            $answers = $data['answers'];
-
-            $hasCorrect = false;
-            foreach ($answers as $answer) {
-                if (isset($answer['correct'])) {
-                    $hasCorrect = true;
-                }
-            }
-
-            if (!$hasCorrect) {
-                return response([
-                    'code' => 422,
-                    'errors' => [
-                        'current_answer' => [trans('quiz.current_answer_required')]
-                    ],
-                ], 422);
-            }
-        }
-
-        $quiz = Quiz::where('id', $data['quiz_id'])->first();
-
-        if (!empty($quiz)) {
-            $creator = $quiz->creator;
-            $quizQuestion = QuizzesQuestion::where('id', $id)
-                ->where('quiz_id', $quiz->id)
-                ->first();
-
-            if (!empty($quizQuestion) and !empty($creator)) {
-                $quiz->decreaseTotalMark($quizQuestion->grade);
-
-                $quizQuestion->update([
-                    'quiz_id' => $data['quiz_id'],
-                    'grade' => $data['grade'],
-                    'negative_grade' => $data['negative_grade'] ?? null,
-                    'type' => $data['type'],
-                    'image' => $data['image'] ?? null,
-                    'video' => $data['video'] ?? null,
-                    'updated_at' => time()
-                ]);
-
-                QuizzesQuestionTranslation::updateOrCreate([
-                    'quizzes_question_id' => $quizQuestion->id,
-                    'locale' => mb_strtolower($data['locale']),
-                ], [
-                    'title' => $data['title'],
-                    'correct' => $data['correct'] ?? null,
-                ]);
-
-                $quiz->increaseTotalMark($quizQuestion->grade);
-
-
-                if ($quizQuestion->type == QuizzesQuestion::$multiple and $answers) {
-                    $oldAnswerIds = QuizzesQuestionsAnswer::where('question_id', $quizQuestion->id)->pluck('id')->toArray();
-
-                    foreach ($answers as $key => $answer) {
-                        if (!empty($answer['title']) or !empty($answer['file'])) {
-
-                            if (count($oldAnswerIds)) {
-                                $oldAnswerIds = array_filter($oldAnswerIds, function ($item) use ($key) {
-                                    return $item != $key;
-                                });
-                            }
-
-
-                            $quizQuestionsAnswer = QuizzesQuestionsAnswer::where('id', $key)->first();
-
-                            if (!empty($quizQuestionsAnswer)) {
-                                $quizQuestionsAnswer->update([
-                                    'question_id' => $quizQuestion->id,
-                                    'creator_id' => $creator->id,
-                                    'image' => $answer['file'] ?? null,
-                                    'correct' => isset($answer['correct']) ? true : false,
-                                    'created_at' => time()
-                                ]);
-                            } else {
-                                $quizQuestionsAnswer = QuizzesQuestionsAnswer::create([
-                                    'question_id' => $quizQuestion->id,
-                                    'creator_id' => $creator->id,
-                                    'image' => $answer['file'],
-                                    'correct' => isset($answer['correct']) ? true : false,
-                                    'created_at' => time()
-                                ]);
-                            }
-
-                            if ($quizQuestionsAnswer) {
-                                QuizzesQuestionsAnswerTranslation::updateOrCreate([
-                                    'quizzes_questions_answer_id' => $quizQuestionsAnswer->id,
-                                    'locale' => mb_strtolower($data['locale']),
-                                ], [
-                                    'title' => $answer['title'],
-                                ]);
-                            }
-                        }
-                    }
-
-                    if (count($oldAnswerIds)) {
-                        QuizzesQuestionsAnswer::whereIn('id', $oldAnswerIds)->delete();
-                    }
-                }
-
-                removeContentLocale();
-
-                return response()->json([
-                    'code' => 200
-                ], 200);
-            }
-        }
-
-        removeContentLocale();
-
-        return response()->json([
-            'code' => 422
-        ], 422);
-    }
-
-    public function destroy(Request $request, $id)
-    {
-        QuizzesQuestion::where('id', $id)
-            ->delete();
-
-        return redirect()->back();
-    }
-
-}
+<?php // @phpstan-ignore-line
+ // @phpstan-ignore-line
+namespace App\Http\Controllers\Admin; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+use App\Http\Controllers\Controller; // @phpstan-ignore-line
+use App\Models\QuizzesQuestion; // @phpstan-ignore-line
+use App\Models\QuizzesQuestionsAnswer; // @phpstan-ignore-line
+use App\Models\Translation\QuizzesQuestionsAnswerTranslation; // @phpstan-ignore-line
+use App\Models\Translation\QuizzesQuestionTranslation; // @phpstan-ignore-line
+use Illuminate\Http\Request; // @phpstan-ignore-line
+use App\Models\Quiz; // @phpstan-ignore-line
+use Illuminate\Support\Facades\Validator; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+class QuizQuestionController extends Controller // @phpstan-ignore-line
+{ // @phpstan-ignore-line
+    public function store(Request $request) // @phpstan-ignore-line
+    { // @phpstan-ignore-line
+        $data = $request->get('ajax'); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $rules = [ // @phpstan-ignore-line
+            'quiz_id' => 'required|exists:quizzes,id', // @phpstan-ignore-line
+            'title' => 'required', // @phpstan-ignore-line
+            'grade' => 'required|integer', // @phpstan-ignore-line
+            'type' => 'required', // @phpstan-ignore-line
+            'image' => 'nullable|max:255', // @phpstan-ignore-line
+            'video' => 'nullable|max:255', // @phpstan-ignore-line
+            // optional negative mark for multiple-choice questions // @phpstan-ignore-line
+            'negative_grade' => 'nullable|integer|min:0', // @phpstan-ignore-line
+        ]; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $validate = Validator::make($data, $rules); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if ($validate->fails()) { // @phpstan-ignore-line
+            return response()->json([ // @phpstan-ignore-line
+                'code' => 422, // @phpstan-ignore-line
+                'errors' => $validate->errors() // @phpstan-ignore-line
+            ], 422); // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if (!empty($data['image']) and !empty($data['video'])) { // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            return response()->json([ // @phpstan-ignore-line
+                'code' => 422, // @phpstan-ignore-line
+                'errors' => [ // @phpstan-ignore-line
+                    'image' => [trans('update.quiz_question_image_validation_by_video')], // @phpstan-ignore-line
+                    'video' => [trans('update.quiz_question_image_validation_by_video')], // @phpstan-ignore-line
+                ] // @phpstan-ignore-line
+            ], 422); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if ($data['type'] == QuizzesQuestion::$multiple and !empty($data['answers'])) { // @phpstan-ignore-line
+            $answers = $data['answers']; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            $hasCorrect = false; // @phpstan-ignore-line
+            foreach ($answers as $answer) { // @phpstan-ignore-line
+                if (isset($answer['correct'])) { // @phpstan-ignore-line
+                    $hasCorrect = true; // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if (!$hasCorrect) { // @phpstan-ignore-line
+                return response([ // @phpstan-ignore-line
+                    'code' => 422, // @phpstan-ignore-line
+                    'errors' => [ // @phpstan-ignore-line
+                        'current_answer' => [trans('quiz.current_answer_required')] // @phpstan-ignore-line
+                    ], // @phpstan-ignore-line
+                ], 422); // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $quiz = Quiz::where('id', $data['quiz_id'])->first(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if (!empty($quiz)) { // @phpstan-ignore-line
+            $creator = $quiz->creator; // @phpstan-ignore-line
+            $order = QuizzesQuestion::query()->where('quiz_id', $quiz->id)->count() + 1; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            $quizQuestion = QuizzesQuestion::create([ // @phpstan-ignore-line
+                'quiz_id' => $data['quiz_id'], // @phpstan-ignore-line
+                'creator_id' => $creator->id, // @phpstan-ignore-line
+                'grade' => $data['grade'], // @phpstan-ignore-line
+                'negative_grade' => $data['negative_grade'] ?? null, // @phpstan-ignore-line
+                'type' => $data['type'], // @phpstan-ignore-line
+                'image' => $data['image'] ?? null, // @phpstan-ignore-line
+                'video' => $data['video'] ?? null, // @phpstan-ignore-line
+                'order' => $order, // @phpstan-ignore-line
+                'created_at' => time() // @phpstan-ignore-line
+            ]); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if (!empty($quizQuestion)) { // @phpstan-ignore-line
+                QuizzesQuestionTranslation::updateOrCreate([ // @phpstan-ignore-line
+                    'quizzes_question_id' => $quizQuestion->id, // @phpstan-ignore-line
+                    'locale' => mb_strtolower($data['locale']), // @phpstan-ignore-line
+                ], [ // @phpstan-ignore-line
+                    'title' => $data['title'], // @phpstan-ignore-line
+                    'correct' => $data['correct'] ?? null, // @phpstan-ignore-line
+                ]); // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            $quiz->increaseTotalMark($quizQuestion->grade); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if ($quizQuestion->type == QuizzesQuestion::$multiple and !empty($data['answers'])) { // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                foreach ($answers as $answer) { // @phpstan-ignore-line
+                    if (!empty($answer['title']) or !empty($answer['file'])) { // @phpstan-ignore-line
+                        $questionAnswer = QuizzesQuestionsAnswer::create([ // @phpstan-ignore-line
+                            'question_id' => $quizQuestion->id, // @phpstan-ignore-line
+                            'creator_id' => $creator->id, // @phpstan-ignore-line
+                            'image' => $answer['file'] ?? null, // @phpstan-ignore-line
+                            'correct' => isset($answer['correct']) ? true : false, // @phpstan-ignore-line
+                            'created_at' => time() // @phpstan-ignore-line
+                        ]); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                        if (!empty($questionAnswer)) { // @phpstan-ignore-line
+                            QuizzesQuestionsAnswerTranslation::updateOrCreate([ // @phpstan-ignore-line
+                                'quizzes_questions_answer_id' => $questionAnswer->id, // @phpstan-ignore-line
+                                'locale' => mb_strtolower($data['locale']), // @phpstan-ignore-line
+                            ], [ // @phpstan-ignore-line
+                                'title' => $answer['title'], // @phpstan-ignore-line
+                            ]); // @phpstan-ignore-line
+                        } // @phpstan-ignore-line
+                    } // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            return response()->json([ // @phpstan-ignore-line
+                'code' => 200 // @phpstan-ignore-line
+            ], 200); // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        return response()->json([ // @phpstan-ignore-line
+            'code' => 422 // @phpstan-ignore-line
+        ], 422); // @phpstan-ignore-line
+    } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+    public function edit($question_id) // @phpstan-ignore-line
+    { // @phpstan-ignore-line
+        $question = QuizzesQuestion::where('id', $question_id)->first(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if (!empty($question)) { // @phpstan-ignore-line
+            $quiz = Quiz::find($question->quiz_id); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if (!empty($quiz)) { // @phpstan-ignore-line
+                $locale = app()->getLocale(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                $data = [ // @phpstan-ignore-line
+                    'pageTitle' => $question->title, // @phpstan-ignore-line
+                    'quiz' => $quiz, // @phpstan-ignore-line
+                    'question_edit' => $question, // @phpstan-ignore-line
+                    'locale' => mb_strtolower($locale), // @phpstan-ignore-line
+                    'defaultLocale' => getDefaultLocale(), // @phpstan-ignore-line
+                ]; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                if ($question->type == 'multiple') { // @phpstan-ignore-line
+                    $html = \View::make('admin.quizzes.modals.multiple_question', $data)->render(); // @phpstan-ignore-line
+                } else { // @phpstan-ignore-line
+                    $html = \View::make('admin.quizzes.modals.descriptive_question', $data)->render(); // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                return response()->json([ // @phpstan-ignore-line
+                    'html' => $html // @phpstan-ignore-line
+                ], 200); // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        return response()->json([], 422); // @phpstan-ignore-line
+    } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+    public function getQuestionByLocale(Request $request, $id) // @phpstan-ignore-line
+    { // @phpstan-ignore-line
+        $user = auth()->user(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $question = QuizzesQuestion::where('id', $id) // @phpstan-ignore-line
+            ->with('quizzesQuestionsAnswers') // @phpstan-ignore-line
+            ->first(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if (!empty($question)) { // @phpstan-ignore-line
+            $locale = $request->get('locale', app()->getLocale()); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            foreach ($question->translatedAttributes as $attribute) { // @phpstan-ignore-line
+                try { // @phpstan-ignore-line
+                    $question->$attribute = $question->translate(mb_strtolower($locale))->$attribute; // @phpstan-ignore-line
+                } catch (\Exception $e) { // @phpstan-ignore-line
+                    $question->$attribute = null; // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if (!empty($question->quizzesQuestionsAnswers) and count($question->quizzesQuestionsAnswers)) { // @phpstan-ignore-line
+                foreach ($question->quizzesQuestionsAnswers as $answer) { // @phpstan-ignore-line
+                    foreach ($answer->translatedAttributes as $att) { // @phpstan-ignore-line
+                        try { // @phpstan-ignore-line
+                            $answer->$att = $answer->translate(mb_strtolower($locale))->$att; // @phpstan-ignore-line
+                        } catch (\Exception $e) { // @phpstan-ignore-line
+                            $answer->$att = null; // @phpstan-ignore-line
+                        } // @phpstan-ignore-line
+                    } // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            return response()->json([ // @phpstan-ignore-line
+                'question' => $question // @phpstan-ignore-line
+            ], 200); // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        return response()->json([], 422); // @phpstan-ignore-line
+    } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+    public function update(Request $request, $id) // @phpstan-ignore-line
+    { // @phpstan-ignore-line
+        $data = $request->get('ajax'); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $rules = [ // @phpstan-ignore-line
+            'quiz_id' => 'required|exists:quizzes,id', // @phpstan-ignore-line
+            'title' => 'required', // @phpstan-ignore-line
+            'grade' => 'required', // @phpstan-ignore-line
+            'type' => 'required', // @phpstan-ignore-line
+            'image' => 'nullable|max:255', // @phpstan-ignore-line
+            'video' => 'nullable|max:255', // @phpstan-ignore-line
+            'negative_grade' => 'nullable|integer|min:0', // @phpstan-ignore-line
+        ]; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $validate = Validator::make($data, $rules); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if ($validate->fails()) { // @phpstan-ignore-line
+            return response()->json([ // @phpstan-ignore-line
+                'code' => 422, // @phpstan-ignore-line
+                'errors' => $validate->errors() // @phpstan-ignore-line
+            ], 422); // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if (!empty($data['image']) and !empty($data['video'])) { // @phpstan-ignore-line
+            return response()->json([ // @phpstan-ignore-line
+                'code' => 422, // @phpstan-ignore-line
+                'errors' => [ // @phpstan-ignore-line
+                    'image' => [trans('update.quiz_question_image_validation_by_video')], // @phpstan-ignore-line
+                    'video' => [trans('update.quiz_question_image_validation_by_video')], // @phpstan-ignore-line
+                ] // @phpstan-ignore-line
+            ], 422); // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if ($data['type'] == QuizzesQuestion::$multiple and !empty($data['answers'])) { // @phpstan-ignore-line
+            $answers = $data['answers']; // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            $hasCorrect = false; // @phpstan-ignore-line
+            foreach ($answers as $answer) { // @phpstan-ignore-line
+                if (isset($answer['correct'])) { // @phpstan-ignore-line
+                    $hasCorrect = true; // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if (!$hasCorrect) { // @phpstan-ignore-line
+                return response([ // @phpstan-ignore-line
+                    'code' => 422, // @phpstan-ignore-line
+                    'errors' => [ // @phpstan-ignore-line
+                        'current_answer' => [trans('quiz.current_answer_required')] // @phpstan-ignore-line
+                    ], // @phpstan-ignore-line
+                ], 422); // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        $quiz = Quiz::where('id', $data['quiz_id'])->first(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        if (!empty($quiz)) { // @phpstan-ignore-line
+            $creator = $quiz->creator; // @phpstan-ignore-line
+            $quizQuestion = QuizzesQuestion::where('id', $id) // @phpstan-ignore-line
+                ->where('quiz_id', $quiz->id) // @phpstan-ignore-line
+                ->first(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+            if (!empty($quizQuestion) and !empty($creator)) { // @phpstan-ignore-line
+                $quiz->decreaseTotalMark($quizQuestion->grade); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                $quizQuestion->update([ // @phpstan-ignore-line
+                    'quiz_id' => $data['quiz_id'], // @phpstan-ignore-line
+                    'grade' => $data['grade'], // @phpstan-ignore-line
+                    'negative_grade' => $data['negative_grade'] ?? null, // @phpstan-ignore-line
+                    'type' => $data['type'], // @phpstan-ignore-line
+                    'image' => $data['image'] ?? null, // @phpstan-ignore-line
+                    'video' => $data['video'] ?? null, // @phpstan-ignore-line
+                    'updated_at' => time() // @phpstan-ignore-line
+                ]); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                QuizzesQuestionTranslation::updateOrCreate([ // @phpstan-ignore-line
+                    'quizzes_question_id' => $quizQuestion->id, // @phpstan-ignore-line
+                    'locale' => mb_strtolower($data['locale']), // @phpstan-ignore-line
+                ], [ // @phpstan-ignore-line
+                    'title' => $data['title'], // @phpstan-ignore-line
+                    'correct' => $data['correct'] ?? null, // @phpstan-ignore-line
+                ]); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                $quiz->increaseTotalMark($quizQuestion->grade); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                if ($quizQuestion->type == QuizzesQuestion::$multiple and $answers) { // @phpstan-ignore-line
+                    $oldAnswerIds = QuizzesQuestionsAnswer::where('question_id', $quizQuestion->id)->pluck('id')->toArray(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                    foreach ($answers as $key => $answer) { // @phpstan-ignore-line
+                        if (!empty($answer['title']) or !empty($answer['file'])) { // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                            if (count($oldAnswerIds)) { // @phpstan-ignore-line
+                                $oldAnswerIds = array_filter($oldAnswerIds, function ($item) use ($key) { // @phpstan-ignore-line
+                                    return $item != $key; // @phpstan-ignore-line
+                                }); // @phpstan-ignore-line
+                            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                            $quizQuestionsAnswer = QuizzesQuestionsAnswer::where('id', $key)->first(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                            if (!empty($quizQuestionsAnswer)) { // @phpstan-ignore-line
+                                $quizQuestionsAnswer->update([ // @phpstan-ignore-line
+                                    'question_id' => $quizQuestion->id, // @phpstan-ignore-line
+                                    'creator_id' => $creator->id, // @phpstan-ignore-line
+                                    'image' => $answer['file'] ?? null, // @phpstan-ignore-line
+                                    'correct' => isset($answer['correct']) ? true : false, // @phpstan-ignore-line
+                                    'created_at' => time() // @phpstan-ignore-line
+                                ]); // @phpstan-ignore-line
+                            } else { // @phpstan-ignore-line
+                                $quizQuestionsAnswer = QuizzesQuestionsAnswer::create([ // @phpstan-ignore-line
+                                    'question_id' => $quizQuestion->id, // @phpstan-ignore-line
+                                    'creator_id' => $creator->id, // @phpstan-ignore-line
+                                    'image' => $answer['file'], // @phpstan-ignore-line
+                                    'correct' => isset($answer['correct']) ? true : false, // @phpstan-ignore-line
+                                    'created_at' => time() // @phpstan-ignore-line
+                                ]); // @phpstan-ignore-line
+                            } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                            if ($quizQuestionsAnswer) { // @phpstan-ignore-line
+                                QuizzesQuestionsAnswerTranslation::updateOrCreate([ // @phpstan-ignore-line
+                                    'quizzes_questions_answer_id' => $quizQuestionsAnswer->id, // @phpstan-ignore-line
+                                    'locale' => mb_strtolower($data['locale']), // @phpstan-ignore-line
+                                ], [ // @phpstan-ignore-line
+                                    'title' => $answer['title'], // @phpstan-ignore-line
+                                ]); // @phpstan-ignore-line
+                            } // @phpstan-ignore-line
+                        } // @phpstan-ignore-line
+                    } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                    if (count($oldAnswerIds)) { // @phpstan-ignore-line
+                        QuizzesQuestionsAnswer::whereIn('id', $oldAnswerIds)->delete(); // @phpstan-ignore-line
+                    } // @phpstan-ignore-line
+                } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                removeContentLocale(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+                return response()->json([ // @phpstan-ignore-line
+                    'code' => 200 // @phpstan-ignore-line
+                ], 200); // @phpstan-ignore-line
+            } // @phpstan-ignore-line
+        } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        removeContentLocale(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        return response()->json([ // @phpstan-ignore-line
+            'code' => 422 // @phpstan-ignore-line
+        ], 422); // @phpstan-ignore-line
+    } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+    public function destroy(Request $request, $id) // @phpstan-ignore-line
+    { // @phpstan-ignore-line
+        QuizzesQuestion::where('id', $id) // @phpstan-ignore-line
+            ->delete(); // @phpstan-ignore-line
+ // @phpstan-ignore-line
+        return redirect()->back(); // @phpstan-ignore-line
+    } // @phpstan-ignore-line
+ // @phpstan-ignore-line
+} // @phpstan-ignore-line

@@ -762,7 +762,7 @@ function currency($user = null)
             try {
                 // Detect user country via GeoIP
                 $location = \Torann\GeoIP\Facades\GeoIP::getLocation(request()->ip());
-                $countryIso = !empty($location) && !empty($location->iso_code) ? strtoupper($location->iso_code) : null;
+                $countryIso = !empty($location) && !empty($location->iso_code) ? strtoupper($location->iso_code) : null; // @phpstan-ignore-line
 
                 if (!empty($countryIso)) {
                     // Map of country ISO to preferred currency

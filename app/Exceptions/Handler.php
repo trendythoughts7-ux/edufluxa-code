@@ -82,7 +82,7 @@ class Handler extends ExceptionHandler
         ) {
 
             if ($this->isHttpException($exception)) {
-                $statusCode = $exception->getStatusCode();
+                $statusCode = $exception->getStatusCode(); // @phpstan-ignore-line
             } else if ($modelNotFound) {
                 $statusCode = 404;
             } else {

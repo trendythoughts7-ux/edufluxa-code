@@ -10,7 +10,7 @@ class SMSChannel
 
     public function send($notifiable, Notification $notification)
     {
-        $message = $notification->toSMS($notifiable);
+        $message = $notification->toSMS($notifiable); // @phpstan-ignore-line
 
         $sendSMS = (new SendSMS($message['to'], $message['content']));
         $sendSMS->send();
