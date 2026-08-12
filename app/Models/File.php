@@ -9,6 +9,8 @@ use App\Models\Traits\SequenceContent;
 
 /**
  * @property string $storage
+ * @property string $file_path
+ * @property string $locale
  */
 class File extends Model implements TranslatableContract
 {

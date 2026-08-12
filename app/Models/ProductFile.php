@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+/**
+ * @property string $locale
+ */
 class ProductFile extends Model implements TranslatableContract
 {
     use Translatable;

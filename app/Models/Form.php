@@ -7,6 +7,9 @@ use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $users_count
+ */
 class Form extends Model implements TranslatableContract
 {
     use Translatable;

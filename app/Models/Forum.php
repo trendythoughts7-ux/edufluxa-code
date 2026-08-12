@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 
+/**
+ * @property int $topics_count
+ * @property int $posts_count
+ */
 class Forum extends Model implements TranslatableContract
 {
     use Translatable;
