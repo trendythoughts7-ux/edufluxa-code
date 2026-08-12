@@ -86,7 +86,7 @@ class SubscribesController extends Controller
         $userLoginHistoryMixin = new UserLoginHistoryMixin();
         $userLoginHistoryMixin->storeUserLoginHistory($user);
 
-        return view('api.subscribe', compact('amount', 'id'))->withHeaders('X-Frame-Options', 'ALLOWALL');
+        return view('api.subscribe', compact('amount', 'id'))->withHeaders(['X-Frame-Options' => 'ALLOWALL']);
     }
 
     public function pay(Request $request)
@@ -243,6 +243,7 @@ class SubscribesController extends Controller
                 trans('site.you_dont_have_active_subscribe')
             );
         }
+        $item = null;
         if ($item_name == 'webinar') {
             $item = Webinar::where('id', $item_id)
                 ->where('status', 'active')
