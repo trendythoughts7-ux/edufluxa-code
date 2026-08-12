@@ -56,6 +56,7 @@ class FavoritesController extends Controller
         $userId = apiAuth()->id;
         $item = $request->input('item');
         $id = $request->input('id');
+        $itemObj = null;
         if ($item == 'webinar') {
             $itemObj = $webinar = Webinar::where('id', $id)
                 ->where('status', 'active')

@@ -140,7 +140,7 @@ class MeetingsController extends Controller
                 'created_at' => time(),
             ]);
 
-            if (!empty($reserve)) {
+            if (!empty($reserve)) { // @phpstan-ignore-line
                 $sale = Sale::create([
                     'buyer_id' => $user->id,
                     'seller_id' => $meeting->creator_id,
@@ -152,7 +152,7 @@ class MeetingsController extends Controller
                     'created_at' => time(),
                 ]);
 
-                if (!empty($sale)) {
+                if (!empty($sale)) { // @phpstan-ignore-line
                     $reserve->update([
                         'sale_id' => $sale->id,
                         'reserved_at' => time()
@@ -172,7 +172,7 @@ class MeetingsController extends Controller
         $reserveMeetingsQuery = ReserveMeeting::where('user_id', $user->id)
             ->whereHas('sale');
 
-        $openReserveCount = deepClone($reserveMeetingsQuery)->where('status', \App\models\ReserveMeeting::$open)->count();
+        $openReserveCount = deepClone($reserveMeetingsQuery)->where('status', \App\Models\ReserveMeeting::$open)->count();
         $totalReserveCount = deepClone($reserveMeetingsQuery)->count();
 
         $meetingIds = deepClone($reserveMeetingsQuery)->pluck('meeting_id')->toArray();
