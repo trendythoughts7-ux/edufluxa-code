@@ -77,7 +77,7 @@ class ForgotPasswordController extends Controller
             'email' => $request->input('email')
         ];
 
-        Mail::send('admin.auth.password_verify', $emailData, function ($message) use ($request, $user, $generalSettings) {
+        Mail::send('admin.auth.password_verify', $emailData, function ($message) use ($user, $generalSettings) {
             $message->from(!empty($generalSettings['site_email']) ? $generalSettings['site_email'] : env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
             $message->to($user->email);
             $message->subject('Reset Password Notification');
