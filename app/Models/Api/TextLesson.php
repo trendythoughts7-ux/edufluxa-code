@@ -7,6 +7,7 @@ use App\Models\TextLesson as WebTextLesson;
 
 /**
  * @property string $locale
+ * @property int $index
  */
 class TextLesson extends WebTextLesson
 {
