@@ -123,7 +123,7 @@ class Handler extends ExceptionHandler
         } elseif ($e instanceof AuthorizationException) {
             $status = Response::HTTP_FORBIDDEN;
             $e = new AuthorizationException('HTTP_FORBIDDEN', $status);
-        } elseif ($e instanceof \Dotenv\Exception\ValidationException && $e->getResponse()) {
+        } elseif ($e instanceof \Dotenv\Exception\ValidationException) {
 
             $status = Response::HTTP_BAD_REQUEST;
             $e = new \Dotenv\Exception\ValidationException('HTTP_BAD_REQUEST', $status, $e);
