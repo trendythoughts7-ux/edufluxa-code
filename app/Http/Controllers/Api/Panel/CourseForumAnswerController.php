@@ -80,7 +80,7 @@ class CourseForumAnswerController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param \App\Models\CourseForumAnswer $answer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CourseForumAnswer $answer)
@@ -133,7 +133,7 @@ class CourseForumAnswerController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function destroy($id)
     {
