@@ -49,6 +49,7 @@ class QuizQuestionController extends Controller
 
         }
 
+        $answers = [];
         if ($data['type'] == QuizzesQuestion::$multiple and !empty($data['answers'])) {
             $answers = $data['answers'];
 
@@ -237,6 +238,7 @@ class QuizQuestionController extends Controller
                 ]
             ], 422);
         }
+        $answers = [];
 
         if ($data['type'] == QuizzesQuestion::$multiple and !empty($data['answers'])) {
             $answers = $data['answers'];
