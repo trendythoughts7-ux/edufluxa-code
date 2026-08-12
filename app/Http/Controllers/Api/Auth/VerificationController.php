@@ -12,7 +12,7 @@ use Illuminate\Validation\Rule;
 class VerificationController extends Controller
 {
 
-    public function checkConfirmed($user = null, $username, $value)
+    public function checkConfirmed($user, $username, $value)
     {
         $disableRegistrationVerificationProcess = getGeneralOptionsSettings('disable_registration_verification_process');
 
