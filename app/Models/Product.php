@@ -20,6 +20,7 @@ use Jorenvh\Share\ShareFacade;
  * @property int|null $delivery_fee
  * @property int|float|null $total_sales
  * @property \Carbon\Carbon|null $last_purchase_date
+ * @property array|null $cashbackRules
  */
 class Product extends Model implements TranslatableContract
 {
