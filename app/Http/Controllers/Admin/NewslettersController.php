@@ -75,7 +75,7 @@ class NewslettersController extends Controller
             'description' => $description,
             'send_method' => $data['send_method'],
             'bcc_email' => $data['bcc_email'] ?? null,
-            'email_count' => $send ?? 0,
+            'email_count' => $send,
             'created_at' => time(),
         ]);
 
