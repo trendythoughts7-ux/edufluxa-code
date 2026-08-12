@@ -34,7 +34,7 @@ class AssignmentController extends Controller
 
 
         $assignments = $query->handleFilters()->orderBy('created_at', 'desc')
-            ->get()->map(function ($assignment) use ($user) {
+            ->get()->map(function ($assignment) {
                 //  dd($assignment->assignmentHistory->where('student_id', $user->id)->get()) ;
                 return $assignment->assignmentHistory;
             });

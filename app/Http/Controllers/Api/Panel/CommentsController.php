@@ -235,6 +235,7 @@ class CommentsController extends Controller
 
 
         $comment = Comment::where('id', $id)->first();
+        $item_name = null;
         if ($comment->webinar_id) {
             $item_name = 'webinar_id';
         } elseif ($comment->blog_id) {
@@ -301,6 +302,7 @@ class CommentsController extends Controller
             abort(404);
         }
         $item_name = null;
+        $idd = null;
         if ($comment->webinar_id) {
             $idd= $comment->webinar_id;
             $item_name = 'webinar_id';
