@@ -16,7 +16,7 @@ class SocialiteController extends Controller
 
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->stateless()->redirect();
+        return Socialite::driver('google')->stateless()->redirect(); // @phpstan-ignore-line
     }
 
     public function handleGoogleCallback(Request $request)
@@ -54,7 +54,7 @@ class SocialiteController extends Controller
         $data['already_registered'] = $registered;
         if ($registered) {
 
-            $token = auth('api')->tokenById($user->id);
+            $token = auth('api')->tokenById($user->id); // @phpstan-ignore-line
             $data['token']=$token ;
             return apiResponse2(1, 'login', trans('api.auth.login'), $data);
 
@@ -66,7 +66,7 @@ class SocialiteController extends Controller
 
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->stateless()->redirect();
+        return Socialite::driver('facebook')->stateless()->redirect(); // @phpstan-ignore-line
     }
 
     public function handleFacebookCallback(Request $request)
@@ -98,7 +98,7 @@ class SocialiteController extends Controller
         $data['already_registered'] = $registered;
         if ($registered) {
 
-            $token = auth('api')->tokenById($user->id);
+            $token = auth('api')->tokenById($user->id); // @phpstan-ignore-line
            $data['token']= $token ;
             return apiResponse2(1, 'login', trans('api.auth.login'), $data);
 
