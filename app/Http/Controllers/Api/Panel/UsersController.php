@@ -242,7 +242,7 @@ class UsersController extends Controller
             $user->update([
                 'password' => User::generatePassword($request->input('new_password'))
             ]);
-            $token = auth('api')->refresh();
+            $token = auth('api')->refresh();  // @phpstan-ignore-line
 
             return apiResponse2(1, 'updated', trans('api.public.updated'), [
                 'token' => $token

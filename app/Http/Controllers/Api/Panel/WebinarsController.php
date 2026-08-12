@@ -47,8 +47,8 @@ class WebinarsController extends Controller
     {
         return [
             'my_classes' => $this->myClasses($request),
-            'purchases' => $this->purchases($request),
-            'organizations' => $this->organizations($request),
+            'purchases' => $this->purchases(),
+            'organizations' => $this->organizations(),
             'invitations' => $this->invitations($request),
         ];
     }
