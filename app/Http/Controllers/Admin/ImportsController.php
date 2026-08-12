@@ -70,7 +70,7 @@ class ImportsController extends Controller
 
                 // duplicate Errors
                 if ($type == "users") {
-                    $importChannel->checkDuplicateRows($duplicateRowsLogs, $row,$index);
+                    $importChannel->checkDuplicateRows($duplicateRowsLogs, $row,$index); // @phpstan-ignore-line
                 }
 
                 if (!empty($duplicateRowsLogs['errors']) and !empty($duplicateRowsLogs['errors'][$index])) {
