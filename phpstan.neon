@@ -103,6 +103,14 @@ parameters:
                 - app/Models/Bundle.php
                 - app/Models/Webinar.php
         -
+            # Group 3: $activePackage from UserPackage::getPackage(), which has a non-nullable
+            # `: UserPackage` return-type declaration - every code path (make()/getDefaultPackage())
+            # returns a valid instance, never null. Larastan correctly flags the empty() guard as dead.
+            # Verified full method body in app/Mixins/RegistrationPackage/UserPackage.php before adding.
+            message: '#^Variable \$activePackage in empty\(\) always exists and is not falsy\.$#'
+            paths:
+                - app/Http/Controllers/Panel/EventsCalendarController.php
+        -
             # Confirmed ionCube-encrypted vendor classes (App\Services\*LicenseService, App\Models\PurchaseCode) -
             # phpstan cannot parse encrypted PHP, so it reports every reference to them as an unknown
             # class/type/constant. Verified identical pattern to ThemeBuilderLicenseController (already closed).
