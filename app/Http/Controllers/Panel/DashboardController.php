@@ -98,7 +98,7 @@ class DashboardController extends Controller
                 $query->where('webinars.creator_id', $user->id);
                 $query->orWhere('webinars.teacher_id', $user->id);
             })
-            ->leftJoin('sales', function ($join) use ($user) {
+            ->leftJoin('sales', function ($join) {
                 $join->on('sales.webinar_id', '=', 'webinars.id');
                 $join->whereNull('sales.refund_at');
                 //$join->where('sales.amount', '>', '0');

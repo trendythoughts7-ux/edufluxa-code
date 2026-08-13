@@ -539,7 +539,7 @@ trait AssignmentTrait
         $query->orderBy('created_at', 'desc');
         $query->limit(4);
         $query->with([
-            'assignment' => function ($query) use ($user) {
+            'assignment' => function ($query) {
                 $query->with([
                     'webinar',
                 ]);

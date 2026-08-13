@@ -70,7 +70,7 @@ class GeneratedCertificatesController extends Controller
                     $query->orWhereHas('webinar', function (Builder $query) use ($user, $type, $typeItemId) {
                         $query->where('status', 'active')
                             ->where('certificate', true)
-                            ->where(function (Builder $query) use ($user, $type, $typeItemId) {
+                            ->where(function (Builder $query) use ($user) {
                                 $query->where('creator_id', $user->id);
                                 $query->orWhere('teacher_id', $user->id);
                             });
@@ -85,7 +85,7 @@ class GeneratedCertificatesController extends Controller
                     $query->orWhereHas('bundle', function (Builder $query) use ($user, $type, $typeItemId) {
                         $query->where('status', 'active')
                             ->where('certificate', true)
-                            ->where(function (Builder $query) use ($user, $type, $typeItemId) {
+                            ->where(function (Builder $query) use ($user) {
                                 $query->where('creator_id', $user->id);
                                 $query->orWhere('teacher_id', $user->id);
                             });
