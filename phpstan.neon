@@ -51,6 +51,19 @@ parameters:
             message: '#^Access to an undefined property Unicodeveloper\\Paystack\\Paystack::\$url\.$#'
             path: app/PaymentChannels/Drivers/Paystack/Channel.php
         -
+            # Jorenvh\Share\ShareFacade uses @method page(...) docblock magic (standard Laravel
+            # facade pattern) which Larastan cannot resolve for this package, flagging it as a
+            # static-call-to-instance-method. Verified vendor source: Share::page() exists and
+            # works correctly at runtime via the facade accessor.
+            message: '#^Static call to instance method Jorenvh\\Share\\ShareFacade::page\(\)\.$#'
+            paths:
+                - app/Models/Blog.php
+                - app/Models/Bundle.php
+                - app/Models/Event.php
+                - app/Models/Product.php
+                - app/Models/UpcomingCourse.php
+                - app/Models/Webinar.php
+        -
             # Confirmed ionCube-encrypted vendor classes (App\Services\*LicenseService, App\Models\PurchaseCode) -
             # phpstan cannot parse encrypted PHP, so it reports every reference to them as an unknown
             # class/type/constant. Verified identical pattern to ThemeBuilderLicenseController (already closed).
