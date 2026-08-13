@@ -26,9 +26,10 @@ class Accounting extends Model
 
     public function getBalanceTypeAttribute(){
 
+        $balance_type = null;
         if ($this->type == Accounting::$addiction) {
             $balance_type = 'addition';
-        } elseif ($this->type = Accounting::$deduction) {
+        } elseif ($this->type == Accounting::$deduction) {
             $balance_type = 'deduction';
         }
 
