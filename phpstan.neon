@@ -210,6 +210,42 @@ parameters:
                 - app/Http/Controllers/Panel/EventSoldTicketsController.php
                 - app/Http/Controllers/Panel/GeneratedCertificatesController.php
                 - app/Models/ForumTopic.php
+        -
+            # Group 9: Webinar::$noticeboards_count - Larastan auto-infers a virtual
+            # read-only "{relation}_count" property for any real relation method
+            # (noticeboards() is a genuine HasMany, app/Models/Webinar.php:222), and
+            # flags direct assignment as "not writable" per its withCount()/loadCount()
+            # convention. Same underlying mechanism and same resolution as Group 6:
+            # $webinar here is used purely as an in-memory carrier to pre-compute the
+            # count once and avoid a second query - confirmed no ->save()/->update()
+            # call on $webinar anywhere in this method (joinToAgora(), SessionController.php:
+            # 511-627). The value is read back downstream via $session->webinar (the
+            # same cached relation instance, since Eloquent caches loaded relations) in
+            # the agora/index.blade.php view's top_header and noticeboards/index
+            # includes, which read $course->noticeboards_count - so this assignment has
+            # a real, intentional effect (N+1 avoidance), not dead code. Traced per Rule K.
+            message: '#^Property App\\Models\\Webinar::\$noticeboards_count is not writable\.$#'
+            path: app/Http/Controllers/Panel/SessionController.php
+        -
+            # Group 10: ProductOrder::$buyer and Sale::$buyer - both are genuine Eloquent
+            # BelongsTo relation methods (ProductOrder.php:34, Sale.php:60), so Larastan
+            # correctly flags direct assignment as "not writable" per Eloquent's normal
+            # rules - same underlying mechanism as Group 6. Both are in-memory-carrier
+            # substitutions for gift-based purchases, where the real buyer_id relation
+            # doesn't represent the actual recipient: the gift's receipt user (or a
+            # synthetic unregistered-recipient User for display) is substituted in place
+            # of the relation so downstream code reads the right person's data without
+            # an extra query or a schema change. Confirmed no ->save()/->update() call on
+            # either $productOrder or $sale after the assignment in either method - the
+            # value is read straight back downstream: MyPurchaseController.php's own
+            # 'buyer' => $productOrder->buyer view-data key a few lines later, and
+            # WebinarStudents.php's $sale->buyer->full_name/email/mobile Excel export
+            # columns. Traced per Rule K.
+            message: '#^Property App\\Models\\ProductOrder::\$buyer is not writable\.$#'
+            path: app/Http/Controllers/Panel/Store/MyPurchaseController.php
+        -
+            message: '#^Property App\\Models\\Sale::\$buyer is not writable\.$#'
+            path: app/Http/Controllers/Panel/WebinarController.php
     paths:
         - app
     excludePaths:
