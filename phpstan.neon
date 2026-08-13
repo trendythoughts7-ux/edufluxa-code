@@ -36,9 +36,6 @@ parameters:
             message: '#^Access to an undefined property Laravel\\Socialite\\Contracts\\User::\$(id|email|name)\.$#'
             path: app/Http/Controllers/Auth/SocialiteController.php
         -
-            message: '#^Call to an undefined method object\{quantity: int, product: mixed\}::update\(\)\.$#'
-            path: app/Http/Controllers/Web/CartManagerController.php
-        -
             message: '#^Call to an undefined static method SebaCarrasco93\\LaravelPayku\\Facades\\LaravelPayku::create\(\)\.$#'
             path: app/PaymentChannels/Drivers/Payku/Channel.php
         -

@@ -478,10 +478,12 @@ class CartManagerController extends Controller
                 }
 
                 if ($isDB) {
-                    $cartItem->productOrder->update([
-                        'quantity' => $quantity
-                    ]);
-
+                    $productOrder = $cartItem->productOrder;
+                    if ($productOrder instanceof \App\Models\ProductOrder) {
+                        $productOrder->update([
+                            'quantity' => $quantity
+                        ]);
+                    }
                 } else {
                     $newData = [
                         'item_id' => $product->id,
