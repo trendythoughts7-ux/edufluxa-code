@@ -53,7 +53,7 @@ class PanelWebinarUpdateService
                     $query->where('creator_id', $user->id)
                         ->orWhere('teacher_id', $user->id);
                 });
-                $query->orWhereHas('webinarPartnerTeacher', function ($query) use ($user) {
+                $query->orWhereHas('webinarPartnerTeacher', function ($query) {
                 });
             });
         if ($step == '1') {

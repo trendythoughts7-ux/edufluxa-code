@@ -17,7 +17,7 @@ class FeatureWebinar extends Model
         $limit = $request->get('limit', null);
         $category = $request->get('cat', null);
 
-        $query->whereHas('webinar', function ($q) use ($category) {
+        $query->whereHas('webinar', function ($q) {
             $q->where('status', \App\Models\Webinar::$active);
         });
 

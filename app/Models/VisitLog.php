@@ -173,7 +173,7 @@ class VisitLog extends Model
                     $query->orWhere('webinars.teacher_id', $user->id);
                 })->pluck('id')->toArray();
 
-            $query->where(function (Builder $query) use ($user, $userWebinarsIds) {
+            $query->where(function (Builder $query) use ($userWebinarsIds) {
                 $query->where('targetable_type', MorphTypesEnum::WEBINAR);
                 $query->whereIn('targetable_id', $userWebinarsIds);
             });

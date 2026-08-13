@@ -41,7 +41,7 @@ class WebinarShowService
                 'webinarExtraDescription' => function ($query) {
                     $query->orderBy('order', 'asc');
                 },
-                'chapters' => function ($query) use ($user) {
+                'chapters' => function ($query) {
                     $query->where('status', WebinarChapter::$chapterActive);
                     $query->orderBy('order', 'asc');
 
