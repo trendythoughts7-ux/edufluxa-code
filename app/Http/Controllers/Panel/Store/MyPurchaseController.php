@@ -62,6 +62,7 @@ class MyPurchaseController extends Controller
 
         $canceledOrders = deepClone($copyQuery)->where('status', ProductOrder::$canceled)->count();
 
+        /** @var object{totalAmount: string}|null $totalPurchase */
         $totalPurchase = deepClone($copyQuery)
             ->join('sales', 'sales.product_order_id', 'product_orders.id')
             ->select(DB::raw("sum(total_amount) as totalAmount"))

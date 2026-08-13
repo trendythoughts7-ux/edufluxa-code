@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $webinar_title
+ * @property bool $required
  */
 class Prerequisite extends Model
 {

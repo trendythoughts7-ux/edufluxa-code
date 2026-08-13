@@ -6,6 +6,21 @@ use App\Models\Api\Traits\CheckForSaleTrait;
 use App\Models\Favorite;
 use App\Models\Bundle as Model;
 
+/**
+ * NOTE: Bundle does not currently have a start_date column or a
+ * prerequisites relation (unlike Webinar, which has both). The
+ * $this->start_date and $this->prerequisites accesses in
+ * CheckForSaleTrait (shared with Webinar) resolve to null for Bundle
+ * via Eloquent's default magic getter and are guarded by
+ * !empty()/short-circuit checks in every call site - this is a
+ * silent no-op for Bundle, not a crash. Declared here to accurately
+ * reflect current behavior. If Bundle should support prerequisites or
+ * a sale start_date in the future, that is a real feature addition
+ * (new relation/column), not a phpstan-only fix - flagging for a
+ * deliberate product decision rather than assuming one.
+ * @property string|null $start_date
+ * @property \Illuminate\Database\Eloquent\Collection|null $prerequisites
+ */
 class Bundle extends Model
 {
     use CheckForSaleTrait;

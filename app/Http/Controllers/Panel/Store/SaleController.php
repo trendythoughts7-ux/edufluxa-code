@@ -42,6 +42,7 @@ class SaleController extends Controller
         $pendingOrders = deepClone($copyQuery)->where('product_orders.status', ProductOrder::$waitingDelivery)->count();
         $canceledOrders = deepClone($copyQuery)->where('product_orders.status', ProductOrder::$canceled)->count();
 
+        /** @var object{totalAmount: string}|null $totalSales */
         $totalSales = deepClone($copyQuery)
             ->join('sales', 'sales.product_order_id', 'product_orders.id')
             ->select(DB::raw('(sum(sales.total_amount) - (sum(sales.tax) + sum(sales.commission))) as totalAmount')) // DB::raw("sum(sales.total_amount) as totalAmount")
