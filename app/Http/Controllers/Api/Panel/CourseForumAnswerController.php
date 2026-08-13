@@ -80,7 +80,7 @@ class CourseForumAnswerController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\CourseForumAnswer $answer
+     * @param \App\Models\Api\CourseForumAnswer $answer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, CourseForumAnswer $answer)
