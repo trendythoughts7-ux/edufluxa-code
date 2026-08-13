@@ -164,7 +164,7 @@ class InstructorWebinarMiscService
                 ->first();
 
             if (!empty($sale)) {
-                $webinar->purchast_date = $sale->created_at;
+                $webinar->purchase_date = $sale->created_at;
             }
         }
 

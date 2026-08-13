@@ -39,7 +39,7 @@ class ReserveMeetingController extends Controller
             return $pageListData;
         }
 
-        $openReserveCount = deepClone($reserveMeetingsQuery)->where('status', \App\models\ReserveMeeting::$open)->count();
+        $openReserveCount = deepClone($reserveMeetingsQuery)->where('status', ReserveMeeting::$open)->count();
         $totalReserveCount = deepClone($reserveMeetingsQuery)->count();
 
         $meetingIds = deepClone($reserveMeetingsQuery)->pluck('meeting_id')->toArray();
@@ -122,7 +122,7 @@ class ReserveMeetingController extends Controller
             return $pageListData;
         }
 
-        $pendingReserveCount = deepClone($reserveMeetingsQuery)->where('status', \App\models\ReserveMeeting::$pending)->count();
+        $pendingReserveCount = deepClone($reserveMeetingsQuery)->where('status', ReserveMeeting::$pending)->count();
         $totalReserveCount = deepClone($reserveMeetingsQuery)->count();
         $sumReservePaid = deepClone($reserveMeetingsQuery)->sum('paid_amount');
 

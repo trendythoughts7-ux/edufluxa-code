@@ -36,7 +36,7 @@
                     <span class="ml-2">{{ $webinar->sales_count }} {{ trans('public.students') }}</span>
                 </div>
                 <div class="d-flex align-items-center">
-                    <span>{{ trans('panel.purchase_date') }}: {{ dateTimeFormat($webinar->purchast_date, 'Y-m-d', false) }}</span>
+                    <span>{{ trans('panel.purchase_date') }}: {{ dateTimeFormat($webinar->purchase_date, 'Y-m-d', false) }}</span>
                 </div>
             </div>
 

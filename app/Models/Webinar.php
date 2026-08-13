@@ -23,6 +23,7 @@ use Spatie\CalendarLinks\Link;
  * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Sale[] $sales
  * @property mixed $lastCertificate
  * @property int|float $total_time_spent
+ * @property \Illuminate\Support\Carbon|null $purchase_date
  */
 class Webinar extends Model implements TranslatableContract
 {
