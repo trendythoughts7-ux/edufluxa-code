@@ -21,10 +21,22 @@ use App\Models\Badge;
  *    require their own query per user. They are only computed when the
  *    caller explicitly asks for them via $with, so existing call-sites that
  *    only need the base shape see zero performance change.
- *  - Batch-safe: when $with includes 'badges' or 'courses_count' and $users
- *    is a collection of many users (e.g. a paginated blog list with several
- *    distinct authors), the underlying queries are issued once per UNIQUE
- *    user id, not once per row - avoiding N+1 blow-up on list endpoints.
+ *  - N+1-proof regardless of call pattern: badges and courses_count are
+ *    memoized in a static, request-scoped cache keyed by user id. This
+ *    protects both call patterns used across the codebase:
+ *      (a) bulk collection calls, e.g. UserObj::brief($users, false, [...])
+ *          where $users has many distinct authors, and
+ *      (b) repeated single calls from a per-model accessor invoked in a
+ *          loop, e.g. Blog::getDetailsAttribute() calling
+ *          UserObj::brief($this->author, true, [...]) once per blog while
+ *          mapping a list of blogs.
+ *    Without this cache, pattern (b) would issue one badges/courses query
+ *    PER ROW even for repeat authors, since each call only "sees" a single
+ *    user and has no visibility into sibling rows. The static cache makes
+ *    the second and further calls for the same user id free, no matter
+ *    which pattern triggered them. PHP-FPM/Laravel serves one HTTP request
+ *    per process lifecycle, so this cache naturally resets between
+ *    requests and never leaks data across users.
  *
  * @see \App\Models\Api\User::getBriefAttribute() for the older, heavier
  *      "brief" shape used internally (dashboard/panel contexts). UserObj is
@@ -37,6 +49,13 @@ class UserObj
      * Fields that require an extra query and are therefore opt-in only.
      */
     private const EXPENSIVE_FIELDS = ['title', 'badges', 'courses_count'];
+
+    /**
+     * Request-scoped memoization caches, keyed by user id.
+     * Reset automatically at the start of every new HTTP request/process.
+     */
+    private static array $badgesCache = [];
+    private static array $courseCountCache = [];
 
     /**
      * Build the "brief" representation of one user or a collection of users.
@@ -58,13 +77,10 @@ class UserObj
 
         $with = array_intersect($with, self::EXPENSIVE_FIELDS);
 
-        // Pre-compute expensive, batchable fields once per UNIQUE user id
-        // so a list of N users with only a handful of distinct authors
-        // doesn't pay N separate queries.
-        $badgesByUserId = [];
-        $courseCountByUserId = [];
+        $needsBadges = in_array('badges', $with, true);
+        $needsCourseCount = in_array('courses_count', $with, true);
 
-        if (in_array('badges', $with, true) || in_array('courses_count', $with, true)) {
+        if ($needsBadges || $needsCourseCount) {
             $uniqueUsers = $collection
                 ->filter()
                 ->unique(function ($user) {
@@ -72,8 +88,8 @@ class UserObj
                 });
 
             foreach ($uniqueUsers as $user) {
-                if (in_array('badges', $with, true)) {
-                    $badgesByUserId[$user->id] = collect(Badge::getUserBadges($user, true, false))
+                if ($needsBadges && !array_key_exists($user->id, self::$badgesCache)) {
+                    self::$badgesCache[$user->id] = collect(Badge::getUserBadges($user, true, false))
                         ->filter()
                         ->map(function ($badge) {
                             return [
@@ -86,13 +102,13 @@ class UserObj
                         ->all();
                 }
 
-                if (in_array('courses_count', $with, true)) {
-                    $courseCountByUserId[$user->id] = $user->getActiveWebinars(true);
+                if ($needsCourseCount && !array_key_exists($user->id, self::$courseCountCache)) {
+                    self::$courseCountCache[$user->id] = $user->getActiveWebinars(true);
                 }
             }
         }
 
-        $result = $collection->map(function ($user) use ($with, $badgesByUserId, $courseCountByUserId) {
+        $result = $collection->map(function ($user) use ($with, $needsBadges, $needsCourseCount) {
             if (empty($user)) {
                 return null;
             }
@@ -108,12 +124,12 @@ class UserObj
                 $brief['title'] = $user->level_of_training;
             }
 
-            if (in_array('badges', $with, true)) {
-                $brief['badges'] = $badgesByUserId[$user->id] ?? [];
+            if ($needsBadges) {
+                $brief['badges'] = self::$badgesCache[$user->id] ?? [];
             }
 
-            if (in_array('courses_count', $with, true)) {
-                $brief['courses_count'] = $courseCountByUserId[$user->id] ?? 0;
+            if ($needsCourseCount) {
+                $brief['courses_count'] = self::$courseCountCache[$user->id] ?? 0;
             }
 
             return $brief;
