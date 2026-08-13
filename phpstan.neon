@@ -140,6 +140,18 @@ parameters:
                 - app/Http/Controllers/Admin/MobileAppLicenseController.php
                 - app/Http/Controllers/Admin/PluginLicenseController.php
                 - app/Http/Controllers/Admin/ThemeBuilderLicenseController.php
+        -
+            # PurchaseCodeController.php itself is clean, uncompiled PHP - but its two
+            # dependencies (App\Services\LicenseService, App\Models\PurchaseCode) are
+            # ionCube-encrypted, so phpstan cannot reflect them and reports every reference
+            # (constructor param type, static method calls, constant access) as an unknown
+            # class. Verified at runtime via ReflectionClass: all 3 constants + 3 methods +
+            # class itself genuinely exist and are callable. Narrow, class-scoped rule (not a
+            # file-blanket fold like ThemeBuilderLicenseController) since the controller code
+            # itself is real and should stay checkable.
+            message: '#(unknown class App\\Services\\LicenseService|unknown class App\\Models\\PurchaseCode|invalid type App\\Services\\LicenseService)#'
+            path: app/Http/Controllers/Web/PurchaseCodeController.php
+            count: 11
     paths:
         - app
     excludePaths:
