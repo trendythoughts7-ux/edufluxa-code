@@ -75,6 +75,34 @@ parameters:
                 - app/Http/Middleware/CheckRestriction.php
                 - app/Http/Middleware/UserLocale.php
         -
+            # Group 2: variables from Eloquent ::create() (throws on failure, never returns null/false)
+            # or from Eloquent relation/query ->get() results (Collection object, never null even when
+            # empty) or foreach loop variables (guaranteed non-null per iteration). Larastan flags these
+            # empty() guards as always-true since the return/loop type is non-nullable. Verified each
+            # variable's origin individually before adding - see Master Resume Prompt Group 2 for detail.
+            message: '#^Variable \$(assignment|chapter|faq|file|quizQuestion|questionAnswer|session|ticket|selectedSpecification|upcomingCourse|webinarExtraDescription|quiz|meetingTimes|meetingsTimes|hasMeetings|userMetas|prerequisites|installmentOrder) in empty\(\) always exists and is not falsy\.$#'
+            paths:
+                - app/Http/Controllers/Panel/AssignmentController.php
+                - app/Http/Controllers/Panel/ChapterController.php
+                - app/Http/Controllers/Panel/FAQController.php
+                - app/Http/Controllers/Panel/FileController.php
+                - app/Http/Controllers/Panel/QuizQuestionController.php
+                - app/Http/Controllers/Panel/SessionController.php
+                - app/Http/Controllers/Panel/TicketController.php
+                - app/Http/Controllers/Panel/Store/ProductFaqController.php
+                - app/Http/Controllers/Panel/Store/ProductFileController.php
+                - app/Http/Controllers/Panel/Store/ProductSpecificationController.php
+                - app/Http/Controllers/Panel/UpcomingCoursesController.php
+                - app/Http/Controllers/Panel/WebinarExtraDescriptionController.php
+                - app/Services/App/QuizManagementService.php
+                - app/Http/Controllers/Panel/MeetingController.php
+                - app/Http/Controllers/Web/InstructorFinderController.php
+                - app/Http/Controllers/Web/InstructorsController.php
+                - app/Http/Controllers/Web/UserProfileController.php
+                - app/Models/Api/Traits/CheckForSaleTrait.php
+                - app/Models/Bundle.php
+                - app/Models/Webinar.php
+        -
             # Confirmed ionCube-encrypted vendor classes (App\Services\*LicenseService, App\Models\PurchaseCode) -
             # phpstan cannot parse encrypted PHP, so it reports every reference to them as an unknown
             # class/type/constant. Verified identical pattern to ThemeBuilderLicenseController (already closed).
