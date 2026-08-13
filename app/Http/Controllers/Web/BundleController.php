@@ -83,7 +83,7 @@ class BundleController extends Controller
 
         if (!empty($has_discount)) {
 
-            if (!empty($has_discount) and $has_discount == 'on') {
+            if ($has_discount == 'on') {
                 $now = time();
                 $webinarIdsHasDiscount = [];
 
