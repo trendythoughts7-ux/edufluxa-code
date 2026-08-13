@@ -16,7 +16,7 @@ interface IChannel
 
     /**
      * @param Order $order
-     * @return Order
+     * @return string|Order|null (drivers redirect via URL string on success, or return null/void on failure)
      */
     public function paymentRequest(Order $order);
 
