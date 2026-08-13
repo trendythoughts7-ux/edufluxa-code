@@ -35,7 +35,7 @@ class CourseForumAnswerPolicy
      * Determine whether the user can update the model.
      *
      * @param \App\User $user
-     * @param \App\Models\CourseForum $courseForum
+     * @param \App\Models\Api\CourseForumAnswer $courseForumAnswer
      * @return mixed
      */
     public function update(User $user,CourseForumAnswer $courseForumAnswer)

@@ -246,6 +246,48 @@ parameters:
         -
             message: '#^Property App\\Models\\Sale::\$buyer is not writable\.$#'
             path: app/Http/Controllers/Panel/WebinarController.php
+        -
+            # Group 11: vendor-package facade magic-proxy calls that Larastan cannot
+            # statically resolve, and the underlying vendor files cannot be safely
+            # edited (composer update would overwrite any inline docblock fix). All
+            # three traced individually per Rule K - not a blanket "trust all facades"
+            # rule, each confirmed to have a real underlying method that resolves at
+            # runtime via a magic __call()/facade-accessor chain:
+            # - MakeCertificate.php:160 - I18N_Arabic::utf8Glyphs() - the vendor
+            #   I18N_Arabic class has a real __call() (vendor/chehivskiy/i18n-arabic/
+            #   I18N/Arabic.php:247) that lazy-loads and forwards to
+            #   I18N_Arabic_Glyphs::utf8Glyphs(), which genuinely exists
+            #   (vendor/.../I18N/Arabic/Glyphs.php:385).
+            message: '#^Call to an undefined method I18N_Arabic::utf8Glyphs\(\)\.$#'
+            path: app/Mixins/Certificate/MakeCertificate.php
+        -
+            # - SendSMS.php:160 - Vonage\Laravel\Facade\Vonage::sms() - the facade
+            #   proxies to Vonage\Client, whose root Client class has a real __call()
+            #   (vendor/vonage/client-core/src/Client.php:495) that dynamically
+            #   resolves registered sub-API clients (sms is a standard Vonage SDK API
+            #   namespace) - Larastan cannot follow the dynamic API-registration chain.
+            message: '#^Call to an undefined static method Vonage\\Laravel\\Facade\\Vonage::sms\(\)\.$#'
+            path: app/Mixins/Notifications/SendSMS.php
+        -
+            # - SendSMS.php:186 - Msg91::otp()->to() - traced to a bug in the VENDOR
+            #   package's own facade docblock (vendor/craftsys/msg91-laravel/src/Facade/
+            #   Msg91.php:11), which annotates '@method static
+            #   \Craftsys\Msg91\Services\OTPService otp(...)' - but the real class is
+            #   \Craftsys\Msg91\OTP\OTPService (confirmed at vendor/craftsys/msg91-php/
+            #   src/OTP/OTPService.php, namespace Craftsys\Msg91\OTP), which does have a
+            #   real to() method (line 35). App code is correct; the vendor's own
+            #   @method annotation points to a nonexistent class. Cannot fix upstream.
+            message: '#^Call to method to\(\) on an unknown class Craftsys\\Msg91\\Services\\OTPService\.$#'
+            path: app/Mixins/Notifications/SendSMS.php
+        -
+            # - ZoomOAuth.php:25 - Jubaer\Zoom\Facades\Zoom::createMeeting() - standard
+            #   Laravel facade with no @method docblock annotations in the vendor
+            #   package (only a bare @see tag). The underlying bound class
+            #   Jubaer\Zoom\Zoom has a real createMeeting() method (vendor/jubaer/
+            #   zoom-laravel/src/Zoom.php:62) resolved at runtime via the facade's
+            #   getFacadeAccessor() -> app('zoom') container binding.
+            message: '#^Call to an undefined static method Jubaer\\Zoom\\Facades\\Zoom::createMeeting\(\)\.$#'
+            path: app/Sessions/ZoomOAuth.php
     paths:
         - app
     excludePaths:

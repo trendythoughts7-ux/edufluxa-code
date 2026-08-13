@@ -3,6 +3,9 @@
 namespace App\PaymentChannels;
 
 
+/**
+ * @property bool $test_mode Set dynamically in setCredentialItems() based on the payment channel's stored credentials; declared as `protected $test_mode` in every concrete Drivers subclass, e.g. Drivers/Stripe/Channel.php (confirmed via grep across ~50 driver classes) but not on this base class.
+ */
 class BasePaymentChannel
 {
 

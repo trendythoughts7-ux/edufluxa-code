@@ -74,8 +74,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        // NOTE: unrouted in this namespace (Api\Panel\ProductController) - the
+        // only wired 'ProductController@store' route (routes/panel.php:506)
+        // resolves to Panel\Store\ProductController@store, a different class.
+        // Safe fallback return added to honor the declared @return contract.
+        return response();
     }
 
     /**
@@ -87,11 +90,13 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::where('creator_id', apiAuth()->id)
-            ->where('id', $id)->get();
-        if (!$product) {
-            // abort(404);
+            ->where('id', $id)->first();
+
+        if (!empty($product)) {
+            return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), ['product' => new ProductResource($product)]);
         }
 
+        return apiResponse2(0, 'invalid', trans('api.public.invalid'));
     }
 
     public function purchasedComment()

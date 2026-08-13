@@ -10,6 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property int|null $bundle_id
  * @property int|null $reserve_meeting_id
  * @property-read \App\Models\ReserveMeeting|null $reserveMeeting
+ * @method array|null getItemInfo() Proxied via JsonResource's __call()/DelegatesToResource to the underlying Cart model's real getItemInfo() method (see Models/Cart.php:143).
  */
 class CartResource extends JsonResource
 {

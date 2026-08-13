@@ -11,6 +11,7 @@ use Astrotomic\Translatable\Translatable;
 /**
  * @property int|null $installment_order_id Transient runtime-only attribute (not a DB column) — set in installment-lookup flows (see Subscribe.php:116, Sale.php:326) to track originating installment order.
  * @property string $title Custom accessor via getTitleAttribute() (uses getTranslateAttributeValue()) — not resolved through Translatable magic getAttribute() despite being in $translatedAttributes.
+ * @property int|null $used_count Transient runtime-only attribute (not a DB column) — set in getActiveSubscribe() (Subscribe.php:146) to track usage against usable_count for the active subscription.
  */
 
 class Subscribe extends Model implements TranslatableContract
