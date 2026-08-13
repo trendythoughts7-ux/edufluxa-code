@@ -152,6 +152,18 @@ parameters:
             message: '#(unknown class App\\Services\\LicenseService|unknown class App\\Models\\PurchaseCode|invalid type App\\Services\\LicenseService)#'
             path: app/Http/Controllers/Web/PurchaseCodeController.php
             count: 11
+        -
+            # Group 5: $user (BecomeInstructorController::checkPackageHasInstallment) is
+            # guaranteed non-null - route is wrapped in 'web.auth' middleware group
+            # (routes/web.php, verified via brace-matching), which blocks unauthenticated
+            # requests before the controller runs. $notifyOptions (CronJobsController) is
+            # assigned unconditionally as a 3-key array literal directly above the guard,
+            # with no branch that could produce an empty array. Both traced individually
+            # per Rule K before adding.
+            message: '#^Variable \$(user|notifyOptions) in empty\(\) always exists and is not falsy\.$#'
+            paths:
+                - app/Http/Controllers/Web/BecomeInstructorController.php
+                - app/Http/Controllers/Web/CronJobsController.php
     paths:
         - app
     excludePaths:
