@@ -139,6 +139,7 @@ parameters:
             paths:
                 - app/Http/Controllers/Admin/MobileAppLicenseController.php
                 - app/Http/Controllers/Admin/PluginLicenseController.php
+                - app/Http/Controllers/Admin/ThemeBuilderLicenseController.php
     paths:
         - app
     excludePaths:
