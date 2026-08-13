@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed|null $comment_user_type NOTE: not a DB column (confirmed via Schema::getColumnListing), never assigned anywhere in the codebase (app/ or database/) — always resolves to null via Eloquent's default magic getter. Read in 2 places (this file's API subclass getDetailsAttribute(), CommentResource.php:87) but appears to be a vestigial/planned-but-unimplemented field. Silent no-op, not a crash. Flagging per project docs Section 2d convention - not resolved here, needs a product decision if the feature is still wanted.
+ */
 class Comment extends Model
 {
     protected $table = 'comments';

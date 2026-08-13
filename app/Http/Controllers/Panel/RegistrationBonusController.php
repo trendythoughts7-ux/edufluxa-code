@@ -127,6 +127,7 @@ class RegistrationBonusController extends Controller
                         $sale = $sales->where('buyer_id', $user->id)->first();
 
                         if (!empty($sale)) {
+                            /** @var object{totalPurchase: string}|null $sale */
                             $user->totalPurchase = $sale->totalPurchase;
                         } else {
                             $user->totalPurchase = 0;

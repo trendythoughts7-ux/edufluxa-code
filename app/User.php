@@ -60,6 +60,7 @@ use Illuminate\Support\Str;
  * @property string|null $purchase_date
  * @property float|int $learning
  * @property int $count
+ * @property string $profile_url Dynamic — assigned via getProfileUrl(), not a DB column (see Panel/UserController.php:549).
  * @property \App\Models\SessionAttendance|null $attendance
  * @property string|null $joined_at
  */
