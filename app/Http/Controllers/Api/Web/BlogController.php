@@ -61,7 +61,7 @@ BlogController extends Controller
     public function list(Request $request, $id = null)
     {
 
-        $query = Blog::where('status', 'publish')
+        $query = Blog::with('author')->where('status', 'publish')
             ->orderBy('updated_at', 'desc')
             ->orderBy('created_at', 'desc');
 
@@ -106,7 +106,7 @@ BlogController extends Controller
                 'description' => truncate($blog->description, 160),
                 'content' => $blog->content,
                 'created_at' => $blog->created_at,
-                'author' => UserObj::brief($blog->author, true),
+                'author' => UserObj::brief($blog->author, true, ['title', 'badges', 'courses_count']),
                 'comment_count' => $blog->comments->count(),
                 'comments' => $blog->comments->map(function ($item) {
                     return [
