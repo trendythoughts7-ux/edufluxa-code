@@ -367,7 +367,7 @@ class UsersController extends Controller
 
     public function fcm()
     {
-        $session = UserFirebaseSessions::where("token", request()->bearerToken())->get()->first();
+        $session = UserFirebaseSessions::where("token", request()->bearerToken())->first();
         abort_unless($session, 404);
         $session->fcm_token = \request("token");
         $session->save();

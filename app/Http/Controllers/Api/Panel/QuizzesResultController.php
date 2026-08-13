@@ -41,7 +41,7 @@ class QuizzesResultController extends Controller
         $user = apiAuth();
         $quizzes_id = Quiz::where('creator_id', $user->id)
             ->where('status', 'active')
-            ->get()->pluck('id')->toArray();
+            ->pluck('id')->toArray();
 
         $quizResults = QuizzesResult::whereIn('quiz_id', $quizzes_id)->handleFilters()
             ->orderBy('created_at', 'desc')
