@@ -97,6 +97,7 @@ class TranslateService
         if (!empty($content)) {
             return $this->translateRecursive($content, $google);
         }
+        return [];
     }
 
     private function translateRecursive($content, $google): array

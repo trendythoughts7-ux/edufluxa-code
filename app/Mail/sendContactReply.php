@@ -42,5 +42,6 @@ class sendContactReply extends Mailable
                     'generalSettings' => $generalSettings
                 ]);
         }
+        return $this;
     }
 }

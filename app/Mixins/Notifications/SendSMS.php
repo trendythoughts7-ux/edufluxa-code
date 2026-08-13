@@ -78,7 +78,7 @@ class SendSMS
         $twilio = new Client($account_sid, $auth_token);
 
 
-        $twilio->messages->create($this->to,
+        return $twilio->messages->create($this->to,
             [
                 'from' => $twilio_number,
                 'body' => $this->content

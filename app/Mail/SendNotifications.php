@@ -41,5 +41,6 @@ class SendNotifications extends Mailable
                     'generalSettings' => $generalSettings
                 ]);
         }
+        return $this;
     }
 }
