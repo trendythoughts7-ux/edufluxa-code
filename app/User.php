@@ -489,6 +489,10 @@ class User extends Authenticatable
         return $code;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
     public function userMetas()
     {
         return $this->hasMany('App\Models\UserMeta');
