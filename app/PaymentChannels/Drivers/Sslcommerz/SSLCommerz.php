@@ -226,7 +226,7 @@ class SSLCommerz
 
     }
 
-    public function orderValidate($trx_id = '', $amount = 0, $currency = "BDT", $post_data)
+    public function orderValidate($trx_id = '', $amount = 0, $currency = "BDT", $post_data = null)
     {
         if ($post_data == '' && $trx_id == '' && !is_array($post_data)) {
             $this->error = "Please provide valid transaction ID and post request data";
@@ -399,7 +399,7 @@ class SSLCommerz
     }
 
     # FUNCTION TO CHECK HASH VALUE
-    protected function SSLCOMMERZ_hash_varify($store_passwd = "", $post_data)
+    protected function SSLCOMMERZ_hash_varify($store_passwd = "", $post_data = null)
     {
 
         if (isset($post_data) && isset($post_data['verify_sign']) && isset($post_data['verify_key'])) {
@@ -407,6 +407,7 @@ class SSLCommerz
             $pre_define_key = explode(',', $post_data['verify_key']);
 
             $new_data = array();
+            // @phpstan-ignore-next-line (explode() with non-empty delimiter always returns a non-empty array)
             if (!empty($pre_define_key)) {
                 foreach ($pre_define_key as $value) {
                     if (isset($post_data[$value])) {
