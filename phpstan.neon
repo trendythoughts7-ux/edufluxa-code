@@ -190,6 +190,26 @@ parameters:
             # $gift due to the docblock name clash) - runtime behavior is correct.
             message: '#^Static access to instance property App\\Models\\Sale::\$gift\.$#'
             path: app/Http/Controllers/Web/GiftController.php
+        -
+            # Group 8: "Called 'count' on Laravel collection, but could have been retrieved
+            # as a query" - all 4 findings here follow the pattern ->groupBy(...)->get()->count().
+            # This is intentionally NOT a query-level ->count(), because groupBy() + a
+            # query-level aggregate count() in Laravel/MySQL does not return "number of
+            # distinct groups" - it returns a per-group count (or just the first group's
+            # count), which is a well-known Laravel foot-gun. The existing code correctly
+            # loads the grouped rows into a Collection first, then counts the Collection in
+            # PHP, to get the actual number of distinct groups. Converting to a query-level
+            # ->count() per Larastan's suggestion would silently change behavior and
+            # introduce a real counting bug. Traced (Rule K) each of the 3 call sites -
+            # EventSoldTicketsController::handleTopStats() (totalParticipantsCount,
+            # totalTicketTypes), GeneratedCertificatesController (totalStudentsCount),
+            # ForumTopic::getTopPosters()-style totals via $userIdsQuery - all follow the
+            # identical groupBy()->get()->count() shape for the same reason.
+            message: '#^Called ''count'' on Laravel collection, but could have been retrieved as a query\.$#'
+            paths:
+                - app/Http/Controllers/Panel/EventSoldTicketsController.php
+                - app/Http/Controllers/Panel/GeneratedCertificatesController.php
+                - app/Models/ForumTopic.php
     paths:
         - app
     excludePaths:
