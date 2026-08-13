@@ -31,6 +31,7 @@ BlogController extends Controller
                     }
                 ]);
             },
+            "author",
         ])->where('status', 'publish')->handleFilters()
 
         ->orderBy('updated_at', 'desc')

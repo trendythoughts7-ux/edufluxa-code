@@ -2,6 +2,7 @@
 
 namespace App\Models\Api;
 
+use App\Http\Controllers\Api\Objects\UserObj;
 use App\Models\Blog as Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
@@ -42,7 +43,7 @@ class Blog extends Model implements TranslatableContract
             'content' => $this->content,
             'created_at' => $this->created_at,
             'locale'=>$this->locale ,
-            'author' => $this->author->brief,
+            'author' => UserObj::brief($this->author, true, ['title', 'badges', 'courses_count']),
             'comment_count' => $this->comments()->where('status','active')->count(),
             'comments' => $this->comments()->where('status','active')
                 ->get()->map(function ($item) {
