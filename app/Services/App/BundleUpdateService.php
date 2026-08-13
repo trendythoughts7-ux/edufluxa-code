@@ -21,7 +21,7 @@ class BundleUpdateService
             $teacher = User::findOrFail($data['teacher_id']);
             $creator = $bundle->creator;
 
-            if (empty($teacher) or ($creator->isOrganization() and ($teacher->organ_id != $creator->id and $teacher->id != $creator->id))) {
+            if (($creator->isOrganization() and ($teacher->organ_id != $creator->id and $teacher->id != $creator->id))) {
                 return [
                     'title' => trans('public.request_failed'),
                     'msg' => trans('admin/main.is_not_the_teacher_of_this_organization'),

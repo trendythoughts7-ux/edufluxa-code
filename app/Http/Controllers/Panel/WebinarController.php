@@ -246,7 +246,7 @@ class WebinarController extends Controller
                     }
                 ])->get();
 
-            if (!empty($sales) and !$sales->isEmpty()) {
+            if (!$sales->isEmpty()) {
 
                 foreach ($sales as $sale) {
                     if (!empty($sale->gift_id)) {

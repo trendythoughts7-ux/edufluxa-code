@@ -33,7 +33,7 @@ class WebinarPolicy
         $access = false;
         if ($webinar->checkUserHasBought($user)) {
             $isPrivate = $webinar->private;
-            if (!empty($user) and ($user->id == $webinar->creator_id or $user->organ_id == $webinar->creator_id or $user->isAdmin())) {
+            if (($user->id == $webinar->creator_id or $user->organ_id == $webinar->creator_id or $user->isAdmin())) {
                 $isPrivate = false;
             }
             $access = true;

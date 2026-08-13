@@ -59,7 +59,7 @@ class CartMutationService
         $carts = Cart::where('creator_id', $user->id)
             ->get();
 
-        if (!empty($carts) and !$carts->isEmpty()) {
+        if (!$carts->isEmpty()) {
             $calculate = $this->cartPricingEngineService->calculatePrice($carts, $user, $discountCoupon);
 
             if (!empty($calculate)) {

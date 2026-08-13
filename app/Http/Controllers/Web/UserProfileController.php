@@ -349,7 +349,7 @@ class UserProfileController extends Controller
 
             $meetingTimes = $meeting->meetingTimes()->where('day_label', $dayLabel)->get();
 
-            if (!empty($meetingTimes) and count($meetingTimes)) {
+            if (count($meetingTimes)) {
 
                 foreach ($meetingTimes as $meetingTime) {
                     $can_reserve = true;

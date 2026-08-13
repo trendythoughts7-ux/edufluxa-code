@@ -95,8 +95,8 @@ class Affiliate extends Model
                     'created_at' => time(),
                 ]);
 
-                $affiliate_user_amount = (!empty($referralSettings) and !empty($referralSettings['affiliate_user_amount'])) ? $referralSettings['affiliate_user_amount'] : 0;
-                $referred_user_amount = (!empty($referralSettings) and !empty($referralSettings['referred_user_amount'])) ? $referralSettings['referred_user_amount'] : 0;
+                $affiliate_user_amount = !empty($referralSettings['affiliate_user_amount']) ? $referralSettings['affiliate_user_amount'] : 0;
+                $referred_user_amount = !empty($referralSettings['referred_user_amount']) ? $referralSettings['referred_user_amount'] : 0;
 
                 if ($affiliate_user_amount) {
                     Accounting::createAffiliateUserAmountAccounting($affiliateUser->id, $user->id, $affiliate_user_amount);

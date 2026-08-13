@@ -33,7 +33,7 @@ class CartManagementService
             ->get();
         $cartt = null;
 
-        if (!empty($carts) and !$carts->isEmpty()) {
+        if (!$carts->isEmpty()) {
             $calculate = $this->cartPricingEngineService->calculatePrice($carts, $user);
 
             $totalCashbackAmount = $this->cartPricingEngineService->getTotalCashbackAmount($carts, $user, $calculate["sub_total"]);
@@ -42,7 +42,7 @@ class CartManagementService
 
             $deliveryEstimateTime = 0;
 
-            if (!empty($hasPhysicalProduct) and count($hasPhysicalProduct)) {
+            if (count($hasPhysicalProduct)) {
                 foreach ($hasPhysicalProduct as $physicalProductCart) {
                     if (!empty($physicalProductCart->productOrder) and
                         !empty($physicalProductCart->productOrder->product) and

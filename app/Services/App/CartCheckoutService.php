@@ -35,7 +35,7 @@ class CartCheckoutService
         $carts = Cart::where('creator_id', $user->id)
             ->get();
 
-        if (!empty($carts) and !$carts->isEmpty()) {
+        if (!$carts->isEmpty()) {
             $calculate = $this->cartPricingEngineService->calculatePrice($carts, $user, $discountCoupon);
 
             $order = $this->createOrderAndOrderItems($carts, $calculate, $user, $discountCoupon);

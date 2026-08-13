@@ -107,7 +107,7 @@ class InstructorWebinarManagementService
                     }
                 ])->get();
 
-            if (!empty($sales) and !$sales->isEmpty()) {
+            if (!$sales->isEmpty()) {
                 $export = new WebinarStudents($sales);
                 return Excel::download($export, trans('panel.users') . '.xlsx');
             }
