@@ -30,7 +30,7 @@ class Geo
             case "POLYGON":
                 $polyPoints = array();
                 foreach ($array as $tmpPolyPoint)
-                    $polyPoints[] .= implode(" ", $tmpPolyPoint);
+                    $polyPoints[] = implode(" ", $tmpPolyPoint);
                 $geoWKT = "POLYGON((" . implode(",", $polyPoints) . "))";
                 break;
         }
@@ -95,7 +95,7 @@ class Geo
             $point .= ')';
 
             return $point;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
         }
     }
