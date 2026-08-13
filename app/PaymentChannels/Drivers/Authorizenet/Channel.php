@@ -186,6 +186,7 @@ class Channel extends BasePaymentChannel implements IChannel
 
             $order->update([
                 'status' => $orderStatus,
+                // @phpstan-ignore-next-line ($payment_data is assigned an array on every code path above)
                 'payment_data' => !empty($payment_data) ? json_encode($payment_data) : null,
             ]);
 
