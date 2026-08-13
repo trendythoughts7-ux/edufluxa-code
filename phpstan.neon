@@ -111,6 +111,27 @@ parameters:
             paths:
                 - app/Http/Controllers/Panel/EventsCalendarController.php
         -
+            # Group 4a: Bigbluebutton facade static calls (initCreateMeeting/create/join) - all three
+            # have @method static docblocks on JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton and
+            # a genuine instance method on the underlying Bbb/InitMeeting trait classes (verified in
+            # vendor source). Larastan mis-resolves the facade's instance-vs-static binding, same class
+            # of false-positive as the already-closed Jorenvh\Share\ShareFacade::page() rule.
+            message: '#^Static call to instance method JoisarJignesh\\Bigbluebutton\\Facades\\Bigbluebutton::(initCreateMeeting|create|join)\(\)\.$#'
+            paths:
+                - app/Http/Controllers/Admin/SessionController.php
+                - app/Http/Controllers/Panel/SessionController.php
+        -
+            # Group 4b: $createMeeting->setDuration() - $createMeeting is the return value of
+            # initCreateMeeting(), whose vendor docblock declares @return CreateMeetingParameters
+            # (BigBlueButton\Parameters\CreateMeetingParameters). setDuration() genuinely exists on
+            # that class (verified - it's called on the same object inside initCreateMeeting() itself).
+            # Larastan can't resolve initCreateMeeting()'s return type through the facade, so it treats
+            # the chained call as undefined. Not a bug - verified against vendor source.
+            message: '#^Call to an undefined method JoisarJignesh\\Bigbluebutton\\Facades\\Bigbluebutton::setDuration\(\)\.$#'
+            paths:
+                - app/Http/Controllers/Admin/SessionController.php
+                - app/Http/Controllers/Panel/SessionController.php
+        -
             # Confirmed ionCube-encrypted vendor classes (App\Services\*LicenseService, App\Models\PurchaseCode) -
             # phpstan cannot parse encrypted PHP, so it reports every reference to them as an unknown
             # class/type/constant. Verified identical pattern to ThemeBuilderLicenseController (already closed).
