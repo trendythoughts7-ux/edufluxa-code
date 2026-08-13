@@ -185,7 +185,7 @@ class WebinarController extends Controller
 
             WebinarTranslation::updateOrCreate([
                 'webinar_id' => $newWebinar->id,
-                'locale' => mb_strtolower($webinar->locale),
+                'locale' => mb_strtolower(app()->getLocale()),
             ], [
                 'title' => $title,
                 'description' => $description,

@@ -42,7 +42,7 @@ class Blog extends Model implements TranslatableContract
             'description' => truncate($this->description, 160),
             'content' => $this->content,
             'created_at' => $this->created_at,
-            'locale'=>$this->locale ,
+            'locale'=>app()->getLocale() ,
             'author' => UserObj::brief($this->author, true, ['title', 'badges', 'courses_count']),
             'comment_count' => $this->comments()->where('status','active')->count(),
             'comments' => $this->comments()->where('status','active')
