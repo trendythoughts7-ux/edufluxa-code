@@ -742,7 +742,7 @@ class UserController extends Controller
             });
 
         if ($option === "for_user_group") {
-            $users->whereNotIn('id', GroupUser::all()->pluck('user_id'));
+            $users->whereNotIn('id', GroupUser::pluck('user_id'));
         }
 
         if ($option === "just_teacher_role") {
