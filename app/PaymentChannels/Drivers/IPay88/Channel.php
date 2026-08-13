@@ -8,7 +8,7 @@ use App\PaymentChannels\BasePaymentChannel;
 use App\PaymentChannels\IChannel;
 use Illuminate\Support\Facades\Auth;
 use IPay88\Requests\RequestBuilder as IPay88RequestBuilder;
-use Ipay88\Responses\Response as IPay88Response;
+use IPay88\Responses\Response as IPay88Response;
 use Illuminate\Http\Request;
 
 class Channel extends BasePaymentChannel implements IChannel
