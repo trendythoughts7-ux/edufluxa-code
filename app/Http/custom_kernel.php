@@ -10,7 +10,7 @@ class CustomKernel
     /**
      * Custom global middleware to be added to the application
      * 
-     * @var array
+     * @return array
      */
     public static function getGlobalMiddleware()
     {
@@ -23,7 +23,7 @@ class CustomKernel
     /**
      * Custom middleware groups to be merged with the application's middleware groups
      * 
-     * @var array
+     * @return array
      */
     public static function getMiddlewareGroups()
     {
@@ -46,7 +46,7 @@ class CustomKernel
     /**
      * Custom route middleware to be merged with the application's route middleware
      * 
-     * @var array
+     * @return array
      */
     public static function getRouteMiddleware()
     {

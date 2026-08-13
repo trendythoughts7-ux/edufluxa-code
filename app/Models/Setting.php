@@ -205,7 +205,7 @@ class Setting extends Model implements TranslatableContract
 
     /**
      * @param $key
-     * @return array|[commission, tax, minimum_payout, currency]
+     * @return array
      */
     static function getFinancialSettings($key = null)
     {
