@@ -164,6 +164,23 @@ parameters:
             paths:
                 - app/Http/Controllers/Web/BecomeInstructorController.php
                 - app/Http/Controllers/Web/CronJobsController.php
+        -
+            # Group 6: OrderItem::$user, $eventTicket, $meetingPackage are Eloquent BelongsTo
+            # relation methods, not settable properties - Larastan correctly flags direct
+            # assignment ($orderItem->user = $user) as "not writable" per Eloquent's normal
+            # rules. However $orderItem here is used purely as an in-memory carrier: it is
+            # never persisted (verified no ->save()/::create() call anywhere in this flow -
+            # EventsController/MeetingPackagesController -> Sale::handleSaleNotifications ->
+            # EventTicketSoldMixins::makeTicket / MeetingPackageSoldMixins::makeUserSessions),
+            # so the "not writable" warning is cosmetic; the magic-attribute values are read
+            # back directly by those downstream methods to avoid extra DB queries. Confirmed
+            # the two real OrderItem::create() call sites elsewhere (CartCheckoutService,
+            # WebCartCheckoutService) do not use these keys, so this suppression can't mask
+            # a real mass-assignment issue there.
+            message: '#^Property App\\Models\\OrderItem::\$(user|eventTicket|meetingPackage) is not writable\.$#'
+            paths:
+                - app/Http/Controllers/Web/EventsController.php
+                - app/Http/Controllers/Web/MeetingPackagesController.php
     paths:
         - app
     excludePaths:
