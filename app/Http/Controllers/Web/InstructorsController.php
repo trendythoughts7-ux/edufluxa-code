@@ -156,15 +156,9 @@ class InstructorsController extends Controller
         ]);
     }
 
-    private function getBestRateUsers($role)
+    private function getBestRateUsers($query, $role)
     {
-        $query = $this->getListQuery($role);
-        $bestRateUsers = $query
-            ->limit(6)
-            ->get();
-
-
-        return $bestRateUsers;
+        return $query->limit(6);
     }
 
     private function getTopSalesUsers($query, $role)
