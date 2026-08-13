@@ -369,6 +369,7 @@ class FileController extends Controller
                         $data['file_url'] = $this->uploadFile($fileUpload, "webinars/{$webinar->id}/files", null, $webinar->creator_id);
                     }
                 } elseif (in_array($data['storage'], ['s3', 'secure_host'])) {
+                    $result = ['status' => false, 'path' => null];
                     if ($data['storage'] == 's3') {
                         if (!empty($fileUpload)) {
                             $data['volume'] = convertToMB($fileUpload->getSize());

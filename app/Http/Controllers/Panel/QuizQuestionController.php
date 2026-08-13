@@ -127,6 +127,8 @@ class QuizQuestionController extends Controller
 
             if ($quizQuestion->type == QuizzesQuestion::$multiple and !empty($data['answers'])) {
 
+                $answers = $data['answers'];
+
                 foreach ($answers as $key => $answer) {
                     $file = !empty($request->file("ajax.answers.{$key}.file")) ? $request->file("ajax.answers.{$key}.file") : null;
 

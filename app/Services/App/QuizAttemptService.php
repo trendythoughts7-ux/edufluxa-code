@@ -25,6 +25,7 @@ class QuizAttemptService
         if (empty($quiz)) {
             return ['action' => 'not_found'];
         }
+        $webinar = null;
         if (!empty($quiz->webinar_id)) {
             $webinar = $quiz->webinar;
             $checkUserHasBought = $webinar->checkUserHasBought($user);
