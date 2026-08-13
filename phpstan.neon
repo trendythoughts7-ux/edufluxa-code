@@ -64,6 +64,17 @@ parameters:
                 - app/Models/UpcomingCourse.php
                 - app/Models/Webinar.php
         -
+            # torann/geoip GeoIP::getLocation() has a non-nullable @return \Torann\GeoIP\Location
+            # docblock (throws Exception on hard failure), so Larastan treats the result as
+            # always-truthy. In practice this wraps an external IP-geolocation lookup whose fields
+            # (e.g. iso_code) can legitimately be empty on partial/degraded lookups. Same defensive-
+            # check treatment as the Authorizenet/Chapa external-API guards confirmed in Phase 1.
+            message: '#^Variable \$location in empty\(\) always exists and is not falsy\.$#'
+            paths:
+                - app/Http/Middleware/Api/CheckRestrictionAPI.php
+                - app/Http/Middleware/CheckRestriction.php
+                - app/Http/Middleware/UserLocale.php
+        -
             # Confirmed ionCube-encrypted vendor classes (App\Services\*LicenseService, App\Models\PurchaseCode) -
             # phpstan cannot parse encrypted PHP, so it reports every reference to them as an unknown
             # class/type/constant. Verified identical pattern to ThemeBuilderLicenseController (already closed).
