@@ -13,11 +13,24 @@ parameters:
                 - app/PaymentChannels/Drivers/Braintree/Channel.php
                 - app/PaymentChannels/Drivers/Mollie/Channel.php
                 - app/PaymentChannels/Drivers/Robokassa/Channel.php
+                - app/PaymentChannels/Drivers/Paysera/Channel.php
         -
             message: '#^Call to an undefined method net\\authorize\\api\\contract\\v1\\ANetApiResponseType::getTransactionResponse\(\)\.$#'
             path: app/PaymentChannels/Drivers/Authorizenet/Channel.php
         -
+            message: '#^Variable \$response in empty\(\) always exists and is not falsy\.$#'
+            path: app/PaymentChannels/Drivers/Authorizenet/Channel.php
+        -
+            message: '#^Variable \$verifyTransaction in empty\(\) always exists and is not falsy\.$#'
+            path: app/PaymentChannels/Drivers/Chapa/Channel.php
+        -
             message: '#^Access to an undefined property WebToPay_PaymentMethod::\$(minAmount|maxAmount|currency)\.$#'
+            path: app/PaymentChannels/Drivers/Paysera/WebToPay.php
+        -
+            message: '#^PHPDoc tag @param has invalid value#'
+            path: app/PaymentChannels/Drivers/Paysera/WebToPay.php
+        -
+            message: '#^Function get_magic_quotes_gpc not found\.$#'
             path: app/PaymentChannels/Drivers/Paysera/WebToPay.php
         -
             message: '#^Access to an undefined property Laravel\\Socialite\\Contracts\\User::\$(id|email|name)\.$#'
@@ -25,6 +38,26 @@ parameters:
         -
             message: '#^Call to an undefined method object\{quantity: int, product: mixed\}::update\(\)\.$#'
             path: app/Http/Controllers/Web/CartManagerController.php
+        -
+            message: '#^Call to an undefined static method SebaCarrasco93\\LaravelPayku\\Facades\\LaravelPayku::create\(\)\.$#'
+            path: app/PaymentChannels/Drivers/Payku/Channel.php
+        -
+            message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, SebaCarrasco93\\LaravelPayku\\Models\\PaykuTransaction\>\|SebaCarrasco93\\LaravelPayku\\Models\\PaykuTransaction::\$status\.$#'
+            path: app/PaymentChannels/Drivers/Payku/Channel.php
+        -
+            message: '#^Access to an undefined property Razorpay\\Api\\Api::\$payment\.$#'
+            path: app/PaymentChannels/Drivers/Razorpay/Channel.php
+        -
+            message: '#^Access to an undefined property Unicodeveloper\\Paystack\\Paystack::\$url\.$#'
+            path: app/PaymentChannels/Drivers/Paystack/Channel.php
+        -
+            # Confirmed ionCube-encrypted vendor classes (App\Services\*LicenseService, App\Models\PurchaseCode) -
+            # phpstan cannot parse encrypted PHP, so it reports every reference to them as an unknown
+            # class/type/constant. Verified identical pattern to ThemeBuilderLicenseController (already closed).
+            message: '#.*#'
+            paths:
+                - app/Http/Controllers/Admin/MobileAppLicenseController.php
+                - app/Http/Controllers/Admin/PluginLicenseController.php
     paths:
         - app
     excludePaths:
