@@ -13,6 +13,7 @@ class Channel extends BasePaymentChannel implements IChannel
 {
     protected $currency;
     protected $api_key;
+    protected $order_session_key;
     protected $test_mode;
 
     protected array $credentialItems = [
