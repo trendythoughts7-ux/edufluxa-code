@@ -181,6 +181,18 @@ parameters:
             paths:
                 - app/Http/Controllers/Web/EventsController.php
                 - app/Http/Controllers/Web/MeetingPackagesController.php
+        -
+            # Group 7: Sale::$gift accessed via static syntax (Sale::$gift) is flagged as
+            # "static access to instance property" because the class docblock declares
+            # @property-read \App\Models\Gift $gift (an IDE-helper annotation, likely for a
+            # gift() relation/accessor), which collides in name with the genuine
+            # `public static $gift = 'gift';` constant-like property declared in the class
+            # body. Larastan resolves the docblock annotation over the real static property.
+            # Verified the static property is real PHP (app/Models/Sale.php:32, alongside
+            # $webinar/$meeting/$credit/etc. - same pattern, all correctly resolved except
+            # $gift due to the docblock name clash) - runtime behavior is correct.
+            message: '#^Static access to instance property App\\Models\\Sale::\$gift\.$#'
+            path: app/Http/Controllers/Web/GiftController.php
     paths:
         - app
     excludePaths:
