@@ -256,7 +256,7 @@ class QuizQuestionController extends Controller
         $rules = [
             'quiz_id' => 'required|exists:quizzes,id',
             'title' => 'required',
-            'grade' => 'required',
+            'grade' => 'required|integer',
             'type' => 'required',
             'negative_grade' => 'nullable|integer|min:0',
         ];
@@ -311,7 +311,7 @@ class QuizQuestionController extends Controller
                 ->first();
 
             if (!empty($quizQuestion)) {
-                $quiz_total_grade = $quiz->total_mark - $quizQuestion->grade;
+                $quiz_total_grade = $quiz->total_mark - (int)$quizQuestion->grade;
 
                 $quizQuestion->update([
                     'quiz_id' => $data['quiz_id'],

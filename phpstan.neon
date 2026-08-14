@@ -288,6 +288,16 @@ parameters:
             #   getFacadeAccessor() -> app('zoom') container binding.
             message: '#^Call to an undefined static method Jubaer\\Zoom\\Facades\\Zoom::createMeeting\(\)\.$#'
             path: app/Sessions/ZoomOAuth.php
+        -
+            # Group 12: dead-guard false positive on Laravel's UploadedFile[]
+            # array return type. request()->file('images') on a multi-file
+            # input returns an array of genuine UploadedFile instances (never
+            # null members) per Laravel's own typing contract, so !empty($image)
+            # inside the foreach can never be false. Traced individually per
+            # Rule K, confirmed via grep that this is the only call site
+            # reading this request key anywhere in the codebase.
+            message: '#^Variable \$image in empty\(\) always exists and is not falsy\.$#'
+            path: app/Http/Controllers/Panel/Store/ProductController.php
     paths:
         - app
     excludePaths:

@@ -552,7 +552,8 @@ class SessionController extends Controller
                 $canAccess = $checkUserCanAccessToSession['canAccess'];
 
                 if ($canAccess) {
-                    $canAccess = (!empty($session->agora_settings) and !empty($session->agora_settings->users_join));
+                    $sessionAgoraSettings = json_decode($session->agora_settings);
+                    $canAccess = (!empty($sessionAgoraSettings) and !empty($sessionAgoraSettings->users_join));
                 }
 
                 if (!$canAccess) {

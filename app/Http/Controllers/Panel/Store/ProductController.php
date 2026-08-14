@@ -433,7 +433,7 @@ class ProductController extends Controller
 
             foreach ($request->file('images') as $k => $image) {
                 if (!empty($image)) {
-                    $name = "image_" . $k + 1;
+                    $name = "image_" . ((int)$k + 1);
                     $path = $this->uploadFile($image, "products/{$product->id}", $name, $product->creator_id);
 
                     ProductMedia::create([
