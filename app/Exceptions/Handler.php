@@ -12,6 +12,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
 class Handler extends ExceptionHandler
 {
@@ -129,6 +130,14 @@ class Handler extends ExceptionHandler
             $e = new \Dotenv\Exception\ValidationException('HTTP_BAD_REQUEST', $status, $e);
         } elseif ($e instanceof ValidationException && $e->getResponse()) {
             return $e->getResponse();
+        } elseif ($e instanceof ThrottleRequestsException) {
+            $status = Response::HTTP_TOO_MANY_REQUESTS;
+            $headers = $e->getHeaders();
+            return response()->json([
+                'success' => false,
+                'status' => $status,
+                'message' => 'Too many requests. Please slow down and try again shortly.'
+            ], $status, $headers);
         } else {
             if (env('APP_DEBUG')) {
                 return parent::render($request, $e);
