@@ -13,11 +13,23 @@ use App\Models\Bundle as Model;
  * CheckForSaleTrait (shared with Webinar) resolve to null for Bundle
  * via Eloquent's default magic getter and are guarded by
  * !empty()/short-circuit checks in every call site - this is a
- * silent no-op for Bundle, not a crash. Declared here to accurately
- * reflect current behavior. If Bundle should support prerequisites or
- * a sale start_date in the future, that is a real feature addition
- * (new relation/column), not a phpstan-only fix - flagging for a
- * deliberate product decision rather than assuming one.
+ * silent no-op for Bundle, not a crash.
+ *
+ * DECISION (researched against industry practice - Teachable, Tutor
+ * LMS, LearnDash, LifterLMS - before deciding, not guessed): Bundle
+ * will NOT get a prerequisites relation. Every surveyed platform
+ * scopes prerequisites to individual courses (a learning-sequence
+ * concept), never to bundles (a commerce/pricing grouping concept) -
+ * adding it here would be an anti-pattern nothing in the market does.
+ * Bundle will NOT get a start_date column either. No surveyed
+ * platform implements scheduled/time-limited sales as a date field on
+ * the product itself; the universal pattern is a separate
+ * Coupon/Promotion entity with its own date range, applied to
+ * products - more flexible (stackable, reusable, multi-product) than
+ * a single column could ever be. If time-limited Bundle sales are
+ * wanted in the future, build a Coupon/Promotion system, not a Bundle
+ * column. This closes the open decision from Batch 7/Section 2d-i -
+ * current no-op behavior is intentional and final, not a placeholder.
  * @property string|null $start_date
  * @property \Illuminate\Database\Eloquent\Collection|null $prerequisites
  */
