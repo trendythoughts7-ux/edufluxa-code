@@ -57,4 +57,8 @@ return [
         'otp_message' => "your verification code: ##OTP##",
         'otp_length' => 5,
     ],
+
+    'cron' => [
+        'secret' => env('CRON_JOB_SECRET'),
+    ],
 ];

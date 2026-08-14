@@ -24,8 +24,35 @@ use Illuminate\Support\Str;
 
 class CronJobsController extends Controller
 {
+    protected $allowedCronMethods = [
+        "makeUsersTableUsername",
+        "sendSessionsReminder",
+        "sendMeetingsReminder",
+        "sendMeetingPackageReminders",
+        "renewSubscriptions",
+        "reminderBeforeExpirationSubscribes",
+        "sendSubscribeReminder",
+        "sendInstallmentReminders",
+        "checkGiftsDate",
+        "sendAbandonedCartReminders",
+        "clearAbandonedCartItems",
+        "sendAttendanceNotifications",
+        "sendEventsReminders",
+    ];
+
     public function index(Request $request, $methodName)
     {
+        $configuredSecret = config("services.cron.secret");
+        $providedSecret = $request->header("X-Cron-Secret") ?? $request->query("secret");
+
+        if (empty($configuredSecret) || !hash_equals((string) $configuredSecret, (string) $providedSecret)) {
+            abort(404);
+        }
+
+        if (!in_array($methodName, $this->allowedCronMethods, true)) {
+            abort(404);
+        }
+
         return $this->$methodName($request);
     }
 
