@@ -174,6 +174,16 @@ class User extends Authenticatable
         return $this->role_name === Role::$organization;
     }
 
+    public function needsTwoFactor()
+    {
+        return $this->isAdmin() || $this->isTeacher();
+    }
+
+    public function hasTwoFactorEnabled()
+    {
+        return (bool) $this->google2fa_enabled && !empty($this->google2fa_secret);
+    }
+
     public function hasPermission($section_name)
     {
         if (!isset($this->permissions)) {
