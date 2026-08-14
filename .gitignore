@@ -17,7 +17,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-composer.lock
 storage/debugbar/.gitignore
 
 # --- Added Session 014: harden against accidental secret/junk commits ---

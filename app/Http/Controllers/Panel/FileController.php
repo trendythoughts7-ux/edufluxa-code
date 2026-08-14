@@ -217,16 +217,16 @@ class FileController extends Controller
         $storageExtractPath = $storage->url($extractPath);
 
         if (!$storage->exists($extractPath)) {
-            $storage->makeDirectory($extractPath);
-
             $filePath = public_path($path);
 
             $zip = new \ZipArchive();
             $res = $zip->open($filePath);
 
-            if ($res) {
-                $zip->extractTo(public_path($storageExtractPath));
-
+            if ($res === true) {
+                if ($this->isZipSafeToExtract($zip)) {
+                    $storage->makeDirectory($extractPath);
+                    $zip->extractTo(public_path($storageExtractPath));
+                }
                 $zip->close();
             }
         }
@@ -240,6 +240,41 @@ class FileController extends Controller
         }
 
         return $storageExtractPath . '/' . $fileName;
+    }
+
+    /**
+     * Validate a zip archive is safe to extract: reject path-traversal entries
+     * (Zip Slip), absolute paths, and archives whose declared uncompressed
+     * size or entry count could exhaust disk/CPU (zip-bomb DoS).
+     */
+    private function isZipSafeToExtract(\ZipArchive $zip): bool
+    {
+        $maxUncompressedBytes = 5 * 1024 * 1024 * 1024; // 5GB cap
+        $maxEntries = 5000;
+        $totalUncompressed = 0;
+
+        if ($zip->numFiles > $maxEntries) {
+            return false;
+        }
+
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $stat = $zip->statIndex($i);
+            if ($stat === false) {
+                return false;
+            }
+
+            $name = $stat['name'];
+            if (str_contains($name, '..') || str_starts_with($name, '/') || preg_match('/^[a-zA-Z]:\\\\/', $name)) {
+                return false;
+            }
+
+            $totalUncompressed += $stat['size'];
+            if ($totalUncompressed > $maxUncompressedBytes) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function update(Request $request, $id)

@@ -51,6 +51,20 @@ trait FilesTraits
             return null;
         }
 
+        // SVG hardening: sanitize with enshrined/svg-sanitize before it touches disk.
+        $sanitizedSvgContent = null;
+        if ($fileOriginalExtension === 'svg') {
+            $dirtySvg = file_get_contents($file->getRealPath());
+            $sanitizer = new \enshrined\svgSanitize\Sanitizer();
+            $sanitizer->removeRemoteReferences(true);
+            $sanitizer->minify(true);
+            $cleanSvg = $sanitizer->sanitize($dirtySvg);
+            if ($cleanSvg === false || empty($cleanSvg)) {
+                return null;
+            }
+            $sanitizedSvgContent = $cleanSvg;
+        }
+
         $originalName = $file->getClientOriginalName();
         $name = $fileName ? $fileName . '.' . $fileOriginalExtension : $originalName;
 
@@ -65,7 +79,11 @@ trait FilesTraits
                 $storage->makeDirectory($path);
             }
 
-            $storage->putFileAs($path, $file, $name);
+            if (!empty($sanitizedSvgContent)) {
+                $storage->put($path . '/' . $name, $sanitizedSvgContent);
+            } else {
+                $storage->putFileAs($path, $file, $name);
+            }
 
             $url = $path . '/' . $name;
 
