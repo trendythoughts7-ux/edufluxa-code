@@ -115,8 +115,8 @@ class UsersController extends Controller
 
             'gender' => 'nullable|in:man,woman',
             'location' => 'array|size:2',
-            'location.latitude' => 'required_with:location',
-            'location.longitude' => 'required_with:location',
+            'location.latitude' => 'required_with:location|numeric',
+            'location.longitude' => 'required_with:location|numeric',
             'address' => 'string',
             'country_id' => 'exists:regions,id',
             'province_id' => 'exists:regions,id',
@@ -133,7 +133,7 @@ class UsersController extends Controller
                     $value = (new UserLevelOfTraining())->getValue($value);
                 }
                 if ($input == 'location') {
-                    $value = DB::raw("POINT(" . $value['latitude'] . "," . $value['longitude'] . ")");
+                    $value = DB::raw("POINT(" . (float) $value['latitude'] . "," . (float) $value['longitude'] . ")");
                 }
                 if ($input == 'password') {
                     $value = User::generatePassword($value);
