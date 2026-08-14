@@ -394,11 +394,11 @@ class InstructorFinderController extends Controller
             $userAgeQuery = UserMeta::where('name', 'age');
 
             if (!empty($minAge)) {
-                $userAgeQuery->whereRaw('value >= ' . $minAge);
+                $userAgeQuery->whereRaw('value >= ?', [$minAge]);
             }
 
             if (!empty($maxAge)) {
-                $userAgeQuery->whereRaw('value <= ' . $maxAge);
+                $userAgeQuery->whereRaw('value <= ?', [$maxAge]);
             }
 
             $userIds = $userAgeQuery->pluck('user_id')->toArray();
