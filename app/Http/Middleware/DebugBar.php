@@ -1,7 +1,5 @@
 <?php namespace App\Http\Middleware;
-
 use Closure;
-
 class DebugBar
 {
     /**
@@ -13,12 +11,12 @@ class DebugBar
      */
     public function handle($request, Closure $next)
     {
-        app('debugbar')->disable();
-
-        if (!empty(getGeneralSettings('app_debugbar'))) {
-            app('debugbar')->enable();
+        if (app()->bound('debugbar')) {
+            app('debugbar')->disable();
+            if (!empty(getGeneralSettings('app_debugbar'))) {
+                app('debugbar')->enable();
+            }
         }
-
         return $next($request);
     }
 }
