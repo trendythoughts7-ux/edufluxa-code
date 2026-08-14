@@ -7,7 +7,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property int $id
  * @property string $status
- * @property string $comment_user_type
  * @property int $created_at
  * @property string $comment
  * @property int $user_id
@@ -33,7 +32,6 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => $this->status,
-            'comment_user_type' => $this->comment_user_type,
             'create_at' => $this->created_at,
             'comment' => $this->comment,
             $this->mergeWhen(1, function () {
@@ -84,7 +82,6 @@ class CommentResource extends JsonResource
             'replies' => $this->replies->where('status', 'active')->map(function ($reply) {
                 return [
                     'id' => $reply->id,
-                    'comment_user_type' => $reply->comment_user_type,
                     'user' => [
                         'full_name' => $this->user->full_name,
                         'avatar' => url($this->user->getAvatar()),

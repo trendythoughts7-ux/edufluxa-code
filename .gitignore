@@ -50,3 +50,12 @@ firebase-auth.json
 *.bak*
 *.broken_backup
 error_log
+# --- Session (this session): exclude refactor-tool intermediate artifacts ---
+*.ctor-new
+*.body-new
+*.p1-ctor-new
+*.p1-body-new
+*.p2-ctor-new
+*.p2-body-new
+*.p3-ctor-new
+*.p3-body-new

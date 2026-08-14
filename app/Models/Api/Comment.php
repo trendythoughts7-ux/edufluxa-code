@@ -13,7 +13,6 @@ class Comment extends Model
         return [
             'id' => $this->id,
             'status' => $this->status,
-            'comment_user_type' => $this->comment_user_type,
             'create_at' => $this->created_at,
             'comment' => $this->comment,
             'blog' => $this->blog->brief ?? null,
@@ -24,7 +23,6 @@ class Comment extends Model
                     /** @var \App\Models\Api\Comment $reply */
                 return [
                     'id' => $reply->id,
-                    'comment_user_type' => $reply->comment_user_type,
                     'user' => $reply->user->brief,
                     'create_at' => $reply->created_at,
                     'comment' => $reply->comment,
