@@ -106,7 +106,7 @@ class RegionController extends Controller
             }
 
             DB::transaction(function () use ($apiCountry, $regionsFromLocal) {
-                $lat = $apiCountry['latitude'] ?? null; $lng = $apiCountry['longitude'] ?? null;
+                $lat = isset($apiCountry['latitude']) ? (float) $apiCountry['latitude'] : null; $lng = isset($apiCountry['longitude']) ? (float) $apiCountry['longitude'] : null;
                 $country = Region::create([
                     'country_id' => null,
                     'province_id' => null,
@@ -119,7 +119,7 @@ class RegionController extends Controller
 
                 $states = $regionsFromLocal->getStates($apiCountry['id']);
                 foreach ($states as $state) {
-                    $slat = $state['latitude'] ?? null; $slng = $state['longitude'] ?? null;
+                    $slat = isset($state['latitude']) ? (float) $state['latitude'] : null; $slng = isset($state['longitude']) ? (float) $state['longitude'] : null;
                     $province = Region::create([
                         'country_id' => $country->id,
                         'province_id' => null,
@@ -132,7 +132,7 @@ class RegionController extends Controller
 
                     $cities = $regionsFromLocal->getCities($state['id']);
                     foreach ($cities as $city) {
-                        $clat = $city['latitude'] ?? null; $clng = $city['longitude'] ?? null;
+                        $clat = isset($city['latitude']) ? (float) $city['latitude'] : null; $clng = isset($city['longitude']) ? (float) $city['longitude'] : null;
                         Region::create([
                             'country_id' => $country->id,
                             'province_id' => $province->id,
@@ -149,8 +149,8 @@ class RegionController extends Controller
             // Legacy single region create (province/city/district or manual country)
             $this->validate($request, [
                 'title' => 'required|string',
-                'latitude' => 'required',
-                'longitude' => 'required',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
                 'country_id' => 'required_if:type,province,city,district',
                 'province_id' => 'required_if:type,city,district',
                 'city_id' => 'required_if:type,district',
@@ -162,7 +162,7 @@ class RegionController extends Controller
                 'city_id' => $data['city_id'] ?? null,
                 'type' => $data['type'],
                 'title' => $data['title'],
-                'geo_center' => DB::raw('point(' . $data['latitude'] . ',' . $data['longitude'] . ')'),
+                'geo_center' => DB::raw('point(' . (float) $data['latitude'] . ',' . (float) $data['longitude'] . ')'),
                 'created_at' => time()
             ]);
         }
@@ -240,8 +240,8 @@ class RegionController extends Controller
         $this->validate($request, [
             'type' => 'required|in:' . implode(',', Region::$types),
             'title' => 'required|string',
-            'latitude' => 'required',
-            'longitude' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
             'country_id' => 'required_if:type,province,city,district',
             'province_id' => 'required_if:type,city,district',
             'city_id' => 'required_if:type,district',
@@ -256,7 +256,7 @@ class RegionController extends Controller
             'city_id' => $data['city_id'] ?? null,
             'type' => $data['type'],
             'title' => $data['title'],
-            'geo_center' => DB::raw("point(" . $data['latitude'] . "," . $data['longitude'] . ")"),
+            'geo_center' => DB::raw("point(" . (float) $data['latitude'] . "," . (float) $data['longitude'] . ")"),
             'created_at' => time()
         ]);
 
