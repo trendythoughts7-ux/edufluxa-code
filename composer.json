@@ -23,6 +23,7 @@
         "clickpaysa/laravel_package": "^1.4",
         "craftsys/msg91-laravel": "^0.16.0",
         "cviebrock/eloquent-sluggable": "*",
+        "enshrined/svg-sanitize": "^0.22",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
         "gizemsever/laravel-paytr": "^2.1",
