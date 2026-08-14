@@ -81,7 +81,7 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
     protected $hidden = [
-        'password', 'remember_token', 'google_id', 'facebook_id', 'role_id'
+        'password', 'remember_token', 'google_id', 'facebook_id', 'role_id', 'google2fa_secret', 'two_factor_recovery_codes'
     ];
 
     static $statuses = [
@@ -95,6 +95,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'level_of_training' => 'integer',
+        'google2fa_secret' => 'encrypted',
+        'two_factor_recovery_codes' => 'encrypted:array',
+        'google2fa_enabled' => 'boolean',
     ];
     private $permissions;
     private $user_group;
