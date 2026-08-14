@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -32,7 +35,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        });
+
+        RateLimiter::for('panel', function (Request $request) {
+            return Limit::perMinute(120)->by($request->user()?->id ?: $request->ip());
+        });
+
+        RateLimiter::for('auth', function (Request $request) {
+            return Limit::perMinute(5)->by($request->ip());
+        });
 
         parent::boot();
     }
@@ -79,7 +92,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::prefix('api')
-            ->middleware('api')
+            ->middleware(['api', 'throttle:api'])
             ->namespace($this->api_namespace)
             ->group(base_path('routes/api.php'));
 
@@ -100,7 +113,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapPanelRoutes()
     {
-        Route::middleware('web')
+        Route::middleware(['web', 'throttle:panel'])
             ->namespace($this->namespace)
             ->group(base_path('routes/panel.php'));
     }
