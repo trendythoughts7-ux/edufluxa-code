@@ -16,6 +16,7 @@ class CustomKernel
     {
         return [
             // Add your custom global middleware here
+            \App\Http\Middleware\SecurityHeaders::class,
             // Example: \App\Http\Middleware\YourCustomMiddleware::class,
         ];
     }
