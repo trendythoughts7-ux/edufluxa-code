@@ -45,7 +45,6 @@
         "kreait/laravel-firebase": "^5.8",
         "kyrax324/laravel-ipay88": "^1.0",
         "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
