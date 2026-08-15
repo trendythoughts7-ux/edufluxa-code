@@ -75,6 +75,7 @@ class UserController extends Controller
         $districts = null;
         $attachments = null;
         $userLoginHistories = null;
+        $twoFactorEnabled = null;
         $formFieldsHtml = null;
 
         if ($step == "extra_information") {
@@ -97,6 +98,8 @@ class UserController extends Controller
             $userLoginHistories = UserLoginHistory::query()->where('user_id', $user->id)
                 ->orderBy('created_at', 'desc')
                 ->get();
+        } elseif ($step == "two_factor") {
+            $twoFactorEnabled = $user->hasTwoFactorEnabled();
         }
 
         $userBanks = UserBank::query()
@@ -121,6 +124,7 @@ class UserController extends Controller
             'formFieldsHtml' => $formFieldsHtml,
             'attachments' => $attachments,
             'userLoginHistories' => $userLoginHistories,
+            'twoFactorEnabled' => $twoFactorEnabled,
         ];
     }
 

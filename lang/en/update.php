@@ -4839,5 +4839,15 @@ return [
 'meeting_packages_grid_component_title' => 'Meeting Packages Grid Cards',
 'meeting_packages_grid_component_hint' => 'Display meeting package cards in grid style',
 'secs' => 'Secs',
+    'two_factor_authentication' => 'Two-Factor Authentication',
+    'two_factor_authentication_description' => 'Add an extra layer of security to your account using an authenticator app.',
+    'enable_two_factor_authentication' => 'Enable Two-Factor Authentication',
+    'disable_two_factor_authentication' => 'Disable Two-Factor Authentication',
+    'two_factor_is_enabled' => 'Two-factor authentication is enabled',
+    'two_factor_scan_qr_instructions' => 'Scan this QR code with your authenticator app (e.g. Google Authenticator), then enter the 6-digit code below to confirm.',
+    'enter_6_digit_code' => 'Enter the 6-digit code',
+    'confirm_and_enable' => 'Confirm and Enable',
+    'save_your_recovery_codes' => 'Save your recovery codes',
+    'recovery_codes_shown_once_warning' => 'These codes will only be shown once. Store them somewhere safe, you can use one to sign in if you lose access to your authenticator app.',
 
 ];

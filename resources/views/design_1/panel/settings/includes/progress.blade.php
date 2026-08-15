@@ -48,3 +48,10 @@
     </div>
     <span class="ml-4">{{ trans('update.login_history') }}</span>
 </a>
+
+<a href="/panel/setting/step/two_factor" class="navbar-item navbar-item-h-52 d-inline-flex-center cursor-pointer {{ ($currentStep == "two_factor") ? 'active' : '' }}">
+    <div class="size-20">
+        <x-iconsax-lin-lock class="icons" width="20px" height="20px"/>
+    </div>
+    <span class="ml-4">{{ trans('update.two_factor_authentication') }}</span>
+</a>
