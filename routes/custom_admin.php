@@ -40,3 +40,10 @@ $prefix = getAdminPanelUrlPrefix();
  * Route::get('/custom-page', '\App\Http\Controllers\YourNamespace\YourController@method');
  */ 
 
+
+Route::group(['prefix' => 'my-account/2fa'], function () {
+    Route::post('/enroll', 'TwoFactorController@enroll')->name('admin.2fa.enroll');
+    Route::post('/confirm', 'TwoFactorController@confirm')->name('admin.2fa.confirm');
+    Route::post('/disable', 'TwoFactorController@disable')->name('admin.2fa.disable');
+    Route::post('/regenerate', 'TwoFactorController@regenerateRecoveryCodes')->name('admin.2fa.regenerate');
+});
