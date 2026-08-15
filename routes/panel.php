@@ -406,6 +406,10 @@ Route::group(['namespace' => 'Panel', 'prefix' => 'panel', 'middleware' => ['imp
         Route::post('metas/{meta_id}/update', 'UserController@updateMeta');
         Route::get('metas/{meta_id}/delete', 'UserController@deleteMeta');
         Route::get('/deleteAccount', 'UserController@deleteAccount');
+        Route::post('/2fa/enroll', 'TwoFactorController@enroll');
+        Route::post('/2fa/confirm', 'TwoFactorController@confirm');
+        Route::post('/2fa/disable', 'TwoFactorController@disable');
+        Route::post('/2fa/recovery-codes/regenerate', 'TwoFactorController@regenerateRecoveryCodes');
         Route::get('/media/{type}/delete', 'UserController@deleteUserMedia');
 
         Route::group(['prefix' => '/attachments'], function () {
