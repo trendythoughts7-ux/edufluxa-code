@@ -4849,5 +4849,7 @@ return [
     'confirm_and_enable' => 'Confirm and Enable',
     'save_your_recovery_codes' => 'Save your recovery codes',
     'recovery_codes_shown_once_warning' => 'These codes will only be shown once. Store them somewhere safe, you can use one to sign in if you lose access to your authenticator app.',
+    'regenerate_recovery_codes' => 'Regenerate Recovery Codes',
+    'regenerate_recovery_codes_description' => 'Generate a new set of recovery codes. Your old codes will stop working.',
 
 ];
