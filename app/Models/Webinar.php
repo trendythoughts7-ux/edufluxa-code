@@ -257,9 +257,9 @@ class Webinar extends Model implements TranslatableContract
         if (!empty($this->avg_rates)) {
             $rate = $this->avg_rates;
         } else {
-            $reviews = $this->reviews()
-                ->where('status', 'active')
-                ->get();
+            $reviews = $this->relationLoaded('reviews')
+                ? $this->reviews->where('status', 'active')
+                : $this->reviews()->where('status', 'active')->get();
 
             if ($reviews->count() > 0) {
                 $rate = number_format($reviews->avg('rates'), 2);
@@ -276,6 +276,10 @@ class Webinar extends Model implements TranslatableContract
 
     public function getRateCount()
     {
+        if ($this->relationLoaded('reviews')) {
+            return $this->reviews->where('status', 'active')->count();
+        }
+
         return $this->reviews()
             ->where('status', 'active')
             ->count();
