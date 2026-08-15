@@ -210,7 +210,7 @@ class LoginController extends Controller
         return redirect('/login')->with(['login_failed_active_session' => $toastData]);
     }
 
-    public function afterLogged(Request $request, $verify = false)
+    public function afterLogged(Request $request, $verify = false, $skipTwoFactor = false)
     {
         $user = auth()->user();
 
@@ -275,6 +275,13 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return $this->sendMaximumActiveSessionResponse();
+        }
+
+        if (!$skipTwoFactor && $user->needsTwoFactor() && $user->hasTwoFactorEnabled()) {
+            $this->guard()->logout();
+            $request->session()->put('2fa_pending_user_id', $user->id);
+            $request->session()->put('2fa_pending_at', time());
+            return redirect()->route('2fa.challenge.show');
         }
 
         $user->update([

@@ -109,6 +109,13 @@ class LoginController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             $user = auth()->user();
 
+            if ($user->needsTwoFactor() && $user->hasTwoFactorEnabled()) {
+                Auth::logout();
+                $request->session()->put('2fa_pending_user_id', $user->id);
+                $request->session()->put('2fa_pending_at', time());
+                return redirect()->route('2fa.challenge.show');
+            }
+
             if (!empty($user)) {
                 $userLoginHistoryMixin = new UserLoginHistoryMixin();
                 $userLoginHistoryMixin->storeUserLoginHistory($user);
