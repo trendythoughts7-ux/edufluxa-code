@@ -33,7 +33,9 @@ class WebinarShowService
                 'relatedCourses' => function ($query) {
                     $query->whereHas('course', function ($query) {
                         $query->where('status', 'active');
-                    })->with(['course.teacher', 'course.category']);
+                    })->with(['course.teacher', 'course.category', 'course.reviews' => function ($query) {
+                        $query->where('status', 'active');
+                    }]);
                 },
                 'faqs' => function ($query) {
                     $query->orderBy('order', 'asc');
