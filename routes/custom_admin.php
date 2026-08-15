@@ -42,6 +42,7 @@ $prefix = getAdminPanelUrlPrefix();
 
 
 Route::group(['prefix' => 'my-account/2fa'], function () {
+    Route::get('/', 'TwoFactorController@page')->name('admin.2fa.page');
     Route::post('/enroll', 'TwoFactorController@enroll')->name('admin.2fa.enroll');
     Route::post('/confirm', 'TwoFactorController@confirm')->name('admin.2fa.confirm');
     Route::post('/disable', 'TwoFactorController@disable')->name('admin.2fa.disable');

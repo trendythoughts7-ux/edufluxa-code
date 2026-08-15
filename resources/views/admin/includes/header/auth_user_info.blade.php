@@ -47,6 +47,12 @@
                         <span class="ml-8">{{ trans('admin/main.change_password') }}</span>
                     </a>
                 </li>
+                <li class="navbar-auth-user__dropdown-item">
+                    <a href="{{ getAdminPanelUrl() }}/my-account/2fa" class="d-flex align-items-center w-100 px-16 py-8 bg-transparent">
+                        <x-iconsax-lin-shield-tick class="icons" width="24px" height="24px"/>
+                        <span class="ml-8">{{ trans('update.two_factor_authentication') }}</span>
+                    </a>
+                </li>
             @endif
 
             <li class="navbar-auth-user__dropdown-item">

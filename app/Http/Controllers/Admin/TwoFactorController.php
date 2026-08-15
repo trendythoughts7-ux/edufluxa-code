@@ -25,6 +25,18 @@ class TwoFactorController extends Controller
     }
 
     /**
+     * Render the self-service 2FA management page.
+     */
+    public function page()
+    {
+        $user = $this->assertEligible();
+
+        return view('admin.my_account.two_factor', [
+            'twoFactorEnabled' => (bool) $user->hasTwoFactorEnabled(),
+        ]);
+    }
+
+    /**
      * Step 1: generate a new (unconfirmed) secret + QR code.
      */
     public function enroll(Request $request)
