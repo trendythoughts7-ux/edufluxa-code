@@ -616,8 +616,6 @@ class Webinar extends Model implements TranslatableContract
 
     public function getFilesLearningProgressStat($userId = null)
     {
-        $passed = 0;
-
         if (empty($userId)) {
             $userId = auth()->id();
         }
@@ -626,15 +624,10 @@ class Webinar extends Model implements TranslatableContract
             ->where('status', 'active')
             ->get();
 
-        foreach ($files as $file) {
-            $status = CourseLearning::where('user_id', $userId)
-                ->where('file_id', $file->id)
-                ->first();
-
-            if (!empty($status)) {
-                $passed += 1;
-            }
-        }
+        $passed = empty($files) ? 0 : CourseLearning::where('user_id', $userId)
+            ->whereIn('file_id', $files->pluck('id'))
+            ->distinct('file_id')
+            ->count('file_id');
 
         return [
             'passed' => $passed,
@@ -644,8 +637,6 @@ class Webinar extends Model implements TranslatableContract
 
     public function getSessionsLearningProgressStat($userId = null)
     {
-        $passed = 0;
-
         if (empty($userId)) {
             $userId = auth()->id();
         }
@@ -654,15 +645,10 @@ class Webinar extends Model implements TranslatableContract
             ->where('status', 'active')
             ->get();
 
-        foreach ($sessions as $session) {
-            $status = CourseLearning::where('user_id', $userId)
-                ->where('session_id', $session->id)
-                ->first();
-
-            if (!empty($status)) {
-                $passed += 1;
-            }
-        }
+        $passed = empty($sessions) ? 0 : CourseLearning::where('user_id', $userId)
+            ->whereIn('session_id', $sessions->pluck('id'))
+            ->distinct('session_id')
+            ->count('session_id');
 
         return [
             'passed' => $passed,
@@ -672,8 +658,6 @@ class Webinar extends Model implements TranslatableContract
 
     public function getTextLessonsLearningProgressStat($userId = null)
     {
-        $passed = 0;
-
         if (empty($userId)) {
             $userId = auth()->id();
         }
@@ -682,15 +666,10 @@ class Webinar extends Model implements TranslatableContract
             ->where('status', 'active')
             ->get();
 
-        foreach ($textLessons as $textLesson) {
-            $status = CourseLearning::where('user_id', $userId)
-                ->where('text_lesson_id', $textLesson->id)
-                ->first();
-
-            if (!empty($status)) {
-                $passed += 1;
-            }
-        }
+        $passed = empty($textLessons) ? 0 : CourseLearning::where('user_id', $userId)
+            ->whereIn('text_lesson_id', $textLessons->pluck('id'))
+            ->distinct('text_lesson_id')
+            ->count('text_lesson_id');
 
         return [
             'passed' => $passed,
@@ -700,8 +679,6 @@ class Webinar extends Model implements TranslatableContract
 
     public function getAssignmentsLearningProgressStat($userId = null)
     {
-        $passed = 0;
-
         if (empty($userId)) {
             $userId = auth()->id();
         }
@@ -710,16 +687,11 @@ class Webinar extends Model implements TranslatableContract
             ->where('status', 'active')
             ->get();
 
-        foreach ($assignments as $assignment) {
-            $assignmentHistory = WebinarAssignmentHistory::where('assignment_id', $assignment->id)
-                ->where('student_id', $userId)
-                ->where('status', WebinarAssignmentHistory::$passed)
-                ->first();
-
-            if (!empty($assignmentHistory)) {
-                $passed += 1;
-            }
-        }
+        $passed = empty($assignments) ? 0 : WebinarAssignmentHistory::where('student_id', $userId)
+            ->whereIn('assignment_id', $assignments->pluck('id'))
+            ->where('status', WebinarAssignmentHistory::$passed)
+            ->distinct('assignment_id')
+            ->count('assignment_id');
 
         return [
             'passed' => $passed,
@@ -729,8 +701,6 @@ class Webinar extends Model implements TranslatableContract
 
     public function getQuizzesLearningProgressStat($userId = null)
     {
-        $passed = 0;
-
         if (empty($userId)) {
             $userId = auth()->id();
         }
@@ -739,22 +709,18 @@ class Webinar extends Model implements TranslatableContract
             ->where('status', 'active')
             ->get();
 
-        foreach ($quizzes as $quiz) {
-            $quizHistory = QuizzesResult::where('quiz_id', $quiz->id)
-                ->where('user_id', $userId)
-                ->where('status', QuizzesResult::$passed)
-                ->first();
-
-            if (!empty($quizHistory)) {
-                $passed += 1;
-            }
-        }
+        $passed = empty($quizzes) ? 0 : QuizzesResult::where('user_id', $userId)
+            ->whereIn('quiz_id', $quizzes->pluck('id'))
+            ->where('status', QuizzesResult::$passed)
+            ->distinct('quiz_id')
+            ->count('quiz_id');
 
         return [
             'passed' => $passed,
             'count' => count($quizzes)
         ];
     }
+
 
     public function getProgress($isLearningPage = false, $user = null)
     {
