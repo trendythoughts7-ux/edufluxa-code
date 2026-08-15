@@ -89,6 +89,8 @@ Route::group(['namespace' => 'Auth', 'middleware' => ['check_mobile_app', 'share
     Route::get('/facebook/redirect', 'SocialiteController@redirectToFacebook');
     Route::get('/facebook/callback', 'SocialiteController@handleFacebookCallback');
     Route::get('/reff/{code}', 'ReferralController@referral');
+    Route::get('/2fa/challenge', 'TwoFactorChallengeController@show')->name('2fa.challenge.show');
+    Route::post('/2fa/challenge', 'TwoFactorChallengeController@verify')->name('2fa.challenge.verify');
 });
 
 Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impersonate', 'share', 'check_maintenance', 'check_restriction']], function () {

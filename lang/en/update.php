@@ -4851,5 +4851,11 @@ return [
     'recovery_codes_shown_once_warning' => 'These codes will only be shown once. Store them somewhere safe, you can use one to sign in if you lose access to your authenticator app.',
     'regenerate_recovery_codes' => 'Regenerate Recovery Codes',
     'regenerate_recovery_codes_description' => 'Generate a new set of recovery codes. Your old codes will stop working.',
+    'two_step_verification' => 'Two-Step Verification',
+    'enter_authentication_code' => 'Enter Authentication Code',
+    'two_factor_challenge_hint' => 'Enter the 6-digit code from your authenticator app to continue.',
+    'recovery_code' => 'Recovery Code',
+    'use_a_recovery_code_instead' => 'Use a recovery code instead',
+    'use_authenticator_app_instead' => 'Use authenticator app instead',
 
 ];
