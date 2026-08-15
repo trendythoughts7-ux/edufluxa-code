@@ -25,6 +25,10 @@ class Session extends Model implements TranslatableContract
 
     public $timestamps = false;
     protected $guarded = ['id'];
+    protected $casts = [
+        'api_secret' => 'encrypted',
+        'moderator_secret' => 'encrypted',
+    ];
     protected $table = 'sessions';
     protected $dateFormat = 'U';
 

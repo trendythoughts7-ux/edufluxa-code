@@ -10,6 +10,11 @@ class UserZoomApi extends Model
     public $timestamps = false;
     protected $dateFormat = 'U';
     protected $guarded = ['id'];
+    protected $casts = [
+        'api_key' => 'encrypted',
+        'api_secret' => 'encrypted',
+        'jwt_token' => 'encrypted',
+    ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
