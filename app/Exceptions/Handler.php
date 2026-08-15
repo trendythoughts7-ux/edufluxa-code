@@ -13,6 +13,8 @@ use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -71,8 +73,16 @@ class Handler extends ExceptionHandler
         // 422 JSON for AJAX/API requests). Letting it fall through here caused every validation
         // failure site-wide (login, register, contact, checkout, etc.) to show a 500 crash-page
         // instead of a normal field-error, whenever APP_DEBUG=false (i.e. always in production).
+        // AuthenticationException must also bypass this path — the base Handler's
+        // unauthenticated() correctly redirects to the login page (or returns 401 JSON for API).
+        // Without this exclusion, any expired/missing session on an authenticated route showed
+        // a 500 crash-page instead of a normal login redirect (found 2026-08-15, Loop 2.9 session,
+        // pre-existing bug unrelated to 2FA work — confirmed via unauthenticated POST to unrelated
+        // pre-existing route /panel/setting/metas).
         if (
             !($exception instanceof ValidationException) and
+            !($exception instanceof AuthenticationException) and
+            !($exception instanceof TokenMismatchException) and
             (
                 $this->isHttpException($exception) or
                 (
