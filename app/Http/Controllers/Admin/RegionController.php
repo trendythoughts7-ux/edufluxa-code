@@ -118,6 +118,7 @@ class RegionController extends Controller
                 ]);
 
                 $states = $regionsFromLocal->getStates($apiCountry['id']);
+                $allCities = $regionsFromLocal->getCities();
                 foreach ($states as $state) {
                     $slat = isset($state['latitude']) ? (float) $state['latitude'] : null; $slng = isset($state['longitude']) ? (float) $state['longitude'] : null;
                     $province = Region::create([
@@ -130,7 +131,7 @@ class RegionController extends Controller
                         'created_at' => time()
                     ]);
 
-                    $cities = $regionsFromLocal->getCities($state['id']);
+                    $cities = array_values(array_filter($allCities, function ($c) use ($state) { return isset($c['state_id']) && (string)$c['state_id'] === (string)$state['id']; }));
                     foreach ($cities as $city) {
                         $clat = isset($city['latitude']) ? (float) $city['latitude'] : null; $clng = isset($city['longitude']) ? (float) $city['longitude'] : null;
                         Region::create([
