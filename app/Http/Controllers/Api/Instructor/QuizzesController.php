@@ -71,7 +71,7 @@ class QuizzesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $quiz = Quiz::where('id', $id)->where('creator_id', auth()->id())->first();
+        $quiz = Quiz::where('id', $id)->where('creator_id', auth('api')->id())->first();
         if (!$quiz) {
             abort(404);
         }
@@ -124,7 +124,7 @@ class QuizzesController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $user_id = auth()->id();
+        $user_id = auth('api')->id();
         $quiz = Quiz::where('id', $id)
             ->where('creator_id', $user_id)
             ->first();
