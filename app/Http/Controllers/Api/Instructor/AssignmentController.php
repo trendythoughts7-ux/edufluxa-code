@@ -49,7 +49,7 @@ class AssignmentController extends Controller
                 $query->where('instructor_id', $user->id);
             },
         ])->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
@@ -57,7 +57,7 @@ class AssignmentController extends Controller
                 'pending_reviews_count' => $pendingReviewCount,
                 'passed_count' => $passedCount,
                 'failed_count' => $failedCount,
-                'assignments' => WebinarAssignmentResource::collection($assignments),
+                'assignments' => $assignments->through(fn($assignment) => new WebinarAssignmentResource($assignment)),
 
             ]);
 
@@ -98,7 +98,7 @@ class AssignmentController extends Controller
 
 
             $histories = $query->orderBy('created_at', 'desc')
-                ->get();
+                ->paginate(min((int) request('per_page', 20), 100));
             //  dd($histories);
             foreach ($histories as &$history) {
                 $history->usedAttemptsCount = 0;
@@ -122,7 +122,7 @@ class AssignmentController extends Controller
                     }
                 }
             }
-            $resource = WebinarAssignmentHistoryResource::collection($histories);
+            $resource = $histories->through(fn($history) => new WebinarAssignmentHistoryResource($history));
             //  dd($resource->groupBy('id')) ;
             //  $resource=$resource->groupBy('student_id')
 
@@ -186,7 +186,7 @@ class AssignmentController extends Controller
             $passedCount = deepClone($query)->where('status', WebinarAssignmentHistory::$passed)->count();
             $failedCount = deepClone($query)->where('status', WebinarAssignmentHistory::$notPassed)->count();
 
-            $histories = $query->orderBy('created_at', 'desc')->get();
+            $histories = $query->orderBy('created_at', 'desc')->paginate(min((int) request('per_page', 20), 100));
 
             foreach ($histories as &$history) {
                 $history->usedAttemptsCount = 0;
@@ -211,7 +211,7 @@ class AssignmentController extends Controller
                 }
             }
 
-            $resource = WebinarAssignmentHistoryResource::collection($histories);
+            $resource = $histories->through(fn($history) => new WebinarAssignmentHistoryResource($history));
             //  dd($resource->groupBy('id')) ;
             //  $resource=$resource->groupBy('student_id')
 

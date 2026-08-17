@@ -192,7 +192,7 @@ class WebinarsController extends Controller
                 }
             ])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
 
         $time = time();
@@ -269,7 +269,7 @@ class WebinarsController extends Controller
         $webinars = Webinar::where('status', 'active')
             ->whereIn('id', $invitedWebinarIds)
             ->handleFilters()
-            ->orderBy('updated_at', 'desc')->get()->map(function ($webinar) {
+            ->orderBy('updated_at', 'desc')->paginate(min((int) request('per_page', 20), 100))->through(function ($webinar) {
                 return $webinar->brief;
             });
 
@@ -284,7 +284,7 @@ class WebinarsController extends Controller
         $webinars = Webinar::where('creator_id', $user->organ_id)
             ->where('status', 'active')->handleFilters()
             ->orderBy('created_at', 'desc')
-            ->orderBy('updated_at', 'desc')->get()->map(function ($webinar) {
+            ->orderBy('updated_at', 'desc')->paginate(min((int) request('per_page', 20), 100))->through(function ($webinar) {
                 return $webinar->brief;
             });
 
@@ -353,7 +353,7 @@ class WebinarsController extends Controller
                 }
             ])
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [

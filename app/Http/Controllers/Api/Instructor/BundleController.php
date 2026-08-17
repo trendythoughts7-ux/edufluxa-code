@@ -47,7 +47,7 @@ class BundleController extends Controller
 
         $bundlesCount = $query->count();
 
-        $bundles = $query->get();
+        $bundles = $query->paginate(min((int) request('per_page', 20), 100));
 
         $bundleSales = Sale::where('seller_id', $user->id)
             ->where('type', 'bundle')
@@ -57,7 +57,7 @@ class BundleController extends Controller
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
-                'bundles' => BundleResource::collection($bundles),
+                'bundles' => $bundles->through(fn($bundle) => new BundleResource($bundle)),
                 'bundles_count' => $bundlesCount,
                 'bundle_sales_amount' => $bundleSales->sum('amount'),
                 'bundle_sales_count' => $bundleSales->count(),

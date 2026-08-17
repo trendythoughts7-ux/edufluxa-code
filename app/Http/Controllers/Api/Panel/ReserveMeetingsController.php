@@ -13,15 +13,17 @@ class ReserveMeetingsController extends Controller
 {
     public function index(Request $request)
     {
+        $reservations = $this->getReservation();
+        $requests = $this->getRequests();
 
         $data = [
             'reservations' => [
-                'count'=>count($this->getReservation()) ,
-                'meetings' => $this->getReservation(),
+                'count' => $reservations->total(),
+                'meetings' => $reservations,
             ],
-            'requests' =>[
-                'count'=>count( $this->getRequests()) ,
-                'meetings'=> $this->getRequests()
+            'requests' => [
+                'count' => $requests->total(),
+                'meetings' => $requests
             ],
         ];
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), $data);
@@ -84,8 +86,8 @@ class ReserveMeetingsController extends Controller
             ->whereHas('sale')
             ->whereNotNull('reserved_at')
             ->orderBy('created_at', 'desc')
-            ->get()
-            ->map(function ($reserveMeeting) {
+            ->paginate(min((int) request('per_page', 20), 100))
+            ->through(function ($reserveMeeting) {
                 return $reserveMeeting->details;
             });
 
@@ -99,7 +101,8 @@ class ReserveMeetingsController extends Controller
         $reservedMeetings = ReserveMeeting::whereIn('meeting_id', $meetingIds)->whereHas('sale')
             ->orderBy('created_at', 'desc')
 
-            ->get()->map(function ($reserveMeeting) {
+            ->paginate(min((int) request('per_page', 20), 100))
+            ->through(function ($reserveMeeting) {
                 return $reserveMeeting->details;
             });
 

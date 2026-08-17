@@ -30,11 +30,11 @@ class WebinarCertificateController extends Controller
         $certificates = Certificate::whereNotNull('webinar_id')
             ->where('type', 'course')
             ->where('student_id', $user->id)->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
-                'certificates' => WebinarCertificateResource::collection($certificates),
+                'certificates' => $certificates->through(fn($cert) => new WebinarCertificateResource($cert)),
 
             ]);
     }
