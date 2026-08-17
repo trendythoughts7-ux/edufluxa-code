@@ -35,10 +35,10 @@ class BundleController extends Controller
                 ]);
             },
         ])->
-        where('status', 'active')->get();
+        where('status', 'active')->paginate(min((int) request('per_page', 20), 100));
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
-                'bundles' => BundleResource::collection($bundles)
+                'bundles' => $bundles->through(fn($bundle) => new BundleResource($bundle))
             ]
         );
     }
