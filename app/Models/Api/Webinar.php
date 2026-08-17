@@ -555,13 +555,6 @@ class Webinar extends Model
             }
         }
 
-        if (!empty($offset) && !empty($limit)) {
-            $query->skip($offset);
-        }
-        if (!empty($limit)) {
-            $query->take($limit);
-        }
-
         if (!empty($sort)) {
             if ($sort == 'expensive') {
                 $query->orderBy('price', 'desc');

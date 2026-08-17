@@ -23,7 +23,7 @@ class WebinarController extends Controller
 {
 
 
-    public function index()
+    public function index(Request $request)
     {
         $webinars = Webinar::where('webinars.status', 'active')
             ->with([
@@ -59,7 +59,8 @@ class WebinarController extends Controller
             })
             ->where('private', false)
             ->handleFilters()
-            ->get()->map(function ($webinar) {
+            ->paginate(min((int) $request->get('per_page', 20), 100))
+            ->through(function ($webinar) {
                 return $webinar->brief;
             });
 
