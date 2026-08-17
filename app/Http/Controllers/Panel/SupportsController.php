@@ -50,7 +50,7 @@ class SupportsController extends Controller
                 'conversations' => function ($query) {
                     $query->orderBy('created_at', 'desc');
                 }
-            ])->get();
+            ])->paginate(min((int) request('per_page', 20), 100))->withQueryString();
 
         $webinars = Webinar::select('id')
             ->whereIn('id', array_unique($webinarIds))
@@ -152,7 +152,7 @@ class SupportsController extends Controller
                     $query->orderBy('created_at', 'desc')
                         ->first();
                 }
-            ])->get();
+            ])->paginate(min((int) request('per_page', 20), 100))->withQueryString();
 
         $departments = SupportDepartment::all();
 

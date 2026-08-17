@@ -80,4 +80,7 @@
         @endforeach
 
     </div>
+        <div class="px-16 pt-16">
+            {{ $supports->links() }}
+        </div>
 </div>
