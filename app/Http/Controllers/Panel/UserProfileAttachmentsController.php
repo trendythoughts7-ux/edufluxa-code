@@ -75,6 +75,17 @@ class UserProfileAttachmentsController extends Controller
     public function edit(Request $request, $id)
     {
         $attachment = UserProfileAttachment::query()->findOrFail($id);
+        if (!empty($request->get('user_id'))) {
+            $organization = auth()->user();
+            $user = User::where('id', $request->get('user_id'))
+                ->where('organ_id', $organization->id)
+                ->first();
+        } else {
+            $user = auth()->user();
+        }
+        if (empty($user) or $attachment->user_id != $user->id) {
+            abort(404);
+        }
 
         $data = [
             'attachment' => $attachment,
