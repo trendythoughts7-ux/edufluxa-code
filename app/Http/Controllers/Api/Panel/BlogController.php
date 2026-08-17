@@ -19,7 +19,7 @@ class BlogController extends Controller
 
         $posts = deepClone($query)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         $blogIds = deepClone($query)->pluck('id')->toArray();
 
@@ -32,7 +32,7 @@ class BlogController extends Controller
                 'posts_count' => $postsCount,
                 'comment_count' => $commentsCount,
                 'pending_publish_count' => $pendingPublishCount,
-                'blogs' => BlogResource::collection($posts)
+                'blogs' => $posts->through(fn($post) => new BlogResource($post))
             ]);
 
     }

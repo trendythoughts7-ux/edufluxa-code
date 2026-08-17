@@ -17,7 +17,7 @@ class BlogCommentController extends Controller
         $posts = Blog::where('author_id', $user->id)->get();
         $blogIds = $posts->pluck('id')->toArray();
         $comments = Comment::whereIn('blog_id', $blogIds)->handleFilters()->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         $blogId = $request->get('blog_id', null);
 
@@ -26,7 +26,7 @@ class BlogCommentController extends Controller
                 ->where('author_id', $user->id)
                 ->first();
         }
-        $resource = CommentResource::collection($comments);
+        $resource = $comments->through(fn($comment) => new CommentResource($comment));
      //   $resource->panel = true;
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [

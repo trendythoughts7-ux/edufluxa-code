@@ -21,8 +21,7 @@ class CourseForumController extends Controller
         $webinar->load(['forums', 'forums.answers']);
 
         $forums_query = CourseForum::withCount('answers')->with('answers')->where('webinar_id', $webinar->id);
-        $forums = $forums_query->get();
-        $filterd = $forums_query->handleFilters()->get();
+        $filterd = $forums_query->handleFilters()->paginate(min((int) request('per_page', 20), 100));
 
         $courseForumsIds = CourseForum::where('webinar_id', $webinar->id)->pluck('id')->toArray();
         $commentsCount = CourseForumAnswer::whereIn('forum_id', $courseForumsIds)->count();
@@ -30,7 +29,7 @@ class CourseForumController extends Controller
 
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), [
-            'forums' => WebinarForumResource::collection($filterd),
+            'forums' => $filterd->through(fn($forum) => new WebinarForumResource($forum)),
             'questions_count' => $webinar->forums->count(),
             'resolved_count' => $webinar->forums()->whereHas('answers', function ($query) {
                 $query->where('resolved', true);

@@ -34,16 +34,14 @@ class AssignmentController extends Controller
 
 
         $assignments = $query->handleFilters()->orderBy('created_at', 'desc')
-            ->get()->map(function ($assignment) {
-                //  dd($assignment->assignmentHistory->where('student_id', $user->id)->get()) ;
-                return $assignment->assignmentHistory;
-            });
+            ->paginate(min((int) request('per_page', 20), 100))
+            ->through(fn($assignment) => new WebinarAssignmentHistoryResource($assignment->assignmentHistory));
         //dd($assignments);
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
 
-                'assignments' => WebinarAssignmentHistoryResource::collection($assignments),
+                'assignments' => $assignments,
 
             ]);
 

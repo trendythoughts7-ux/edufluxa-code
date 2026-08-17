@@ -19,10 +19,10 @@ class CourseForumAnswerController extends Controller
     public function index(CourseForum $forum)
     {
         $this->authorizeForUser(apiAuth(), 'view', $forum->webinar);
-        $courseForum = CourseForumAnswer::where('forum_id', $forum->id)->get();
+        $courseForum = CourseForumAnswer::where('forum_id', $forum->id)->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), [
-            'answers' => CourseForumAnswerResource::collection($courseForum)
+            'answers' => $courseForum->through(fn($answer) => new CourseForumAnswerResource($answer))
         ]);
 
     }
