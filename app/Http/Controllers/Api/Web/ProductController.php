@@ -19,7 +19,7 @@ class ProductController extends Controller
         $data = $request->all();
 
         $products = Product::where('products.status', Product::$active)
-            ->where('ordering', true)->handleFilters()->get();
+            ->where('ordering', true)->handleFilters()->paginate(min((int) request('per_page', 20), 100));
 
 
         if (!empty($data['category_id'])) {
@@ -27,7 +27,7 @@ class ProductController extends Controller
         }
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
-                'products' => ProductResource::collection($products),
+                'products' => $products->through(fn($product) => new ProductResource($product)),
             ]);
 
     }
