@@ -103,7 +103,13 @@ class WebinarReviewController extends Controller
         validateParam($request->all(), [
             'reply' => 'required'
         ]);
-        if (empty(WebinarReview::find($id))) {
+        $review = WebinarReview::find($id);
+        if (empty($review)) {
+            abort(404);
+        }
+        $user = apiAuth();
+        $webinar = $review->webinar;
+        if (empty($webinar) or !$webinar->canAccess($user)) {
             abort(404);
         }
 
