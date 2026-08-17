@@ -15,15 +15,16 @@ class SalesController extends Controller
             ->whereNull('refund_at');
 
         $studentIds = deepClone($query)->pluck('buyer_id')->toArray();
-       
+
         $getStudentCount = count($studentIds);
         $getWebinarsCount = count(array_filter(deepClone($query)->pluck('webinar_id')->toArray()));
         $getMeetingCount = count(array_filter(deepClone($query)->pluck('meeting_id')->toArray()));
 
- 
+
         $sales = $query->handleFilters()->orderBy('created_at', 'desc')
-            ->get()->map(function ($sale) {
-               
+            ->paginate(min((int) request('per_page', 20), 100))
+            ->through(function ($sale) {
+
                 return $sale->details ;
             });
 
@@ -37,7 +38,7 @@ class SalesController extends Controller
             'meeting_sales'=>$user->meetingsSaleAmount()
 
         ]);
-       
+
     }
- 
+
 }

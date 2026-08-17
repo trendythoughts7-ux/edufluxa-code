@@ -18,14 +18,14 @@ class PayoutsController extends Controller
             //->where('status',Payout::$done)
             ->orderBy('status', 'asc')
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         $getFinancialSettings = getFinancialSettings();
 
         $currentPayout = $this->getCurrentPayout($request, $user);
 
         return apiResponse2(1, 'retrieved', trans('public.retrieved'), [
-            'payouts' => $payouts->map(function ($payout) {
+            'payouts' => $payouts->through(function ($payout) {
                 return $payout->details;
             }),
             'current_payout' => $currentPayout,

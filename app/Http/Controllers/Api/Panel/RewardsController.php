@@ -31,7 +31,8 @@ class RewardsController extends Controller
 
         $availablePoints = $addictionPoints - $spentPoints;
         $rewards = $query->orderBy('created_at', 'desc')
-            ->get()->map(function ($reward) {
+            ->paginate(min((int) request('per_page', 20), 100))
+            ->through(function ($reward) {
                 return $reward->details;
             });
 
@@ -106,14 +107,17 @@ class RewardsController extends Controller
 
     public function courses(Request $request)
     {
-        $webinars = Webinar::where('webinars.status', 'active')
+        $webinarsQuery = Webinar::where('webinars.status', 'active')
             ->where('private', false)->whereNotNull('points')
-            ->get()->map(function ($webinar) {
-                return $webinar->brief;
-            });
+            ->paginate(min((int) request('per_page', 20), 100));
+
+        $webinarsTotalCount = $webinarsQuery->total();
+        $webinars = $webinarsQuery->through(function ($webinar) {
+            return $webinar->brief;
+        });
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), [
-            'count' => count($webinars),
+            'count' => $webinarsTotalCount,
             'webinars' => $webinars
         ]);
 

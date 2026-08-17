@@ -54,10 +54,10 @@ class ProductController extends Controller
 
         $products = deepClone($query)
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
-            ['products' => ProductResource::collection($products),
+            ['products' => $products->through(fn($product) => new ProductResource($product)),
                 'physical_products_count' => $physicalProducts,
                 'virtual_products_count' => $virtualProducts,
                 'physical_products_sale' => (float)$totalPhysicalSales->total_sales ?? 0,
@@ -128,20 +128,21 @@ class ProductController extends Controller
         $repliedCommentsCount = deepClone($query)->whereNotNull('reply_id')->count();
 
         $comments = $query->handleFilters()->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         foreach ($comments->whereNull('viewed_at') as $comment) {
             $comment->update([
                 'viewed_at' => time()
             ]);
         }
-        $comments = $comments->map(function ($comment) {
+        $commentsTotalCount = $comments->total();
+        $comments = $comments->through(function ($comment) {
             return $comment->details;
         });
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
-                'comments_count' => $comments->count(),
+                'comments_count' => $commentsTotalCount,
                 'replied_comment_count' => $repliedCommentsCount,
                 'comments' => $comments,
 

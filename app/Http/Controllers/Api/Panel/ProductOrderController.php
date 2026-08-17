@@ -33,10 +33,10 @@ class ProductOrderController extends Controller
             ->first();
 
 
-        $orders = $query->handleFilters()->orderBy('created_at', 'desc')->get();
+        $orders = $query->handleFilters()->orderBy('created_at', 'desc')->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
-            ['orders' => ProductOrderResource::collection($orders),
+            ['orders' => $orders->through(fn($order) => new ProductOrderResource($order)),
                 'total_orders_count' => $totalOrders,
                 'pending_orders_count' => $pendingOrders,
                 'canceled_orders_count' => $canceledOrders,
@@ -57,7 +57,7 @@ class ProductOrderController extends Controller
         $customerIds = deepClone($query)->pluck('buyer_id')->toArray();
         $customers = User::select('id', 'full_name')
             ->whereIn('id', array_unique($customerIds))
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             ['users' => $customers
@@ -88,7 +88,7 @@ class ProductOrderController extends Controller
             ->first();
 
         $orders = $query->handleFilters()->orderBy('created_at', 'desc')
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
 
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
             [
@@ -96,7 +96,7 @@ class ProductOrderController extends Controller
                 'pending_orders_count' => $pendingOrders,
                 'canceled_orders_count' => $canceledOrders,
                 'total_purchase_amount' => $totalPurchase->totalAmount ?? 0,
-                'orders' => ProductOrderResource::collection($orders),
+                'orders' => $orders->through(fn($order) => new ProductOrderResource($order)),
             ]);
 
     }
@@ -114,7 +114,11 @@ class ProductOrderController extends Controller
         $sellerIds = deepClone($query)->pluck('seller_id')->toArray();
         $sellers = User::select('id', 'full_name')
             ->whereIn('id', array_unique($sellerIds))
-            ->get();
+            ->paginate(min((int) request('per_page', 20), 100));
+
+        return apiResponse2(1, 'retrieved', trans('api.public.retrieved'),
+            ['users' => $sellers
+            ]);
     }
 
 

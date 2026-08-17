@@ -13,8 +13,8 @@ class OfflinePayments extends Controller
     public function index()
     {
         $user = apiAuth();
-        $offlinePayments = OfflinePayment::where('user_id', $user->id)->orderBy('created_at', 'desc')->get()
-            ->map(function ($offlinePayment) {
+        $offlinePayments = OfflinePayment::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(min((int) request('per_page', 20), 100))
+            ->through(function ($offlinePayment) {
                 return [
                     'id' => $offlinePayment->id,
                     'amount' => $offlinePayment->amount,
