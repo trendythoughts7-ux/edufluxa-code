@@ -125,9 +125,9 @@ Route::group([], function () {
             $response = $messaging->send($fcmMessage);
             return apiResponse2(1,"retrived","",$response);
         } catch (Exception $exception){
-            return apiResponse2(1,"retrived",$exception->getMessage(),$exception->getTrace());
+            return apiResponse2(1,"retrived",$exception->getMessage(),null);
         }
-    });
+    })->middleware('throttle:60,1');
 
     //End New API
 });
