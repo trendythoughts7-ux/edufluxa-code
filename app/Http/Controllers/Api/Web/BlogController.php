@@ -36,8 +36,8 @@ BlogController extends Controller
 
         ->orderBy('updated_at', 'desc')
         ->orderBy('created_at', 'desc')
-        ->get()
-        ->map(function($blog){
+        ->paginate(min((int) $request->get('per_page', 20), 100))
+        ->through(function($blog){
             return $blog->details;
         }) ;
 

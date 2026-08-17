@@ -86,12 +86,6 @@ class Blog extends Model implements TranslatableContract
         $limit = $request->get('limit', null);
         $category=$request->get('cat',null) ;
 
-        if (!empty($offset) && !empty($limit)) {
-            $query->skip($offset);
-        }
-        if (!empty($limit)) {
-            $query->take($limit);
-        }
 
         if($category){
             $query->where('category_id',$category) ;
