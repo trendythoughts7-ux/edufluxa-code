@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Middleware\Api;
-
 use Closure;
 use Illuminate\Contracts\Auth\Factory as Auth;
-
 class Authenticate
 {
     /**
@@ -13,7 +10,6 @@ class Authenticate
      * @var \Illuminate\Contracts\Auth\Factory
      */
     protected $auth;
-
     /**
      * Create a new middleware instance.
      *
@@ -24,7 +20,6 @@ class Authenticate
     {
         $this->auth = $auth;
     }
-
     /**
      * Handle an incoming request.
      *
@@ -35,14 +30,9 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-
-        if(request()->input('test_auth_id')){
-            return $next($request);
-        }
         if ($this->auth->guard('api')->guest()) {
             return apiResponse2(0,'unauthorized',trans('auth.unauthorized')) ;
         }
-
         return $next($request);
     }
 }
