@@ -15,6 +15,9 @@ class WebinarTextLessonController extends Controller
 
         $text_lesson = TextLesson::find($id);
         abort_unless($text_lesson, 404);
+        if ($error = $text_lesson->canViewError()) {
+            return $this->failure($error, 403, 403);
+        }
         $webinar = $text_lesson->webinar;
         $all_text_lessons = $webinar->textLessons->map(function ($item, $key)  {
             $item->index = $key + 1;

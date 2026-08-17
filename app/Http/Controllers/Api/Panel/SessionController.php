@@ -23,7 +23,7 @@ class SessionController extends Controller
             ->where('status', WebinarChapter::$chapterActive)->first();
         abort_unless($session, 404);
         if ($error = $session->canViewError()) {
-            //       return $this->failure($error, 403, 403);
+            return $this->failure($error, 403, 403);
         }
         $resource = new SessionResource($session);
         return apiResponse2(1, 'retrieved', trans('api.public.retrieved'), $resource);
