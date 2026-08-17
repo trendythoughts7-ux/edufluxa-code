@@ -71,7 +71,7 @@ class QuizzesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $quiz = Quiz::find($id);
+        $quiz = Quiz::where('id', $id)->where('creator_id', auth()->id())->first();
         if (!$quiz) {
             abort(404);
         }
