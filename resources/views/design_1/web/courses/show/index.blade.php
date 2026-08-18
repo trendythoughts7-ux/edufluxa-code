@@ -11,6 +11,39 @@
 @endpush
 
 
+@push('scripts_top')
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": {!! json_encode(strip_tags($course->title)) !!},
+        "description": {!! json_encode(strip_tags($course->seo_description ?? $course->summary ?? '')) !!},
+        "provider": {
+            "@type": "Organization",
+            "name": {!! json_encode($generalSettings['site_name'] ?? 'Edufluxa') !!},
+            "sameAs": {!! json_encode(url('/')) !!}
+        },
+        "image": {!! json_encode(url($pageMetaImage)) !!},
+        "url": {!! json_encode($course->getUrl()) !!}
+        @if(!empty($course->price))
+        ,"offers": {
+            "@type": "Offer",
+            "price": {!! json_encode((string)$course->price) !!},
+            "priceCurrency": {!! json_encode(getDefaultCurrency()) !!},
+            "availability": "https://schema.org/InStock",
+            "url": {!! json_encode($course->getUrl()) !!}
+        }
+        @endif
+        @if($course->getRateCount() > 0)
+        ,"aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": {!! json_encode((string)$course->getRate()) !!},
+            "reviewCount": {!! json_encode((string)$course->getRateCount()) !!}
+        }
+        @endif
+    }
+    </script>
+@endpush
 @section("content")
     <div class="container position-relative mt-80 pb-120 ">
 
