@@ -28,7 +28,7 @@ class CategoriesController extends Controller
             $categoryQuery->where('enable', true);
 
             $category = $categoryQuery->withCount('webinars')
-                ->with(['filters' => function ($query) {
+                ->with(['category', 'filters' => function ($query) {
                     $query->with('options');
                 }])->first();
 
