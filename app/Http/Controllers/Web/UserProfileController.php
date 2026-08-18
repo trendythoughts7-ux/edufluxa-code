@@ -134,9 +134,11 @@ class UserProfileController extends Controller
         }
 
         $coursesCount = $this->getUserCoursesQuery($user->id)->count();
+        $pageRobot = getPageRobot('profile');
 
         $data = [
             'pageTitle' => $user->full_name . ' ' . trans('public.profile'),
+            'pageRobot' => $pageRobot,
             'user' => $user,
             'userBadges' => $userBadges,
             'meeting' => $meeting,
