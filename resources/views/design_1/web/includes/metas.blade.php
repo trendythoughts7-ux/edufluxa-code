@@ -52,4 +52,24 @@
 <meta property='og:type' content='website'>
 
 {!! getSeoMetas('extra_meta_tags') !!}
+@php
+    $orgEmail = !empty($generalSettings['site_email']) ? $generalSettings['site_email'] : null;
+    $orgPhone = !empty($generalSettings['site_phone']) ? $generalSettings['site_phone'] : null;
+    $orgSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'Organization',
+        'name' => !empty($generalSettings['site_name']) ? $generalSettings['site_name'] : '',
+        'url' => url('/'),
+        'logo' => url(!empty($generalSettings['logo']) ? $generalSettings['logo'] : ''),
+    ];
+    if (!empty($orgEmail)) {
+        $orgSchema['email'] = $orgEmail;
+    }
+    if (!empty($orgPhone)) {
+        $orgSchema['telephone'] = $orgPhone;
+    }
+@endphp
+<script type="application/ld+json">
+{!! json_encode($orgSchema) !!}
+</script>
 
