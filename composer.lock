@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb1064b4a5f9f361da3509f60659efed",
+    "content-hash": "04a8bdfe4f81558aeaa431ac0a3cd612",
     "packages": [
         {
             "name": "akcybex/laravel-jazzcash",
@@ -54,137 +54,6 @@
                 "source": "https://github.com/akcybex/laravel-jazzcash/tree/1.0"
             },
             "time": "2021-12-26T15:42:25+00:00"
-        },
-        {
-            "name": "alazzi-az/laravel-tamara",
-            "version": "v1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alazzi-az/laravel-tamara.git",
-                "reference": "8d4e72a8a0902432d3f3658748f603d1a23706b4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alazzi-az/laravel-tamara/zipball/8d4e72a8a0902432d3f3658748f603d1a23706b4",
-                "reference": "8d4e72a8a0902432d3f3658748f603d1a23706b4",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.4",
-                "illuminate/contracts": "^9.0",
-                "php": "^8.1",
-                "psr/http-client": "^1.0",
-                "spatie/laravel-package-tools": "^1.9.2"
-            },
-            "require-dev": {
-                "laravel/pint": "^1.0",
-                "nunomaduro/collision": "^6.0",
-                "nunomaduro/larastan": "^2.0.1",
-                "orchestra/testbench": "^7.0",
-                "pestphp/pest": "^1.21",
-                "pestphp/pest-plugin-laravel": "^1.1",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpunit/phpunit": "^9.5",
-                "spatie/laravel-ray": "^1.26"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Tamara": "AlazziAz\\Tamara\\Facades\\Tamara"
-                    },
-                    "providers": [
-                        "AlazziAz\\Tamara\\TamaraServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "AlazziAz\\Tamara\\": "src",
-                    "AlazziAz\\Tamara\\Database\\Factories\\": "database/factories"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mohammed Ali Azman",
-                    "email": "azmman2012@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel wrapper for Tamara SDK",
-            "homepage": "https://github.com/alazzi-az/laravel-tamara",
-            "keywords": [
-                "alazzi-az",
-                "laravel",
-                "laravel-tamara"
-            ],
-            "support": {
-                "issues": "https://github.com/alazzi-az/laravel-tamara/issues",
-                "source": "https://github.com/alazzi-az/laravel-tamara/tree/v1.2.0"
-            },
-            "time": "2023-07-15T20:02:50+00:00"
-        },
-        {
-            "name": "anandsiddharth/laravel-paytm-wallet",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/anandsiddharth/laravel-paytm-wallet.git",
-                "reference": "5342add0719e9c5ca94fdd13f766e6a810f2ef45"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/anandsiddharth/laravel-paytm-wallet/zipball/5342add0719e9c5ca94fdd13f766e6a810f2ef45",
-                "reference": "5342add0719e9c5ca94fdd13f766e6a810f2ef45",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": ">=8.0",
-                "illuminate/support": ">=8.0",
-                "php": ">=7.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "PaytmWallet": "Anand\\LaravelPaytmWallet\\Facades\\PaytmWallet"
-                    },
-                    "providers": [
-                        "Anand\\LaravelPaytmWallet\\PaytmWalletServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Anand\\LaravelPaytmWallet\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anand Siddharth",
-                    "email": "anandsiddharth21@gmail.com"
-                }
-            ],
-            "description": "Integrate paytm wallet easily with this package. This package uses official Paytm PHP SDK's",
-            "keywords": [
-                "laravel",
-                "paytm wallet"
-            ],
-            "support": {
-                "issues": "https://github.com/anandsiddharth/laravel-paytm-wallet/issues",
-                "source": "https://github.com/anandsiddharth/laravel-paytm-wallet/tree/v2.0.0"
-            },
-            "time": "2020-10-28T06:22:20+00:00"
         },
         {
             "name": "astrotomic/laravel-translatable",
@@ -270,49 +139,6 @@
                 }
             ],
             "time": "2026-03-27T14:41:10+00:00"
-        },
-        {
-            "name": "authorizenet/authorizenet",
-            "version": "2.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/AuthorizeNet/sdk-php.git",
-                "reference": "8555cc245953dd0ac57f7ea424a5572eae4c7191"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/AuthorizeNet/sdk-php/zipball/8555cc245953dd0ac57f7ea424a5572eae4c7191",
-                "reference": "8555cc245953dd0ac57f7ea424a5572eae4c7191",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": ">=5.6"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "lib"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary"
-            ],
-            "description": "Official PHP SDK for Authorize.Net",
-            "homepage": "http://developer.authorize.net",
-            "keywords": [
-                "authorize.net",
-                "authorizenet",
-                "ecommerce",
-                "payment"
-            ],
-            "support": {
-                "issues": "https://github.com/AuthorizeNet/sdk-php/issues",
-                "source": "https://github.com/AuthorizeNet/sdk-php/tree/2.0.4"
-            },
-            "time": "2024-09-18T06:23:52+00:00"
         },
         {
             "name": "aws/aws-crt-php",
@@ -799,112 +625,6 @@
             "time": "2025-09-11T23:36:19+00:00"
         },
         {
-            "name": "bitpay/key-utils",
-            "version": "1.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bitpay/bitpay-php-keyutils.git",
-                "reference": "61cc4a58f25e79b7f61ff4631152139f6b084cb1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/bitpay-php-keyutils/zipball/61cc4a58f25e79b7f61ff4631152139f6b084cb1",
-                "reference": "61cc4a58f25e79b7f61ff4631152139f6b084cb1",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "ext-curl": "*",
-                "ext-iconv": "*",
-                "ext-json": "*",
-                "ext-openssl": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5 || ^9.0"
-            },
-            "suggest": {
-                "ext-gmp": "Required to use this package with GMP instead of BCMath"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Buedo",
-                    "email": "sales-engineering@bitpay.com"
-                }
-            ],
-            "description": "BitPay Utils pack for cryptography",
-            "support": {
-                "issues": "https://github.com/bitpay/bitpay-php-keyutils/issues",
-                "source": "https://github.com/bitpay/bitpay-php-keyutils/tree/1.1.4"
-            },
-            "time": "2024-02-06T02:15:49+00:00"
-        },
-        {
-            "name": "bitpay/sdk",
-            "version": "7.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bitpay/php-bitpay-client-v2.git",
-                "reference": "543c62192825afe3852f84d1f5606df20847c509"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bitpay/php-bitpay-client-v2/zipball/543c62192825afe3852f84d1f5606df20847c509",
-                "reference": "543c62192825afe3852f84d1f5606df20847c509",
-                "shasum": ""
-            },
-            "require": {
-                "bitpay/key-utils": "^1.1",
-                "ext-json": "*",
-                "ext-reflection": "*",
-                "guzzlehttp/guzzle": "^7.0",
-                "php": "^7.4 || ^8.0 || ^8.1",
-                "symfony/yaml": "^3.0 || ^4.3 || ^5.0 || ^6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5 || ^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BitPaySDK\\": "src/BitPaySDK"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Antonio Buedo",
-                    "email": "solutions-engineering@bitpay.com"
-                }
-            ],
-            "description": "Complete version of the PHP library for the new cryptographically secure BitPay API",
-            "homepage": "https://github.com/bitpay/php-bitpay-client-v2",
-            "keywords": [
-                "bitcoin",
-                "bitpay",
-                "cash",
-                "gateway",
-                "payment"
-            ],
-            "support": {
-                "issues": "https://github.com/bitpay/php-bitpay-client-v2/issues",
-                "source": "https://github.com/bitpay/php-bitpay-client-v2/tree/7.1.0"
-            },
-            "time": "2022-11-16T21:36:41+00:00"
-        },
-        {
             "name": "blade-ui-kit/blade-icons",
             "version": "1.10.1",
             "source": {
@@ -984,54 +704,6 @@
                 }
             ],
             "time": "2026-06-30T09:44:12+00:00"
-        },
-        {
-            "name": "braintree/braintree_php",
-            "version": "5.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/braintree/braintree_php.git",
-                "reference": "8902a072ac04c9eea2996f2683cb56259cbe46fa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/8902a072ac04c9eea2996f2683cb56259cbe46fa",
-                "reference": "8902a072ac04c9eea2996f2683cb56259cbe46fa",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-dom": "*",
-                "ext-hash": "*",
-                "ext-openssl": "*",
-                "ext-xmlwriter": "*",
-                "php": ">=7.2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Braintree\\": "lib/Braintree"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Braintree",
-                    "homepage": "https://www.braintreepayments.com"
-                }
-            ],
-            "description": "Braintree PHP Client Library",
-            "support": {
-                "issues": "https://github.com/braintree/braintree_php/issues",
-                "source": "https://github.com/braintree/braintree_php/tree/5.5.0"
-            },
-            "time": "2021-01-25T21:53:32+00:00"
         },
         {
             "name": "brick/math",
@@ -1370,98 +1042,6 @@
                 "source": "https://github.com/chehivskiy/I18N_Arabic/tree/1.0.2"
             },
             "time": "2019-10-08T15:03:10+00:00"
-        },
-        {
-            "name": "cinetpay/cinetpay-php",
-            "version": "1.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cinetpay/cinetpay-php-legacy.git",
-                "reference": "8a4a53bce076036fc5d6781bee839719780f2028"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cinetpay/cinetpay-php-legacy/zipball/8a4a53bce076036fc5d6781bee839719780f2028",
-                "reference": "8a4a53bce076036fc5d6781bee839719780f2028",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": ">=5.6.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "CinetPay": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fawaz Adisa",
-                    "email": "adisaf@programmer.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "easily integrate cinetpay's gateway on your php web site.",
-            "homepage": "https://github.com/cinetpay/cinetpay-php-legacy",
-            "keywords": [
-                "cinetpay",
-                "integration",
-                "mobile",
-                "money"
-            ],
-            "support": {
-                "email": "support@cinetpay.com",
-                "issues": "https://github.com/cinetpay/cinetpay-php-legacy/issues",
-                "source": "https://github.com/cinetpay/cinetpay-php-legacy/tree/v1.9.2"
-            },
-            "time": "2020-11-30T00:00:00+00:00"
-        },
-        {
-            "name": "clickpaysa/laravel_package",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/clickpaysa/laravel-package.git",
-                "reference": "e51b89e958909090c1684ef566757fb70b5dd4c8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/clickpaysa/laravel-package/zipball/e51b89e958909090c1684ef566757fb70b5dd4c8",
-                "reference": "e51b89e958909090c1684ef566757fb70b5dd4c8",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0|^8.0"
-            },
-            "type": "composer-package",
-            "autoload": {
-                "psr-4": {
-                    "Clickpaysa\\Laravel_package\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Official laravel package to implement ClickPay integration with laravel apps",
-            "homepage": "https://clickpay.com.sa",
-            "keywords": [
-                "ClickPay",
-                "E-comerce",
-                "laravel",
-                "payments"
-            ],
-            "support": {
-                "issues": "https://github.com/clickpaysa/laravel-package/issues",
-                "source": "https://github.com/clickpaysa/laravel-package/tree/1.4.0"
-            },
-            "time": "2023-08-21T11:26:31+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -3063,59 +2643,6 @@
             "time": "2025-12-03T09:33:47+00:00"
         },
         {
-            "name": "gizemsever/laravel-paytr",
-            "version": "2.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GizemSever/laravel-paytr.git",
-                "reference": "c3d9926553603abcd79c4b14641f22575b6b70b2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GizemSever/laravel-paytr/zipball/c3d9926553603abcd79c4b14641f22575b6b70b2",
-                "reference": "c3d9926553603abcd79c4b14641f22575b6b70b2",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.0.1",
-                "illuminate/collections": "^8|^9|^10",
-                "illuminate/support": "^8.0|^9.0|^10.0",
-                "php": "^8.0|^8.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Paytr": "Gizemsever\\LaravelPaytr\\PaytrFacade"
-                    },
-                    "providers": [
-                        "Gizemsever\\LaravelPaytr\\PaytrServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Gizemsever\\LaravelPaytr\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Gizem Sever",
-                    "email": "gizemsever68@gmail.com"
-                }
-            ],
-            "description": "Laravel Paytr Wrapper",
-            "support": {
-                "issues": "https://github.com/GizemSever/laravel-paytr/issues",
-                "source": "https://github.com/GizemSever/laravel-paytr/tree/2.1.2"
-            },
-            "time": "2024-06-03T21:39:28+00:00"
-        },
-        {
             "name": "google/apiclient",
             "version": "v2.19.4",
             "source": {
@@ -3780,64 +3307,6 @@
             "time": "2026-07-03T09:39:53+00:00"
         },
         {
-            "name": "guysolamour/laravel-cinetpay",
-            "version": "v2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guysolamour/laravel-cinetpay.git",
-                "reference": "e54b0f0ec8635b83ff7b2b8ce11d6e810e4c308d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guysolamour/laravel-cinetpay/zipball/e54b0f0ec8635b83ff7b2b8ce11d6e810e4c308d",
-                "reference": "e54b0f0ec8635b83ff7b2b8ce11d6e810e4c308d",
-                "shasum": ""
-            },
-            "require": {
-                "cinetpay/cinetpay-php": "^1.9",
-                "illuminate/support": "^8.0|^9.0|^10.0",
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^4.0|^5.0|^6.0",
-                "phpunit/phpunit": "^8.4|^9.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Guysolamour\\Cinetpay\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Guysolamour\\Cinetpay\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Guy-roland ASSALE",
-                    "email": "rolandassale@gmail.com"
-                }
-            ],
-            "description": "A laravel wrapper for cinetpay",
-            "keywords": [
-                "cinetpay",
-                "laravel",
-                "payment"
-            ],
-            "support": {
-                "issues": "https://github.com/guysolamour/laravel-cinetpay/issues",
-                "source": "https://github.com/guysolamour/laravel-cinetpay/tree/v2.0"
-            },
-            "time": "2023-02-26T08:36:21+00:00"
-        },
-        {
             "name": "guzzlehttp/guzzle",
             "version": "7.15.3",
             "source": {
@@ -4255,191 +3724,6 @@
             "time": "2026-07-17T13:53:03+00:00"
         },
         {
-            "name": "haggag/laravel-tap-payment",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/MahmoudSaidHaggag/laravel-tap-payment.git",
-                "reference": "09e29969e87c5fd94dc106a63d69f192d00ab172"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/MahmoudSaidHaggag/laravel-tap-payment/zipball/09e29969e87c5fd94dc106a63d69f192d00ab172",
-                "reference": "09e29969e87c5fd94dc106a63d69f192d00ab172",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "illuminate/support": "5.6.*|5.7.*|5.8.*|6.*|7.*|8.*|9.*",
-                "php": "^7.1|^7.2|^7.3|^8.0|^8.1|^8.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Essam\\TapPayment\\TapServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Essam\\TapPayment\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sfwan Essam",
-                    "email": "sfwanessam9@gmail.com"
-                }
-            ],
-            "description": "Tap Payment SDK Package for PHP Laravel",
-            "support": {
-                "source": "https://github.com/MahmoudSaidHaggag/laravel-tap-payment/tree/1.0.0"
-            },
-            "time": "2023-05-09T18:04:47+00:00"
-        },
-        {
-            "name": "hiqdev/omnipay-robokassa",
-            "version": "3.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hiqdev/omnipay-robokassa.git",
-                "reference": "ebfd062d192c4020180d2bc617ee20c9ed2f49a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hiqdev/omnipay-robokassa/zipball/ebfd062d192c4020180d2bc617ee20c9ed2f49a4",
-                "reference": "ebfd062d192c4020180d2bc617ee20c9ed2f49a4",
-                "shasum": ""
-            },
-            "require": {
-                "omnipay/common": "^3.0"
-            },
-            "require-dev": {
-                "hiqdev/hidev-hiqdev": "<2.0",
-                "hiqdev/hidev-php": "<2.0",
-                "omnipay/tests": "^3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\RoboKassa\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andrii Vasyliev",
-                    "email": "sol@hiqdev.com",
-                    "homepage": "http://hipanel.com/",
-                    "role": "Project lead"
-                },
-                {
-                    "name": "Dmitry Naumenko",
-                    "email": "d.naumenko.a@gmail.com",
-                    "homepage": "http://silverfire.me/",
-                    "role": "Lead backend developer"
-                },
-                {
-                    "name": "Andrey Klochok",
-                    "email": "andreyklochok@gmail.com",
-                    "homepage": "http://hiqdev.com/",
-                    "role": "Lead frontend developer"
-                },
-                {
-                    "name": "Yuriy Myronchuk",
-                    "email": "bladeroot@gmail.com",
-                    "homepage": "http://hiqdev.com/",
-                    "role": "QA Lead"
-                }
-            ],
-            "description": "RoboKassa driver for Omnipay PHP payment library",
-            "homepage": "https://github.com/hiqdev/omnipay-robokassa",
-            "keywords": [
-                "merchant",
-                "omnipay",
-                "payment",
-                "php",
-                "robokassa"
-            ],
-            "support": {
-                "email": "support@hiqdev.com",
-                "forum": "http://forum.hiqdev.com/",
-                "issues": "https://github.com/hiqdev/omnipay-robokassa/issues",
-                "source": "https://github.com/hiqdev/omnipay-robokassa",
-                "wiki": "https://github.com/hiqdev/omnipay-robokassa/wiki"
-            },
-            "time": "2022-05-25T08:47:58+00:00"
-        },
-        {
-            "name": "instamojo/instamojo-php",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Instamojo/instamojo-php.git",
-                "reference": "58564617b3f8828b2057274b0f6e7384e4740d33"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Instamojo/instamojo-php/zipball/58564617b3f8828b2057274b0f6e7384e4740d33",
-                "reference": "58564617b3f8828b2057274b0f6e7384e4740d33",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Utilities.php"
-                ],
-                "psr-4": {
-                    "Instamojo\\": "src/",
-                    "Instamojo\\Exceptions\\": "src/Exceptions"
-                },
-                "classmap": [
-                    "src"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Instamojo and contributors",
-                    "email": "dev@instamojo.com",
-                    "homepage": "https://github.com/instamojo/instamojo-php/contributors"
-                }
-            ],
-            "description": "This is composer wrapper for instamojo-php",
-            "homepage": "https://github.com/instamojo/instamojo-php/",
-            "keywords": [
-                "api",
-                "instamojo",
-                "php",
-                "wrapper"
-            ],
-            "support": {
-                "docs": "https://github.com/instamojo/instamojo-php/",
-                "email": "support@instamojo.com",
-                "issues": "https://github.com/instamojo/instamojo-php/issues",
-                "source": "https://github.com/Instamojo/instamojo-php/tree/1.0"
-            },
-            "time": "2020-09-08T10:18:12+00:00"
-        },
-        {
             "name": "intervention/image",
             "version": "2.7.2",
             "source": {
@@ -4522,115 +3806,6 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
-        },
-        {
-            "name": "irakan/paylink",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/irakan/paylink.git",
-                "reference": "42ddcb5ff7dc00dfe77f85136c0a21c668dcba54"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/irakan/paylink/zipball/42ddcb5ff7dc00dfe77f85136c0a21c668dcba54",
-                "reference": "42ddcb5ff7dc00dfe77f85136c0a21c668dcba54",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.2",
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.4",
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Paylink\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Rakan Salem",
-                    "email": "i.rakkan66@gmail.com"
-                }
-            ],
-            "description": "Paylink.sa API PHP library",
-            "keywords": [
-                "api",
-                "gateway",
-                "merchant",
-                "pay",
-                "paylink",
-                "payment"
-            ],
-            "support": {
-                "issues": "https://github.com/irakan/paylink/issues",
-                "source": "https://github.com/irakan/paylink/tree/v1.1.0"
-            },
-            "time": "2021-01-12T22:10:54+00:00"
-        },
-        {
-            "name": "iyzico/iyzipay-php",
-            "version": "v2.0.61",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/iyzico/iyzipay-php.git",
-                "reference": "168839f9ccb2aebaa2cb9f07b883b1b2bb0cf87a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/iyzico/iyzipay-php/zipball/168839f9ccb2aebaa2cb9f07b883b1b2bb0cf87a",
-                "reference": "168839f9ccb2aebaa2cb9f07b883b1b2bb0cf87a",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "php": ">=7.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.6.34",
-                "satooshi/php-coveralls": "~0.6.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Iyzipay\\": "src/Iyzipay/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "iyzico and contributors",
-                    "homepage": "https://github.com/iyzico/iyzipay-php/contributors"
-                }
-            ],
-            "description": "iyzipay api php client",
-            "homepage": "https://www.iyzico.com",
-            "keywords": [
-                "iyzico",
-                "iyzico.com",
-                "iyzipay",
-                "iyzipay api",
-                "iyzipay api php",
-                "iyzipay api php client",
-                "iyzipay php",
-                "payment processing"
-            ],
-            "support": {
-                "issues": "https://github.com/iyzico/iyzipay-php/issues",
-                "source": "https://github.com/iyzico/iyzipay-php/tree/v2.0.61"
-            },
-            "time": "2026-04-28T11:31:34+00:00"
         },
         {
             "name": "james-heinrich/getid3",
@@ -5394,57 +4569,6 @@
                 }
             ],
             "time": "2024-11-22T13:02:38+00:00"
-        },
-        {
-            "name": "kyrax324/laravel-ipay88",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Kyrax324/laravel-ipay88.git",
-                "reference": "beb7c0023a37889df3f509f6a4acdfa653ee17f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Kyrax324/laravel-ipay88/zipball/beb7c0023a37889df3f509f6a4acdfa653ee17f4",
-                "reference": "beb7c0023a37889df3f509f6a4acdfa653ee17f4",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "IPay88\\IPay88ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "IPay88\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kyrax324",
-                    "email": "kyrax324@gmail.com"
-                }
-            ],
-            "description": "IPay88 Payment Gateway Integration for Laravel Application",
-            "keywords": [
-                "ipay88",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/Kyrax324/laravel-ipay88/issues",
-                "source": "https://github.com/Kyrax324/laravel-ipay88/tree/v1.0.2"
-            },
-            "time": "2021-07-18T12:53:15+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -7077,55 +6201,6 @@
             "time": "2018-11-16T01:57:14+00:00"
         },
         {
-            "name": "lyracom/rest-php-sdk",
-            "version": "4.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lyra/rest-php-sdk.git",
-                "reference": "3af7d3d22faf02b79d025afb25cc2ade1d3d68c7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lyra/rest-php-sdk/zipball/3af7d3d22faf02b79d025afb25cc2ade1d3d68c7",
-                "reference": "3af7d3d22faf02b79d025afb25cc2ade1d3d68c7",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "6.5.*"
-            },
-            "suggest": {
-                "ext-curl": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Lyra REST API PHP SDK",
-            "keywords": [
-                "api",
-                "creditcard",
-                "lyra",
-                "payment",
-                "rest",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/lyra/rest-php-sdk/issues",
-                "source": "https://github.com/lyra/rest-php-sdk/tree/4.0.4"
-            },
-            "time": "2021-02-23T14:11:12+00:00"
-        },
-        {
             "name": "maatwebsite/excel",
             "version": "3.1.69",
             "source": {
@@ -7657,67 +6732,6 @@
                 "source": "https://github.com/meyfa/php-svg/tree/v0.9.1"
             },
             "time": "2019-07-30T18:41:25+00:00"
-        },
-        {
-            "name": "midtrans/midtrans-php",
-            "version": "2.6.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Midtrans/midtrans-php.git",
-                "reference": "8ed7fc58ff1ababe675da17acf8233f4028eb3be"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Midtrans/midtrans-php/zipball/8ed7fc58ff1ababe675da17acf8233f4028eb3be",
-                "reference": "8ed7fc58ff1ababe675da17acf8233f4028eb3be",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "ext-openssl": "*",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "5.7.*",
-                "psy/psysh": "0.4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SnapBi\\": "SnapBi/",
-                    "Midtrans\\": "Midtrans/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Andri Setiawan",
-                    "email": "andri.setiawan@veritrans.co.id"
-                },
-                {
-                    "name": "Alvin Litani",
-                    "email": "alvin.litani@veritrans.co.id"
-                },
-                {
-                    "name": "Ismail Faruqi",
-                    "email": "ismail.faruqi@veritrans.co.id"
-                },
-                {
-                    "name": "Muhammad Fauzi Masykur",
-                    "email": "muhammad.masykur@gojek.com"
-                }
-            ],
-            "description": "PHP Wrapper for Midtrans Payment API.",
-            "homepage": "https://midtrans.com",
-            "support": {
-                "issues": "https://github.com/Midtrans/midtrans-php/issues",
-                "source": "https://github.com/Midtrans/midtrans-php/tree/v2.6.2"
-            },
-            "time": "2025-03-18T06:30:17+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -8726,74 +7740,6 @@
             "time": "2024-11-21T10:36:35+00:00"
         },
         {
-            "name": "omnipay/braintree",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/omnipay-braintree.git",
-                "reference": "b60a754ad2b33e638ffd9cfc29611f372e8d531a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/omnipay-braintree/zipball/b60a754ad2b33e638ffd9cfc29611f372e8d531a",
-                "reference": "b60a754ad2b33e638ffd9cfc29611f372e8d531a",
-                "shasum": ""
-            },
-            "require": {
-                "braintree/braintree_php": "^5.0",
-                "omnipay/common": "^3"
-            },
-            "require-dev": {
-                "omnipay/tests": "^3"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "4.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\Braintree\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kayla Daniels",
-                    "email": "kayladnls@gmail.com"
-                },
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                },
-                {
-                    "name": "Omnipay Contributors",
-                    "homepage": "https://github.com/thephpleague/omnipay-braintree/contributors"
-                }
-            ],
-            "description": "Braintree gateway for Omnipay payment processing library",
-            "homepage": "https://github.com/thephpleague/omnipay-braintree",
-            "keywords": [
-                "braintree",
-                "gateway",
-                "merchant",
-                "omnipay",
-                "pay",
-                "payment",
-                "purchase"
-            ],
-            "support": {
-                "issues": "https://github.com/thephpleague/omnipay-braintree/issues",
-                "source": "https://github.com/thephpleague/omnipay-braintree/tree/master"
-            },
-            "time": "2022-02-16T13:54:35+00:00"
-        },
-        {
             "name": "omnipay/common",
             "version": "v3.5.1",
             "source": {
@@ -8887,79 +7833,6 @@
                 }
             ],
             "time": "2026-02-13T11:51:03+00:00"
-        },
-        {
-            "name": "omnipay/mollie",
-            "version": "v5.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/omnipay-mollie.git",
-                "reference": "6e9366893e012fd64615dc6ad365750b0cba91e9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/omnipay-mollie/zipball/6e9366893e012fd64615dc6ad365750b0cba91e9",
-                "reference": "6e9366893e012fd64615dc6ad365750b0cba91e9",
-                "shasum": ""
-            },
-            "require": {
-                "omnipay/common": "^3.1",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "omnipay/tests": "^4.1",
-                "squizlabs/php_codesniffer": "^3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Omnipay\\Mollie\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Adrian Macneil",
-                    "email": "adrian@adrianmacneil.com"
-                },
-                {
-                    "name": "Barry vd. Heuvel",
-                    "email": "barryvdh@gmail.com"
-                },
-                {
-                    "name": "Omnipay Contributors",
-                    "homepage": "https://github.com/thephpleague/omnipay-mollie/contributors"
-                }
-            ],
-            "description": "Mollie driver for the Omnipay payment processing library",
-            "homepage": "https://github.com/thephpleague/omnipay-mollie",
-            "keywords": [
-                "gateway",
-                "merchant",
-                "mollie",
-                "omnipay",
-                "pay",
-                "payment"
-            ],
-            "support": {
-                "issues": "https://github.com/thephpleague/omnipay-mollie/issues",
-                "source": "https://github.com/thephpleague/omnipay-mollie/tree/v5.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/barryvdh",
-                    "type": "github"
-                }
-            ],
-            "time": "2026-02-03T09:19:50+00:00"
         },
         {
             "name": "openai-php/client",
@@ -9520,53 +8393,6 @@
             },
             "abandoned": "paypal/paypal-server-sdk",
             "time": "2016-01-20T17:45:52+00:00"
-        },
-        {
-            "name": "paytabscom/laravel_paytabs",
-            "version": "1.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/paytabscom/paytabs-php-laravel-package.git",
-                "reference": "14b903e30ac74d6dc0318d22d465ecdd6969ec15"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/paytabscom/paytabs-php-laravel-package/zipball/14b903e30ac74d6dc0318d22d465ecdd6969ec15",
-                "reference": "14b903e30ac74d6dc0318d22d465ecdd6969ec15",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0|^8.0"
-            },
-            "type": "composer-package",
-            "autoload": {
-                "psr-4": {
-                    "Paytabscom\\Laravel_paytabs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Walaa Elsaeed",
-                    "email": "w.elsaeed@paytabs.com"
-                }
-            ],
-            "description": "Official laravel package to implement PayTabs integration with laravel apps",
-            "homepage": "https://site.paytabs.com/en/",
-            "keywords": [
-                "E-comerce",
-                "laravel",
-                "payments",
-                "paytabs"
-            ],
-            "support": {
-                "issues": "https://github.com/paytabscom/paytabs-php-laravel-package/issues",
-                "source": "https://github.com/paytabscom/paytabs-php-laravel-package/tree/V1.10.0"
-            },
-            "time": "2026-02-04T17:20:57+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -10232,65 +9058,6 @@
                 }
             ],
             "time": "2026-06-14T23:24:10+00:00"
-        },
-        {
-            "name": "pishran/zarinpal",
-            "version": "v4.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pishran/Zarinpal.git",
-                "reference": "557417ca1ad6a8f0d4cb53c94ed81e20d0470329"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pishran/Zarinpal/zipball/557417ca1ad6a8f0d4cb53c94ed81e20d0470329",
-                "reference": "557417ca1ad6a8f0d4cb53c94ed81e20d0470329",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "php": "^7.2|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Pishran\\Zarinpal\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "Pishran\\Zarinpal\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Farid Aghili",
-                    "email": "farid@pishranit.ir",
-                    "homepage": "https://www.faridaghili.ir",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Zarinpal library for Laravel.",
-            "homepage": "https://github.com/pishran/zarinpal",
-            "keywords": [
-                "laravel",
-                "payment",
-                "zarinpal"
-            ],
-            "support": {
-                "issues": "https://github.com/pishran/Zarinpal/issues",
-                "source": "https://github.com/pishran/Zarinpal/tree/v4.3.7"
-            },
-            "time": "2026-05-01T16:44:24+00:00"
         },
         {
             "name": "pragmarx/google2fa",
@@ -11226,71 +9993,6 @@
             "time": "2026-06-18T03:57:49+00:00"
         },
         {
-            "name": "razorpay/razorpay",
-            "version": "2.9.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/razorpay/razorpay-php.git",
-                "reference": "b724515d548083b9fba52e61f47c0c24136ab181"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/razorpay/razorpay-php/zipball/b724515d548083b9fba52e61f47c0c24136ab181",
-                "reference": "b724515d548083b9fba52e61f47c0c24136ab181",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.3",
-                "rmccue/requests": "^2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9",
-                "raveren/kint": "1.*"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "Deprecated.php"
-                ],
-                "psr-4": {
-                    "Razorpay\\Api\\": "src/",
-                    "Razorpay\\Tests\\": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Abhay Rana",
-                    "email": "nemo@razorpay.com",
-                    "homepage": "https://captnemo.in",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Shashank Kumar",
-                    "email": "shashank@razorpay.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Razorpay PHP Client Library",
-            "homepage": "https://docs.razorpay.com",
-            "keywords": [
-                "api",
-                "client",
-                "php",
-                "razorpay"
-            ],
-            "support": {
-                "email": "contact@razorpay.com",
-                "issues": "https://github.com/Razorpay/razorpay-php/issues",
-                "source": "https://github.com/Razorpay/razorpay-php"
-            },
-            "time": "2026-06-08T08:12:20+00:00"
-        },
-        {
             "name": "rize/uri-template",
             "version": "0.4.2",
             "source": {
@@ -11353,92 +10055,6 @@
                 }
             ],
             "time": "2026-05-07T15:30:40+00:00"
-        },
-        {
-            "name": "rmccue/requests",
-            "version": "v2.0.18",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/WordPress/Requests.git",
-                "reference": "2e5b8434e0dd54b35bcf1e9a5b52ba2ad84cf773"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/Requests/zipball/2e5b8434e0dd54b35bcf1e9a5b52ba2ad84cf773",
-                "reference": "2e5b8434e0dd54b35bcf1e9a5b52ba2ad84cf773",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || ^1.0",
-                "php-parallel-lint/php-console-highlighter": "^0.5.0",
-                "php-parallel-lint/php-parallel-lint": "^1.3.1",
-                "phpcompatibility/php-compatibility": "^10.0.0@dev",
-                "requests/test-server": "dev-main",
-                "squizlabs/php_codesniffer": "^3.6",
-                "wp-coding-standards/wpcs": "^2.0",
-                "yoast/phpunit-polyfills": "^1.1.5"
-            },
-            "suggest": {
-                "art4/requests-psr18-adapter": "For using Requests as a PSR-18 HTTP Client",
-                "ext-curl": "For improved performance",
-                "ext-openssl": "For secure transport support",
-                "ext-zlib": "For improved performance when decompressing encoded streams"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "library/Deprecated.php"
-                ],
-                "psr-4": {
-                    "WpOrg\\Requests\\": "src/"
-                },
-                "classmap": [
-                    "library/Requests.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "ISC"
-            ],
-            "authors": [
-                {
-                    "name": "Ryan McCue",
-                    "homepage": "https://rmccue.io/"
-                },
-                {
-                    "name": "Alain Schlesser",
-                    "homepage": "https://github.com/schlessera"
-                },
-                {
-                    "name": "Juliette Reinders Folmer",
-                    "homepage": "https://github.com/jrfnl"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/WordPress/Requests/graphs/contributors"
-                }
-            ],
-            "description": "A HTTP library written in PHP, for human beings.",
-            "homepage": "https://requests.ryanmccue.info/",
-            "keywords": [
-                "curl",
-                "fsockopen",
-                "http",
-                "idna",
-                "ipv6",
-                "iri",
-                "sockets"
-            ],
-            "support": {
-                "docs": "https://requests.ryanmccue.info/",
-                "issues": "https://github.com/WordPress/Requests/issues",
-                "source": "https://github.com/WordPress/Requests"
-            },
-            "time": "2026-04-30T00:41:23+00:00"
         },
         {
             "name": "saade/blade-iconsax",
@@ -11583,154 +10199,6 @@
                 "source": "https://github.com/MyIntervals/PHP-CSS-Parser/tree/v9.4.0"
             },
             "time": "2026-06-18T15:10:53+00:00"
-        },
-        {
-            "name": "samir-hussein/paymob",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/samir-hussein/paymob.git",
-                "reference": "5e7b59aba9fa810076925da9a17e02373ae494a4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/samir-hussein/paymob/zipball/5e7b59aba9fa810076925da9a17e02373ae494a4",
-                "reference": "5e7b59aba9fa810076925da9a17e02373ae494a4",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PayMob\\": "paymob/laravel",
-                    "Paymob\\": "paymob"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Samir Ebrahim Hussein",
-                    "email": "samirhussein274@gmail.com"
-                }
-            ],
-            "description": "paymob payment gateway",
-            "support": {
-                "issues": "https://github.com/samir-hussein/paymob/issues",
-                "source": "https://github.com/samir-hussein/paymob/tree/2.0"
-            },
-            "time": "2023-01-24T23:40:17+00:00"
-        },
-        {
-            "name": "sebacarrasco93/laravel-payku",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sebacarrasco93/laravel-payku.git",
-                "reference": "a6047a129b1282a8c47a1bccc3129bab1beb5afd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sebacarrasco93/laravel-payku/zipball/a6047a129b1282a8c47a1bccc3129bab1beb5afd",
-                "reference": "a6047a129b1282a8c47a1bccc3129bab1beb5afd",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "^7.0.1",
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "orchestra/testbench": "^6.18",
-                "pestphp/pest": "^1.3"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "LaravelPayku": "SebaCarrasco93\\LaravelPayku\\Facades\\LaravelPayku"
-                    },
-                    "providers": [
-                        "SebaCarrasco93\\LaravelPayku\\LaravelPaykuServiceProvider",
-                        "SebaCarrasco93\\LaravelPayku\\RouteServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "SebaCarrasco93\\LaravelPayku\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Seba Carrasco Poblete",
-                    "email": "sebacarrasco93@gmail.com"
-                }
-            ],
-            "description": "Payku Package for Laravel",
-            "support": {
-                "issues": "https://github.com/sebacarrasco93/laravel-payku/issues",
-                "source": "https://github.com/sebacarrasco93/laravel-payku/tree/1.0.5"
-            },
-            "time": "2024-03-05T02:48:13+00:00"
-        },
-        {
-            "name": "sermepa/sermepa",
-            "version": "1.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ssheduardo/sermepa.git",
-                "reference": "b55189d9ead39c1829a36cc6096a724e22359a0a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ssheduardo/sermepa/zipball/b55189d9ead39c1829a36cc6096a724e22359a0a",
-                "reference": "b55189d9ead39c1829a36cc6096a724e22359a0a",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1.3|^7.2.5|^8.0|^8.1|^8.2|^8.3|^8.4|^8.5"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0|^8.5.8|^9.3.3|^10.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Redsys\\": "src/Redsys/",
-                    "Sermepa\\Tpv\\": "src/Sermepa/Tpv/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eduardo D",
-                    "email": "ssh.eduardo@gmail.com",
-                    "homepage": "http://ubublog.com/"
-                }
-            ],
-            "description": "Pasarela de pago Redsys, Sermepa",
-            "homepage": "https://github.com/ssheduardo/sermepa",
-            "keywords": [
-                "lacaixa",
-                "pasarela",
-                "payment",
-                "redsys",
-                "sabadell",
-                "sermepa"
-            ],
-            "support": {
-                "issues": "https://github.com/ssheduardo/sermepa/issues",
-                "source": "https://github.com/ssheduardo/sermepa/tree/v1.5.3"
-            },
-            "time": "2026-02-22T17:37:39+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -12004,134 +10472,6 @@
                 }
             ],
             "time": "2026-02-21T21:26:55+00:00"
-        },
-        {
-            "name": "spatie/laravel-package-tools",
-            "version": "1.92.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "f09a799850b1ed765103a4f0b4355006360c49a5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/f09a799850b1ed765103a4f0b4355006360c49a5",
-                "reference": "f09a799850b1ed765103a4f0b4355006360c49a5",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "^9.28|^10.0|^11.0|^12.0",
-                "php": "^8.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.5",
-                "orchestra/testbench": "^7.7|^8.0|^9.0|^10.0",
-                "pestphp/pest": "^1.23|^2.1|^3.1",
-                "phpunit/php-code-coverage": "^9.0|^10.0|^11.0",
-                "phpunit/phpunit": "^9.5.24|^10.5|^11.5",
-                "spatie/pest-plugin-test-time": "^1.1|^2.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\LaravelPackageTools\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Tools for creating Laravel packages",
-            "homepage": "https://github.com/spatie/laravel-package-tools",
-            "keywords": [
-                "laravel-package-tools",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.92.7"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-07-17T15:46:43+00:00"
-        },
-        {
-            "name": "ssheduardo/redsys-laravel",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ssheduardo/redsys-laravel.git",
-                "reference": "7fb9ed8edbbeffc5b3c965a215ba6c8af5e7466f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ssheduardo/redsys-laravel/zipball/7fb9ed8edbbeffc5b3c965a215ba6c8af5e7466f",
-                "reference": "7fb9ed8edbbeffc5b3c965a215ba6c8af5e7466f",
-                "shasum": ""
-            },
-            "require": {
-                "laravel/framework": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "php": "^7.2|^8.0",
-                "sermepa/sermepa": "^1.4"
-            },
-            "require-dev": {
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
-                "phpunit/phpunit": "^9.0|^10.0|^11.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Redsys": "Ssheduardo\\Redsys\\Facades\\Redsys"
-                    },
-                    "providers": [
-                        "Ssheduardo\\Redsys\\RedsysServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Ssheduardo\\Redsys\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": ":Eduardo D",
-                    "email": "ssh.eduardo@gmail.com",
-                    "homepage": "http://ubublog.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Package redsys for laravel",
-            "homepage": "https://github.com/ssheduardo/redsys-laravel",
-            "keywords": [
-                "lacaixa",
-                "pasarela",
-                "payment",
-                "redsys",
-                "sabadell",
-                "tpv"
-            ],
-            "support": {
-                "issues": "https://github.com/ssheduardo/redsys-laravel/issues",
-                "source": "https://github.com/ssheduardo/redsys-laravel/tree/1.5.0"
-            },
-            "time": "2026-03-20T23:54:52+00:00"
         },
         {
             "name": "stichoza/google-translate-php",
@@ -15106,128 +13446,6 @@
             "time": "2026-06-27T08:12:01+00:00"
         },
         {
-            "name": "symfony/yaml",
-            "version": "v6.4.42",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "989dfb75049b77884f3f8cf9e99f103c8f91ca1c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/989dfb75049b77884f3f8cf9e99f103c8f91ca1c",
-                "reference": "989dfb75049b77884f3f8cf9e99f103c8f91ca1c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.1",
-                "symfony/deprecation-contracts": "^2.5|^3",
-                "symfony/polyfill-ctype": "^1.8"
-            },
-            "conflict": {
-                "symfony/console": "<5.4"
-            },
-            "require-dev": {
-                "symfony/console": "^5.4|^6.0|^7.0"
-            },
-            "bin": [
-                "Resources/bin/yaml-lint"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Yaml\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Loads and dumps YAML files",
-            "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/yaml/tree/v6.4.42"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-06-08T07:06:12+00:00"
-        },
-        {
-            "name": "tabbyai/laravel",
-            "version": "2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sultan-algarbi/tabby-laravel-package.git",
-                "reference": "4da07b18d00ee3db08156eee264885c49f8e027f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sultan-algarbi/tabby-laravel-package/zipball/4da07b18d00ee3db08156eee264885c49f8e027f",
-                "reference": "4da07b18d00ee3db08156eee264885c49f8e027f",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tabby\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sultan Algarbi",
-                    "email": "sultanye@gmail.com"
-                }
-            ],
-            "description": "Laravel package for integrating with Tabby.",
-            "keywords": [
-                "api",
-                "integration",
-                "package",
-                "payment",
-                "payment gateway",
-                "sdk",
-                "tabby"
-            ],
-            "support": {
-                "issues": "https://github.com/sultan-algarbi/tabby-laravel-package/issues",
-                "source": "https://github.com/sultan-algarbi/tabby-laravel-package/tree/v2.1.1"
-            },
-            "time": "2024-11-14T11:35:23+00:00"
-        },
-        {
             "name": "thecodingmachine/safe",
             "version": "v3.4.0",
             "source": {
@@ -15685,170 +13903,6 @@
                 "source": "https://github.com/tymondesigns/jwt-auth"
             },
             "time": "2026-03-06T09:50:45+00:00"
-        },
-        {
-            "name": "tzsk/payu",
-            "version": "7.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tzsk/payu.git",
-                "reference": "f4d9d96b8a735abf6964b9bc15e75c35ca1959cd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tzsk/payu/zipball/f4d9d96b8a735abf6964b9bc15e75c35ca1959cd",
-                "reference": "f4d9d96b8a735abf6964b9bc15e75c35ca1959cd",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^8.0|^9.0|^10.0",
-                "php": "^8.1"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "^7.0",
-                "laravel/legacy-factories": "^1.0",
-                "laravel/pint": "^1.6",
-                "orchestra/testbench": "^6.0|^7.0|^8.0",
-                "phpstan/phpstan": "^1.4",
-                "phpunit/phpunit": "^9.3",
-                "spatie/phpunit-snapshot-assertions": "^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Payu": "Tzsk\\Payu\\Facades\\Payu"
-                    },
-                    "providers": [
-                        "Tzsk\\Payu\\PayuServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Tzsk\\Payu\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "tzsk",
-                    "email": "mailtokmahmed@gmail.com",
-                    "homepage": "https://tzsk.githu.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PayU India Payment Gateway Integration with Laravel",
-            "homepage": "https://github.com/tzsk/payu",
-            "keywords": [
-                "gateway",
-                "laravel 5 payment gateway",
-                "laravel payu",
-                "payment",
-                "payment gateway",
-                "payu",
-                "payu gateway with verification",
-                "payu payment gateway",
-                "payu payment verification laravel",
-                "tzsk",
-                "verification"
-            ],
-            "support": {
-                "issues": "https://github.com/tzsk/payu/issues",
-                "source": "https://github.com/tzsk/payu/tree/7.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://paypal.me/KMAhmed",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tzsk",
-                    "type": "github"
-                }
-            ],
-            "time": "2023-03-18T16:10:53+00:00"
-        },
-        {
-            "name": "unicodeveloper/laravel-paystack",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/unicodeveloper/laravel-paystack.git",
-                "reference": "4d540e081f63f8ceca42ded5668da8ec93a3a084"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/unicodeveloper/laravel-paystack/zipball/4d540e081f63f8ceca42ded5668da8ec93a3a084",
-                "reference": "4d540e081f63f8ceca42ded5668da8ec93a3a084",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6|~7|~8|~9",
-                "illuminate/support": "~6|~7|~8|~9|^10.0|^11.0",
-                "php": "^7.2|^8.0|^8.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3",
-                "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^8.4|^9.0|^10.5",
-                "scrutinizer/ocular": "~1.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "Paystack": "Unicodeveloper\\Paystack\\Facades\\Paystack"
-                    },
-                    "providers": [
-                        "Unicodeveloper\\Paystack\\PaystackServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/Support/helpers.php"
-                ],
-                "psr-4": {
-                    "Unicodeveloper\\Paystack\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "unicodeveloper",
-                    "email": "prosperotemuyiwa@gmail.com"
-                },
-                {
-                    "name": "iamfunsho",
-                    "email": "info@devfunsho.com"
-                }
-            ],
-            "description": "A Laravel Package for Paystack",
-            "keywords": [
-                "github",
-                "laravel",
-                "laravel 6",
-                "laravel 7",
-                "laravel 8",
-                "open source",
-                "payments",
-                "paystack",
-                "paystack.co",
-                "php",
-                "subscription"
-            ],
-            "support": {
-                "issues": "https://github.com/unicodeveloper/laravel-paystack/issues",
-                "source": "https://github.com/unicodeveloper/laravel-paystack/tree/1.2.0"
-            },
-            "time": "2024-04-08T09:40:49+00:00"
         },
         {
             "name": "unisharp/laravel-filemanager",
@@ -16378,157 +14432,6 @@
                 "source": "https://github.com/Vonage/vonage-laravel/tree/1.2.0"
             },
             "time": "2026-04-22T13:00:32+00:00"
-        },
-        {
-            "name": "vrajroham/laravel-bitpay",
-            "version": "6.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/vrajroham/laravel-bitpay.git",
-                "reference": "606b9383e8770d007953c198fc91bacd3fabbab3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/vrajroham/laravel-bitpay/zipball/606b9383e8770d007953c198fc91bacd3fabbab3",
-                "reference": "606b9383e8770d007953c198fc91bacd3fabbab3",
-                "shasum": ""
-            },
-            "require": {
-                "bitpay/sdk": "~7.1.0",
-                "ext-json": "*",
-                "php": "^7.4 || ^8.0 || ^8.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": ">=9.5"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": {
-                        "LaravelBitpay": "Vrajroham\\LaravelBitpay\\LaravelBitpayFacade"
-                    },
-                    "providers": [
-                        "Vrajroham\\LaravelBitpay\\LaravelBitpayServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Vrajroham\\LaravelBitpay\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Vaibhavraj Roham",
-                    "email": "vaibhavraj@vrajroham.me",
-                    "homepage": "https://vrajroham.me",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Alex Stewart",
-                    "email": "iamalexstewart@gmail.com",
-                    "homepage": "https://github.com/alexstewartja",
-                    "role": "Developer"
-                }
-            ],
-            "description": "BitPay wrapper for laravel",
-            "homepage": "https://github.com/vrajroham/laravel-bitpay",
-            "keywords": [
-                "bitpay",
-                "btc",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/vrajroham/laravel-bitpay/issues",
-                "source": "https://github.com/vrajroham/laravel-bitpay/tree/6.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://bit.ly/asja_paypal_lara_bitpay",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://www.buymeacoffee.com/asja",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/alexstewartja",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/vrajroham",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/vrajroham",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2022-12-18T14:26:38+00:00"
-        },
-        {
-            "name": "xendit/xendit-php",
-            "version": "3.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/xendit/xendit-php.git",
-                "reference": "cbbffbdfec3feedb1d5176c5bb0e1d0e7d12f451"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/xendit/xendit-php/zipball/cbbffbdfec3feedb1d5176c5bb0e1d0e7d12f451",
-                "reference": "cbbffbdfec3feedb1d5176c5bb0e1d0e7d12f451",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "guzzlehttp/guzzle": "^7.3",
-                "guzzlehttp/psr7": "^1.7 || ^2.0",
-                "php": "^7.4 || ^8.0",
-                "vlucas/phpdotenv": "^5.5"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.5",
-                "phpunit/phpunit": "^8.0 || ^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Xendit\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "unlicense"
-            ],
-            "authors": [
-                {
-                    "name": "OpenAPI-Generator contributors",
-                    "homepage": "https://openapi-generator.tech"
-                }
-            ],
-            "description": "Xendit PHP SDK",
-            "homepage": "https://openapi-generator.tech",
-            "keywords": [
-                "api",
-                "openapi",
-                "openapi-generator",
-                "openapitools",
-                "php",
-                "rest",
-                "sdk"
-            ],
-            "support": {
-                "issues": "https://github.com/xendit/xendit-php/issues",
-                "source": "https://github.com/xendit/xendit-php/tree/3.7.0"
-            },
-            "time": "2023-11-29T07:18:13+00:00"
         }
     ],
     "packages-dev": [
@@ -19356,6 +17259,82 @@
             "time": "2023-01-03T19:28:04+00:00"
         },
         {
+            "name": "symfony/yaml",
+            "version": "v6.4.42",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "989dfb75049b77884f3f8cf9e99f103c8f91ca1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/989dfb75049b77884f3f8cf9e99f103c8f91ca1c",
+                "reference": "989dfb75049b77884f3f8cf9e99f103c8f91ca1c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "symfony/console": "<5.4"
+            },
+            "require-dev": {
+                "symfony/console": "^5.4|^6.0|^7.0"
+            },
+            "bin": [
+                "Resources/bin/yaml-lint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Loads and dumps YAML files",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v6.4.42"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-06-08T07:06:12+00:00"
+        },
+        {
             "name": "theseer/tokenizer",
             "version": "1.3.1",
             "source": {
@@ -19410,8 +17389,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "cashuanony/phpanonymous": 20,
-        "chapa/chapa-laravel": 20,
-        "omnipay/braintree": 20
+        "chapa/chapa-laravel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
