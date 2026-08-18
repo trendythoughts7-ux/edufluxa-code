@@ -84,10 +84,10 @@
                                 <div class="col-md-5 border-right py-2">
                                     <h6 class="mega-title">Session Type</h6>
                                     <ul class="mega-list">
-                                        <li><a href="{{ url('/tutors') }}" class="mega-link">1-on-1 Tutoring</a></li>
+                                        <li><a href="{{ url('/instructors') }}" class="mega-link">1-on-1 Tutoring</a></li>
                                         <li><a href="{{ url('/classes/group-classes') }}" class="mega-link">Group Classes</a></li>
                                         <li><a href="{{ url('/classes/homework-help') }}" class="mega-link">Homework Help</a></li>
-                                        <li><a href="{{ url('/tutors') }}" class="mega-link">Trial Lesson (Free)</a></li>
+                                        <li><a href="{{ url('/instructors') }}" class="mega-link">Trial Lesson (Free)</a></li>
                                         <li><a href="{{ url('/classes/corporate-training') }}" class="mega-link">Corporate Training</a></li>
                                     </ul>
                                 </div>
@@ -108,7 +108,7 @@
                                         <i class="fa fa-chalkboard-teacher d-block mb-3" style="font-size: 35px; color: #28a745;"></i>
                                         <h6>Find the Right Tutor</h6>
                                         <p>Expert tutors for every subject and level.</p>
-                                        <a href="{{ url('/tutors') }}" class="btn btn-success btn-sm btn-block">Find a Tutor</a>
+                                        <a href="{{ url('/instructors') }}" class="btn btn-success btn-sm btn-block">Find a Tutor</a>
                                     </div>
                                 </div>
 
@@ -196,7 +196,7 @@
                     <a href="{{ url('/blog') }}" class="nav-item-custom">Blog</a>
 
                     {{-- Find a Tutor CTA Button --}}
-                    <a href="{{ url('/tutors') }}" class="btn-find-tutor">
+                    <a href="{{ url('/instructors') }}" class="btn-find-tutor">
                         <i class="fa fa-search mr-1"></i> Find a Tutor
                     </a>
 
