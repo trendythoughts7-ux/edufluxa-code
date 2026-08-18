@@ -65,7 +65,7 @@
                                         <i class="fa fa-laptop-code d-block mb-3" style="font-size: 35px; color: #0056b3;"></i>
                                         <h6>Learn at Your Pace</h6>
                                         <p>Expert-designed courses with lifetime access.</p>
-                                        <a href="{{ url('/courses') }}" class="btn btn-primary btn-sm btn-block">Explore Courses</a>
+                                        <a href="{{ url('/classes') }}" class="btn btn-primary btn-sm btn-block">Explore Courses</a>
                                     </div>
                                 </div>
 
@@ -172,8 +172,8 @@
                                     <h6 class="mega-title"><i class="fa fa-star mr-2 text-warning"></i> Premium Materials</h6>
                                     <ul class="mega-list">
                                         <li style="list-style: none;"><a href="{{ url('/categories/learning-materials') }}" class="mega-link">PDF Lesson Packs</a></li>
-                                        <li style="list-style: none;"><a href="{{ url('/courses') }}" class="mega-link">Text Courses</a></li>
-                                        <li style="list-style: none;"><a href="{{ url('/courses') }}" class="mega-link">Video Courses</a></li>
+                                        <li style="list-style: none;"><a href="{{ url('/classes') }}" class="mega-link">Text Courses</a></li>
+                                        <li style="list-style: none;"><a href="{{ url('/classes') }}" class="mega-link">Video Courses</a></li>
                                         <li style="list-style: none;"><a href="{{ url('/categories/learning-materials') }}" class="mega-link">Workbooks</a></li>
                                         <li style="list-style: none;"><a href="{{ url('/categories/learning-materials') }}" class="mega-link">Expert Materials</a></li>
                                     </ul>

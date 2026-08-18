@@ -23,7 +23,7 @@ class GenerateSitemap extends Command
             ['loc' => '/', 'priority' => '1.00'],
             ['loc' => '/login', 'priority' => '0.80'],
             ['loc' => '/register', 'priority' => '0.80'],
-            ['loc' => '/courses', 'priority' => '0.90'],
+            ['loc' => '/classes', 'priority' => '0.90'],
             ['loc' => '/tutoring', 'priority' => '0.90'],
             ['loc' => '/about', 'priority' => '0.70'],
             ['loc' => '/contact', 'priority' => '0.70'],
