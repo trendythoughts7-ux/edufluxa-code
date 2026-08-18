@@ -58,3 +58,6 @@ error_log
 *.p2-body-new
 *.p3-ctor-new
 *.p3-body-new
+
+# Backup files (Loop 11)
+storage/app/backups/
