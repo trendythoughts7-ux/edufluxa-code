@@ -34,6 +34,7 @@
 <link rel="home" href="{{ url('') }}">
 
 <!-- Open Graph -->
+<link rel="canonical" href="{{ $canonicalUrl ?? url()->current() }}">
 <meta property='og:title' content='{{ $pageTitle ?? '' }}'>
 <meta name='twitter:card' content='summary'>
 <meta name='twitter:title' content='{{ $pageTitle ?? '' }}'>
