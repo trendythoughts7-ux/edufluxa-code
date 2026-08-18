@@ -6,7 +6,10 @@ use App\Http\Controllers\Api\Controller;
 use App\Mixins\Logs\UserLoginHistoryMixin;
 use App\Models\Api\UserFirebaseSessions;
 use App\User;
+use App\Models\Api\TwoFactorPendingToken;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use PragmaRX\Google2FAQRCode\Google2FA;
 
 class LoginController extends Controller
 {
@@ -65,7 +68,7 @@ class LoginController extends Controller
         return $this->afterLogged($request, $token);
     }
 
-    public function afterLogged(Request $request, $token, $verify = false)
+    public function afterLogged(Request $request, $token, $verify = false, $skipTwoFactor = false)
     {
         $user = auth('api')->user();
 
@@ -118,6 +121,24 @@ class LoginController extends Controller
             return apiResponse2(0, 'limit_account', trans('auth.limit_account'));
         }
 
+        if (!$skipTwoFactor && $user->needsTwoFactor() && $user->hasTwoFactorEnabled()) {
+            \auth('api')->logout();
+
+            TwoFactorPendingToken::where('user_id', $user->id)->delete();
+
+            $rawToken = bin2hex(random_bytes(32));
+            TwoFactorPendingToken::create([
+                'user_id' => $user->id,
+                'token_hash' => hash('sha256', $rawToken),
+                'expires_at' => now()->addMinutes(5),
+            ]);
+
+            return apiResponse2(0, 'two_factor_required', trans('update.two_step_verification'), [
+                'temp_token' => $rawToken,
+                'expires_in' => 300,
+            ]);
+        }
+
         $profile_completion = [];
         $data  ['token'] = $token;
         $data['user_id'] = $user->id;
@@ -141,6 +162,65 @@ class LoginController extends Controller
         return apiResponse2(1, 'login', trans('auth.login'), $data);
 
 
+    }
+
+    public function verifyTwoFactor(Request $request)
+    {
+        $rules = [
+            'temp_token' => 'required|string',
+        ];
+        validateParam($request->all(), $rules);
+
+        $tempToken = $request->get('temp_token');
+        $code = $request->get('one_time_password');
+        $recoveryCode = $request->get('recovery_code');
+
+        $tokenHash = hash('sha256', $tempToken);
+
+        $pending = TwoFactorPendingToken::where('token_hash', $tokenHash)
+            ->where('expires_at', '>', now())
+            ->first();
+
+        if (empty($pending)) {
+            return apiResponse2(0, 'two_factor_invalid', trans('auth.failed'));
+        }
+
+        $user = \App\Models\Api\User::find($pending->user_id);
+
+        if (empty($user) || !$user->needsTwoFactor() || !$user->hasTwoFactorEnabled()) {
+            return apiResponse2(0, 'two_factor_invalid', trans('auth.failed'));
+        }
+
+        $verified = false;
+
+        if (!empty($code)) {
+            $google2fa = new Google2FA();
+            $verified = $google2fa->verifyKey($user->google2fa_secret, $code);
+        } elseif (!empty($recoveryCode)) {
+            $storedCodes = $user->two_factor_recovery_codes;
+
+            if (!empty($storedCodes) && is_array($storedCodes)) {
+                foreach ($storedCodes as $index => $hashedCode) {
+                    if (Hash::check($recoveryCode, $hashedCode)) {
+                        $verified = true;
+                        unset($storedCodes[$index]);
+                        $user->two_factor_recovery_codes = array_values($storedCodes);
+                        $user->save();
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!$verified) {
+            return apiResponse2(0, 'two_factor_invalid', trans('update.verification_code_is_invalid'));
+        }
+
+        $pending->delete();
+
+        $newToken = auth('api')->login($user);
+
+        return $this->afterLogged($request, $newToken, false, true);
     }
 
     public function logout()
