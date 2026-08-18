@@ -161,8 +161,24 @@ class ClassesController extends Controller
                 ->whereNotNull("{$this->columnId}")
                 ->get();
 
+            $ticketIds = $tickets->pluck('id')->toArray();
+            $ticketUserCounts = \App\Models\TicketUser::whereIn('ticket_id', $ticketIds)
+                ->select('ticket_id', DB::raw('count(*) as cnt'))
+                ->groupBy('ticket_id')
+                ->pluck('cnt', 'ticket_id');
+
             foreach ($tickets as $ticket) {
-                if ($ticket->isValid()) {
+                $isValid = true;
+                if ($ticket->start_date > $now or $ticket->end_date < $now) {
+                    $isValid = false;
+                }
+                if ($ticket->capacity) {
+                    $ticketUserCount = $ticketUserCounts[$ticket->id] ?? 0;
+                    if ($ticketUserCount and $ticket->capacity <= $ticketUserCount) {
+                        $isValid = false;
+                    }
+                }
+                if ($isValid) {
                     $webinarIdsHasDiscount[] = $ticket->{$this->columnId};
                 }
             }
