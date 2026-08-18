@@ -566,3 +566,15 @@ Route::post('/purchase-code', [PurchaseCodeController::class, 'store'])->name('p
 Route::middleware(['web','admin'])->prefix('admin')->group(function () {
     Route::get('/exports/{export}/download', 'Admin\ExportController@download')->name('admin.exports.download');
 });
+
+// Opcache reset endpoint (Loop 11) - secret-token-gated, for post-deploy cache clearing
+Route::get('/system/opcache-reset/{token}', function ($token) {
+    if (!hash_equals(env('OPCACHE_RESET_TOKEN', ''), $token)) {
+        abort(404);
+    }
+    if (function_exists('opcache_reset')) {
+        opcache_reset();
+        return response()->json(['status' => 'ok', 'message' => 'OPcache reset successfully', 'time' => now()->toDateTimeString()]);
+    }
+    return response()->json(['status' => 'error', 'message' => 'opcache_reset function not available'], 500);
+});
