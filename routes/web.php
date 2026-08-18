@@ -115,36 +115,36 @@ Route::group(['namespace' => 'Web', 'middleware' => ['check_mobile_app', 'impers
     return view('pages.privacy_policy');
 });
     // Courses Categories
-    Route::get('/classes/academic-subjects', function () { return view('pages.academic'); });
-    Route::get('/classes/languages', function () { return view('pages.languages'); });
-    Route::get('/classes/test-preparation', function () { return view('pages.test_prep'); });
-    Route::get('/classes/computer-skills', function () { return view('pages.computer_skills'); });
-    Route::get('/classes/art-and-creativity', function () { return view('pages.art_creativity'); });
-    Route::get('/classes/personal-development', function () { return view('pages.personal_dev'); });
-    Route::get('/classes/coding-and-technology', function () { return view('pages.coding_tech'); });
+    Route::get('/classes/academic-subjects', function () { return view('pages.academic', ['pageTitle' => 'Academic Subjects']); });
+    Route::get('/classes/languages', function () { return view('pages.languages', ['pageTitle' => 'Languages']); });
+    Route::get('/classes/test-preparation', function () { return view('pages.test_prep', ['pageTitle' => 'Test Preparation']); });
+    Route::get('/classes/computer-skills', function () { return view('pages.computer_skills', ['pageTitle' => 'Computer Skills']); });
+    Route::get('/classes/art-and-creativity', function () { return view('pages.art_creativity', ['pageTitle' => 'Art and Creativity']); });
+    Route::get('/classes/personal-development', function () { return view('pages.personal_dev', ['pageTitle' => 'Personal Development']); });
+    Route::get('/classes/coding-and-technology', function () { return view('pages.coding_tech', ['pageTitle' => 'Coding and Technology']); });
 
     // Grades
-    Route::get('/classes/primary-(grades-1-5)', function () { return view('pages.grades.primary'); });
-    Route::get('/classes/middle-school-(grades-6-8)', function () { return view('pages.grades.middle'); });
-    Route::get('/classes/high-school-(grades-9-12)', function () { return view('pages.grades.high'); });
-    Route::get('/classes/university', function () { return view('pages.grades.university'); });
-     Route::get('/classes/adult-learning', function () { return view('pages.grades.adult'); });
+    Route::get('/classes/primary-(grades-1-5)', function () { return view('pages.grades.primary', ['pageTitle' => 'Primary (Grades 1-5)']); });
+    Route::get('/classes/middle-school-(grades-6-8)', function () { return view('pages.grades.middle', ['pageTitle' => 'Middle School (Grades 6-8)']); });
+    Route::get('/classes/high-school-(grades-9-12)', function () { return view('pages.grades.high', ['pageTitle' => 'High School (Grades 9-12)']); });
+    Route::get('/classes/university', function () { return view('pages.grades.university', ['pageTitle' => 'University']); });
+     Route::get('/classes/adult-learning', function () { return view('pages.grades.adult', ['pageTitle' => 'Adult Learning']); });
     
     // --- EDUFLUXA SUBJECTS ---
-    Route::get('/classes/math', function () { return view('pages.subjects.math'); });
-    Route::get('/classes/science', function () { return view('pages.subjects.science'); });
-    Route::get('/classes/physics', function () { return view('pages.subjects.physics'); });
-    Route::get('/classes/biology', function () { return view('pages.subjects.biology'); });
-    Route::get('/classes/view-all-subjects', function () { return view('pages.subjects.all_subjects'); });
+    Route::get('/classes/math', function () { return view('pages.subjects.math', ['pageTitle' => 'Math']); });
+    Route::get('/classes/science', function () { return view('pages.subjects.science', ['pageTitle' => 'Science']); });
+    Route::get('/classes/physics', function () { return view('pages.subjects.physics', ['pageTitle' => 'Physics']); });
+    Route::get('/classes/biology', function () { return view('pages.subjects.biology', ['pageTitle' => 'Biology']); });
+    Route::get('/classes/view-all-subjects', function () { return view('pages.subjects.all_subjects', ['pageTitle' => 'All Subjects']); });
     
     // --- TUTORING PAGES (EXACT MATCH FOR MENU) ---
-    Route::get('/classes/1-on-1-tutoring', function () { return view('pages.tutoring.one_on_one'); });
-    Route::get('/classes/group-classes', function () { return view('pages.tutoring.group_classes'); });
-    Route::get('/classes/homework-help', function () { return view('pages.tutoring.homework_help'); });
+    Route::get('/classes/1-on-1-tutoring', function () { return view('pages.tutoring.one_on_one', ['pageTitle' => '1-on-1 Tutoring']); });
+    Route::get('/classes/group-classes', function () { return view('pages.tutoring.group_classes', ['pageTitle' => 'Group Classes']); });
+    Route::get('/classes/homework-help', function () { return view('pages.tutoring.homework_help', ['pageTitle' => 'Homework Help']); });
     
-    Route::get('/classes/math-tutoring', function () { return view('pages.tutoring.subjects.math'); });
-    Route::get('/classes/english-tutoring', function () { return view('pages.tutoring.subjects.english'); });
-    Route::get('/classes/science-tutoring', function () { return view('pages.tutoring.subjects.science'); });
+    Route::get('/classes/math-tutoring', function () { return view('pages.tutoring.subjects.math', ['pageTitle' => 'Math Tutoring']); });
+    Route::get('/classes/english-tutoring', function () { return view('pages.tutoring.subjects.english', ['pageTitle' => 'English Tutoring']); });
+    Route::get('/classes/science-tutoring', function () { return view('pages.tutoring.subjects.science', ['pageTitle' => 'Science Tutoring']); });
     
     Route::group(['prefix' => 'course'], function () {
         Route::get('/{slug}', 'WebinarController@course');
