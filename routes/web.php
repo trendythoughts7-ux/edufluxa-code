@@ -569,7 +569,7 @@ Route::middleware(['web','admin'])->prefix('admin')->group(function () {
 
 // Opcache reset endpoint (Loop 11) - secret-token-gated, for post-deploy cache clearing
 Route::get('/system/opcache-reset/{token}', function ($token) {
-    if (!hash_equals(env('OPCACHE_RESET_TOKEN', ''), $token)) {
+    if (!hash_equals(config('opcache.reset_token', ''), $token)) {
         abort(404);
     }
     if (function_exists('opcache_reset')) {
