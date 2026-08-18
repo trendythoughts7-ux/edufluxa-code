@@ -87,6 +87,14 @@ class Channel extends BasePaymentChannel implements IChannel
 
         try {
 
+            if (!$this->hasValidSecureHash($request)) {
+                \Log::warning('JazzCash: invalid or missing pp_SecureHash on verify callback', [
+                    'ppmpf_1' => $request->get('ppmpf_1'),
+                    'ip'      => $request->ip(),
+                ]);
+                return null;
+            }
+
             $orderId = $request->get('ppmpf_1');
             $buyerId = $request->get('ppmpf_2');
 
@@ -95,25 +103,57 @@ class Channel extends BasePaymentChannel implements IChannel
                 ->first();
 
             if (!empty($order)) {
-                $orderStatus = Order::$fail;
+
+                if ($order->status == Order::$paying) {
+                    return $order;
+                }
 
                 Auth::loginUsingId($buyerId);
 
                 $jazzcash = \AKCybex\JazzCash\Facades\JazzCash::response();
 
-                if ($jazzcash->code() == 000) {
-                    $orderStatus = Order::$paying;
-                }
+                $orderStatus = ($jazzcash->code() == 000) ? Order::$paying : Order::$fail;
 
                 $order->update([
                     'status' => $orderStatus,
                 ]);
             }
 
-            return $order;
+            return $order ?? null;
 
         } catch (\Exception $exception) {
             throw new \Exception($exception->getMessage(), $exception->getCode());
         }
+    }
+
+    /**
+     * Recomputes JazzCash's HMAC-SHA256 secure hash server-side using the
+     * merchant's own stored integrity salt (never trusts a client-submitted
+     * pp_HashKey), and compares it timing-safely against the pp_SecureHash
+     * the client submitted. This mirrors AKCybex\JazzCash's own
+     * generateSecureHash() field-selection and string-building logic exactly.
+     */
+    private function hasValidSecureHash(Request $request): bool
+    {
+        $providedHash = $request->get('pp_SecureHash');
+
+        if (empty($providedHash) || empty($this->integerity_salt)) {
+            return false;
+        }
+
+        $data = $request->except(['pp_SecureHash', 'pp_HashKey']);
+        ksort($data);
+
+        $str = '';
+        foreach ($data as $value) {
+            if (!empty($value) && !is_array($value)) {
+                $str .= '&' . $value;
+            }
+        }
+        $str = $this->integerity_salt . $str;
+
+        $expectedHash = hash_hmac('sha256', $str, $this->integerity_salt);
+
+        return hash_equals($expectedHash, (string) $providedHash);
     }
 }
