@@ -15,6 +15,37 @@
     $breadcrumbItems[] = ['name' => $post->title, 'url' => '/blog/' . $post->slug];
 @endphp
 @include('design_1.web.includes.breadcrumb_jsonld')
+@php
+    $blogPublishedDate = \Carbon\Carbon::createFromTimestamp($post->created_at)->toIso8601String();
+    $blogModifiedDate = \Carbon\Carbon::createFromTimestamp($post->updated_at)->toIso8601String();
+    $blogDescription = !empty($post->meta_description) ? $post->meta_description : strip_tags($post->description);
+@endphp
+@push('scripts_top')
+    <script type="application/ld+json">
+    {!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'BlogPosting',
+        'headline' => $post->title,
+        'description' => $blogDescription,
+        'image' => url($post->image),
+        'url' => url('/blog/' . $post->slug),
+        'datePublished' => $blogPublishedDate,
+        'dateModified' => $blogModifiedDate,
+        'author' => [
+            '@type' => 'Person',
+            'name' => $post->author->full_name ?? $generalSettings['site_name'],
+        ],
+        'publisher' => [
+            '@type' => 'Organization',
+            'name' => $generalSettings['site_name'],
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => url($generalSettings['logo']),
+            ],
+        ],
+    ]) !!}
+    </script>
+@endpush
 @section("content")
     <div class="blog-show-hero position-relative">
         <div class="blog-show-hero__mask"></div>
