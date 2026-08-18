@@ -88,7 +88,7 @@
                                         <li><a href="{{ url('/classes/group-classes') }}" class="mega-link">Group Classes</a></li>
                                         <li><a href="{{ url('/classes/homework-help') }}" class="mega-link">Homework Help</a></li>
                                         <li><a href="{{ url('/instructors') }}" class="mega-link">Trial Lesson (Free)</a></li>
-                                        <li><a href="{{ url('/classes/corporate-training') }}" class="mega-link">Corporate Training</a></li>
+                                        <li><a href="{{ url('/classes') }}" class="mega-link">Corporate Training</a></li>
                                     </ul>
                                 </div>
 
