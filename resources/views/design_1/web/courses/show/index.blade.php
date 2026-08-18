@@ -44,6 +44,14 @@
     }
     </script>
 @endpush
+@php
+    $breadcrumbItems = [['name' => 'Home', 'url' => '/']];
+    if (!empty($course->category)) {
+        $breadcrumbItems[] = ['name' => $course->category->title, 'url' => $course->category->getUrl()];
+    }
+    $breadcrumbItems[] = ['name' => $course->title, 'url' => $course->getUrl()];
+@endphp
+@include('design_1.web.includes.breadcrumb_jsonld')
 @section("content")
     <div class="container position-relative mt-80 pb-120 ">
 

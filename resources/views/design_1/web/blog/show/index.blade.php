@@ -7,6 +7,14 @@
 @endpush
 
 
+@php
+    $breadcrumbItems = [['name' => 'Home', 'url' => '/'], ['name' => 'Blog', 'url' => '/blog']];
+    if (!empty($post->category)) {
+        $breadcrumbItems[] = ['name' => $post->category->title, 'url' => '/blog/categories/' . $post->category->slug];
+    }
+    $breadcrumbItems[] = ['name' => $post->title, 'url' => '/blog/' . $post->slug];
+@endphp
+@include('design_1.web.includes.breadcrumb_jsonld')
 @section("content")
     <div class="blog-show-hero position-relative">
         <div class="blog-show-hero__mask"></div>

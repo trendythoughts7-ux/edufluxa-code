@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{ getDesign1StylePath("courses_lists") }}">
 @endpush
 
+@php
+    $breadcrumbItems = [['name' => 'Home', 'url' => '/']];
+    if (!empty($category->category)) {
+        $breadcrumbItems[] = ['name' => $category->category->title, 'url' => $category->category->getUrl()];
+    }
+    $breadcrumbItems[] = ['name' => $category->title, 'url' => $category->getUrl()];
+@endphp
+@include('design_1.web.includes.breadcrumb_jsonld')
 @section("content")
     <main class="pb-120">
 
